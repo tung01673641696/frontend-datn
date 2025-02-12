@@ -1,0 +1,10 @@
+.room {
+  width: 70%;
+  margin: 0 auto;
+
+  &_wrap {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+}

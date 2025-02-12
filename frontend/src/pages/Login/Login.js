@@ -30,7 +30,7 @@ export default function Login() {
 
           <div className='login_content_child'>
             <button className="login_handle">
-              Đăng ký
+              Đăng nhập
             </button>
           </div>
 

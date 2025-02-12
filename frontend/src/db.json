@@ -1,0 +1,330 @@
+{
+  "district": [
+    {
+      "id": "1",
+      "district_name": "Ba Đình",
+      "district_image": "https://i.imgur.com/zUSMPOB.jpeg",
+      "city": "Hà Nội"
+    },
+    {
+      "id": "2",
+      "district_name": "Hoàn Kiếm",
+      "district_image": "https://i.imgur.com/Si48zJy.jpeg",
+      "city": "Hà Nội"
+    },
+    {
+      "id": "3",
+      "district_name": "Hai Bà Trưng",
+      "district_image": "https://i.imgur.com/jHLWVRB.jpeg",
+      "city": "Hà Nội"
+    },
+    {
+      "id": "4",
+      "district_name": "Đống Đa",
+      "district_image": "https://i.imgur.com/Y4msjn2.jpeg",
+      "city": "Hà Nội"
+    },
+    {
+      "id": "5",
+      "district_name": "Hà Đông",
+      "district_image": "https://i.imgur.com/Mbb0Sk9.jpeg",
+      "city": "Hà Nội"
+    },
+    {
+      "id": "6",
+      "district_name": "Cầu Giấy",
+      "district_image": "https://i.imgur.com/t22aFvp.jpeg",
+      "city": "Hà Nội"
+    },
+    {
+      "id": "7",
+      "district_name": "Thanh Xuân",
+      "district_image": "https://i.imgur.com/QseSdA3.jpeg",
+      "city": "Hà Nội"
+    },
+    {
+      "id": "8",
+      "district_name": "Nam Từ Liêm",
+      "district_image": "https://i.imgur.com/tKdF9nb.jpeg",
+      "city": "Hà Nội"
+    },
+    {
+      "id": "9",
+      "district_name": "Long Biên",
+      "district_image": "https://i.imgur.com/jSor4qd.jpeg",
+      "city": "Hà Nội"
+    },
+    {
+      "id": "10",
+      "district_name": "Hoàng Mai",
+      "district_image": "https://i.imgur.com/Z8JcN24.jpeg",
+      "city": "Hà Nội"
+    },
+    {
+      "id": "11",
+      "district_name": "Bắc Từ Liêm",
+      "district_image": "https://i.imgur.com/Q8ISb23.jpeg",
+      "city": "Hà Nội"
+    },
+    {
+      "id": "12",
+      "district_name": "Tây Hồ",
+      "district_image": "https://i.imgur.com/6VyXT1Z.jpeg",
+      "city": "Hà Nội"
+    }
+  ],
+  "room": [
+    {
+      "room_name": "301",
+      "room_title": "Phòng trọ mới khai trương full nội thất",
+      "floor": 3,
+      "area": 35,
+      "price": 4500000,
+      "people": 4,
+      "deposit": 4500000,
+      "status": true,
+      "image": [
+        "https://i.imgur.com/NcnYKcH.jpeg",
+        "https://i.imgur.com/jQ3qgvP.jpeg",
+        "https://i.imgur.com/tCDpPhB.jpeg",
+        "https://i.imgur.com/KPTeYB5.jpeg"
+      ],
+      "district": "Quận Ba Đình",
+      "describe": "Phòng có điều hòa, nóng lạnh, tủ quần áo, kệ bếp,giường.\nKhông chung chủ,ra vào vân tay\nVệ sinh khép kín\nGần chợ dân sinh\n",
+      "id": "1"
+    },
+    {
+      "room_name": "201",
+      "room_title": "Phòng trọ dành cho tân sinh viên",
+      "floor": 2,
+      "area": 30,
+      "price": 3000000,
+      "people": 3,
+      "deposit": 3000000,
+      "status": true,
+      "image": [
+        "https://i.imgur.com/hFdrdIx.jpeg",
+        "https://i.imgur.com/7SeKKJy.jpeg",
+        "https://i.imgur.com/59w2oks.jpeg",
+        "https://i.imgur.com/kHM0U8S.jpeg"
+      ],
+      "district": "Quận Ba Đình",
+      "describe": "Phòng có điều hòa, nóng lạnh, tủ quần áo, kệ bếp,giường.\nKhông chung chủ,ra vào vân tay\nVệ sinh khép kín \nGần chợ dân sinh \n",
+      "id": "2"
+    },
+    {
+      "room_name": "303",
+      "room_title": "Phòng trọ mới khai trương full nội thất",
+      "floor": 3,
+      "area": 35,
+      "price": 3500000,
+      "people": 4,
+      "deposit": 3500000,
+      "status": true,
+      "image": [
+        "https://i.imgur.com/7z0ZhIN.jpeg",
+        "https://i.imgur.com/CoI8Pxd.jpeg",
+        "https://i.imgur.com/UUDN16B.jpeg",
+        "https://i.imgur.com/CLBNpvs.jpeg"
+      ],
+      "district": "Quận Ba Đình",
+      "describe": "Phòng có điều hòa, nóng lạnh, tủ quần áo, kệ bếp,giường.\nKhông chung chủ,ra vào vân tay\nVệ sinh khép kín \nGần chợ dân sinh \n",
+      "id": "3"
+    },
+    {
+      "room_name": "101",
+      "room_title": "Phòng trọ mới ngay đại học Thủy Lợi",
+      "floor": 1,
+      "area": 30,
+      "price": 2000000,
+      "people": 3,
+      "deposit": 2000000,
+      "status": true,
+      "image": [
+        "https://i.imgur.com/wZD0LVT.jpeg",
+        "https://i.imgur.com/GKvR8zG.jpeg",
+        "https://i.imgur.com/9b06esT.jpeg",
+        "https://i.imgur.com/rraLckw.jpeg"
+      ],
+      "district": "Quận Ba Đình",
+      "describe": "Phòng có điều hòa, nóng lạnh, tủ quần áo, kệ bếp,giường.\nKhông chung chủ,ra vào vân tay\nVệ sinh khép kín \nGần chợ dân sinh \n",
+      "id": "4"
+    },
+    {
+      "room_name": "202",
+      "room_title": "Phòng trọ giá rẻ ngay ngã 4 sở",
+      "floor": 2,
+      "area": 30,
+      "price": 2500000,
+      "people": 4,
+      "deposit": 2500000,
+      "status": true,
+      "image": [
+        "https://i.imgur.com/WEDsq2n.jpeg"
+      ],
+      "district": "Quận Ba Đình",
+      "describe": "Phòng có điều hòa, nóng lạnh, tủ quần áo, kệ bếp,giường.\nKhông chung chủ,ra vào vân tay\nVệ sinh khép kín \nGần chợ dân sinh \n",
+      "id": "5"
+    },
+    {
+      "room_name": "302",
+      "room_title": "Phòng trọ mới khai trương",
+      "floor": 3,
+      "area": 35,
+      "price": 3000000,
+      "people": 3,
+      "deposit": 3000000,
+      "status": true,
+      "image": [
+        "https://i.imgur.com/YJTiXah.jpeg"
+      ],
+      "district": "Quận Ba Đình",
+      "describe": "Phòng có điều hòa, nóng lạnh, tủ quần áo, kệ bếp,giường.\nKhông chung chủ,ra vào vân tay\nVệ sinh khép kín \nGần chợ dân sinh \n",
+      "id": "6"
+    },
+    {
+      "room_name": "404",
+      "room_title": "Phòng trọ đầy đủ tiện nghi",
+      "floor": 4,
+      "area": 30,
+      "price": 4000000,
+      "people": 4,
+      "deposit": 4000000,
+      "status": true,
+      "image": [
+        "https://i.imgur.com/KRm6EWE.jpeg"
+      ],
+      "district": "Quận Ba Đình",
+      "describe": "Phòng có điều hòa, nóng lạnh, tủ quần áo, kệ bếp,giường.\nKhông chung chủ,ra vào vân tay\nVệ sinh khép kín \nGần chợ dân sinh \n",
+      "id": "7"
+    },
+    {
+      "room_name": "301",
+      "room_title": "Phòng trọ mới khai trương giá rẻ",
+      "floor": 3,
+      "area": 30,
+      "price": 2000000,
+      "people": 3,
+      "deposit": 2000000,
+      "status": true,
+      "image": [
+        "https://i.imgur.com/Hzs3FCP.jpeg"
+      ],
+      "district": "Quận Ba Đình",
+      "describe": "Phòng có điều hòa, nóng lạnh, tủ quần áo, kệ bếp,giường.\nKhông chung chủ,ra vào vân tay\nVệ sinh khép kín \nGần chợ dân sinh \n",
+      "id": "8"
+    },
+    {
+      "room_name": "103",
+      "room_title": "Phòng trọ mới dành cho tân sinh viên",
+      "floor": 1,
+      "area": 30,
+      "price": 4500000,
+      "people": 3,
+      "deposit": 4500000,
+      "status": true,
+      "image": [
+        "https://i.imgur.com/mYMzewR.jpeg"
+      ],
+      "district": "Quận Ba Đình",
+      "describe": "Phòng có điều hòa, nóng lạnh, tủ quần áo, kệ bếp,giường.\nKhông chung chủ,ra vào vân tay\nVệ sinh khép kín \nGần chợ dân sinh \n",
+      "id": "9"
+    },
+    {
+      "room_name": "302",
+      "room_title": "Phòng trọ mới khai trương full nội thất",
+      "floor": 3,
+      "area": 30,
+      "price": 3500000,
+      "people": 4,
+      "deposit": 3500000,
+      "status": true,
+      "image": [
+        "https://i.imgur.com/XYN384N.jpeg"
+      ],
+      "district": "Quận Hoàn Kiếm",
+      "describe": "Phòng có điều hòa, nóng lạnh, tủ quần áo, kệ bếp,giường.\nKhông chung chủ,ra vào vân tay\nVệ sinh khép kín \nGần chợ dân sinh \n",
+      "id": "10"
+    },
+    {
+      "room_name": "101",
+      "room_title": "Phòng trọ không chung chủ",
+      "floor": 1,
+      "area": 30,
+      "price": 3000000,
+      "people": 3,
+      "deposit": 3000000,
+      "status": true,
+      "image": [
+        "https://i.imgur.com/bECNS9B.jpeg"
+      ],
+      "district": "Quận Ba Đình",
+      "describe": "Phòng có điều hòa, nóng lạnh, tủ quần áo, kệ bếp,giường.\nKhông chung chủ,ra vào vân tay\nVệ sinh khép kín \nGần chợ dân sinh \n",
+      "id": "11"
+    },
+    {
+      "room_name": "401",
+      "room_title": "Phòng trọ mới khai trương an toàn PCCC",
+      "floor": 4,
+      "area": 35,
+      "price": 2300000,
+      "people": 3,
+      "deposit": 2300000,
+      "status": true,
+      "image": [
+        "https://i.imgur.com/r6rFkMy.jpeg"
+      ],
+      "district": "Quận Ba Đình",
+      "describe": "Phòng có điều hòa, nóng lạnh, tủ quần áo, kệ bếp,giường.\nKhông chung chủ,ra vào vân tay\nVệ sinh khép kín \nGần chợ dân sinh \n",
+      "id": "12"
+    },
+    {
+      "room_name": "501",
+      "room_title": "Phòng trọ mới khai trương full nội thất",
+      "floor": 5,
+      "area": 30,
+      "price": 3700000,
+      "people": 4,
+      "deposit": 3700000,
+      "status": true,
+      "image": [
+        "https://i.imgur.com/a9ZpyGg.jpeg"
+      ],
+      "district": "Quận Đống Đa",
+      "describe": "Phòng có điều hòa, nóng lạnh, tủ quần áo, kệ bếp,giường.\nKhông chung chủ,ra vào vân tay\nVệ sinh khép kín \nGần chợ dân sinh \n",
+      "id": "13"
+    },
+    {
+      "room_name": "301",
+      "room_title": "Phòng trọ mới khai trương full nội thất",
+      "floor": 3,
+      "area": 30,
+      "price": 2800000,
+      "people": 3,
+      "deposit": 2800000,
+      "status": true,
+      "image": [
+        "https://i.imgur.com/WlEH8cv.jpeg"
+      ],
+      "district": "Quận Đống Đa",
+      "describe": "Phòng có điều hòa, nóng lạnh, tủ quần áo, kệ bếp,giường.\nKhông chung chủ,ra vào vân tay\nVệ sinh khép kín \nGần chợ dân sinh \n",
+      "id": "14"
+    },
+    {
+      "room_name": "301",
+      "room_title": "Phòng trọ mới khai trương full nội thất",
+      "floor": 3,
+      "area": 35,
+      "price": 3500000,
+      "people": 4,
+      "deposit": 3500000,
+      "status": true,
+      "image": [
+        "https://i.imgur.com/futltIH.jpeg"
+      ],
+      "district": "Quận Ba Đình",
+      "describe": "Phòng có điều hòa, nóng lạnh, tủ quần áo, kệ bếp,giường.\nKhông chung chủ,ra vào vân tay\nVệ sinh khép kín \nGần chợ dân sinh \n",
+      "id": "15"
+    }
+  ]
+}

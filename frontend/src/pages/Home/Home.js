@@ -1,14 +1,28 @@
 import React from 'react'
 import './Home.scss'
 import HeaderUser from '../../layouts/UserLayout/HeaderUser/HeaderUser'
-import Footer from '../../layouts/UserLayout/FooterUser/FooterUser'
+import FooterUser from '../../layouts/UserLayout/FooterUser/FooterUser'
+import Title from '../../components/Title/Title'
+import Banner from '../../components/Banner/Banner'
+import DistrictLayout from '../../layouts/HomeLayout/DistrictLayout/DistrictLayout'
+import RoomNew from '../../layouts/HomeLayout/RoomNew/RoomNew'
 
 export default function Home() {
   return (
     <div className='home'>
       <HeaderUser />
 
-      <Footer />
+      <Banner />
+
+      <Title text={"KHÁM PHÁ PHÒNG TRỌ CÁC QUẬN"} />
+      <DistrictLayout />
+
+      <Title text={"PHÒNG TRỌ MỚI NHẤT"} />
+      <RoomNew />
+
+      <Title text={"TÌM PHÒNG THEO NHU CẦU"} />
+
+      <FooterUser />
     </div>
   )
 }

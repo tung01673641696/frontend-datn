@@ -1,0 +1,48 @@
+.district {
+  width: 70%;
+  margin: 0 auto;
+
+  &_card {
+    width: calc(100% / 4 - 20px);
+    position: relative;
+    margin-bottom: 20px;
+
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+
+    .district_card_img {
+      width: 90%;
+      height: 300px;
+      margin-left: 10px;
+      border-radius: 20px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 20px;
+      }
+    }
+
+    .district_card_name {
+      position: absolute;
+      text-align: center;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+
+      width: 200px;
+      color: white;
+      font-size: 20px;
+      font-weight: 600;
+    }
+  }
+
+  .slick-prev:before {
+    color: #D60909;
+  }
+
+  .slick-next:before {
+    color: #D60909;
+  }
+}

@@ -5,6 +5,7 @@ const Register = React.lazy(() => import('./pages/Register/Register'));
 const Login = React.lazy(() => import('./pages/Login/Login'));
 
 const Home = React.lazy(() => import('./pages/Home/Home'))
+const SearchRoom = React.lazy(() => import('./pages/SearchRoom/SearchRoom'))
 
 export default function Routers() {
   return (
@@ -17,6 +18,7 @@ export default function Routers() {
 
             <Route>
               <Route path='/' element={<Home />} />
+              <Route path='/search-room' element={<SearchRoom />} />
             </Route>
 
           </Routes>
