@@ -1,0 +1,25 @@
+.footer {
+  background: #201E1E;
+  width: 100%;
+
+  &_wrap {
+    width: 70%;
+    margin: 0 auto;
+    padding: 50px 0;
+    display: flex;
+    justify-content: center;
+
+    .footer_content {
+      width: calc(100% / 2 - 100px);
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+
+      span {
+        color: white;
+        font-size: 18px;
+        padding: 10px 0;
+      }
+    }
+  }
+}

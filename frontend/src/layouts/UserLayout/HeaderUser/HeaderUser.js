@@ -15,7 +15,7 @@ export default function HeaderUser() {
             <Navbar.Brand as={Link} to="/">WESITE TÌM KIẾM VÀ QUẢN LÍ PHÒNG TRỌ</Navbar.Brand>
 
             <Nav>
-              <Link to="" className='header_user'>Đăng Nhập</Link>
+              <Link to="/login" className='header_user'>Đăng Nhập</Link>
 
               <span className='header_separate'>|</span>
 
