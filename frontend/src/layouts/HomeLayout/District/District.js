@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import Slider from "react-slick";
-import './DistrictLayout.scss'
+import './District.scss'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useNavigate } from 'react-router-dom';
 
 
-export default function DistrictLayout() {
+export default function District() {
+  const navigate = useNavigate()
 
   const [district, setDistrict] = useState([])
 
@@ -14,6 +16,10 @@ export default function DistrictLayout() {
       .then((res) => res.json())
       .then((data) => setDistrict(data))
   }, [])
+
+  function handleClick() {
+    navigate(`/search-room`)
+  }
 
   const settings = {
     className: "center",
@@ -30,7 +36,7 @@ export default function DistrictLayout() {
     <div className='district'>
       <Slider {...settings}>
         {district?.map((item) => (
-          <div className='district_card'>
+          <div className='district_card' onClick={() => handleClick()}>
             <div className='district_card_img'>
               <img src={item.district_image} />
             </div>
