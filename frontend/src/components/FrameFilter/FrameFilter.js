@@ -1,14 +1,12 @@
 import React from 'react'
 
-export default function FrameFilter({ isOpen, onClose }) {
-
-  if (!isOpen) return null
+export default function FrameFilter() {
 
   return (
     <div>
       cửa sổ bộ lọc
 
-      <button onClick={onClose}>Đóng</button>
+      <button>Đóng</button>
     </div>
   )
 }

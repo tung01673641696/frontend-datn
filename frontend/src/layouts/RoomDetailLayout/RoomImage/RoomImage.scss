@@ -1,0 +1,30 @@
+.room-image {
+  width: calc(100% / 2 - 10px);
+
+  &_big {
+    width: 100%;
+    margin-bottom: 20px;
+
+    img {
+      width: 100%;
+      height: 55vh;
+      object-fit: cover;
+    }
+  }
+
+  &_small {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    .room-image_mall_ele {
+      width: calc(100% / 4 - 15px);
+
+      img {
+        width: 100%;
+        height: 12vh;
+        object-fit: cover;
+      }
+    }
+  }
+}

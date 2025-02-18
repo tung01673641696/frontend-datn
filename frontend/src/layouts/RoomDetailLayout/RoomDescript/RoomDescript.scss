@@ -1,0 +1,14 @@
+.room-descript {
+  width: calc(100% / 2 - 10px);
+  background-color: white;
+  padding: 15px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+
+  &_title {
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 15px;
+  }
+}

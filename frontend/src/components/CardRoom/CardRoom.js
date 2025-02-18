@@ -1,10 +1,17 @@
 import React from 'react'
 import "./CardRoom.scss"
+import { useNavigate } from 'react-router-dom'
 
 export default function CardRoom({ item }) {
+  const navigate = useNavigate()
+
+  function handleClick() {
+    navigate(`/room-detail`)
+    window.scrollTo(0, 0)
+  }
 
   return (
-    <div className='room_card'>
+    <div className='room_card' onClick={() => handleClick()}>
       <div className='room_card_img'>
         <img src={item.image} />
       </div>

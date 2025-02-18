@@ -19,6 +19,10 @@ export default function RoomNew() {
           <CardRoom item={item} />
         ))}
       </div>
+
+      <div className='room_button'>
+        <button>Xem thêm</button>
+      </div>
     </div>
   )
 }

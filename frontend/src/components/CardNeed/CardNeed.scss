@@ -1,0 +1,30 @@
+.need {
+  display: flex;
+  width: calc(100% / 2 - 15px);
+  border: 1px solid rgb(203, 198, 198);
+  margin-bottom: 20px;
+
+  &_img {
+    width: 30%;
+
+    img {
+      width: 100%;
+      height: -webkit-fill-available;
+      object-fit: cover;
+    }
+  }
+
+  &_content {
+    width: 70%;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    padding: 8px 16px;
+
+    .need_content_title {
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+  }
+}

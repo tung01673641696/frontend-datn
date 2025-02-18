@@ -1,0 +1,19 @@
+.room-detail {
+  background-color: #f4f4f4;
+
+  &_wrap {
+    width: 60%;
+    margin: 30px auto;
+
+    .room-detail_above {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .room-detail_below {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}

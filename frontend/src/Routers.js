@@ -6,6 +6,7 @@ const Login = React.lazy(() => import('./pages/Login/Login'));
 
 const Home = React.lazy(() => import('./pages/Home/Home'))
 const SearchRoom = React.lazy(() => import('./pages/SearchRoom/SearchRoom'))
+const RoomDetail = React.lazy(() => import('./pages/RoomDetail/RoomDetail'))
 
 export default function Routers() {
   return (
@@ -19,6 +20,7 @@ export default function Routers() {
             <Route>
               <Route path='/' element={<Home />} />
               <Route path='/search-room' element={<SearchRoom />} />
+              <Route path='/room-detail' element={<RoomDetail />} />
             </Route>
 
           </Routes>
