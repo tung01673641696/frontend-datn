@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import "./RoomNeed.scss"
 import CardNeed from '../../../components/CardNeed/CardNeed'
+import { useNavigate } from 'react-router-dom'
 
 export default function RoomNeed() {
-
+  const navigate = useNavigate()
   const [roomNeed, setRoomNeed] = useState([])
 
   useEffect(() => {
@@ -12,7 +13,10 @@ export default function RoomNeed() {
       .then((data) => setRoomNeed(data))
   }, [])
 
-  console.log("hihi", roomNeed)
+  function handleClick() {
+    navigate(`/search-room-need`)
+    window.scrollTo(0, 0)
+  }
 
   return (
     <div className='room-need'>
@@ -23,7 +27,7 @@ export default function RoomNeed() {
       </div>
 
       <div className='room-need_button'>
-        <button>Xem thêm</button>
+        <button onClick={() => handleClick()}>Xem thêm</button>
       </div>
     </div>
   )
