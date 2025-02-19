@@ -1,30 +1,25 @@
-.room_need_same {
-  width: 70%;
-  margin: 0 auto;
-  background-color: white;
+.room-same {
 
-  &_title {
+  h3 {
     font-size: 22px;
-    font-weight: 500;
-    padding-top: 30px;
+    padding: 30px 0;
   }
 
   &_box {
 
-    .room_need_same_box_ele {
+    .room-same_box_ele {
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
-      margin: 50px 0 20px 0;
-      padding: 0 30px;
+      padding: 0 20px;
     }
 
-    .room_need_same_box_button {
+    .room-same_box_button {
       button {
         border: none;
         border-radius: 10px;
         padding: 8px 25px;
-        margin: 0 0 50px 0;
+        margin: 30px 0 50px 0;
         background: #D60909;
         color: white;
       }

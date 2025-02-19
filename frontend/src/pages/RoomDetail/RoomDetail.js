@@ -6,6 +6,7 @@ import RoomImage from '../../layouts/RoomDetailLayout/RoomImage/RoomImage'
 import RoomContent from '../../layouts/RoomDetailLayout/RoomContent/RoomContent'
 import RoomInfo from '../../layouts/RoomDetailLayout/RoomInfo/RoomInfo'
 import RoomDescript from '../../layouts/RoomDetailLayout/RoomDescript/RoomDescript'
+import RoomSame from '../../layouts/RoomDetailLayout/RoomSame/RoomSame'
 
 export default function RoomDetail() {
   return (
@@ -22,6 +23,10 @@ export default function RoomDetail() {
           <RoomInfo />
           <RoomDescript />
         </div>
+      </div>
+
+      <div className='room-detail_same'>
+        <RoomSame />
       </div>
 
       <FooterUser />
