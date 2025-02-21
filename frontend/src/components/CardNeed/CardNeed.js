@@ -7,7 +7,7 @@ export default function CardNeed({ item }) {
   const navigate = useNavigate()
 
   function handleClick() {
-    navigate(`/search-room-need`)
+    navigate(`/need-detail`)
     window.scrollTo(0, 0)
   }
 

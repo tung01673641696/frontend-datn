@@ -1,0 +1,35 @@
+.list-need {
+  width: 70%;
+  margin: 20px auto;
+  background-color: white;
+
+  h4 {
+    padding: 30px 0 50px 0;
+  }
+
+  &_all {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 0 40px;
+  }
+
+  &_button {
+    button {
+      border: none;
+      border-radius: 10px;
+      padding: 8px 25px;
+      margin: 20px 0 50px 0;
+      background: #D60909;
+      color: white;
+    }
+
+    button:hover {
+      background-color: white;
+      color: #D60909;
+      border: 1px solid #D60909;
+      transition: 0.3s;
+    }
+  }
+}

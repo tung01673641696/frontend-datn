@@ -14,7 +14,7 @@ export default function RoomNeed() {
   }, [])
 
   function handleClick() {
-    navigate(`/search-room-need`)
+    navigate(`/search-need`)
     window.scrollTo(0, 0)
   }
 

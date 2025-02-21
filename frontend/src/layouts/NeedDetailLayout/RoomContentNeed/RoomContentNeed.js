@@ -5,9 +5,6 @@ import Img from '../../../assets/Images/NeedAvatar/avatar.png'
 export default function RoomContentNeed() {
   return (
     <div className='room_content_need'>
-      <h3 className='room_content_need_title'>
-        Chi tiết nhu cầu tìm phòng
-      </h3>
 
       <div className='room_content_need_box'>
         <div className='room_content_need_box_left'>
