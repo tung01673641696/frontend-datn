@@ -2,6 +2,8 @@ import React from 'react'
 import './Register.scss'
 import { Link } from 'react-router-dom'
 import HeaderUser from '../../layouts/UserLayout/HeaderUser/HeaderUser'
+import BaseButton from '../../components/BaseButton/BaseButton'
+import BaseInput from '../../components/BaseInput/BaseInput'
 
 export default function Register() {
   return (
@@ -13,35 +15,19 @@ export default function Register() {
 
         <div className='register_content'>
           <div className="register_content_child">
-            <input
-              type="text"
-              placeholder="Họ và tên"
-              required
-            />
+            <BaseInput placeholder="Họ và tên" />
           </div>
 
           <div className="register_content_child">
-            <input
-              type="text"
-              placeholder="Số điện thoại"
-              required
-            />
+            <BaseInput placeholder="Số điện thoại" />
           </div>
 
           <div className="register_content_child">
-            <input
-              type="text"
-              placeholder="Mật khẩu"
-              required
-            />
+            <BaseInput placeholder="Mật khẩu" />
           </div>
 
           <div className="register_content_child">
-            <input
-              type="text"
-              placeholder="Nhập lại mật khẩu"
-              required
-            />
+            <BaseInput placeholder="Nhập lại mật khẩu" />
           </div>
 
           <div className='register_content_child'>
@@ -53,9 +39,9 @@ export default function Register() {
           </div>
 
           <div className='register_content_child'>
-            <button className="register_handle">
+            <BaseButton type="red">
               Đăng ký
-            </button>
+            </BaseButton>
           </div>
 
           <div className='register_link'>

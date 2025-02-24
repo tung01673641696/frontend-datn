@@ -31,21 +31,10 @@
           border: 1px solid #838282;
         }
 
-        .login_handle {
+        button {
           width: 100%;
           margin: 10px auto 0;
-          padding: 8px 10px;
           border-radius: 8px;
-          border: none;
-          background-color: #D60909;
-          color: white;
-        }
-
-        .login_handle:hover {
-          background-color: white;
-          color: #D60909;
-          border: 1px solid #D60909;
-          transition: 0.2s;
         }
       }
     }

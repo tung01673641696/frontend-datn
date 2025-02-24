@@ -2,6 +2,8 @@ import React from 'react'
 import './Login.scss'
 import HeaderUser from '../../layouts/UserLayout/HeaderUser/HeaderUser'
 import { Link } from 'react-router-dom'
+import BaseButton from '../../components/BaseButton/BaseButton'
+import BaseInput from '../../components/BaseInput/BaseInput'
 
 export default function Login() {
   return (
@@ -13,25 +15,17 @@ export default function Login() {
 
         <div className='login_content'>
           <div className="login_content_child">
-            <input
-              type="text"
-              placeholder="Số điện thoại"
-              required
-            />
+            <BaseInput placeholder="Số điện thoại" />
           </div>
 
           <div className="login_content_child">
-            <input
-              type="text"
-              placeholder="Mật khẩu"
-              required
-            />
+            <BaseInput placeholder="Mật khẩu" />
           </div>
 
           <div className='login_content_child'>
-            <button className="login_handle">
+            <BaseButton type="red">
               Đăng nhập
-            </button>
+            </BaseButton>
           </div>
 
           <div className='login_link'>
