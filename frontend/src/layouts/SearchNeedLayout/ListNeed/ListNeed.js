@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './ListNeed.scss'
 import CardNeed from '../../../components/CardNeed/CardNeed'
+import BaseButton from '../../../components/BaseButton/BaseButton'
 
 export default function ListNeed() {
   const [need, setNeed] = useState([])
@@ -20,9 +21,7 @@ export default function ListNeed() {
         ))}
       </div>
 
-      <div className='list-need_button'>
-        <button>Xem thêm</button>
-      </div>
+      <BaseButton type="red">Xem thêm</BaseButton>
     </div>
   )
 }

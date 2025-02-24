@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import "./RoomNeedSame.scss"
 import CardNeed from '../../../components/CardNeed/CardNeed'
+import BaseButton from '../../../components/BaseButton/BaseButton'
 
 export default function RoomNeedSame() {
 
@@ -23,9 +24,7 @@ export default function RoomNeedSame() {
           ))}
         </div>
 
-        <div className='room_need_same_box_button'>
-          <button>Xem thêm</button>
-        </div>
+        <BaseButton type="red">Xem thêm</BaseButton>
       </div>
     </div>
   )

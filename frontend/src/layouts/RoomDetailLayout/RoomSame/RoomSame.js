@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import "./RoomSame.scss"
 import CardRoom from '../../../components/CardRoom/CardRoom'
+import BaseButton from '../../../components/BaseButton/BaseButton'
 
 export default function RoomSame() {
   const [roomSame, setRoomSame] = useState([])
@@ -22,9 +23,7 @@ export default function RoomSame() {
           ))}
         </div>
 
-        <div className='room-same_box_button'>
-          <button>Xem thêm</button>
-        </div>
+        <BaseButton type="red">Xem thêm</BaseButton>
       </div>
     </div>
   )

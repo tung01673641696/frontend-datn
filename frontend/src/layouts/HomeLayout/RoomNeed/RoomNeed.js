@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import "./RoomNeed.scss"
 import CardNeed from '../../../components/CardNeed/CardNeed'
 import { useNavigate } from 'react-router-dom'
+import BaseButton from '../../../components/BaseButton/BaseButton'
 
 export default function RoomNeed() {
   const navigate = useNavigate()
@@ -26,9 +27,8 @@ export default function RoomNeed() {
         ))}
       </div>
 
-      <div className='room-need_button'>
-        <button onClick={() => handleClick()}>Xem thêm</button>
-      </div>
+      <BaseButton type="red" onClick={() => handleClick()}>Xem thêm</BaseButton>
+
     </div>
   )
 }

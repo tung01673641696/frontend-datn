@@ -11,24 +11,4 @@
     font-weight: 400;
     margin-top: 3px;
   }
-
-  button {
-    border: none;
-    border-radius: 20px;
-    padding: 5px 20px;
-    background: #D60909;
-    color: white;
-
-    span {
-      margin-left: 5px;
-      font-size: 16px;
-    }
-  }
-
-  button:hover {
-    background-color: white;
-    color: #D60909;
-    border: 1px solid #D60909;
-    transition: 0.3s;
-  }
 }

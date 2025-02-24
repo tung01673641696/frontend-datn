@@ -1,9 +1,11 @@
 import React from 'react'
+import './HouseManager.scss'
+import Common from '../../../layouts/LandlordLayout/Common/Common'
 
 export default function HouseManager() {
   return (
-    <div>
-      trang quản lí nhà
-    </div>
+    <Common>
+      hihi
+    </Common>
   )
 }

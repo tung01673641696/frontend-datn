@@ -7,22 +7,4 @@
     justify-content: space-between;
     flex-wrap: wrap;
   }
-
-  &_button {
-    button {
-      border: none;
-      border-radius: 10px;
-      padding: 8px 25px;
-      margin: 20px 0 20px 0;
-      background: #D60909;
-      color: white;
-    }
-
-    button:hover {
-      background-color: white;
-      color: #D60909;
-      border: 1px solid #D60909;
-      transition: 0.3s;
-    }
-  }
 }

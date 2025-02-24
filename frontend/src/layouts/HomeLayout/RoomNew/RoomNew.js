@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import "./RoomNew.scss"
 import CardRoom from '../../../components/CardRoom/CardRoom'
 import { useNavigate } from 'react-router-dom'
+import BaseButton from '../../../components/BaseButton/BaseButton'
 
 export default function RoomNew() {
   const [room, setRoom] = useState([])
@@ -25,9 +26,7 @@ export default function RoomNew() {
         ))}
       </div>
 
-      <div className='room_button'>
-        <button onClick={() => handleClick()}>Xem thêm</button>
-      </div>
+      <BaseButton type="red" onClick={() => handleClick()}>Xem thêm</BaseButton>
     </div>
   )
 }

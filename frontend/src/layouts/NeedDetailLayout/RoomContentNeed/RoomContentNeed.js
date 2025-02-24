@@ -1,6 +1,7 @@
 import React from 'react'
 import "./RoomContentNeed.scss"
 import Img from '../../../assets/Images/NeedAvatar/avatar.png'
+import BaseButton from '../../../components/BaseButton/BaseButton'
 
 export default function RoomContentNeed() {
   return (
@@ -20,17 +21,17 @@ export default function RoomContentNeed() {
           <span className='room_content_need_box_right_common'>Chi tiết: Phòng có điều hòa,vệ sinh khép kín,có ban công thoáng,giờ giấc tự do thoải mái</span>
           <div className='room_content_need_box_right_contact'>
             <div className='room_content_need_box_right_contact_tele'>
-              <button>
-                <i class="bi bi-telephone"></i>
+              <BaseButton type="red">
+                <i class="bi bi-telephone" style={{ marginRight: "5px" }}></i>
                 Liên hệ ngay
-              </button>
+              </BaseButton>
             </div>
 
             <div className='room_content_need_box_right_contact_like'>
-              <button>
-                <i class="bi bi-heart"></i>
+              <BaseButton type="white">
+                <i class="bi bi-heart" style={{ marginRight: "5px" }}></i>
                 Yêu thích tin đăng
-              </button>
+              </BaseButton>
             </div>
           </div>
 

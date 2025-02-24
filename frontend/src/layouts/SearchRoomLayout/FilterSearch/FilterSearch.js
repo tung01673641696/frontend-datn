@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './FilterSearch.scss'
 import FrameFilter from '../../../components/FrameFilter/FrameFilter'
+import BaseButton from '../../../components/BaseButton/BaseButton'
 
 export default function FilterSearch() {
 
@@ -8,11 +9,10 @@ export default function FilterSearch() {
     <div className='filter-search'>
       <span>Tìm kiếm phòng</span>
 
-      <button>
-        <i class="bi bi-funnel"></i>
-        <span>Bộ lọc tìm kiếm</span>
-      </button>
-
+      <BaseButton type="red">
+        <i class="bi bi-funnel" style={{ marginRight: "5px" }}></i>
+        Bộ lọc tìm kiếm
+      </BaseButton>
     </div>
   )
 }

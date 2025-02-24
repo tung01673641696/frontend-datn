@@ -13,23 +13,5 @@
       flex-wrap: wrap;
       padding: 0 20px;
     }
-
-    .room-same_box_button {
-      button {
-        border: none;
-        border-radius: 10px;
-        padding: 8px 25px;
-        margin: 30px 0 50px 0;
-        background: #D60909;
-        color: white;
-      }
-
-      button:hover {
-        background-color: white;
-        color: #D60909;
-        border: 1px solid #D60909;
-        transition: 0.3s;
-      }
-    }
   }
 }

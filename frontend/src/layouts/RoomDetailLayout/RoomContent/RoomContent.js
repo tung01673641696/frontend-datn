@@ -1,5 +1,6 @@
 import React from 'react'
 import './RoomContent.scss'
+import BaseButton from '../../../components/BaseButton/BaseButton'
 
 export default function RoomContent() {
   return (
@@ -12,17 +13,17 @@ export default function RoomContent() {
 
       <div className='room-content_contact'>
         <div className='room-content_contact_tele'>
-          <button>
+          <BaseButton type="red">
             <i class="bi bi-telephone"></i>
             Liên hệ ngay
-          </button>
+          </BaseButton>
         </div>
 
         <div className='room-content_contact_like'>
-          <button>
+          <BaseButton type="white">
             <i class="bi bi-heart"></i>
             Yêu thích phòng
-          </button>
+          </BaseButton>
         </div>
       </div>
     </div>
