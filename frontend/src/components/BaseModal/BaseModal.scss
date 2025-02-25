@@ -1,0 +1,39 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .base-modal {
+    width: 50%;
+
+    background-color: white;
+    text-align: left;
+
+    .base-modal_header {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 20px;
+    }
+
+    .base-modal_main {
+      padding: 20px;
+    }
+  }
+}
+
+
+.red_bg {
+  background-color: rgb(208, 10, 10);
+  color: white;
+}
+
+.blue_bg {
+  background-color: rgb(57, 59, 184);
+  color: white;
+}

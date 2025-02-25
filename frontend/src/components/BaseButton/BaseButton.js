@@ -3,7 +3,9 @@ import "./BaseButton.scss"
 
 const RED = "red_color"
 const WHITE = "white_color"
-const FILTER= "button_filter"
+const BLUE = "blue_color"
+const WARNING = "warning_color"
+const FILTER = "button_filter"
 
 
 export default function BaseButton({ children, type, onClick }) {
@@ -11,6 +13,8 @@ export default function BaseButton({ children, type, onClick }) {
   const typeObject = {
     red: RED,
     white: WHITE,
+    blue: BLUE,
+    warning: WARNING,
     filter: FILTER
   }
 
