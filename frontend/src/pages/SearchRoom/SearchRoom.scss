@@ -5,3 +5,18 @@
 
   }
 }
+
+.info {
+
+  .info_select {
+    display: flex;
+    justify-content: space-between;
+
+    .info_select_ele {
+      width: calc(100% / 3 - 20px);
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+}

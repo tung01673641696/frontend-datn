@@ -7,9 +7,9 @@ export default function Common({ children }) {
   const manager = [
     { id: 1, title: 'Trang chủ', path: '/' },
     { id: 2, title: 'Quản lí nhà', path: '/landlord/house-manager' },
-    { id: 3, title: 'Quản lí phòng', path: '/landlord/house-manager' },
-    { id: 4, title: 'Quản lí khách thuê', path: '/landlord/house-manager' },
-    { id: 5, title: 'Quản lí phương tiện', path: '/landlord/house-manager' },
+    { id: 3, title: 'Quản lí phòng', path: '/landlord/room-manager' },
+    { id: 4, title: 'Quản lí khách thuê', path: '/landlord/tenant-manager' },
+    { id: 5, title: 'Quản lí phương tiện', path: '/landlord/vehicle-manager' },
     { id: 6, title: 'Quản lí tin đăng phòng', path: '/landlord/house-manager' },
     { id: 7, title: 'Quản lí khách hàng tiềm năng', path: '/landlord/house-manager' },
   ]

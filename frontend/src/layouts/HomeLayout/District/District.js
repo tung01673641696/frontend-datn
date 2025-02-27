@@ -17,6 +17,8 @@ export default function District() {
       .then((data) => setDistrict(data))
   }, [])
 
+  console.log(district)
+
   function handleClick() {
     navigate(`/search-room`)
   }
