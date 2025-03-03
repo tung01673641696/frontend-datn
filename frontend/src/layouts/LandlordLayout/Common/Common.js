@@ -6,12 +6,13 @@ import { Link } from 'react-router-dom'
 export default function Common({ children }) {
   const manager = [
     { id: 1, title: 'Trang chủ', path: '/' },
-    { id: 2, title: 'Quản lí nhà', path: '/landlord/house-manager' },
-    { id: 3, title: 'Quản lí phòng', path: '/landlord/room-manager' },
-    { id: 4, title: 'Quản lí khách thuê', path: '/landlord/tenant-manager' },
-    { id: 5, title: 'Quản lí phương tiện', path: '/landlord/vehicle-manager' },
-    { id: 6, title: 'Quản lí tin đăng phòng', path: '/landlord/house-manager' },
-    { id: 7, title: 'Quản lí khách hàng tiềm năng', path: '/landlord/house-manager' },
+    { id: 2, title: 'Thống kê', path: '/landlord/dashboard' },
+    { id: 3, title: 'Quản lý nhà', path: '/landlord/house-manager' },
+    { id: 4, title: 'Quản lý phòng', path: '/landlord/room-manager' },
+    { id: 5, title: 'Quản lý khách thuê', path: '/landlord/tenant-manager' },
+    { id: 6, title: 'Quản lý phương tiện', path: '/landlord/vehicle-manager' },
+    { id: 7, title: 'Quản lý bài đăng', path: '/landlord/house-manager' },
+    { id: 8, title: 'Quản lý khách hàng tiềm năng', path: '/landlord/house-manager' },
   ]
 
   return (

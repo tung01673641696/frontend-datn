@@ -10,6 +10,7 @@ const SearchNeed = React.lazy(() => import('./pages/SearchNeed/SearchNeed'))
 const RoomDetail = React.lazy(() => import('./pages/RoomDetail/RoomDetail'))
 const NeedDetail = React.lazy(() => import('./pages/NeedDetail/NeedDetail'))
 
+const Dashboard = React.lazy(() => import('./pages/Landlord/Dashboard/Dashboard'))
 const HouseManager = React.lazy(() => import('./pages/Landlord/HouseManager/HouseManager'))
 const RoomManager = React.lazy(() => import('./pages/Landlord/RoomManager/RoomManager'))
 const TenantManager = React.lazy(() => import('./pages/Landlord/TenantManager/TenantManager'))
@@ -33,6 +34,7 @@ export default function Routers() {
             </Route>
 
             <Route>
+              <Route path='/landlord/dashboard' element={<Dashboard />} />
               <Route path='/landlord/house-manager' element={<HouseManager />} />
               <Route path='/landlord/room-manager' element={<RoomManager />} />
               <Route path='/landlord/tenant-manager' element={<TenantManager />} />
