@@ -6,50 +6,74 @@ import BaseButton from '../../components/BaseButton/BaseButton'
 import BaseInput from '../../components/BaseInput/BaseInput'
 import { toast } from 'react-toastify'
 import { validateName, validatePassword, validatePhone } from '../../utils/validate'
+import UserApi from '../../api/UserApi'
 
 export default function Register() {
-  const [data, setData] = useState({
+  const [dataForm, setDataForm] = useState({
     username: "",
-    telephone: "",
+    phone: "",
     password: "",
     confirmPassword: "",
     role: ""
   })
 
-  const handleChange = async (e) => {
-    setData({ ...data, [e.target.name]: e.target.value })
+  const data = {
+    name: dataForm.username,
+    phone: dataForm.phone,
+    password: dataForm.password,
+    role_id: dataForm.role,
   }
 
-  console.log(data)
+  console.log("data", data)
 
-  const handleSubmit = (e) => {
+  const handleChange = async (e) => {
+    setDataForm({ ...dataForm, [e.target.name]: e.target.value });
+
+    if (dataForm.phone.length === 10) {
+      try {
+        const response = await UserApi.checkPhone({ phone: data.phone })
+
+        if (response.data.exists) {
+          toast.error("hihi")
+        }
+      } catch (error) {
+        console.error("Lỗi kiểm tra số điện thoại", error);
+        toast.error("Lỗi server, vui lòng thử lại.");
+      }
+    }
+  }
+
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (
-      !data.username ||
-      !data.telephone ||
-      !data.password ||
-      !data.confirmPassword ||
-      !data.role
+      !dataForm.username ||
+      !dataForm.phone ||
+      !dataForm.password ||
+      !dataForm.confirmPassword ||
+      !dataForm.role
     ) {
       toast.error("Vui lòng nhập đầy đủ thông tin");
       return
     }
-    if (!validateName(data.username)) {
+    if (!validateName(dataForm.username)) {
       toast.error("Họ và tên không đúng định dạng");
       return
     }
-    if (!validatePhone(data.telephone)) {
+    if (!validatePhone(dataForm.phone)) {
       toast.error("Số điện thoại không đúng định dạng");
       return
     }
-    if (!validatePassword(data.password)) {
+    if (!validatePassword(dataForm.password)) {
       toast.error("Mật khẩu ít nhất 8 ký tự");
       return
     }
-    if (data.password !== data.confirmPassword) {
+    if (dataForm.password !== dataForm.confirmPassword) {
       toast.error("Xác nhận sai mật khẩu")
+      return
     }
+
   }
 
   return (
@@ -61,26 +85,26 @@ export default function Register() {
 
         <div className='register_content'>
           <div className="register_content_child">
-            <BaseInput name="username" placeholder="Họ và tên" value={data.username} onChange={handleChange} />
+            <BaseInput name="username" placeholder="Họ và tên" value={dataForm.username} onChange={handleChange} />
           </div>
 
           <div className="register_content_child">
-            <BaseInput name="telephone" placeholder="Số điện thoại" value={data.telephone} onChange={handleChange} />
+            <BaseInput name="phone" placeholder="Số điện thoại" value={dataForm.phone} onChange={handleChange} />
           </div>
 
           <div className="register_content_child">
-            <BaseInput type="password" name="password" placeholder="Mật khẩu" value={data.password} onChange={handleChange} />
+            <BaseInput type="password" name="password" placeholder="Mật khẩu" value={dataForm.password} onChange={handleChange} />
           </div>
 
           <div className="register_content_child">
-            <BaseInput type="password" name="confirmPassword" placeholder="Nhập lại mật khẩu" value={data.confirmPassword} onChange={handleChange} />
+            <BaseInput type="password" name="confirmPassword" placeholder="Nhập lại mật khẩu" value={dataForm.confirmPassword} onChange={handleChange} />
           </div>
 
           <div className='register_content_child'>
-            <select name="role" value={data.role} onChange={handleChange}>
+            <select name="role" value={dataForm.role} onChange={handleChange}>
               <option value="" selected disabled>Loại tài khoản</option>
-              <option value="tenant">Người thuê</option>
-              <option value="landlord">Chủ nhà</option>
+              <option value="1">Người thuê</option>
+              <option value="2">Chủ nhà</option>
             </select>
           </div>
 
