@@ -2,6 +2,13 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
 import UserApi from "../../api/UserApi";
 
+export const register = createAsyncThunk(
+  'user/register',
+  async (data) => {
+    const resu = await UserApi.register(data);
+    return resu
+  }
+)
 
 export const login = createAsyncThunk(
   "user/login",
@@ -32,6 +39,16 @@ const UserSlice = createSlice({
         state.loading = false
       })
       .addCase(login.fulfilled, (state, action) => {
+        state.loading = false
+        state.user = action.payload.data;
+      })
+      .addCase(register.pending, (state, action) => {
+        state.loading = true
+      })
+      .addCase(register.rejected, (state, action) => {
+        state.loading = false
+      })
+      .addCase(register.fulfilled, (state, action) => {
         state.loading = false
         state.user = action.payload.data;
       })

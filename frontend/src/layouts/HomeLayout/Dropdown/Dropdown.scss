@@ -1,0 +1,11 @@
+.dropdown-toggle::after {
+  display: none; 
+}
+
+.dropdown-toggle {
+  color: white;
+
+  span {
+    margin-left: 5px;
+  }
+}

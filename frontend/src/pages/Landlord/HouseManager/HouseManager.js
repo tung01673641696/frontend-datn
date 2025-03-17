@@ -1,41 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './HouseManager.scss'
 import Common from '../../../layouts/LandlordLayout/Common/Common'
 import BaseButton from '../../../components/BaseButton/BaseButton'
 import { Table } from 'antd'
 import Column from 'antd/es/table/Column'
+import { useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { houseByOwner } from '../../../redux/reducers/house'
 
 export default function HouseManager() {
-  const data = [
-    {
-      id: 1,
-      name_house: "Gohomy1",
-      room_number: "4",
-      room_number_null: "0",
-      address: 'Hà Nội',
-    },
-    {
-      id: 2,
-      name_house: "Gohomy1",
-      room_number: "4",
-      room_number_null: "0",
-      address: 'Hà Nội',
-    },
-    {
-      id: 3,
-      name_house: "Gohomy1",
-      room_number: "4",
-      room_number_null: "0",
-      address: 'Hà Nội',
-    },
-    {
-      id: 4,
-      name_house: "Gohomy1",
-      room_number: "4",
-      room_number_null: "0",
-      address: 'Hà Nội',
-    }
-  ]
+  const params = useParams()
+  const dispatch = useDispatch()
+  const { listHouseByOwner } = useSelector((state) => state.houseReducer)
+
+  useEffect(() => {
+    dispatch(houseByOwner(params.id));
+  }, [dispatch, params]);
 
   return (
     <Common>
@@ -51,12 +31,12 @@ export default function HouseManager() {
           showSizeChanger: false,
           pageSizeOptions: ['10', '20', '30'],
         }}
-        dataSource={data}
+        dataSource={listHouseByOwner}
       >
         <Column title={"STT"} dataIndex="id" key="id" />
         <Column title={"Tên nhà"}
           render={(item) => (
-            <span>{item?.name_house}</span>
+            <span>{item?.name}</span>
           )}
         />
 

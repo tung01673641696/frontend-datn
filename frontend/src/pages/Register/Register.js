@@ -1,14 +1,20 @@
 import React, { useState } from 'react'
 import './Register.scss'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import HeaderUser from '../../layouts/UserLayout/HeaderUser/HeaderUser'
 import BaseButton from '../../components/BaseButton/BaseButton'
 import BaseInput from '../../components/BaseInput/BaseInput'
 import { toast } from 'react-toastify'
 import { validateName, validatePassword, validatePhone } from '../../utils/validate'
 import UserApi from '../../api/UserApi'
+import { useDispatch, useSelector } from 'react-redux'
+import { register } from '../../redux/reducers/user'
 
 export default function Register() {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const { loading } = useSelector((state) => state.userReducer)
+
   const [dataForm, setDataForm] = useState({
     username: "",
     phone: "",
@@ -17,35 +23,20 @@ export default function Register() {
     role: ""
   })
 
-  const data = {
-    name: dataForm.username,
-    phone: dataForm.phone,
-    password: dataForm.password,
-    role_id: dataForm.role,
-  }
-
-  console.log("data", data)
-
   const handleChange = async (e) => {
     setDataForm({ ...dataForm, [e.target.name]: e.target.value });
-
-    if (dataForm.phone.length === 10) {
-      try {
-        const response = await UserApi.checkPhone({ phone: data.phone })
-
-        if (response.data.exists) {
-          toast.error("hihi")
-        }
-      } catch (error) {
-        console.error("Lỗi kiểm tra số điện thoại", error);
-        toast.error("Lỗi server, vui lòng thử lại.");
-      }
-    }
   }
 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const data = {
+      name: dataForm.username,
+      phone: dataForm.phone,
+      password: dataForm.password,
+      role_id: dataForm.role,
+    }
 
     if (
       !dataForm.username ||
@@ -72,6 +63,13 @@ export default function Register() {
     if (dataForm.password !== dataForm.confirmPassword) {
       toast.error("Xác nhận sai mật khẩu")
       return
+    }
+    try {
+      const response = await dispatch(register(data))
+      console.log("đăng kí thành công", response)
+      navigate(`/login`)
+    } catch (error) {
+      console.error(error);
     }
 
   }

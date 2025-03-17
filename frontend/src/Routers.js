@@ -35,7 +35,7 @@ export default function Routers() {
 
             <Route>
               <Route path='/landlord/dashboard' element={<Dashboard />} />
-              <Route path='/landlord/house-manager' element={<HouseManager />} />
+              <Route path='/landlord/house-manager/:id' element={<HouseManager />} />
               <Route path='/landlord/room-manager' element={<RoomManager />} />
               <Route path='/landlord/tenant-manager' element={<TenantManager />} />
               <Route path='/landlord/vehicle-manager' element={<VehicleManager />} />
