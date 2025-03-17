@@ -10,6 +10,14 @@ export const getDistrict = createAsyncThunk(
   }
 )
 
+export const getWard = createAsyncThunk(
+  "address/getWard",
+  async (id) => {
+    const response = await AddressApi.getWard(id);
+    return response
+  }
+)
+
 const addressSlice = createSlice({
   name: "address",
   initialState: {
@@ -31,6 +39,16 @@ const addressSlice = createSlice({
       .addCase(getDistrict.fulfilled, (state, action) => {
         state.loadingAddress = false
         state.district = action.payload.data;
+      })
+      .addCase(getWard.pending, (state, action) => {
+        state.loadingAddress = true
+      })
+      .addCase(getWard.rejected, (state, action) => {
+        state.loadingAddress = false
+      })
+      .addCase(getWard.fulfilled, (state, action) => {
+        state.loadingAddress = false
+        state.ward = action.payload.data;
       })
   }
 })

@@ -1,13 +1,16 @@
 import React from 'react'
 import './Common.scss'
 import Img from '../../../assets/Images/User/user.jpg'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 export default function Common({ children }) {
+  const params = useParams()
+  
+
   const manager = [
     { id: 1, title: 'Trang chủ', path: '/' },
     { id: 2, title: 'Thống kê', path: '/landlord/dashboard' },
-    { id: 3, title: 'Quản lý nhà', path: '/landlord/house-manager' },
+    { id: 3, title: 'Quản lý nhà', path: `/landlord/house-manager/user/${params.id}` },
     { id: 4, title: 'Quản lý phòng', path: '/landlord/room-manager' },
     { id: 5, title: 'Quản lý khách thuê', path: '/landlord/tenant-manager' },
     { id: 6, title: 'Quản lý phương tiện', path: '/landlord/vehicle-manager' },

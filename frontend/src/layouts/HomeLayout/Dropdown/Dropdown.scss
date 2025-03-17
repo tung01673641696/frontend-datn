@@ -1,5 +1,5 @@
 .dropdown-toggle::after {
-  display: none; 
+  display: none;
 }
 
 .dropdown-toggle {
@@ -8,4 +8,14 @@
   span {
     margin-left: 5px;
   }
+
+  i {
+    margin: 0 5px;
+  }
+}
+
+.dropdown-menu[data-bs-popper] {
+  top: 35px;
+  left: -5px;
+  margin-top: var(--bs-dropdown-spacer);
 }

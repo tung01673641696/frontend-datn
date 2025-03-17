@@ -4,14 +4,20 @@ import Common from '../../../layouts/LandlordLayout/Common/Common'
 import BaseButton from '../../../components/BaseButton/BaseButton'
 import { Table } from 'antd'
 import Column from 'antd/es/table/Column'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { houseByOwner } from '../../../redux/reducers/house'
 
 export default function HouseManager() {
+  const navigate = useNavigate()
   const params = useParams()
   const dispatch = useDispatch()
   const { listHouseByOwner } = useSelector((state) => state.houseReducer)
+  console.log("list", listHouseByOwner)
+
+  function handleClick() {
+    navigate(`/landlord/house-manager/add-house`)
+  }
 
   useEffect(() => {
     dispatch(houseByOwner(params.id));
@@ -22,7 +28,7 @@ export default function HouseManager() {
       <h3>Danh sách nhà</h3>
 
       <div className='add_house'>
-        <BaseButton type="blue">Thêm nhà</BaseButton>
+        <BaseButton type="blue" onClick={handleClick}>Thêm nhà</BaseButton>
       </div>
 
       <Table style={{ textAlignLast: 'center' }}
@@ -54,7 +60,7 @@ export default function HouseManager() {
 
         <Column title={"Địa chỉ"}
           render={(value) => (
-            <span>{value?.address}</span>
+            <span>{value?.address},{value?.ward?.name},{value?.district?.name}</span>
           )}
         />
 

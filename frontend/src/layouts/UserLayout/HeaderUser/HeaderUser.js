@@ -19,7 +19,7 @@ export default function HeaderUser() {
             <Navbar.Brand as={Link} to="/">WESITE TÌM KIẾM VÀ QUẢN LÍ PHÒNG TRỌ</Navbar.Brand>
 
             <Nav>
-              {user.auth ? (
+              {!user.auth ? (
                 <>
                   <Link to="/login" className='header_user'>Đăng Nhập</Link>
 
@@ -33,14 +33,6 @@ export default function HeaderUser() {
                 </>
               )}
             </Nav>
-
-            {/* <Nav>
-              <NavDropdown title="User" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Thông Tin Cá Nhân</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">Cài Đặt</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Đăng Xuất</NavDropdown.Item>
-              </NavDropdown>
-            </Nav> */}
 
           </Container>
         </Navbar>

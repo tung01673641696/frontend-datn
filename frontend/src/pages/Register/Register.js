@@ -65,11 +65,15 @@ export default function Register() {
       return
     }
     try {
-      const response = await dispatch(register(data))
-      console.log("đăng kí thành công", response)
-      navigate(`/login`)
+      const res = await dispatch(register(data))
+      if(res.payload.data.code === 422) {
+        toast.error(res.payload.data.message)
+      }
+      else {
+        navigate(`/login`)
+      }
     } catch (error) {
-      console.error(error);
+      console.log(error)
     }
 
   }

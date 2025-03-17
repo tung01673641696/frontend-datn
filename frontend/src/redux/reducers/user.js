@@ -49,7 +49,8 @@ const UserSlice = createSlice({
         state.loading = false
       })
       .addCase(register.fulfilled, (state, action) => {
-        state.loading = false
+        state.loading = false;
+        state.user.auth = true;
         state.user = action.payload.data;
       })
   }

@@ -42,11 +42,13 @@ export default function Login() {
       if (res.payload.data) {
         localStorage.setItem("access_Token", res.payload.data.token)
         localStorage.setItem("user", JSON.stringify(res.payload.data.user))
+        //update state auth trong redux
+
         if (res.payload.data.user.role_id === 1) {
           navigate(`/`)
         }
         else if (res.payload.data.user.role_id === 2) {
-          navigate(`/landlord/house-manager`)
+          navigate(`/landlord/dashboard`)
         }
       }
     } catch (error) {

@@ -1,0 +1,30 @@
+.post-mana {
+  width: 100%; 
+  background-color: #f3f3f3;
+
+  &_box {
+    width: 70%;
+    background-color: white;
+    margin: 0 auto;
+    padding: 50px;
+
+    h3 {
+      font-size: 22px;
+    }
+
+    .post-mana_box_status {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      margin: 40px 0;
+
+      .post-mana_box_status_ele {
+        width: calc(100% / 3);
+
+        button {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
