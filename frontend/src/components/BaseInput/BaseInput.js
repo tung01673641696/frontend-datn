@@ -5,7 +5,8 @@ export default function BaseInput({
   type = "text",
   name,
   placeholder,
-  onChange
+  onChange,
+  value
 }) {
   return (
     <>
@@ -14,6 +15,7 @@ export default function BaseInput({
         name={name}
         placeholder={placeholder}
         onChange={onChange}
+        value={value}
       />
     </>
   )

@@ -6,35 +6,52 @@ import BaseButton from '../../../../components/BaseButton/BaseButton'
 import { getDistrict } from '../../../../redux/reducers/address'
 import { getWard } from '../../../../redux/reducers/address'
 import { useDispatch, useSelector } from 'react-redux'
+import { addHouse } from '../../../../redux/reducers/house'
 
 export default function AddHouse() {
   const dispatch = useDispatch()
   const { district, ward } = useSelector((state) => state.addressReducer)
-  const [selectedValue, setSelectedValue] = useState("")
+  const { houseAddNew } = useSelector((state) => state.houseReducer)
+  const user = JSON.parse(localStorage.getItem('user'))
+  const user_id = user.id
+
+  const [house, setHouse] = useState({
+    name: "",
+    address: "",
+    user_id: user_id,
+    district_id: "",
+    ward_id: ""
+  })
 
   useEffect(() => {
     dispatch(getDistrict())
   }, [])
 
   const handleDistrictChange = (e) => {
-    const districtId = e.target.value;
-    setSelectedValue(districtId)
+    const district_id = e.target.value;
+    setHouse({ ...house, district_id, ward_id: "" })
+    dispatch(getWard(district_id))
+  }
 
-    dispatch(getWard(districtId))
+  const handleChange = (e) => {
+    setHouse({ ...house, [e.target.name]: e.target.value })
+  }
 
-    console.log("id", districtId)
-    console.log("ward", ward)
+  console.log("house", house)
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    dispatch(addHouse(house))
   }
 
   return (
     <Common>
-
-      <form>
+      <form onSubmit={handleSubmit}>
         <span>Thêm nhà</span>
 
         <div className='add_house_content'>
           <div className='add_house_content_ele'>
-            <BaseInput placeholder="Tên nhà" />
+            <BaseInput name="name" placeholder="Tên nhà" onChange={handleChange} />
           </div>
           <div className='add_house_content_ele'>
             <select>
@@ -43,7 +60,7 @@ export default function AddHouse() {
           </div>
 
           <div className='add_house_content_ele'>
-            <select value={selectedValue} onChange={handleDistrictChange}>
+            <select name='district_id' onChange={handleDistrictChange}>
               <option value="">Chọn Quận / Huyện</option>
               {district.map(item => (
                 <option key={item.id} value={item.id}>{item.name}</option>
@@ -52,7 +69,7 @@ export default function AddHouse() {
           </div>
 
           <div className='add_house_content_ele'>
-            <select>
+            <select name='ward_id' onChange={handleChange}>
               <option value="">Chọn Phường / Xã</option>
               {ward.map(item => (
                 <option key={item.id} value={item.id}>{item.name}</option>
@@ -61,7 +78,7 @@ export default function AddHouse() {
           </div>
 
           <div className='add_house_content_ele'>
-            <BaseInput placeholder="Địa chỉ chi tiết" />
+            <BaseInput name="address" placeholder="Địa chỉ chi tiết" onChange={handleChange} />
           </div>
 
           <div className='add_house_content_ele'>

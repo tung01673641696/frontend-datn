@@ -11,6 +11,7 @@ import { houseByOwner } from '../../../redux/reducers/house'
 export default function HouseManager() {
   const navigate = useNavigate()
   const params = useParams()
+
   const dispatch = useDispatch()
   const { listHouseByOwner } = useSelector((state) => state.houseReducer)
   console.log("list", listHouseByOwner)
@@ -21,7 +22,7 @@ export default function HouseManager() {
 
   useEffect(() => {
     dispatch(houseByOwner(params.id));
-  }, [dispatch, params]);
+  }, [dispatch, params.id]);
 
   return (
     <Common>
