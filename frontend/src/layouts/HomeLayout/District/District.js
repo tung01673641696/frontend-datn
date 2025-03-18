@@ -36,7 +36,7 @@ export default function District() {
     <div className='district'>
       <Slider {...settings}>
         {district?.map((item) => (
-          <div className='district_card' onClick={() => handleClick()}>
+          <div key={item.id} className='district_card' onClick={() => handleClick()}>
             <div className='district_card_img'>
               <img src={item.image} />
             </div>

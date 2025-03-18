@@ -11,6 +11,7 @@ import Dropdown from '../../HomeLayout/Dropdown/Dropdown';
 export default function HeaderUser() {
   const { user } = useSelector((state) => state.userReducer)
 
+  console.log("user", user)
   return (
     <div className='header'>
       <div className='header_wrap'>
@@ -19,7 +20,7 @@ export default function HeaderUser() {
             <Navbar.Brand as={Link} to="/">WESITE TÌM KIẾM VÀ QUẢN LÍ PHÒNG TRỌ</Navbar.Brand>
 
             <Nav>
-              {!user.auth ? (
+              {!user ? (
                 <>
                   <Link to="/login" className='header_user'>Đăng Nhập</Link>
 

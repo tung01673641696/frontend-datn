@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux'
 export default function AddHouse() {
   const dispatch = useDispatch()
   const { district, ward } = useSelector((state) => state.addressReducer)
+  const [selectedValue, setSelectedValue] = useState("")
 
   useEffect(() => {
     dispatch(getDistrict())
@@ -17,6 +18,7 @@ export default function AddHouse() {
 
   const handleDistrictChange = (e) => {
     const districtId = e.target.value;
+    setSelectedValue(districtId)
 
     dispatch(getWard(districtId))
 
@@ -41,8 +43,8 @@ export default function AddHouse() {
           </div>
 
           <div className='add_house_content_ele'>
-            <select onChange={handleDistrictChange}>
-              <option value="" selected disabled>Chọn Quận / Huyện</option>
+            <select value={selectedValue} onChange={handleDistrictChange}>
+              <option value="">Chọn Quận / Huyện</option>
               {district.map(item => (
                 <option key={item.id} value={item.id}>{item.name}</option>
               ))}

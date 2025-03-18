@@ -39,6 +39,7 @@ export default function Login() {
     }
     try {
       const res = await dispatch(login(data));
+      console.log('res',res)
       if (res.payload.data) {
         localStorage.setItem("access_Token", res.payload.data.token)
         localStorage.setItem("user", JSON.stringify(res.payload.data.user))

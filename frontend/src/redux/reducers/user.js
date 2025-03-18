@@ -20,13 +20,12 @@ export const login = createAsyncThunk(
   }
 )
 
+const userStorage = JSON.parse(localStorage.getItem("user"))
+
 const UserSlice = createSlice({
   name: "user",
   initialState: {
-    user: {
-      auth: false,
-      data: ""
-    },
+    user: userStorage,
     loading: false,
     error: ""
   },

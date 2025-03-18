@@ -1,26 +1,33 @@
 import React from 'react'
 import "./Dropdown.scss"
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 export default function Dropdown() {
   const { user } = useSelector((state) => state.userReducer)
 
+  const manager = [
+    { id: 1, title: 'Thông tin cá nhân', path: '' },
+    { id: 2, title: 'Đăng bài tìm phòng', path: '' },
+    { id: 3, title: 'Quản lý bài đăng', path: '/tenant/post-manager' },
+    { id: 4, title: 'Quản lý phòng yêu thích', path: '/tenant/room-like-manager' },
+    { id: 5, title: 'Quản lý giỏ hàng', path: '' },
+    { id: 6, title: 'Quản lý đơn hàng đã đặt', path: '' },
+    { id: 7, title: 'Đăng xuất', path: '' },
+  ]
+
   return (
     <div>
       <div class="dropdown">
-        <span class=" dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-          <span></span>
-          <i class="bi bi-person-circle"></i>
-          <span>{user.user.name}</span>
+        <span className=" dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+          <i className="bi bi-person-circle"></i>
+          <span>{user?.name}</span>
         </span>
 
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <li><a class="dropdown-item" href="#">Thông tin cá nhân</a></li>
-          <li><a class="dropdown-item" href="#">Quản lý tin đăng</a></li>
-          <li><a class="dropdown-item" href="#">Quản lý phòng yêu thích</a></li>
-          <li><a class="dropdown-item" href="#">Quản lý giỏ hàng</a></li>
-          <li><a class="dropdown-item" href="#">Quản lý đơn hàng đã đặt</a></li>
-          <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
+        <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          {manager?.map((item) => (
+            <Link to={item?.path} className='dropdown-menu_item'>{item?.title}</Link>
+          ))}
         </ul>
       </div>
     </div>

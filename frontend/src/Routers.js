@@ -19,6 +19,7 @@ const TenantManager = React.lazy(() => import('./pages/Landlord/TenantManager/Te
 const VehicleManager = React.lazy(() => import('./pages/Landlord/VehicleManager/VehicleManager'))
 
 const PostManagerTenant = React.lazy(() => import('./pages/Tenant/PostManager/PostManager'))
+const RoomLikeManager = React.lazy(() => import('./pages/Tenant/RoomLikeManager/RoomLikeManager'))
 
 export default function Routers() {
   return (
@@ -49,6 +50,7 @@ export default function Routers() {
 
             <Route>
               <Route path='/tenant/post-manager' element={<PostManagerTenant />} />
+              <Route path='/tenant/room-like-manager' element={<RoomLikeManager />} />
             </Route>
 
           </Routes>
