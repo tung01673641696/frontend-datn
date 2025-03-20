@@ -6,12 +6,12 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import "./HeaderUser.scss"
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import Dropdown from '../../HomeLayout/Dropdown/Dropdown';
+import DropdownTenant from '../../HomeLayout/DropdownTenant/DropdownTenant';
+import DropdownLandlord from '../../HomeLayout/DropdownLandlord/DropdownLandlord';
 
 export default function HeaderUser() {
-  const { user } = useSelector((state) => state.userReducer)
+  const user = localStorage.getItem('user') === null ? null : JSON.parse(localStorage.getItem('user'));
 
-  console.log("user", user)
   return (
     <div className='header'>
       <div className='header_wrap'>
@@ -23,16 +23,18 @@ export default function HeaderUser() {
               {!user ? (
                 <>
                   <Link to="/login" className='header_user'>Đăng Nhập</Link>
-
                   <span className='header_separate'>|</span>
-
                   <Link to="/register" className='header_user'>Đăng Ký</Link>
                 </>
-              ) : (
+              ) : user && user.role_id === 1 ? (
                 <>
-                  <Dropdown />
+                  <DropdownTenant />
                 </>
-              )}
+              ) :
+                <>
+                  <DropdownLandlord />
+                </>
+              }
             </Nav>
 
           </Container>

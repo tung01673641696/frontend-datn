@@ -12,7 +12,6 @@ import { useDispatch, useSelector } from 'react-redux'
 export default function Login() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { loading, user } = useSelector((state) => state.userReducer)
 
   const [phone, setPhone] = useState("")
   const [password, setPassword] = useState("")
@@ -41,7 +40,7 @@ export default function Login() {
       const res = await dispatch(login(data));
       console.log('res',res)
       if (res.payload.data) {
-        localStorage.setItem("access_Token", res.payload.data.token)
+        localStorage.setItem("access_token", res.payload.data.token)
         localStorage.setItem("user", JSON.stringify(res.payload.data.user))
         //update state auth trong redux
 

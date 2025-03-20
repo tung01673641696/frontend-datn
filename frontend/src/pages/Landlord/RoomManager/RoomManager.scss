@@ -4,16 +4,12 @@ h3 {
   font-weight: 400;
 }
 
-.select {
-  background-color: #EFF2F5;
-  display: flex;
-  justify-content: space-between;
-  padding: 15px 20px;
+.room_mana {
   margin: 40px 0;
 
-  .select_search {
+  .room_mana_search {
 
-    .select_search_title {
+    .room_mana_search_title {
       margin-right: 25px;
     }
 
@@ -24,7 +20,7 @@ h3 {
 
   }
 
-  .select_add {
+  .room_mana_add {
 
     button {
       padding: 5px 10px;

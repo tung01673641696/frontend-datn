@@ -1,0 +1,26 @@
+.info-tenant {
+  background-color: #f3f3f3;
+
+  .info-tenant_box {
+    width: 50%;
+    margin: 50px auto;
+    padding: 40px 0;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+
+    h3 {
+      font-size: 22px;
+      margin-bottom: 30px;
+    }
+
+    .info-tenant_box_item {
+      width: 60%;
+      margin: 10px auto;
+
+      input {
+        width: 100%;
+      }
+    }
+  }
+}

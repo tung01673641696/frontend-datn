@@ -43,6 +43,7 @@ export default function VehicleManager() {
           pageSizeOptions: ['10', '20', '30'],
         }}
         dataSource={data}
+        bordered
       >
         <Column title={"STT"} dataIndex="id" key="id" />
         <Column title={"Nhà"}

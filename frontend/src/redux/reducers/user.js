@@ -20,14 +20,15 @@ export const login = createAsyncThunk(
   }
 )
 
-const userStorage = JSON.parse(localStorage.getItem("user"))
+const access_token = localStorage.getItem('access_token')
+const user = JSON.parse(localStorage.getItem("user"))
 
 const UserSlice = createSlice({
   name: "user",
   initialState: {
-    user: userStorage,
+    isAuth: access_token === 'undefined' || access_token === null ? false : true,
+    myInfo: user || {},
     loading: false,
-    error: ""
   },
   extraReducers: builder => {
     builder
@@ -39,7 +40,7 @@ const UserSlice = createSlice({
       })
       .addCase(login.fulfilled, (state, action) => {
         state.loading = false
-        state.user = action.payload.data;
+        state.myInfo = action.payload.data;
       })
       .addCase(register.pending, (state, action) => {
         state.loading = true

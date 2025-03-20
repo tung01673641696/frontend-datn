@@ -1,3 +1,15 @@
+.header_user {
+  display: flex;
+
+  &_write {
+    margin-right: 50px;
+
+    span {
+      margin-left: 5px;
+    }
+  }
+}
+
 .dropdown-toggle::after {
   display: none;
 }

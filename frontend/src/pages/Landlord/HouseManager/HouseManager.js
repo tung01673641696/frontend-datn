@@ -4,13 +4,14 @@ import Common from '../../../layouts/LandlordLayout/Common/Common'
 import BaseButton from '../../../components/BaseButton/BaseButton'
 import { Table } from 'antd'
 import Column from 'antd/es/table/Column'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { houseByOwner } from '../../../redux/reducers/house'
 
 export default function HouseManager() {
   const navigate = useNavigate()
-  const params = useParams()
+  const user = JSON.parse(localStorage.getItem("user"))
+  const id = user.id
 
   const dispatch = useDispatch()
   const { listHouseByOwner } = useSelector((state) => state.houseReducer)
@@ -21,8 +22,8 @@ export default function HouseManager() {
   }
 
   useEffect(() => {
-    dispatch(houseByOwner(params.id));
-  }, [dispatch, params.id]);
+    dispatch(houseByOwner(id));
+  }, [dispatch, id]);
 
   return (
     <Common>
@@ -39,6 +40,7 @@ export default function HouseManager() {
           pageSizeOptions: ['10', '20', '30'],
         }}
         dataSource={listHouseByOwner}
+        bordered
       >
         <Column title={"STT"} dataIndex="id" key="id" />
         <Column title={"Tên nhà"}
@@ -68,7 +70,7 @@ export default function HouseManager() {
         <Column title={"Thao tác"}
           render={() => (
             <>
-              <BaseButton type="warning">Sửa</BaseButton>
+              <BaseButton type="warning" onClick={()=>navigate()}>Sửa</BaseButton>
               <BaseButton type="red">Xóa</BaseButton>
             </>
           )}

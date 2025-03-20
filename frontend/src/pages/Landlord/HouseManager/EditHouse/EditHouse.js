@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import "./AddHouse.scss"
+import "./EditHouse.scss"
 import Common from '../../../../layouts/LandlordLayout/Common/Common'
 import BaseInput from '../../../../components/BaseInput/BaseInput'
 import BaseButton from '../../../../components/BaseButton/BaseButton'
 import { getDistrict } from '../../../../redux/reducers/address'
 import { getWard } from '../../../../redux/reducers/address'
 import { useDispatch, useSelector } from 'react-redux'
-import { addHouse } from '../../../../redux/reducers/house'
 import { useNavigate } from 'react-router-dom'
 
-export default function AddHouse() {
+export default function EditHouse() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { district, ward } = useSelector((state) => state.addressReducer)
-  const { houseAddNew } = useSelector((state) => state.houseReducer)
   const user = JSON.parse(localStorage.getItem('user'))
   const user_id = user.id
 
@@ -39,18 +37,15 @@ export default function AddHouse() {
     setHouse({ ...house, [e.target.name]: e.target.value })
   }
 
-  console.log("house", house)
-
   const handleSubmit = (e) => {
     e.preventDefault()
-    dispatch(addHouse(house))
-    navigate(`/landlord/house-manager/user/${user_id}`)
+
   }
 
   return (
     <Common>
       <form onSubmit={handleSubmit}>
-        <span>Thêm nhà</span>
+        <span>Cập nhật nhà</span>
 
         <div className='add_house_content'>
           <div className='add_house_content_ele'>
@@ -85,7 +80,7 @@ export default function AddHouse() {
           </div>
 
           <div className='add_house_content_ele'>
-            <BaseButton type="blue">Thêm nhà</BaseButton>
+            <BaseButton type="blue">Cập nhật nhà</BaseButton>
           </div>
         </div>
       </form>

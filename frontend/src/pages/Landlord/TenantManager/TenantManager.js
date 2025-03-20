@@ -55,6 +55,7 @@ export default function TenantManager() {
           pageSizeOptions: ['10', '20', '30'],
         }}
       dataSource={data}
+      bordered
       >
         <Column title={"STT"} dataIndex="id" key="id" />
         <Column title={"Tên khách"}
