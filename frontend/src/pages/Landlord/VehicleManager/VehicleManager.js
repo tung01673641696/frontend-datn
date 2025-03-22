@@ -4,8 +4,11 @@ import Common from '../../../layouts/LandlordLayout/Common/Common'
 import BaseButton from '../../../components/BaseButton/BaseButton'
 import { Table } from 'antd'
 import Column from 'antd/es/table/Column'
+import { useNavigate } from 'react-router-dom'
 
 export default function VehicleManager() {
+  const navigate = useNavigate()
+
   const data = [
     {
       id: 1,
@@ -15,7 +18,19 @@ export default function VehicleManager() {
       type_vehicle: 'Xe máy',
       vehicle_number: '34M9-6705'
     },
+    {
+      id: 2,
+      house: "Gohomy1",
+      room: "102",
+      tenant: "Nguyễn Văn Toàn",
+      type_vehicle: 'Xe máy',
+      vehicle_number: '34M9-4422'
+    },
   ]
+
+  function handleClick() {
+    navigate(`/landlord/vehicle-manager/add-vehicle`)
+  }
 
   return (
     <Common>
@@ -32,7 +47,7 @@ export default function VehicleManager() {
         </div>
 
         <div className='select_add'>
-          <BaseButton type="blue">Thêm phương tiện</BaseButton>
+          <BaseButton type="blue" onClick={handleClick}>Thêm phương tiện</BaseButton>
         </div>
       </div>
 

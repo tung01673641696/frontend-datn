@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./Post.scss"
 import HeaderUser from '../../../layouts/UserLayout/HeaderUser/HeaderUser'
 import Footer from '../../../layouts/UserLayout/FooterUser/FooterUser'
@@ -6,6 +6,17 @@ import BaseInput from '../../../components/BaseInput/BaseInput'
 import BaseButton from '../../../components/BaseButton/BaseButton'
 
 export default function Post() {
+  const [price, setPrice] = useState("")
+
+  const formatPrice = (val) => {
+    let num = val.replace(/\D/g, "");
+    return new Intl.NumberFormat("vi-VN").format(num)+ " vnđ";
+  };
+
+  const handleChangePrice = (e) => {
+    setPrice(formatPrice(e.target.value));
+  }
+
   return (
     <div className='post'>
       <HeaderUser />
@@ -24,10 +35,12 @@ export default function Post() {
             </select>
           </div>
           <div className='post_box_ele_item'>
-            <BaseInput placeholder="Giá phòng" />
+            <BaseInput placeholder="Giá phòng" value={price} onChange={handleChangePrice}/>
           </div>
           <div className='post_box_ele_item'>
-            <BaseInput placeholder="Số người ở" />
+            <select>
+              <option value="">1</option>
+            </select>
           </div>
         </div>
 
@@ -39,12 +52,12 @@ export default function Post() {
           </div>
           <div className='post_box_ele_item'>
             <select>
-              <option value="">Hà Nội</option>
+              <option value="">Quận Đống Đa</option>
             </select>
           </div>
           <div className='post_box_ele_item'>
             <select>
-              <option value="">Hà Nội</option>
+              <option value="">Phường Khương Thượng</option>
             </select>
           </div>
         </div>
@@ -54,12 +67,16 @@ export default function Post() {
         </div>
 
         <div className='post_box_ele'>
-          <BaseInput placeholder="Ghi chú" />
+          <textarea
+            onChange=""
+            placeholder="Chi tiết tìm phòng"
+          />
         </div>
 
         <div className='post_box_ele'>
-          <BaseButton>Đăng bài</BaseButton>
+          <BaseButton type="red">Đăng bài</BaseButton>
         </div>
+
       </form>
 
       <Footer />

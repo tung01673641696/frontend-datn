@@ -15,8 +15,6 @@ export default function Common({ children }) {
     { id: 4, title: 'Quản lý phòng', path: '/landlord/room-manager' },
     { id: 5, title: 'Quản lý khách thuê', path: '/landlord/tenant-manager' },
     { id: 6, title: 'Quản lý phương tiện', path: '/landlord/vehicle-manager' },
-    { id: 7, title: 'Quản lý bài đăng', path: '/landlord/house-manager' },
-    { id: 8, title: 'Quản lý khách hàng tiềm năng', path: '/landlord/house-manager' },
   ]
 
   return (

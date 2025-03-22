@@ -38,4 +38,13 @@ table {
     padding: 5px 12px;
     margin-right: 8px;
   }
+
+  .ant-table-thead {
+
+    th {
+      background-color: #3461b4 !important;
+      color: white !important;
+    }
+
+  }
 }

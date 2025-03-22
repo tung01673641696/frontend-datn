@@ -51,9 +51,9 @@ export default function Dashboard() {
 
   return (
     <Common>
-      <h3>Thống kê</h3>
+      <h3 className='dashboard_title'>Thống kê</h3>
 
-      <div className='quantity'>
+      <div className='dashboard_quantity'>
         {
           statis?.map((item) => (
             <Link className={`quantity_ele orange ${item.color}`} to={item?.path}>

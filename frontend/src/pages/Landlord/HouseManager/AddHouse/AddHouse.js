@@ -49,8 +49,8 @@ export default function AddHouse() {
 
   return (
     <Common>
-      <form onSubmit={handleSubmit}>
-        <span>Thêm nhà</span>
+      <form className='add_house' onSubmit={handleSubmit}>
+        <span className='add_house_title'>Thêm nhà</span>
 
         <div className='add_house_content'>
           <div className='add_house_content_ele'>

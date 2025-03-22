@@ -4,37 +4,89 @@ import Common from '../../../layouts/LandlordLayout/Common/Common'
 import BaseButton from '../../../components/BaseButton/BaseButton'
 import { Table } from 'antd'
 import Column from 'antd/es/table/Column'
+import { useNavigate } from 'react-router-dom'
 
 export default function RoomManager() {
+  const navigate = useNavigate()
   const room = [
     {
       id: 1,
       name: "101",
+      type_room: "Chung cư mini",
       floor: 1,
       price: "4.000.000đ",
       area: "35",
       number_people: "4",
       number_people_sp: "2",
       status: "đã thuê"
+    },
+    {
+      id: 2,
+      name: "102",
+      type_room: "Chung cư mini",
+      floor: 1,
+      price: "4.000.000đ",
+      area: "35",
+      number_people: "4",
+      number_people_sp: "4",
+      status: "đã thuê"
+    },
+    {
+      id: 3,
+      name: "201",
+      type_room: "Chung cư mini",
+      floor: 2,
+      price: "4.000.000đ",
+      area: "35",
+      number_people: "4",
+      number_people_sp: "4",
+      status: "đã thuê"
+    },
+    {
+      id: 4,
+      name: "202",
+      type_room: "Chung cư mini",
+      floor: 2,
+      price: "4.000.000đ",
+      area: "35",
+      number_people: "4",
+      number_people_sp: "0",
+      status: "Đang trống"
     }
   ]
 
+  function handleClick() {
+    navigate(`/landlord/room-manager/add-room`)
+
+  }
+
   return (
     <Common>
-      <h3>Danh sách phòng</h3>
+      <h3 className='room_mana_title'>Danh sách phòng</h3>
 
       <div className='room_mana'>
-        <div className='room_mana_search'>
-          <span className='room_mana_search_title'>Nhà</span>
+        <div className='room_mana_add'>
+          <BaseButton type="blue" onClick={handleClick}>Thêm phòng</BaseButton>
+        </div>
+
+        <div className='room_mana_select'>
+          <span className='room_mana_select_title'>Chọn nhà</span>
           <select>
-            <option>Tất cả nhà</option>
             <option>Nhà Gohomy1</option>
             <option>Nhà Gohomy2</option>
           </select>
         </div>
 
-        <div className='room_mana_add'>
-          <BaseButton type="blue">Thêm phòng</BaseButton>
+        <div className='room_mana_status'>
+          <div className='room_mana_status_item'>
+            <input type='checkbox' />
+            <span>Chỉ hiện phòng trống</span>
+          </div>
+
+          <div className='room_mana_status_item'>
+            <input type='checkbox' />
+            <span>Chỉ hiện phòng đang ở</span>
+          </div>
         </div>
 
         <Table style={{ textAlignLast: 'center' }}
@@ -50,6 +102,12 @@ export default function RoomManager() {
           <Column title={"Tên phòng"}
             render={(item) => (
               <span>{item?.name}</span>
+            )}
+          />
+
+          <Column title={"Loại phòng"}
+            render={(item) => (
+              <span>{item?.type_room}</span>
             )}
           />
 

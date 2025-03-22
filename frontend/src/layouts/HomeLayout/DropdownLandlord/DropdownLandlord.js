@@ -12,12 +12,13 @@ export default function DropdownLandlord() {
 
   const manager = [
     { id: 1, title: 'Thông tin cá nhân', path: '/tenant/info-tenant' },
-    { id: 2, title: 'Đăng phòng', path: '' },
-    { id: 3, title: 'Quản lý chung', path: '/tenant/post-manager' },
-    { id: 4, title: 'Quản lý phòng yêu thích', path: '/tenant/room-like-manager' },
-    { id: 5, title: 'Quản lý giỏ hàng', path: '' },
-    { id: 6, title: 'Quản lý đơn hàng đã đặt', path: '' },
-    { id: 7, title: 'Đăng xuất', path: '' },
+    { id: 2, title: 'Quản lý chung', path: '/landlord/dashboard' },
+    { id: 3, title: 'Quản lý bài đăng', path: '' },
+    { id: 4, title: 'Quản lý khách hàng tiềm năng', path: '' },
+    { id: 5, title: 'Quản lý nhu cầu yêu thích', path: '' },
+    { id: 6, title: 'Quản lý giỏ hàng', path: '' },
+    { id: 7, title: 'Quản lý đơn hàng đã đặt', path: '' },
+    { id: 8, title: 'Đăng xuất', path: '' },
   ]
 
   return (

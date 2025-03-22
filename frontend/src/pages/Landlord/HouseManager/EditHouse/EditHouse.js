@@ -23,33 +23,33 @@ export default function EditHouse() {
     ward_id: ""
   })
 
-  useEffect(() => {
-    dispatch(getDistrict())
-  }, [])
+  // useEffect(() => {
+  //   dispatch(getDistrict())
+  // }, [])
 
-  const handleDistrictChange = (e) => {
-    const district_id = e.target.value;
-    setHouse({ ...house, district_id, ward_id: "" })
-    dispatch(getWard(district_id))
-  }
+  // const handleDistrictChange = (e) => {
+  //   const district_id = e.target.value;
+  //   setHouse({ ...house, district_id, ward_id: "" })
+  //   dispatch(getWard(district_id))
+  // }
 
-  const handleChange = (e) => {
-    setHouse({ ...house, [e.target.name]: e.target.value })
-  }
+  // const handleChange = (e) => {
+  //   setHouse({ ...house, [e.target.name]: e.target.value })
+  // }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
+  // const handleSubmit = (e) => {
+  //   e.preventDefault()
 
-  }
+  // }
 
   return (
     <Common>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit="">
         <span>Cập nhật nhà</span>
 
         <div className='add_house_content'>
           <div className='add_house_content_ele'>
-            <BaseInput name="name" placeholder="Tên nhà" onChange={handleChange} />
+            <BaseInput name="name" placeholder="Tên nhà" onChange="" />
           </div>
           <div className='add_house_content_ele'>
             <select>
@@ -58,7 +58,7 @@ export default function EditHouse() {
           </div>
 
           <div className='add_house_content_ele'>
-            <select name='district_id' onChange={handleDistrictChange}>
+            <select name='district_id' onChange="">
               <option value="">Chọn Quận / Huyện</option>
               {district.map(item => (
                 <option key={item.id} value={item.id}>{item.name}</option>
@@ -67,7 +67,7 @@ export default function EditHouse() {
           </div>
 
           <div className='add_house_content_ele'>
-            <select name='ward_id' onChange={handleChange}>
+            <select name='ward_id' onChange="">
               <option value="">Chọn Phường / Xã</option>
               {ward.map(item => (
                 <option key={item.id} value={item.id}>{item.name}</option>
@@ -76,7 +76,7 @@ export default function EditHouse() {
           </div>
 
           <div className='add_house_content_ele'>
-            <BaseInput name="address" placeholder="Địa chỉ chi tiết" onChange={handleChange} />
+            <BaseInput name="address" placeholder="Địa chỉ chi tiết" onChange="" />
           </div>
 
           <div className='add_house_content_ele'>

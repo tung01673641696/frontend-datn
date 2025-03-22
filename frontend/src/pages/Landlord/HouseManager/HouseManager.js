@@ -27,9 +27,9 @@ export default function HouseManager() {
 
   return (
     <Common>
-      <h3>Danh sách nhà</h3>
+      <h3 className='house_mana_title'>Danh sách nhà</h3>
 
-      <div className='add_house'>
+      <div className='house_mana_add'>
         <BaseButton type="blue" onClick={handleClick}>Thêm nhà</BaseButton>
       </div>
 
@@ -68,9 +68,9 @@ export default function HouseManager() {
         />
 
         <Column title={"Thao tác"}
-          render={() => (
+          render={(item) => (
             <>
-              <BaseButton type="warning" onClick={()=>navigate()}>Sửa</BaseButton>
+              <BaseButton type="warning" onClick={() => navigate(`/landlord/house-manager/edit-house/${item.id}`)}>Sửa</BaseButton>
               <BaseButton type="red">Xóa</BaseButton>
             </>
           )}

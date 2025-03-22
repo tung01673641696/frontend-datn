@@ -4,8 +4,10 @@ import Common from '../../../layouts/LandlordLayout/Common/Common'
 import BaseButton from '../../../components/BaseButton/BaseButton'
 import { Table } from 'antd'
 import Column from 'antd/es/table/Column'
+import { useNavigate } from 'react-router-dom'
 
 export default function TenantManager() {
+  const navigate = useNavigate()
   const data = [
     {
       id: 1,
@@ -19,32 +21,47 @@ export default function TenantManager() {
     },
     {
       id: 2,
-      name: "Hoàng Thanh Tùng",
-      telephone: "0373641696",
+      name: "Nguyễn Văn Lâm",
+      telephone: "0373641698",
       house: "Gohomy1",
-      room: '101',
+      room: '102',
       date: '27/2/2025',
       note: '',
       status: 'Đang ở'
     }
   ]
 
+  function handleClick() {
+    navigate(`/landlord/tenant-manager/add-tenant`);
+  }
+
   return (
     <Common>
-      <h3>Danh sách khách thuê</h3>
+      <h3 className='tenant-mana_title'>Danh sách khách thuê</h3>
 
-      <div className='select'>
-        <div className='select_search'>
-          <span className='select_search_title'>Nhà</span>
-          <select>
-            <option>Tất cả nhà</option>
-            <option>Nhà Gohomy1</option>
-            <option>Nhà Gohomy2</option>
-          </select>
+      <div className='tenant-mana_act'>
+        <div className='tenant-mana_act_search'>
+          <div className='tenant-mana_act_search_ele'>
+            <span className='tenant-mana_act_search_ele_name'>Nhà</span>
+            <select className='tenant-mana_act_search_ele_select'>
+              <option>Nhà Gohomy1</option>
+              <option>Nhà Gohomy2</option>
+            </select>
+          </div>
+
+          <div className='tenant-mana_act_search_ele'>
+            <span className='tenant-mana_act_search_ele_name'>Phòng</span>
+            <select className='tenant-mana_act_search_ele_select'>
+              <option>101</option>
+              <option>102</option>
+              <option>201</option>
+              <option>202</option>
+            </select>
+          </div>
         </div>
 
-        <div className='select_add'>
-          <BaseButton type="blue">Thêm khách thuê</BaseButton>
+        <div className='tenant-mana_act_add'>
+          <BaseButton type="blue" onClick={handleClick}>Thêm khách thuê</BaseButton>
         </div>
       </div>
 
@@ -54,11 +71,11 @@ export default function TenantManager() {
           showSizeChanger: false,
           pageSizeOptions: ['10', '20', '30'],
         }}
-      dataSource={data}
-      bordered
+        dataSource={data}
+        bordered
       >
         <Column title={"STT"} dataIndex="id" key="id" />
-        <Column title={"Tên khách"}
+        <Column title={"Tên khách thuê"}
           render={(item) => (
             <span>{item?.name}</span>
           )}
@@ -91,12 +108,6 @@ export default function TenantManager() {
         <Column title={"Ghi chú"}
           render={(value) => (
             <span>{value?.note}</span>
-          )}
-        />
-
-        <Column title={"Tình trạng"}
-          render={(value) => (
-            <span>{value?.status}</span>
           )}
         />
 

@@ -1,31 +1,35 @@
-h3 {
+.tenant-mana_title {
   text-align: left;
   font-size: 22px;
   font-weight: 400;
 }
 
-.select {
+.tenant-mana_act {
   background-color: #EFF2F5;
   display: flex;
   justify-content: space-between;
   padding: 15px 20px;
   margin: 40px 0;
 
-  .select_search {
+  .tenant-mana_act_search {
+    display: flex;
 
-    .select_search_title {
-      margin-right: 25px;
-    }
+    .tenant-mana_act_search_ele {
+      margin-right: 70px;
 
-    select {
-      font-size: 14px;
-      padding: 5px 40px 5px 10px;
+      .tenant-mana_act_search_ele_name {
+        margin-right: 15px;
+      }
+
+      .tenant-mana_act_search_ele_select {
+        font-size: 14px;
+        padding: 5px 40px 5px 10px;
+      }
     }
 
   }
 
-  .select_add {
-
+  .tenant-mana_act_add {
     button {
       padding: 5px 10px;
       font-size: 14px;
@@ -38,5 +42,14 @@ table {
   .button {
     padding: 5px 12px;
     margin-right: 8px;
+  }
+
+  .ant-table-thead {
+
+    th {
+      background-color: #3461b4 !important;
+      color: white !important;
+    }
+
   }
 }

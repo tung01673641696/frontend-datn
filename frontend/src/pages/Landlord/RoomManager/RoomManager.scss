@@ -1,4 +1,4 @@
-h3 {
+.room_mana_title {
   text-align: left;
   font-size: 22px;
   font-weight: 400;
@@ -7,24 +7,54 @@ h3 {
 .room_mana {
   margin: 40px 0;
 
-  .room_mana_search {
+  .room_mana_add {
+    text-align: left;
 
-    .room_mana_search_title {
+    button {
+      padding: 8px 20px;
+    }
+  }
+
+  .room_mana_select {
+    background-color: #f3f3f3;
+    margin: 40px 0;
+    padding: 10px 30px;
+    text-align: left;
+
+    .room_mana_select_title {
       margin-right: 25px;
     }
 
     select {
-      font-size: 14px;
-      padding: 5px 40px 5px 10px;
-    }
-
-  }
-
-  .room_mana_add {
-
-    button {
-      padding: 5px 10px;
-      font-size: 14px;
+      padding: 5px 20px 5px 10px;
     }
   }
+
+  .room_mana_status {
+    display: flex;
+    margin-bottom: 40px;
+
+    .room_mana_status_item {
+      margin-right: 50px;
+
+      span {
+        margin-left: 5px;
+      }
+    }
+  }
+
+  button {
+    margin-right: 7px;
+    padding: 5px 10px;
+    font-size: 14px;
+  }
+}
+
+.ant-table-thead {
+
+  th {
+    background-color: #3461b4 !important;
+    color: white !important;
+  }
+
 }

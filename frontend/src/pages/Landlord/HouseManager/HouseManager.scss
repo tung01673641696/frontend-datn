@@ -1,12 +1,16 @@
-h3 {
+.house_mana_title {
   text-align: left;
   font-size: 22px;
   font-weight: 400;
 }
 
-.add_house {
+.house_mana_add {
   text-align: left;
-  margin-top: 40px;
+  margin: 40px 0;
+
+  button {
+    padding: 6px 20px;
+  }
 }
 
 table {
@@ -15,4 +19,12 @@ table {
     padding: 5px 12px;
     margin-right: 8px;
   }
+}
+
+.ant-table-thead {
+  th {
+    background-color: #3461b4 !important;
+    color: white !important;
+  }
+
 }

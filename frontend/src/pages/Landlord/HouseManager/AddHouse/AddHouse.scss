@@ -1,12 +1,10 @@
-
-
-form {
+.add_house {
   width: 55%;
   border: 1px solid #385995;
   margin-left: 15%;
   margin-top: 4%;
 
-  span {
+  .add_house_title {
     width: 100%;
     display: block;
     background-color: #385995;
@@ -35,6 +33,7 @@ form {
       select {
         width: 100%;
         padding: 10px;
+        border: 1px solid #b8b5b5;
       }
     }
   }
