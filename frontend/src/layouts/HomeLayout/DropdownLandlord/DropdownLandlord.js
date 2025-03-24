@@ -7,14 +7,14 @@ export default function DropdownLandlord() {
   const navigate = useNavigate()
   const user = localStorage.getItem('user') === null ? null : JSON.parse(localStorage.getItem('user'));
   function handleClick() {
-    navigate('')
+    navigate('/landlord/post')
   }
 
   const manager = [
-    { id: 1, title: 'Thông tin cá nhân', path: '/tenant/info-tenant' },
+    { id: 1, title: 'Thông tin cá nhân', path: '/landlord/info-landlord' },
     { id: 2, title: 'Quản lý chung', path: '/landlord/dashboard' },
     { id: 3, title: 'Quản lý bài đăng', path: '' },
-    { id: 4, title: 'Quản lý khách hàng tiềm năng', path: '' },
+    { id: 4, title: 'Quản lý khách hàng tiềm năng', path: '/landlord/customer-manager' },
     { id: 5, title: 'Quản lý nhu cầu yêu thích', path: '' },
     { id: 6, title: 'Quản lý giỏ hàng', path: '' },
     { id: 7, title: 'Quản lý đơn hàng đã đặt', path: '' },

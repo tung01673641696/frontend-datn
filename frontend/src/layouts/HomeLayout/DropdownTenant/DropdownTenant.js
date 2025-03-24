@@ -12,12 +12,11 @@ export default function DropdownTenant() {
 
   const manager = [
     { id: 1, title: 'Thông tin cá nhân', path: '/tenant/info-tenant' },
-    { id: 2, title: 'Đăng bài tìm phòng', path: '/tenant/post' },
-    { id: 3, title: 'Quản lý bài đăng', path: '/tenant/post-manager' },
-    { id: 4, title: 'Quản lý phòng yêu thích', path: '/tenant/room-like-manager' },
-    { id: 5, title: 'Quản lý giỏ hàng', path: '' },
-    { id: 6, title: 'Quản lý đơn hàng đã đặt', path: '' },
-    { id: 7, title: 'Đăng xuất', path: '' },
+    { id: 2, title: 'Quản lý bài đăng', path: '/tenant/post-manager' },
+    { id: 3, title: 'Quản lý phòng yêu thích', path: '/tenant/room-like-manager' },
+    { id: 4, title: 'Quản lý giỏ hàng', path: '' },
+    { id: 5, title: 'Quản lý đơn hàng đã đặt', path: '' },
+    { id: 6, title: 'Đăng xuất', path: '' },
   ]
 
   return (
@@ -25,7 +24,7 @@ export default function DropdownTenant() {
       <div className='header_user_write' onClick={handleClick}>
         <i class="bi bi-pencil-square"></i>
         <span>
-          Đăng bài
+          Đăng bài tìm phòng
         </span>
       </div>
 

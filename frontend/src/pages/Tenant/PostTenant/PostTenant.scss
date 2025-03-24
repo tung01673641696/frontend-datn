@@ -1,17 +1,17 @@
-.post {
+.post_tenant {
   background-color: #f3f3f3;
 
-  .post_box {
+  .post_tenant_box {
     width: 50%;
     margin: 30px auto;
     background-color: white;
 
-    h3 {
+    .post_tenant_box_title {
       font-size: 22px;
       padding: 30px 0;
     }
 
-    .post_box_ele {
+    .post_tenant_box_ele {
       width: 70%;
       margin: 20px auto;
       display: flex;
@@ -21,14 +21,15 @@
         width: 100%;
       }
 
-      .post_box_ele_item {
+      .post_tenant_box_ele_item {
         width: calc(100% / 3 - 10px);
 
         select {
           width: 100%;
-          padding: 8px 10px;
+          padding: 10px;
           border-radius: 8px;
           border: 1px solid #a2a2a2;
+          color: #625f5f;
         }
       }
 
@@ -36,6 +37,8 @@
         width: 100%;
         height: 15vh;
         outline: none;
+        border: 1px solid #aea9a9;
+        padding: 5px 8px;
       }
 
       button {

@@ -1,0 +1,50 @@
+.post_land {
+  background-color: #f3f3f3;
+
+  .post_land_box {
+    width: 50%;
+    margin: 30px auto;
+    background-color: white;
+
+    .post_land_box_title {
+      font-size: 22px;
+      padding: 30px 0;
+    }
+
+    .post_land_box_ele {
+      width: 70%;
+      margin: 20px auto;
+      display: flex;
+      justify-content: space-between;
+
+      input {
+        width: 100%;
+      }
+
+      .post_land_box_ele_item {
+        width: calc(100% / 3 - 10px);
+
+        select {
+          width: 100%;
+          padding: 10px;
+          border-radius: 8px;
+          border: 1px solid #a2a2a2;
+          color: #625f5f;
+        }
+      }
+
+      textarea {
+        width: 100%;
+        height: 15vh;
+        outline: none;
+        border: 1px solid #aea9a9;
+        padding: 5px 8px;
+      }
+
+      button {
+        width: 100%;
+        margin: 20px 0 60px 0;
+      }
+    }
+  }
+}

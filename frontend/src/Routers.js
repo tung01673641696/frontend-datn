@@ -10,6 +10,10 @@ const SearchNeed = React.lazy(() => import('./pages/SearchNeed/SearchNeed'))
 const RoomDetail = React.lazy(() => import('./pages/RoomDetail/RoomDetail'))
 const NeedDetail = React.lazy(() => import('./pages/NeedDetail/NeedDetail'))
 
+const InfoLandlord = React.lazy(() => import('./pages/Landlord/InfoLandlord/InfoLandlord'))
+const PostLandlord = React.lazy(() => import('./pages/Landlord/PostLandlord/PostLandlord'))
+const CustomerManager = React.lazy(() => import('./pages/Landlord/CustomerManager/CustomerManager'))
+
 const Dashboard = React.lazy(() => import('./pages/Landlord/Dashboard/Dashboard'))
 const HouseManager = React.lazy(() => import('./pages/Landlord/HouseManager/HouseManager'))
 const AddHouse = React.lazy(() => import('./pages/Landlord/HouseManager/AddHouse/AddHouse'))
@@ -25,7 +29,7 @@ const VehicleManager = React.lazy(() => import('./pages/Landlord/VehicleManager/
 const AddVehicle = React.lazy(() => import('./pages/Landlord/VehicleManager/AddVehicle/AddVehicle'))
 
 const InfoTenant = React.lazy(() => import('./pages/Tenant/InfoTenant/InfoTenant'))
-const Post = React.lazy(() => import('./pages/Tenant/Post/Post'))
+const PostTenant = React.lazy(() => import('./pages/Tenant/PostTenant/PostTenant'))
 const PostManagerTenant = React.lazy(() => import('./pages/Tenant/PostManager/PostManager'))
 const RoomLikeManager = React.lazy(() => import('./pages/Tenant/RoomLikeManager/RoomLikeManager'))
 
@@ -47,6 +51,10 @@ export default function Routers() {
             </Route>
 
             <Route>
+              <Route path='/landlord/info-landlord' element={<InfoLandlord />} />
+              <Route path='/landlord/post' element={<PostLandlord />} />
+              <Route path='/landlord/customer-manager' element={<CustomerManager />} />
+
               <Route path='/landlord/dashboard' element={<Dashboard />} />
               <Route path='/landlord/house-manager/user/:id' element={<HouseManager />} />
               <Route path='landlord/house-manager/add-house' element={<AddHouse />} />
@@ -64,7 +72,7 @@ export default function Routers() {
 
             <Route>
               <Route path='/tenant/info-tenant' element={<InfoTenant />} />
-              <Route path='/tenant/post' element={<Post />} />
+              <Route path='/tenant/post' element={<PostTenant />} />
               <Route path='/tenant/post-manager' element={<PostManagerTenant />} />
               <Route path='/tenant/room-like-manager' element={<RoomLikeManager />} />
             </Route>

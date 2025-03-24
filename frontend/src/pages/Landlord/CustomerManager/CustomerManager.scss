@@ -1,0 +1,36 @@
+.customer_manager {
+  width: 100%; 
+  background-color: #f3f3f3;
+
+  &_main {
+    width: 70%;
+    background-color: white;
+    margin: 0 auto;
+    padding: 50px;
+
+    h3 {
+      font-size: 22px;
+    }
+
+    .customer_manager_main_status {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      margin: 40px 0;
+
+      .customer_manager_main_status_ele {
+        width: calc(100% / 3);
+
+        button {
+          width: 100%;
+        }
+      }
+    }
+
+    .customer_manager_main_child {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+  }
+}

@@ -1,0 +1,43 @@
+.customer_item {
+  width: calc(100% / 2 - 15px);
+  margin-bottom: 30px;
+
+  .customer_item_ele {
+    display: flex;
+    border: 1px solid #858181;
+
+    .customer_item_ele_avatar {
+      width: 30%;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .customer_item_ele_content {
+      width: 70%;
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      padding: 5px 40px;
+
+      .customer_item_ele_content_child {
+        font-size: 16px;
+        margin: 2px 0;
+      }
+      
+      .customer_item_ele_content_action {
+        margin-top: 10px;
+        margin-bottom: 15px;
+
+        button {
+          padding: 5px 15px;
+          font-size: 14px;
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+}
