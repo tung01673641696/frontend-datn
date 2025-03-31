@@ -8,9 +8,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1;
 
   .base-modal {
-    width: 50%;
+    width: 30%;
 
     background-color: white;
     text-align: left;
@@ -22,7 +23,18 @@
     }
 
     .base-modal_main {
+      padding: 20px 20px 0 20px;
+    }
+
+    .base-modal_footer {
       padding: 20px;
+      display: flex;
+      justify-content: flex-end;
+
+      button {
+        padding: 3px 12px;
+        margin-left: 10px;
+      }
     }
   }
 }

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './HouseManager.scss'
 import Common from '../../../layouts/LandlordLayout/Common/Common'
 import BaseButton from '../../../components/BaseButton/BaseButton'
@@ -7,27 +7,57 @@ import Column from 'antd/es/table/Column'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { houseByOwner } from '../../../redux/reducers/house'
+import BaseModal from '../../../components/BaseModal/BaseModal'
+import { deleteHouse } from '../../../redux/reducers/house'
 
 export default function HouseManager() {
-  const navigate = useNavigate()
+  const [isShow, setIsShow] = useState(false)
+  const [selectHouseId, setSelectHouseId] = useState(null)
   const user = JSON.parse(localStorage.getItem("user"))
   const id = user.id
 
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const { listHouseByOwner } = useSelector((state) => state.houseReducer)
-  console.log("list", listHouseByOwner)
 
   function handleClick() {
     navigate(`/landlord/house-manager/add-house`)
+  }
+
+  const handleShow = (houseId) => {
+    setSelectHouseId(houseId)
+    setIsShow(true)
+  }
+
+  function handleClose() {
+    setIsShow(false)
   }
 
   useEffect(() => {
     dispatch(houseByOwner(id));
   }, [dispatch, id]);
 
+  const handleDelete = async () => {
+    if (selectHouseId) {
+      await dispatch(deleteHouse({ houseId: selectHouseId, id: id }));
+      setIsShow(false);
+    }
+  };
+
   return (
     <Common>
       <h3 className='house_mana_title'>Danh sách nhà</h3>
+
+      <>
+        <BaseModal
+          open={isShow}
+          title="Xóa nhà"
+          type="red"
+          content="Bạn có chắc chắn muốn xóa nhà không ?"
+          onCancel={handleClose}
+          onConfirm={handleDelete}
+        />
+      </>
 
       <div className='house_mana_add'>
         <BaseButton type="blue" onClick={handleClick}>Thêm nhà</BaseButton>
@@ -71,7 +101,7 @@ export default function HouseManager() {
           render={(item) => (
             <>
               <BaseButton type="warning" onClick={() => navigate(`/landlord/house-manager/edit-house/${item.id}`)}>Sửa</BaseButton>
-              <BaseButton type="red">Xóa</BaseButton>
+              <BaseButton type="red" onClick={() => handleShow(item.id)}>Xóa</BaseButton>
             </>
           )}
         />

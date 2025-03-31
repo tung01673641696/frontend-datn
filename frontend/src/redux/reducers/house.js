@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
 import HouseApi from "../../api/HouseApi";
+import { toast } from "react-toastify";
 
 export const houseByOwner = createAsyncThunk("house/houseByOwner", async (id) => {
   const listHouseByOwner = await HouseApi.getHouseByOwner(id);
@@ -12,12 +13,30 @@ export const addHouse = createAsyncThunk("house/addHouse", async (data) => {
   return addHouse
 })
 
+export const getOneHouse = createAsyncThunk("house/getOneHouse", async (houseId) => {
+  const one = await HouseApi.getOneHouse(houseId);
+  return one
+})
+
+export const deleteHouse = createAsyncThunk("house/deleteHouse", async ({ houseId, id }, thunkApi) => {
+  const deleteHouse = await HouseApi.deleteHouse(houseId)
+
+  if (deleteHouse.status === 200) {
+    toast.success("Xóa nhà thành công");
+    thunkApi.dispatch(houseByOwner(id))
+  } else {
+    toast.error("Xóa nhà thất bại");
+  }
+  return deleteHouse
+})
+
 
 const HouseSlice = createSlice({
   name: "house",
   initialState: {
     listHouseByOwner: [],
-    houseAddNew: []
+    houseAddNew: [],
+    oneHouse: {}
   },
   extraReducers: builder => {
     builder
@@ -41,6 +60,17 @@ const HouseSlice = createSlice({
       .addCase(addHouse.fulfilled, (state, action) => {
         state.loading = false
         state.houseAddNew = action.payload.data;
+      })
+
+      .addCase(getOneHouse.pending, (state, action) => {
+        state.loading = true
+      })
+      .addCase(getOneHouse.rejected, (state, action) => {
+        state.loading = false
+      })
+      .addCase(getOneHouse.fulfilled, (state, action) => {
+        state.loading = false
+        state.oneHouse = action.payload.data;
       })
   }
 })

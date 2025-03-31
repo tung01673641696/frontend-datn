@@ -1,13 +1,43 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./RoomManager.scss"
 import Common from '../../../layouts/LandlordLayout/Common/Common'
 import BaseButton from '../../../components/BaseButton/BaseButton'
 import { Table } from 'antd'
 import Column from 'antd/es/table/Column'
 import { useNavigate } from 'react-router-dom'
+import { houseByOwner } from '../../../redux/reducers/house'
+import { useDispatch, useSelector } from 'react-redux'
+import { getRoomByHouse } from '../../../redux/reducers/room'
 
 export default function RoomManager() {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const { listHouseByOwner } = useSelector((state) => state.houseReducer)
+  const { listRoomByHouse } = useSelector((state) => state.roomReducer)
+  const user = JSON.parse(localStorage.getItem("user"))
+  const id = user.id
+  const [selectedHouse, setSelectedHouse] = useState("")
+
+  console.log("id nhà", selectedHouse)
+  console.log("aaaaaaaa", listRoomByHouse)
+
+  useEffect(() => {
+    dispatch(houseByOwner(id))
+  }, [])
+
+  useEffect(() => {
+    if (listHouseByOwner.length > 0) {
+      setSelectedHouse(listHouseByOwner[0].id);
+    }
+  }, [listHouseByOwner]);
+
+  useEffect(() => {
+    if (selectedHouse) {
+      dispatch(getRoomByHouse(selectedHouse))
+    }
+  }, [dispatch, selectedHouse]);
+
+
   const room = [
     {
       id: 1,
@@ -19,39 +49,6 @@ export default function RoomManager() {
       number_people: "4",
       number_people_sp: "2",
       status: "đã thuê"
-    },
-    {
-      id: 2,
-      name: "102",
-      type_room: "Chung cư mini",
-      floor: 1,
-      price: "4.000.000đ",
-      area: "35",
-      number_people: "4",
-      number_people_sp: "4",
-      status: "đã thuê"
-    },
-    {
-      id: 3,
-      name: "201",
-      type_room: "Chung cư mini",
-      floor: 2,
-      price: "4.000.000đ",
-      area: "35",
-      number_people: "4",
-      number_people_sp: "4",
-      status: "đã thuê"
-    },
-    {
-      id: 4,
-      name: "202",
-      type_room: "Chung cư mini",
-      floor: 2,
-      price: "4.000.000đ",
-      area: "35",
-      number_people: "4",
-      number_people_sp: "0",
-      status: "Đang trống"
     }
   ]
 
@@ -71,9 +68,14 @@ export default function RoomManager() {
 
         <div className='room_mana_select'>
           <span className='room_mana_select_title'>Chọn nhà</span>
-          <select>
-            <option>Nhà Gohomy1</option>
-            <option>Nhà Gohomy2</option>
+          <select
+            value={selectedHouse}
+            onChange={(e) => setSelectedHouse(e.target.value)}
+          >
+            <option value="" disabled>Chọn nhà</option>
+            {listHouseByOwner?.map((item) => (
+              <option key={item?.id} value={item?.id}>{item?.name}</option>
+            ))}
           </select>
         </div>
 
@@ -95,7 +97,7 @@ export default function RoomManager() {
             showSizeChanger: false,
             pageSizeOptions: ['10', '20', '30'],
           }}
-          dataSource={room}
+          dataSource={listRoomByHouse}
           bordered
         >
           <Column title={"STT"} dataIndex="id" key="id" />
@@ -107,7 +109,7 @@ export default function RoomManager() {
 
           <Column title={"Loại phòng"}
             render={(item) => (
-              <span>{item?.type_room}</span>
+              <span>{item?.room_type}</span>
             )}
           />
 
@@ -131,7 +133,7 @@ export default function RoomManager() {
 
           <Column title={"Số người tối đa"}
             render={(value) => (
-              <span>{value?.number_people}</span>
+              <span>{value?.user_number}</span>
             )}
           />
 
@@ -143,8 +145,11 @@ export default function RoomManager() {
 
           <Column title={"Tình trạng phòng"}
             render={(value) => (
-              <span>{value?.status}</span>
-            )}
+              value.is_available ? (
+                <span style={{ color: "green" }}>Phòng đang trống</span>
+              ) : (<span style={{ color: "red" }}>Phòng đã thuê</span>)
+            )
+            }
           />
 
           <Column title={"Thao tác"}

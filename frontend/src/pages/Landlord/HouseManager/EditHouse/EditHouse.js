@@ -6,26 +6,27 @@ import BaseButton from '../../../../components/BaseButton/BaseButton'
 import { getDistrict } from '../../../../redux/reducers/address'
 import { getWard } from '../../../../redux/reducers/address'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+import { getOneHouse } from '../../../../redux/reducers/house'
+
 
 export default function EditHouse() {
-  const navigate = useNavigate()
+  const params = useParams()
   const dispatch = useDispatch()
   const { district, ward } = useSelector((state) => state.addressReducer)
-  const user = JSON.parse(localStorage.getItem('user'))
-  const user_id = user.id
+  const { oneHouse } = useSelector((state) => state.houseReducer)
 
   const [house, setHouse] = useState({
     name: "",
     address: "",
-    user_id: user_id,
     district_id: "",
     ward_id: ""
   })
 
-  // useEffect(() => {
-  //   dispatch(getDistrict())
-  // }, [])
+  useEffect(() => {
+    dispatch(getOneHouse(params.id))
+    dispatch(getDistrict())
+  }, [])
 
   // const handleDistrictChange = (e) => {
   //   const district_id = e.target.value;
@@ -49,7 +50,7 @@ export default function EditHouse() {
 
         <div className='add_house_content'>
           <div className='add_house_content_ele'>
-            <BaseInput name="name" placeholder="Tên nhà" onChange="" />
+            <BaseInput name="name" value={oneHouse?.name} placeholder="Tên nhà" onChange="" />
           </div>
           <div className='add_house_content_ele'>
             <select>
@@ -76,7 +77,7 @@ export default function EditHouse() {
           </div>
 
           <div className='add_house_content_ele'>
-            <BaseInput name="address" placeholder="Địa chỉ chi tiết" onChange="" />
+            <BaseInput name="address" value={oneHouse?.address} placeholder="Địa chỉ chi tiết" onChange="" />
           </div>
 
           <div className='add_house_content_ele'>

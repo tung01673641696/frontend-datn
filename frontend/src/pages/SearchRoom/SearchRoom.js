@@ -8,15 +8,15 @@ import BaseModal from '../../components/BaseModal/BaseModal'
 
 export default function SearchRoom() {
   const [district, setDistrict] = useState([])
-  const [isShow, setIsShow] = useState(false)
+  // const [isShow, setIsShow] = useState(false)
 
-  function handleClick() {
-    setIsShow(true)
-  }
+  // function handleClick() {
+  //   setIsShow(true)
+  // }
 
-  function handleClose() {
-    setIsShow(false)
-  }
+  // function handleClose() {
+  //   setIsShow(false)
+  // }
 
   useEffect(() => {
     fetch("http://localhost:3001/district")
@@ -29,12 +29,12 @@ export default function SearchRoom() {
       <HeaderUser />
 
       <div className='search-room_wrap'>
-        <FilterSearch onClick={handleClick} />
+        {/* <FilterSearch /> */}
 
         <ListRoom />
       </div>
 
-      <BaseModal open={isShow} title="Bộ lọc tìm kiếm" type="red" onClose={handleClose}>
+      {/* <BaseModal open={isShow} title="Bộ lọc tìm kiếm" type="red" onClose={handleClose}>
         <div className='info'>
           <span className='info_title'>
             Khu vực
@@ -70,7 +70,7 @@ export default function SearchRoom() {
             </div>
           </div>
         </div>
-      </BaseModal>
+      </BaseModal> */}
 
       <Footer />
     </div>

@@ -1,10 +1,18 @@
 import React from 'react'
 import './BaseModal.scss'
+import BaseButton from '../BaseButton/BaseButton'
 
 const RED = "red_bg"
 const BLUE = "blue_bg"
 
-export default function BaseModal({ open, type, title, onClose, children }) {
+export default function BaseModal({
+  open,
+  type,
+  title,
+  content,
+  onCancel,
+  onConfirm
+}) {
   const typeObject = {
     red: RED,
     blue: BLUE
@@ -21,19 +29,24 @@ export default function BaseModal({ open, type, title, onClose, children }) {
                   {title}
                 </div>
 
-                <div className='base-modal_header_close' onClick={onClose}>
+                <div className='base-modal_header_close' onClick={onCancel}>
                   <i class="bi bi-x-lg"></i>
                 </div>
               </div>
 
               <div className='base-modal_main'>
-                {children}
+                {content}
               </div>
 
+              <div className='base-modal_footer'>
+                <BaseButton type="white" onClick={onCancel}>Hủy</BaseButton>
+                <BaseButton type="red" onClick={onConfirm}>Xác nhận</BaseButton>
+              </div>
             </div>
           </div>
         )
       }
+
     </>
   )
 }
