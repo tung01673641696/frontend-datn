@@ -18,6 +18,11 @@ export const getOneHouse = createAsyncThunk("house/getOneHouse", async (houseId)
   return one
 })
 
+export const editHouse = createAsyncThunk("house/editHouse", async ({ houseId, data }) => {
+  const editHouse = await HouseApi.editHouse(houseId, data);
+  return editHouse
+})
+
 export const deleteHouse = createAsyncThunk("house/deleteHouse", async ({ houseId, id }, thunkApi) => {
   const deleteHouse = await HouseApi.deleteHouse(houseId)
 

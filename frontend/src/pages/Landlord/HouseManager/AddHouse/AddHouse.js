@@ -8,12 +8,12 @@ import { getWard } from '../../../../redux/reducers/address'
 import { useDispatch, useSelector } from 'react-redux'
 import { addHouse } from '../../../../redux/reducers/house'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 export default function AddHouse() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { district, ward } = useSelector((state) => state.addressReducer)
-  const { houseAddNew } = useSelector((state) => state.houseReducer)
   const user = JSON.parse(localStorage.getItem('user'))
   const user_id = user.id
 
@@ -43,8 +43,19 @@ export default function AddHouse() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    dispatch(addHouse(house))
-    navigate(`/landlord/house-manager/user/${user_id}`)
+
+    if (
+      !house.name ||
+      !house.address ||
+      !house.district_id ||
+      !house.ward_id
+    ) {
+      toast.error("Vui lòng nhập đầy đủ thông tin")
+    }
+    else {
+      dispatch(addHouse(house))
+      navigate(`/landlord/house-manager/user/${user_id}`)
+    }
   }
 
   return (

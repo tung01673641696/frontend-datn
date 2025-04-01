@@ -8,11 +8,13 @@ import { getWard } from '../../../../redux/reducers/address'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import { getOneHouse } from '../../../../redux/reducers/house'
+import { editHouse } from '../../../../redux/reducers/house'
 
 
 export default function EditHouse() {
   const params = useParams()
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const { district, ward } = useSelector((state) => state.addressReducer)
   const { oneHouse } = useSelector((state) => state.houseReducer)
 
@@ -28,29 +30,48 @@ export default function EditHouse() {
     dispatch(getDistrict())
   }, [])
 
-  // const handleDistrictChange = (e) => {
-  //   const district_id = e.target.value;
-  //   setHouse({ ...house, district_id, ward_id: "" })
-  //   dispatch(getWard(district_id))
-  // }
+  useEffect(() => {
+    if (oneHouse) {
+      setHouse({
+        name: oneHouse?.name || "",
+        address: oneHouse?.address || "",
+        district_id: oneHouse?.district?.id || "",
+        ward_id: oneHouse?.ward?.id || ""
+      });
+    }
+  }, [oneHouse]);
 
-  // const handleChange = (e) => {
-  //   setHouse({ ...house, [e.target.name]: e.target.value })
-  // }
+  useEffect(() => {
+    if (house.district_id) {
+      dispatch(getWard(house.district_id));
+    }
+  }, [house.district_id, dispatch]);
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault()
+  const handleDistrictChange = (e) => {
+    const district_id = e.target.value;
+    setHouse({ ...house, district_id, ward_id: "" })
+    dispatch(getWard(district_id))
+  }
 
-  // }
+  const handleChange = (e) => {
+    setHouse({ ...house, [e.target.name]: e.target.value })
+
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    dispatch(editHouse({ houseId: params.id, data: house }))
+    navigate(`/landlord/house-manager/user/${params.id}`)
+  }
 
   return (
     <Common>
-      <form onSubmit="">
+      <form onSubmit={handleSubmit}>
         <span>Cập nhật nhà</span>
 
         <div className='add_house_content'>
           <div className='add_house_content_ele'>
-            <BaseInput name="name" value={oneHouse?.name} placeholder="Tên nhà" onChange="" />
+            <BaseInput name="name" value={house.name} placeholder="Tên nhà" onChange={handleChange} />
           </div>
           <div className='add_house_content_ele'>
             <select>
@@ -59,8 +80,8 @@ export default function EditHouse() {
           </div>
 
           <div className='add_house_content_ele'>
-            <select name='district_id' onChange="">
-              <option value="">Chọn Quận / Huyện</option>
+            <select name='district_id' value={house.district_id} onChange={handleDistrictChange}>
+              <option>Chọn Quận / Huyện</option>
               {district.map(item => (
                 <option key={item.id} value={item.id}>{item.name}</option>
               ))}
@@ -68,8 +89,8 @@ export default function EditHouse() {
           </div>
 
           <div className='add_house_content_ele'>
-            <select name='ward_id' onChange="">
-              <option value="">Chọn Phường / Xã</option>
+            <select name='ward_id' value={house.ward_id} onChange={handleChange}>
+              <option>Chọn Phường / Xã</option>
               {ward.map(item => (
                 <option key={item.id} value={item.id}>{item.name}</option>
               ))}
@@ -77,7 +98,7 @@ export default function EditHouse() {
           </div>
 
           <div className='add_house_content_ele'>
-            <BaseInput name="address" value={oneHouse?.address} placeholder="Địa chỉ chi tiết" onChange="" />
+            <BaseInput name="address" value={house.address} placeholder="Địa chỉ chi tiết" onChange={handleChange} />
           </div>
 
           <div className='add_house_content_ele'>

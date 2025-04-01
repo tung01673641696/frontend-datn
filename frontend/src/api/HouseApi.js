@@ -16,6 +16,11 @@ const HouseApi = {
     return axiosClient.post(url, data)
   },
 
+  async editHouse(houseId, data) {
+    const url = `/house-manager/edit-house/${houseId}`
+    return axiosClient.put(url, data)
+  },
+
   async deleteHouse(houseId) {
     const url = `/house-manager/delete-house/house_id/${houseId}`
     return axiosClient.delete(url)
