@@ -29,6 +29,7 @@ export default function AddRoom() {
   const user = JSON.parse(localStorage.getItem("user"))
   const id = user.id
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const { listHouseByOwner } = useSelector((state) => state.houseReducer)
 
   const handleChangeImage = (event) => {
@@ -95,13 +96,13 @@ export default function AddRoom() {
     } else {
       try {
         const res = await dispatch(addRoom(data))
-        if(res.payload.data.status) {
+        if (res.payload.data.status) {
           toast.error(res.payload.data.message)
         }
       } catch (error) {
         console.log(error)
       }
-      // navigate(`/landlord/room-manager/house_/${user_id}`)
+      navigate(`/landlord/room-manager`)
     }
   }
 
@@ -163,7 +164,7 @@ export default function AddRoom() {
               <select name="is_available" value={room.is_available} onChange={handleChange} className='add_room_box_child_select'>
                 <option value="" disabled>Tình trạng phòng</option>
                 <option value="1">Đang trống</option>
-                <option value="2">Đã cho thuê</option>
+                <option value="0">Đã cho thuê</option>
               </select>
             </div>
           </div>

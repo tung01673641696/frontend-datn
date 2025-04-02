@@ -8,9 +8,13 @@ import { useNavigate } from 'react-router-dom'
 import { houseByOwner } from '../../../redux/reducers/house'
 import { useDispatch, useSelector } from 'react-redux'
 import { getRoomByHouse } from '../../../redux/reducers/room'
+import BaseModal from '../../../components/BaseModal/BaseModal'
+import { deleteRoom } from '../../../redux/reducers/room'
 
 export default function RoomManager() {
   const [selectedHouse, setSelectedHouse] = useState("")
+  const [isShow, setIsShow] = useState(false)
+  const [selectRoomId, setSelectRoomId] = useState(null)
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { listHouseByOwner } = useSelector((state) => state.houseReducer)
@@ -38,9 +42,36 @@ export default function RoomManager() {
     navigate(`/landlord/room-manager/add-room`)
   }
 
+  const handleShow = (roomId) => {
+    setSelectRoomId(roomId)
+    setIsShow(true)
+  }
+
+  function handleClose() {
+    setIsShow(false)
+  }
+
+  const handleDelete = async () => {
+    if (selectRoomId) {
+      await dispatch(deleteRoom({ roomId: selectRoomId, houseId: selectedHouse}))
+      setIsShow(false)
+    }
+  }
+
   return (
     <Common>
       <h3 className='room_mana_title'>Danh sách phòng</h3>
+
+      <>
+        <BaseModal
+          open={isShow}
+          title="Xóa nhà"
+          type="red"
+          content="Bạn có chắc chắn muốn xóa phòng này không ?"
+          onCancel={handleClose}
+          onConfirm={handleDelete}
+        />
+      </>
 
       <div className='room_mana'>
         <div className='room_mana_add'>
@@ -133,10 +164,10 @@ export default function RoomManager() {
           />
 
           <Column title={"Thao tác"}
-            render={() => (
+            render={(item) => (
               <>
                 <BaseButton type="warning">Sửa</BaseButton>
-                <BaseButton type="red">Xóa</BaseButton>
+                <BaseButton type="red" onClick={() => handleShow(item.id)}>Xóa</BaseButton>
               </>
             )}
           />
