@@ -10,16 +10,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getRoomByHouse } from '../../../redux/reducers/room'
 
 export default function RoomManager() {
+  const [selectedHouse, setSelectedHouse] = useState("")
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { listHouseByOwner } = useSelector((state) => state.houseReducer)
   const { listRoomByHouse } = useSelector((state) => state.roomReducer)
   const user = JSON.parse(localStorage.getItem("user"))
   const id = user.id
-  const [selectedHouse, setSelectedHouse] = useState("")
-
-  console.log("id nhà", selectedHouse)
-  console.log("aaaaaaaa", listRoomByHouse)
 
   useEffect(() => {
     dispatch(houseByOwner(id))
@@ -37,24 +34,8 @@ export default function RoomManager() {
     }
   }, [dispatch, selectedHouse]);
 
-
-  const room = [
-    {
-      id: 1,
-      name: "101",
-      type_room: "Chung cư mini",
-      floor: 1,
-      price: "4.000.000đ",
-      area: "35",
-      number_people: "4",
-      number_people_sp: "2",
-      status: "đã thuê"
-    }
-  ]
-
   function handleClick() {
     navigate(`/landlord/room-manager/add-room`)
-
   }
 
   return (
@@ -72,7 +53,6 @@ export default function RoomManager() {
             value={selectedHouse}
             onChange={(e) => setSelectedHouse(e.target.value)}
           >
-            <option value="" disabled>Chọn nhà</option>
             {listHouseByOwner?.map((item) => (
               <option key={item?.id} value={item?.id}>{item?.name}</option>
             ))}

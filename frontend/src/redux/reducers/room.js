@@ -7,6 +7,11 @@ export const getRoomByHouse = createAsyncThunk("room/getRoomByHouse", async (id)
   return listRoom
 })
 
+export const addRoom = createAsyncThunk("room/addRoom", async (data) => {
+  const addRoom = await RoomApi.addRoom(data);
+  return addRoom
+})
+
 const RoomSlice = createSlice({
   name: "room",
   initialState: {

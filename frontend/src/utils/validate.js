@@ -5,6 +5,12 @@ export function validateName(name) {
   return checkName
 }
 
+export function validateNumber(number) {
+  let regex = new RegExp(/^[1-9][0-9]*$/);
+  let numbers = regex.test(number);
+  return numbers;
+}
+
 export function validatePhone(phone) {
  let regex = new RegExp(/^(0[3|5|7|8|9])+([0-9]{8})$/)
  let checkPhone = regex.test(phone)

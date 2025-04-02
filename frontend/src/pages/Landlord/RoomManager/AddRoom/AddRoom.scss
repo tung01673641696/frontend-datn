@@ -24,7 +24,7 @@
       justify-content: space-between;
 
       .add_room_box_child_item {
-        width: calc(100% / 3 - 10px);
+        width: calc(100% / 2 - 10px);
 
         input {
           width: 100%;
@@ -39,8 +39,17 @@
         }
       }
 
-      .add_room_box_child_item2 {
-        width: calc(100% / 2 - 10px);
+      .add_room_box_child_item1 {
+        width: calc(100% / 3 - 10px);
+        border-radius: 10px;
+
+        .add_room_box_child_select {
+          width: 100%;
+          padding: 10px;
+          border-radius: 10px;
+          border: 1px solid #b7b3b3;
+          color: #605e5e;
+        }
 
         input {
           width: 100%;
@@ -53,9 +62,20 @@
         min-height: 120px;
       }
 
-      .add_room_box_child_select {
-        width: 40%;
-        padding: 10px;
+    }
+
+    .add_room_box_child2 {
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      margin-bottom: 20px;
+
+      img {
+        width: calc(100% / 4 - 10px);
+        height: 16vh;
+        object-fit: cover;
+        margin-right: 10px;
+        
       }
     }
   }

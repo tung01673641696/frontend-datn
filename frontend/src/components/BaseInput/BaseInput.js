@@ -3,6 +3,7 @@ import "./BaseInput.scss"
 
 export default function BaseInput({
   type = "text",
+  min,
   name,
   placeholder,
   onChange,
@@ -12,6 +13,7 @@ export default function BaseInput({
     <>
       <input
         type={type}
+        min={min}
         name={name}
         placeholder={placeholder}
         onChange={onChange}
