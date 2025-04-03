@@ -1,13 +1,27 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import "./TenantManager.scss"
 import Common from '../../../layouts/LandlordLayout/Common/Common'
 import BaseButton from '../../../components/BaseButton/BaseButton'
 import { Table } from 'antd'
 import Column from 'antd/es/table/Column'
 import { useNavigate } from 'react-router-dom'
+import { houseByOwner } from '../../../redux/reducers/house'
+import { useDispatch, useSelector } from 'react-redux'
 
 export default function TenantManager() {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const user = JSON.parse(localStorage.getItem("user"))
+  const id_user = user.id
+  const { listHouseByOwner } = useSelector((state) => state.houseReducer)
+
+
+  useEffect(() => {
+    dispatch(houseByOwner(id_user))
+  }, [id_user])
+
+  console.log("sssss", listHouseByOwner)
+
   const data = [
     {
       id: 1,
@@ -15,9 +29,8 @@ export default function TenantManager() {
       telephone: "0373641696",
       house: "Gohomy1",
       room: '101',
-      date: '27/2/2025',
       note: '',
-      status: 'Đang ở'
+
     },
     {
       id: 2,
@@ -25,9 +38,8 @@ export default function TenantManager() {
       telephone: "0373641698",
       house: "Gohomy1",
       room: '102',
-      date: '27/2/2025',
       note: '',
-      status: 'Đang ở'
+
     }
   ]
 
@@ -44,8 +56,9 @@ export default function TenantManager() {
           <div className='tenant-mana_act_search_ele'>
             <span className='tenant-mana_act_search_ele_name'>Nhà</span>
             <select className='tenant-mana_act_search_ele_select'>
-              <option>Nhà Gohomy1</option>
-              <option>Nhà Gohomy2</option>
+              {listHouseByOwner.map(item => (
+                <option key={item.id} value={item.id}>{item.name}</option>
+              ))}
             </select>
           </div>
 
@@ -96,12 +109,6 @@ export default function TenantManager() {
         <Column title={"Phòng"}
           render={(value) => (
             <span>{value?.room}</span>
-          )}
-        />
-
-        <Column title={"Ngày vào"}
-          render={(value) => (
-            <span>{value?.date}</span>
           )}
         />
 

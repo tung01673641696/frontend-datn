@@ -13,22 +13,28 @@ export const addRoom = createAsyncThunk("room/addRoom", async (data) => {
   return addRoom
 })
 
-export const deleteRoom = createAsyncThunk("room/deleteRoom", async ({ roomId, houseId}, thunkApi) => {
+export const deleteRoom = createAsyncThunk("room/deleteRoom", async ({ roomId, houseId }, thunkApi) => {
   const deleteRoom = await RoomApi.deleteRoom(roomId)
 
   if (deleteRoom.status === 200) {
-    toast.success("Xóa nhà thành công");
+    toast.success("Xóa phòng thành công");
     thunkApi.dispatch(getRoomByHouse(houseId))
   } else {
-    toast.error("Xóa nhà thất bại");
+    toast.error("Xóa phòng thất bại");
   }
   return deleteRoom
+})
+
+export const getOneRoom = createAsyncThunk("room/getOneRoom", async (roomId) => {
+  const oneRoom = await RoomApi.getOneRoom(roomId);
+  return oneRoom
 })
 
 const RoomSlice = createSlice({
   name: "room",
   initialState: {
     listRoomByHouse: [],
+    oneRoom: {}
   },
   extraReducers: builder => {
     builder
@@ -41,6 +47,17 @@ const RoomSlice = createSlice({
       .addCase(getRoomByHouse.fulfilled, (state, action) => {
         state.loading = false
         state.listRoomByHouse = action.payload.data;
+      })
+
+      .addCase(getOneRoom.pending, (state, action) => {
+        state.loading = true
+      })
+      .addCase(getOneRoom.rejected, (state, action) => {
+        state.loading = false
+      })
+      .addCase(getOneRoom.fulfilled, (state, action) => {
+        state.loading = false
+        state.oneRoom = action.payload.data;
       })
   }
 })

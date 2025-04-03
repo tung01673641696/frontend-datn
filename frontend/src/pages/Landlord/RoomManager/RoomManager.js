@@ -166,7 +166,7 @@ export default function RoomManager() {
           <Column title={"Thao tác"}
             render={(item) => (
               <>
-                <BaseButton type="warning">Sửa</BaseButton>
+                <BaseButton type="warning" onClick={() => navigate(`/landlord/room-manager/edit-room/room_id/${item.id}`)}>Sửa</BaseButton>
                 <BaseButton type="red" onClick={() => handleShow(item.id)}>Xóa</BaseButton>
               </>
             )}

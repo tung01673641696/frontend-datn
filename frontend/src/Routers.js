@@ -21,6 +21,7 @@ const EditHouse = React.lazy(() => import('./pages/Landlord/HouseManager/EditHou
 
 const RoomManager = React.lazy(() => import('./pages/Landlord/RoomManager/RoomManager'))
 const AddRoom = React.lazy(() => import('./pages/Landlord/RoomManager/AddRoom/AddRoom'))
+const EditRoom = React.lazy(() => import('./pages/Landlord/RoomManager/EditRoom/EditRoom'))
 
 const TenantManager = React.lazy(() => import('./pages/Landlord/TenantManager/TenantManager'))
 const AddTenant = React.lazy(() => import('./pages/Landlord/TenantManager/AddTenant/AddTenant'))
@@ -62,6 +63,7 @@ export default function Routers() {
 
               <Route path='/landlord/room-manager' element={<RoomManager />} />
               <Route path='/landlord/room-manager/add-room' element={<AddRoom />} />
+              <Route path='/landlord/room-manager/edit-room/room_id/:id' element={<EditRoom />} />
 
               <Route path='/landlord/tenant-manager' element={<TenantManager />} />
               <Route path='/landlord/tenant-manager/add-tenant' element={<AddTenant />} />

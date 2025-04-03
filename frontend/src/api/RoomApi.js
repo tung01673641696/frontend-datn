@@ -14,6 +14,11 @@ const RoomApi = {
   async deleteRoom(roomId) {
     const url = `/room-manager/delete-room/room_id/${roomId}`
     return axiosClient.delete(url)
+  },
+
+  async getOneRoom(roomId) {
+    const url = `/room-manager/get-one-room/room_id/${roomId}`
+    return axiosClient.get(url)
   }
 }
 
