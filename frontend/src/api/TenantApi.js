@@ -6,6 +6,11 @@ const TenantApi = {
     return axiosClient.post(url, data);
   },
 
+  async getAllTenant() {
+    const url = `/tenant-manager/get-all-tenant`;
+    return axiosClient.get(url);
+  }
+
 }
 
 export default TenantApi
