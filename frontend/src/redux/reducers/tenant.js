@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
 import TenantApi from "../../api/TenantApi";
+import { toast } from "react-toastify";
 
 // export const addRoom = createAsyncThunk("room/addRoom", async (data) => {
 //   const addRoom = await RoomApi.addRoom(data);
@@ -14,6 +15,18 @@ export const addTenant = createAsyncThunk("tenant/addTenant", async (data) => {
 export const getAllTenant = createAsyncThunk("tenant/getAllTenant", async () => {
   const getAllTenant = await TenantApi.getAllTenant();
   return getAllTenant
+})
+
+export const deleteTenant = createAsyncThunk("tenant/deleteTenant", async (tenantId, thunkApi) => {
+  const deleteTenant = await TenantApi.deleteTenant(tenantId)
+
+  if (deleteTenant.status === 200) {
+    toast.success("Xóa khách thuê thành công");
+    thunkApi.dispatch(getAllTenant())
+  } else {
+    toast.error("Xóa khách thuê thất bại");
+  }
+  return deleteTenant
 })
 
 

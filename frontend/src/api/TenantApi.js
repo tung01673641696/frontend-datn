@@ -9,6 +9,11 @@ const TenantApi = {
   async getAllTenant() {
     const url = `/tenant-manager/get-all-tenant`;
     return axiosClient.get(url);
+  },
+
+  async deleteTenant(tenantId) {
+    const url = `/tenant-manager/delete-tenant/tenant_id/${tenantId}`;
+    return axiosClient.delete(url);
   }
 
 }

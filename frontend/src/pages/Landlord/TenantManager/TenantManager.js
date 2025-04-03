@@ -8,9 +8,12 @@ import { useNavigate } from 'react-router-dom'
 import { houseByOwner } from '../../../redux/reducers/house'
 import { useDispatch, useSelector } from 'react-redux'
 import { getRoomByHouse } from '../../../redux/reducers/room'
-import { getAllTenant } from '../../../redux/reducers/tenant'
+import { deleteTenant, getAllTenant } from '../../../redux/reducers/tenant'
+import BaseModal from '../../../components/BaseModal/BaseModal'
 
 export default function TenantManager() {
+  const [isShow, setIsShow] = useState(false)
+  const [tenantId, setTenantId] = useState(null)
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const user = JSON.parse(localStorage.getItem("user"))
@@ -20,7 +23,7 @@ export default function TenantManager() {
   const { listRoomByHouse } = useSelector((state) => state.roomReducer)
   const { allTenant } = useSelector((state) => state.tenantReducer)
 
-  console.log(">>>>>",allTenant)
+  console.log(">>>>>", allTenant)
   useEffect(() => {
     dispatch(houseByOwner(id_user))
   }, [id_user])
@@ -42,9 +45,36 @@ export default function TenantManager() {
     navigate(`/landlord/tenant-manager/add-tenant`);
   }
 
+  const handleShow = (tenantId) => {
+    setTenantId(tenantId)
+    setIsShow(true)
+  }
+
+  function handleClose() {
+    setIsShow(false)
+  }
+
+  const handleDelete = async () => {
+    if (tenantId) {
+      await dispatch(deleteTenant(tenantId));
+      setIsShow(false);
+    }
+  };
+
   return (
     <Common>
       <h3 className='tenant-mana_title'>Danh sách khách thuê</h3>
+
+      <>
+        <BaseModal
+          open={isShow}
+          title="Xóa nhà"
+          type="red"
+          content="Bạn có chắc chắn muốn xóa khách hàng không ?"
+          onCancel={handleClose}
+          onConfirm={handleDelete}
+        />
+      </>
 
       <div className='tenant-mana_act'>
         <div className='tenant-mana_act_search'>
@@ -115,10 +145,10 @@ export default function TenantManager() {
         />
 
         <Column title={"Thao tác"}
-          render={() => (
+          render={(value) => (
             <>
               <BaseButton type="warning">Sửa</BaseButton>
-              <BaseButton type="red">Xóa</BaseButton>
+              <BaseButton type="red" onClick={() => handleShow(value.tenant.id)}>Xóa</BaseButton>
             </>
           )}
         />
