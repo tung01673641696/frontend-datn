@@ -48,7 +48,6 @@ export default function AddTenant() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log("tung", tenant)
 
     if (
       !tenant.name ||

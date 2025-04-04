@@ -53,7 +53,6 @@ export default function AddRoom() {
     });
   };
 
-
   useEffect(() => {
     dispatch(houseByOwner(id))
   }, [])
@@ -93,16 +92,19 @@ export default function AddRoom() {
       !room.is_available
     ) {
       toast.error("Vui lòng nhập đầy đủ thông tin");
-    } else {
-      try {
-        const res = await dispatch(addRoom(data))
-        if (res.payload.data.status) {
-          toast.error(res.payload.data.message)
-        }
-      } catch (error) {
-        console.log(error)
+      return
+    }
+    try {
+      const res = await dispatch(addRoom(data))
+      if (res.payload.data.status) {
+        toast.error(res.payload.data.message)
+        
+      } else {
+        toast.success("Thêm phòng thành công");
+        navigate(`/landlord/room-manager`)
       }
-      navigate(`/landlord/room-manager`)
+    } catch (error) {
+      toast.error("Thêm phòng thất bại")
     }
   }
 
@@ -170,7 +172,7 @@ export default function AddRoom() {
           </div>
 
           <div className='add_room_box_child'>
-            <input name='images' value={room.images} type='file' accept="image/*" multiple onChange={handleChangeImage} />
+            <input name='images' type='file' accept="image/*" multiple onChange={handleChangeImage} />
           </div>
 
           <div className='add_room_box_child2'>

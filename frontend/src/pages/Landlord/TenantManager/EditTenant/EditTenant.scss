@@ -1,0 +1,55 @@
+.edit_tenant {
+  width: 55%;
+  border: 1px solid #385995;
+  margin-left: 15%;
+  margin-top: 4%;
+
+  .edit_tenant_title {
+    width: 100%;
+    display: block;
+    background-color: #385995;
+    text-align: left;
+    padding: 5px 20px;
+    color: white;
+  }
+
+  .edit_tenant_box {
+    width: 100%;
+    padding: 40px;
+
+    .edit_tenant_box_child {
+      width: 100%;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+
+      .edit_tenant_box_child_ele {
+        width: calc(100% / 2 - 10px);
+
+        input {
+          width: 100%;
+        }
+
+        .edit_tenant_box_child_select {
+          width: 100%;
+          padding: 10px 5px;
+          border-radius: 10px;
+          border: 1px solid #b0aeae;
+          color: rgb(124, 122, 122);
+        }
+      }
+
+      textarea {
+        width: 100%;
+        height: 100px;
+        min-height: 120px;
+        border-radius: 10px;
+        padding: 10px;
+      }
+    }
+
+    .edit_tenant_button {
+      margin-top: 30px;
+    }
+  }
+}

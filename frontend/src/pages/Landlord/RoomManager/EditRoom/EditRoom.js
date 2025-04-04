@@ -34,7 +34,7 @@ export default function EditRoom() {
 
   const { oneRoom } = useSelector((state) => state.roomReducer)
 
-  console.log("onerooom",oneRoom)
+  console.log("onerooom", oneRoom)
   const { listHouseByOwner } = useSelector((state) => state.houseReducer)
 
   useEffect(() => {
@@ -56,15 +56,15 @@ export default function EditRoom() {
         price_deposit: oneRoom?.price_deposit || "",
         area: oneRoom?.area || "",
         user_number: oneRoom?.user_number || "",
-        images: oneRoom?.images || [],
+        images: [],
         description: oneRoom?.description || "",
-        is_available: oneRoom?.is_available || ""
+        is_available: oneRoom?.is_available?.toString() || ""
       })
 
       console.log("eeeeeeeeeeeeee", room)
 
-      if (oneRoom?.images?.length > 0) {
-        setPreviewImages(oneRoom.images); // Lưu đường dẫn ảnh từ API
+      if (Array.isArray(oneRoom.images) && oneRoom.images.length > 0) {
+        setPreviewImages(oneRoom.images); // hiển thị ảnh cũ
       }
     }
   }, [oneRoom])
@@ -176,15 +176,15 @@ export default function EditRoom() {
           </div>
 
           <div className='edit_room_box_child'>
-            <input name='images' value={room.images} type='file' accept="image/*" multiple onChange={handleImageChange} />
+            <input name='images' value="" type='file' accept="image/*" multiple onChange={handleImageChange} />
           </div>
 
           <div className='edit_room_box_child2'>
-            {room.images.map((img, index) => (
+            {previewImages.map((src, index) => (
               <img
                 key={index}
-                src={typeof img === "string" ? img : URL.createObjectURL(img)}
-                alt={`upload-${index}`}
+                src={src}
+                alt={`preview-${index}`}
                 style={{ width: "100px", height: "100px", margin: "5px" }}
               />
             ))}

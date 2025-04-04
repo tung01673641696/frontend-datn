@@ -10,7 +10,6 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { getOneHouse } from '../../../../redux/reducers/house'
 import { editHouse } from '../../../../redux/reducers/house'
 
-
 export default function EditHouse() {
   const params = useParams()
   const dispatch = useDispatch()
@@ -55,13 +54,12 @@ export default function EditHouse() {
 
   const handleChange = (e) => {
     setHouse({ ...house, [e.target.name]: e.target.value })
-
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
     dispatch(editHouse({ houseId: params.id, data: house }))
-    navigate(`/landlord/house-manager/user/${params.id}`)
+    navigate(`/landlord/house-manager`)
   }
 
   return (

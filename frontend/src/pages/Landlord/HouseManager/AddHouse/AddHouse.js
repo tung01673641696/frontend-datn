@@ -54,7 +54,7 @@ export default function AddHouse() {
     }
     else {
       dispatch(addHouse(house))
-      navigate(`/landlord/house-manager/user/${user_id}`)
+      navigate(`/landlord/house-manager`)
     }
   }
 

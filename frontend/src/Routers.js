@@ -25,6 +25,7 @@ const EditRoom = React.lazy(() => import('./pages/Landlord/RoomManager/EditRoom/
 
 const TenantManager = React.lazy(() => import('./pages/Landlord/TenantManager/TenantManager'))
 const AddTenant = React.lazy(() => import('./pages/Landlord/TenantManager/AddTenant/AddTenant'))
+const EditTenant = React.lazy(() => import('./pages/Landlord/TenantManager/EditTenant/EditTenant'))
 
 const VehicleManager = React.lazy(() => import('./pages/Landlord/VehicleManager/VehicleManager'))
 const AddVehicle = React.lazy(() => import('./pages/Landlord/VehicleManager/AddVehicle/AddVehicle'))
@@ -57,7 +58,7 @@ export default function Routers() {
               <Route path='/landlord/customer-manager' element={<CustomerManager />} />
 
               <Route path='/landlord/dashboard' element={<Dashboard />} />
-              <Route path='/landlord/house-manager/userId/:id' element={<HouseManager />} />
+              <Route path='/landlord/house-manager' element={<HouseManager />} />
               <Route path='landlord/house-manager/add-house' element={<AddHouse />} />
               <Route path='landlord/house-manager/edit-house/:id' element={<EditHouse />} />
 
@@ -67,6 +68,7 @@ export default function Routers() {
 
               <Route path='/landlord/tenant-manager' element={<TenantManager />} />
               <Route path='/landlord/tenant-manager/add-tenant' element={<AddTenant />} />
+              <Route path='/landlord/tenant-manager/edit-tenant/tenant_id/:id' element={<EditTenant />} />
 
               <Route path='/landlord/vehicle-manager' element={<VehicleManager />} />
               <Route path='/landlord/vehicle-manager/add-vehicle' element={<AddVehicle />} />

@@ -72,7 +72,7 @@ export default function HouseManager() {
         dataSource={listHouseByOwner}
         bordered
       >
-        <Column title={"STT"} dataIndex="id" key="id" />
+        <Column title={"STT"} render={(_, __, index) => index + 1} key="id" />
         <Column title={"Tên nhà"}
           render={(item) => (
             <span>{item?.name}</span>

@@ -29,11 +29,25 @@ export const deleteTenant = createAsyncThunk("tenant/deleteTenant", async (tenan
   return deleteTenant
 })
 
+export const getOneTenant = createAsyncThunk("tenant/getOneTenant", async (tenantId) => {
+  const getOneTenant = await TenantApi.getOneTenant(tenantId);
+  return getOneTenant
+})
+
+export const editTenant = createAsyncThunk("tenant/editTenant", async ({ tenantId, data }) => {
+  const editTenant = await TenantApi.editTenant(tenantId, data);
+  if (editTenant.status === 200) {
+    toast.success("Cập nhật thông tin khách thuê thành công");
+  }
+  return editTenant
+})
+
 
 const TenantSlice = createSlice({
   name: "tenant",
   initialState: {
-    allTenant: []
+    allTenant: [],
+    oneTenant: {}
   },
   extraReducers: builder => {
     builder
@@ -46,6 +60,16 @@ const TenantSlice = createSlice({
       .addCase(getAllTenant.fulfilled, (state, action) => {
         state.loading = false
         state.allTenant = action.payload.data;
+      })
+      .addCase(getOneTenant.pending, (state, action) => {
+        state.loading = true
+      })
+      .addCase(getOneTenant.rejected, (state, action) => {
+        state.loading = false
+      })
+      .addCase(getOneTenant.fulfilled, (state, action) => {
+        state.loading = false
+        state.oneTenant = action.payload.data;
       })
   }
 })

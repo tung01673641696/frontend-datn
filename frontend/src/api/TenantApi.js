@@ -14,6 +14,16 @@ const TenantApi = {
   async deleteTenant(tenantId) {
     const url = `/tenant-manager/delete-tenant/tenant_id/${tenantId}`;
     return axiosClient.delete(url);
+  },
+
+  async getOneTenant(tenantId) {
+    const url = `/tenant-manager/get-one-tenant/tenant_id/${tenantId}`;
+    return axiosClient.get(url);
+  },
+
+  async editTenant(tenantId, data) {
+    const url = `/tenant-manager/edit-tenant/${tenantId}`;
+    return axiosClient.put(url, data)
   }
 
 }

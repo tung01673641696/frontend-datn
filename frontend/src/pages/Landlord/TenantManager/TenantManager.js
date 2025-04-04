@@ -23,7 +23,6 @@ export default function TenantManager() {
   const { listRoomByHouse } = useSelector((state) => state.roomReducer)
   const { allTenant } = useSelector((state) => state.tenantReducer)
 
-  console.log(">>>>>", allTenant)
   useEffect(() => {
     dispatch(houseByOwner(id_user))
   }, [id_user])
@@ -147,7 +146,7 @@ export default function TenantManager() {
         <Column title={"Thao tác"}
           render={(value) => (
             <>
-              <BaseButton type="warning">Sửa</BaseButton>
+              <BaseButton type="warning" onClick={() => navigate(`/landlord/tenant-manager/edit-tenant/tenant_id/${value.tenant.id}`)}>Sửa</BaseButton>
               <BaseButton type="red" onClick={() => handleShow(value.tenant.id)}>Xóa</BaseButton>
             </>
           )}
