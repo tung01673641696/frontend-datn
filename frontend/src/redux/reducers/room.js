@@ -30,6 +30,16 @@ export const getOneRoom = createAsyncThunk("room/getOneRoom", async (roomId) => 
   return oneRoom
 })
 
+export const editRoom = createAsyncThunk("room/editRoom", async ({ roomId, data }, thunkApi) => {
+  const editRoom = await RoomApi.editRoom(roomId, data);
+  if (editRoom.status === 200) {
+    toast.success("Cập nhật phòng thành công");
+    const { house_id } = data;
+    thunkApi.dispatch(getRoomByHouse(house_id))
+  }
+  return editRoom
+})
+
 const RoomSlice = createSlice({
   name: "room",
   initialState: {

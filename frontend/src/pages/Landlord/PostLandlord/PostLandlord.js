@@ -1,20 +1,43 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./PostLandlord.scss"
 import HeaderUser from '../../../layouts/UserLayout/HeaderUser/HeaderUser'
 import Footer from '../../../layouts/UserLayout/FooterUser/FooterUser'
 import BaseInput from '../../../components/BaseInput/BaseInput'
 import BaseButton from '../../../components/BaseButton/BaseButton'
+import { houseByOwner } from '../../../redux/reducers/house'
+import { useDispatch, useSelector } from 'react-redux'
 
 export default function PostLandlord() {
-  const [price, setPrice] = useState("")
+  const user = JSON.parse(localStorage.getItem("user"))
+  const user_id = user.id
+  const dispatch = useDispatch()
+  const { listHouseByOwner } = useSelector((state) => state.houseReducer)
 
-  const formatPrice = (val) => {
-    let num = val.replace(/\D/g, "");
-    return new Intl.NumberFormat("vi-VN").format(num) + " vnđ";
-  };
+  const [form, setForm] = useState({
+    title: '',
+    house_id: '',
+    room_id: '',
+    room_type: '',
+    area: '',
+    floor: '',
+    max_people: '',
+    price: '',
+    price_deposit: '',
+    district_id: '',
+    ward_id: '',
+    description: '',
+    user_id: user_id,
+  })
 
-  const handleChangePrice = (e) => {
-    setPrice(formatPrice(e.target.value));
+  useEffect(() => {
+    dispatch(houseByOwner(user_id))
+  }, [])
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setForm({ ...form, [name]: value })
+
+    console.log(">>>>", form)
   }
 
   return (
@@ -25,82 +48,34 @@ export default function PostLandlord() {
         <h3 className='post_land_box_title'>Thêm bài đăng</h3>
 
         <div className='post_land_box_ele'>
-          <BaseInput placeholder="Tiêu đề bài đăng" />
+          <BaseInput name="title" placeholder="Tiêu đề bài đăng" onChange={handleChange} />
         </div>
 
         <div className='post_land_box_ele'>
           <div className='post_land_box_ele_item'>
-            <select>
-              <option value="">Chọn nhà</option>
+            <select name='house_id' value={form.house_id}>
+              <option value="" disabled>Chọn nhà</option>
+              {listHouseByOwner.map(item => (
+                <option key={item.id} value={item.id}>{item.name}</option>
+              ))}
             </select>
           </div>
           <div className='post_land_box_ele_item'>
-            <select>
+            <select name='room_id'>
               <option value="">Chọn phòng</option>
             </select>
           </div>
-          <div className='post_land_box_ele_item'>
-            <select>
-              <option value="">Loại phòng</option>
-            </select>
-          </div>
         </div>
 
-        <div className='post_land_box_ele'>
-          <div className='post_land_box_ele_item'>
-            <select>
-              <option value="">Diện tích</option>
-            </select>
-          </div>
-          <div className='post_land_box_ele_item'>
-            <select>
-              <option value="">Tầng</option>
-            </select>
-          </div>
-          <div className='post_land_box_ele_item'>
-            <select>
-              <option value="">Số người tối đa</option>
-            </select>
-          </div>
-        </div>
 
         <div className='post_land_box_ele'>
-          <div className='post_land_box_ele_item'>
-            <select>
-              <option value="">Tỉnh / Thành phố</option>
-            </select>
-          </div>
-          <div className='post_land_box_ele_item'>
-            <select>
-              <option value="">Quận / Huyện</option>
-            </select>
-          </div>
-          <div className='post_land_box_ele_item'>
-            <select>
-              <option value="">Phường / Xã</option>
-            </select>
-          </div>
-        </div>
-
-        <div className='post_land_box_ele'>
-          <div className='post_land_box_ele_item'>
-            <BaseInput placeholder="Tiền phòng" />
-          </div>
-          <div className='post_land_box_ele_item'>
-            <BaseInput placeholder="Tiền cọc" />
-          </div>
-          <div className='post_land_box_ele_item'>
-            <BaseInput placeholder="Số điện thoại" />
-          </div>
-        </div>
-
-        <div className='post_land_box_ele'>
-          <input type='file'/>
+          <input type='file' />
         </div>
 
         <div className='post_land_box_ele'>
           <textarea
-            onChange=""
+            name='description'
+            onChange={handleChange}
             placeholder="Mô tả chi tiết"
           />
         </div>

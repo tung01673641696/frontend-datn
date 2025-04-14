@@ -20,7 +20,6 @@ export default function AddRoom() {
     price_deposit: "",
     area: "",
     user_number: "",
-    images: [],
     description: "",
     is_available: ""
   })
@@ -34,6 +33,7 @@ export default function AddRoom() {
 
   const handleChangeImage = (event) => {
     const files = Array.from(event.target.files);
+    console.log("files", files)
 
     if (files.length + images.length > 4) {
       toast.error("Chỉ được chọn tối đa 4 ảnh!");
@@ -59,7 +59,7 @@ export default function AddRoom() {
 
   const handleChange = (e) => {
     setRoom({ ...room, [e.target.name]: e.target.value })
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -77,6 +77,7 @@ export default function AddRoom() {
       description: room.description,
       is_available: room.is_available
     }
+    console.log(data)
 
     if (
       !room.house_id ||
@@ -87,9 +88,9 @@ export default function AddRoom() {
       !room.price_deposit ||
       !room.area ||
       !room.user_number ||
-      !room.images ||
+      images.length === 0 ||
       !room.description ||
-      !room.is_available
+      room.is_available === ""
     ) {
       toast.error("Vui lòng nhập đầy đủ thông tin");
       return
@@ -98,7 +99,7 @@ export default function AddRoom() {
       const res = await dispatch(addRoom(data))
       if (res.payload.data.status) {
         toast.error(res.payload.data.message)
-        
+
       } else {
         toast.success("Thêm phòng thành công");
         navigate(`/landlord/room-manager`)

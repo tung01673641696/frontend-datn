@@ -8,13 +8,19 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { getOneRoom } from '../../../../redux/reducers/room'
 import { houseByOwner } from '../../../../redux/reducers/house'
+import { editRoom } from '../../../../redux/reducers/room'
 
 export default function EditRoom() {
   const params = useParams()
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const id_room = params.id
   const user = JSON.parse(localStorage.getItem("user"))
   const id_user = user.id
+
+  const [oldImages, setOldImages] = useState([]);
+  const [newImages, setNewImages] = useState([]);
+
 
   const [room, setRoom] = useState({
     house_id: "",
@@ -25,16 +31,14 @@ export default function EditRoom() {
     price_deposit: "",
     area: "",
     user_number: "",
-    images: [],
     description: "",
     is_available: ""
   })
-
-  const [previewImages, setPreviewImages] = useState([]);
+  const [images, setImages] = useState([])
+  const allImages = [...oldImages, ...newImages];
 
   const { oneRoom } = useSelector((state) => state.roomReducer)
-
-  console.log("onerooom", oneRoom)
+  console.log("one", oneRoom)
   const { listHouseByOwner } = useSelector((state) => state.houseReducer)
 
   useEffect(() => {
@@ -56,35 +60,70 @@ export default function EditRoom() {
         price_deposit: oneRoom?.price_deposit || "",
         area: oneRoom?.area || "",
         user_number: oneRoom?.user_number || "",
-        images: [],
         description: oneRoom?.description || "",
         is_available: oneRoom?.is_available?.toString() || ""
-      })
+      });
 
-      console.log("eeeeeeeeeeeeee", room)
 
-      if (Array.isArray(oneRoom.images) && oneRoom.images.length > 0) {
-        setPreviewImages(oneRoom.images); // hiển thị ảnh cũ
+      let imgs = oneRoom.image;
+      if (typeof imgs === 'string') {
+        try {
+          imgs = JSON.parse(imgs);
+        } catch (e) {
+          imgs = [imgs];
+        }
       }
+
+      if (Array.isArray(imgs)) {
+        const convertedImages = imgs.map(link => {
+          if (link.includes("imgur.com")) {
+            const id = link.split("/").pop();
+            return `https://i.imgur.com/${id}.jpg`;
+          }
+          return link;
+        });
+
+        setOldImages(convertedImages);
+      } else {
+        setOldImages([]);
+      }
+
+      setNewImages([]);
+
     }
   }, [oneRoom])
 
-  const handleImageChange = (event) => {
-    const files = event.target.files;
-    const newImages = [...room.images]; // Giữ ảnh cũ
-    const imageUrls = [...previewImages]; // Giữ ảnh xem trước cũ
+  const handleChangeImage = (event) => {
+    const files = Array.from(event.target.files);
 
-    for (let i = 0; i < files.length; i++) {
-      newImages.push(files[i]);  // Thêm file mới
-      imageUrls.push(URL.createObjectURL(files[i])); // Tạo URL xem trước
+    if (files.length + oldImages.length + newImages.length > 4) {
+      toast.error("Chỉ được chọn tối đa 4 ảnh!");
+      return;
     }
 
-    setRoom((prevRoom) => ({
-      ...prevRoom,
-      images: newImages  // Cập nhật danh sách ảnh
-    }));
+    const promises = files.map((file) => {
+      return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = () => resolve(reader.result);
+      });
+    });
 
-    setPreviewImages(imageUrls);  // Cập nhật ảnh xem trước
+    Promise.all(promises).then((imgs) => {
+      setNewImages((prev) => [...prev, ...imgs]);
+    });
+  };
+
+  const handleRemoveImage = (index, isOld) => {
+    if (isOld) {
+      const updated = [...oldImages];
+      updated.splice(index, 1);
+      setOldImages(updated);
+    } else {
+      const updated = [...newImages];
+      updated.splice(index, 1);
+      setNewImages(updated);
+    }
   };
 
   const handleChange = (e) => {
@@ -103,13 +142,39 @@ export default function EditRoom() {
       price_deposit: room.price_deposit,
       area: room.area,
       user_number: room.user_number,
-      image: "",
+      image: JSON.stringify(allImages),
       description: room.description,
       is_available: room.is_available
     }
 
+    if (
+      !room.house_id ||
+      !room.room_type ||
+      !room.name ||
+      !room.floor ||
+      !room.price ||
+      !room.price_deposit ||
+      !room.area ||
+      !room.user_number ||
+      !room.description ||
+      room.is_available === ""
+    ) {
+      toast.error("Vui lòng nhập đầy đủ thông tin");
+      return
+    }
 
-    console.log("data", data)
+    if (allImages.length === 0) {
+      toast.error("Vui lòng chọn ít nhất 1 ảnh");
+      return;
+    }
+
+    const updatedData = {
+      ...room,
+      image: JSON.stringify(allImages)
+    };
+
+    dispatch(editRoom({ roomId: id_room, data: updatedData }))
+    navigate(`/landlord/room-manager`)
   }
 
   return (
@@ -176,17 +241,58 @@ export default function EditRoom() {
           </div>
 
           <div className='edit_room_box_child'>
-            <input name='images' value="" type='file' accept="image/*" multiple onChange={handleImageChange} />
+            <input name='images' type='file' accept="image/*" multiple onChange={handleChangeImage} />
           </div>
 
           <div className='edit_room_box_child2'>
-            {previewImages.map((src, index) => (
-              <img
-                key={index}
-                src={src}
-                alt={`preview-${index}`}
-                style={{ width: "100px", height: "100px", margin: "5px" }}
-              />
+            {oldImages.map((src, index) => (
+              <div key={`old-${index}`} style={{ position: 'relative' }}>
+                <img src={src} alt="old" style={{ width: '100px', height: '100px', objectFit: 'cover', borderRadius: '8px' }} />
+                <button
+                  type="button" onClick={() => handleRemoveImage(index, true)}
+                  style={{
+                    position: 'absolute',
+                    top: '0',
+                    right: '10px',
+                    background: 'rgba(0, 0, 0, 0.6)',
+                    color: '#fff',
+                    border: 'none',
+                    borderRadius: '50%',
+                    width: '24px',
+                    height: '24px',
+                    cursor: 'pointer',
+                    fontSize: '16px',
+                    lineHeight: '24px',
+                    textAlign: 'center',
+                  }}
+                >
+                  ×
+                </button>
+              </div>
+            ))}
+            {newImages.map((src, index) => (
+              <div key={`new-${index}`} style={{ position: 'relative' }}>
+                <img src={src} alt="new" style={{ width: '100px', height: '100px', objectFit: 'cover', borderRadius: '8px' }} />
+                <button type="button" onClick={() => handleRemoveImage(index, false)}
+                  style={{
+                    position: 'absolute',
+                    top: '0',
+                    right: '10px',
+                    background: 'rgba(0, 0, 0, 0.6)',
+                    color: '#fff',
+                    border: 'none',
+                    borderRadius: '50%',
+                    width: '24px',
+                    height: '24px',
+                    cursor: 'pointer',
+                    fontSize: '16px',
+                    lineHeight: '24px',
+                    textAlign: 'center',
+                  }}
+                >
+                  ×
+                </button>
+              </div>
             ))}
           </div>
 

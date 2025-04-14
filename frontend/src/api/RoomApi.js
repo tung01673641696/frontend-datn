@@ -19,6 +19,11 @@ const RoomApi = {
   async getOneRoom(roomId) {
     const url = `/room-manager/get-one-room/room_id/${roomId}`
     return axiosClient.get(url)
+  },
+
+  async editRoom(roomId, data) {
+    const url = `/room-manager/edit-room/${roomId}`
+    return axiosClient.put(url, data)
   }
 }
 

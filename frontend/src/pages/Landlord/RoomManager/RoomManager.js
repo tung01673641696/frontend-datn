@@ -53,7 +53,7 @@ export default function RoomManager() {
 
   const handleDelete = async () => {
     if (selectRoomId) {
-      await dispatch(deleteRoom({ roomId: selectRoomId, houseId: selectedHouse}))
+      await dispatch(deleteRoom({ roomId: selectRoomId, houseId: selectedHouse }))
       setIsShow(false)
     }
   }
@@ -132,7 +132,7 @@ export default function RoomManager() {
 
           <Column title={"Giá phòng"}
             render={(value) => (
-              <span>{value?.price}</span>
+              <span>{Number(value?.price).toLocaleString('vi-VN', {  currency: 'VND' })}</span>
             )}
           />
 
@@ -156,7 +156,7 @@ export default function RoomManager() {
 
           <Column title={"Tình trạng phòng"}
             render={(value) => (
-              value.is_available ? (
+              value.is_available === 1 ? (
                 <span style={{ color: "green" }}>Phòng đang trống</span>
               ) : (<span style={{ color: "red" }}>Phòng đã thuê</span>)
             )
