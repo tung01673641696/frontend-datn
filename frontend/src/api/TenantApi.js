@@ -24,8 +24,12 @@ const TenantApi = {
   async editTenant(tenantId, data) {
     const url = `/tenant-manager/edit-tenant/${tenantId}`;
     return axiosClient.put(url, data)
-  }
+  },
 
+  async getTenantByRoom(roomId) {
+    const url = `/tenant-manager/get-tenant-by-room/room_id/${roomId}`
+    return axiosClient.get(url)
+  }
 }
 
 export default TenantApi

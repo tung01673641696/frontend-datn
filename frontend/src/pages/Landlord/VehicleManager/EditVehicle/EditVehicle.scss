@@ -1,10 +1,10 @@
-.add_vehicle {
+.edit_vehicle {
   width: 55%;
   border: 1px solid #385995;
   margin-left: 15%;
   margin-top: 4%;
 
-  .add_vehicle_title {
+  .edit_vehicle_title {
     width: 100%;
     display: block;
     background-color: #385995;
@@ -13,11 +13,11 @@
     color: white;
   }
 
-  .add_vehicle_box {
+  .edit_vehicle_box {
     width: 100%;
     padding: 40px;
 
-    .add_vehicle_box_child {
+    .edit_vehicle_box_child {
       width: 100%;
       margin-bottom: 20px;
       display: flex;
@@ -27,10 +27,10 @@
         width: 100%;
       }
 
-      .add_vehicle_box_child_ele {
+      .edit_vehicle_box_child_ele {
         width: calc(100% / 2 - 10px);
 
-        .add_vehicle_box_child_select {
+        .edit_vehicle_box_child_select {
           width: 100%;
           padding: 10px 5px;
           border-radius: 10px;

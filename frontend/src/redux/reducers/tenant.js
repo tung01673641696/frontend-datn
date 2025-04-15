@@ -3,10 +3,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import TenantApi from "../../api/TenantApi";
 import { toast } from "react-toastify";
 
-// export const addRoom = createAsyncThunk("room/addRoom", async (data) => {
-//   const addRoom = await RoomApi.addRoom(data);
-//   return addRoom
-// })
 export const addTenant = createAsyncThunk("tenant/addTenant", async (data) => {
   const addTenant = await TenantApi.addTenant(data);
   return addTenant
@@ -42,12 +38,17 @@ export const editTenant = createAsyncThunk("tenant/editTenant", async ({ tenantI
   return editTenant
 })
 
+export const getTenantByRoom = createAsyncThunk("tenant/getTenantByRoom", async (roomId) => {
+  const getTenantByRoom = await TenantApi.getTenantByRoom(roomId);
+  return getTenantByRoom
+})
 
 const TenantSlice = createSlice({
   name: "tenant",
   initialState: {
     allTenant: [],
-    oneTenant: {}
+    oneTenant: {},
+    listTenantByRoom: []
   },
   extraReducers: builder => {
     builder
@@ -70,6 +71,16 @@ const TenantSlice = createSlice({
       .addCase(getOneTenant.fulfilled, (state, action) => {
         state.loading = false
         state.oneTenant = action.payload.data;
+      })
+      .addCase(getTenantByRoom.pending, (state, action) => {
+        state.loading = true
+      })
+      .addCase(getTenantByRoom.rejected, (state, action) => {
+        state.loading = false
+      })
+      .addCase(getTenantByRoom.fulfilled, (state, action) => {
+        state.loading = false
+        state.listTenantByRoom = action.payload.data;
       })
   }
 })

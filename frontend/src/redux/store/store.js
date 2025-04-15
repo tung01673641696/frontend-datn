@@ -4,6 +4,7 @@ import UserSlice from "../reducers/user";
 import HouseSlice from "../reducers/house";
 import RoomSlice from "../reducers/room";
 import TenantSlice from "../reducers/tenant";
+import VehicleSlice from "../reducers/vehicle";
 
 export const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
     userReducer: UserSlice.reducer,
     houseReducer: HouseSlice.reducer,
     roomReducer: RoomSlice.reducer,
-    tenantReducer: TenantSlice.reducer
+    tenantReducer: TenantSlice.reducer,
+    vehicleReducer: VehicleSlice.reducer
   }
 })

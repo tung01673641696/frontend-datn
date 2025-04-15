@@ -20,6 +20,7 @@ export default function TenantManager() {
   const id_user = user.id
   const { listHouseByOwner } = useSelector((state) => state.houseReducer)
   const [selectHouse, setSelectHouse] = useState("")
+  const [selectRoom, setSelectRoom] = useState("")
   const { listRoomByHouse } = useSelector((state) => state.roomReducer)
   const { allTenant } = useSelector((state) => state.tenantReducer)
 
@@ -28,9 +29,9 @@ export default function TenantManager() {
   }, [id_user])
 
   const handleHouseChange = (e) => {
-    const houseId = e.target.value
+    const houseId = Number(e.target.value);
     setSelectHouse(houseId)
-
+    setSelectRoom("")
     if (houseId) {
       dispatch(getRoomByHouse(houseId))
     }
@@ -60,6 +61,12 @@ export default function TenantManager() {
     }
   };
 
+  const filteredTenant = allTenant.filter(item => {
+    const matchHouse = selectHouse ? Number(item.house_id) === Number(selectHouse) : true;
+    const matchRoom = selectRoom ? Number(item.room_id) === Number(selectRoom) : true;
+    return matchHouse && matchRoom;
+  });
+
   return (
     <Common>
       <h3 className='tenant-mana_title'>Danh sách khách thuê</h3>
@@ -80,7 +87,7 @@ export default function TenantManager() {
           <div className='tenant-mana_act_search_ele'>
             <span className='tenant-mana_act_search_ele_name'>Nhà</span>
             <select value={selectHouse} onChange={handleHouseChange} className='tenant-mana_act_search_ele_select'>
-              <option value="" disabled>Chọn nhà</option>
+              <option value="" disabled>Tất cả nhà</option>
               {listHouseByOwner.map(item => (
                 <option key={item.id} value={item.id}>{item.name}</option>
               ))}
@@ -89,8 +96,12 @@ export default function TenantManager() {
 
           <div className='tenant-mana_act_search_ele'>
             <span className='tenant-mana_act_search_ele_name'>Phòng</span>
-            <select className='tenant-mana_act_search_ele_select'>
-              <option value="">Chọn phòng</option>
+            <select
+              className='tenant-mana_act_search_ele_select'
+              value={selectRoom}
+              onChange={(e) => setSelectRoom(Number(e.target.value))}
+            >
+              <option value="">Tất cả phòng</option>
               {listRoomByHouse.map(item => (
                 <option key={item.id} value={item.id}>{item.name}</option>
               ))}
@@ -109,7 +120,7 @@ export default function TenantManager() {
           showSizeChanger: false,
           pageSizeOptions: ['10', '20', '30'],
         }}
-        dataSource={allTenant}
+        dataSource={filteredTenant}
         bordered
       >
         <Column title={"STT"} render={(_, __, index) => <span>{index + 1}</span>} key="id" />

@@ -111,7 +111,7 @@ export default function RoomManager() {
           dataSource={listRoomByHouse}
           bordered
         >
-          <Column title={"STT"} dataIndex="id" key="id" />
+          <Column title={"STT"} render={(_, __, index) => <span>{index + 1}</span>} key="id" />
           <Column title={"Tên phòng"}
             render={(item) => (
               <span>{item?.name}</span>
