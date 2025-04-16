@@ -13,6 +13,11 @@ export const addPostsByCustomer = createAsyncThunk("posts/addPostsByCustomer", a
   return addPostsByCustomer
 })
 
+export const addPostsByLandlord = createAsyncThunk("posts/addPostsByLandlord", async (data) => {
+  const addPostsByLandlord = await PostsApi.addPostsByLandlord(data);
+  return addPostsByLandlord
+})
+
 // export const deleteRoom = createAsyncThunk("room/deleteRoom", async ({ roomId, houseId }, thunkApi) => {
 //   const deleteRoom = await RoomApi.deleteRoom(roomId)
 

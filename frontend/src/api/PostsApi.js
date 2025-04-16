@@ -6,6 +6,11 @@ const PostsApi = {
     return axiosClient.post(url, data);
   },
 
+  async addPostsByLandlord(data) {
+    const url = `/posts/add-posts-by-landlord`;
+    return axiosClient.post(url, data);
+  },
+
   // async getRoomByHouse(id) {
   //   const url = `/room-manager/show-room/house_id/${id}`;
   //   return axiosClient.get(url);

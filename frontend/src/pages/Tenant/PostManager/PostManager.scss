@@ -24,6 +24,12 @@
         button {
           width: 100%;
         }
+
+        .active-button {
+          background: #b90505 !important;
+          color: white !important;
+          border: none;
+        }
       }
     }
   }

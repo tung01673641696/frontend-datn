@@ -16,15 +16,33 @@ export default function PostManager() {
 
         <div className='post-mana_box_status'>
           <div className='post-mana_box_status_ele'>
-            <BaseButton type="white" onClick={() => setStatus("pending")}>Đang chờ duyệt</BaseButton>
+            <BaseButton
+              type="white"
+              className={status === "pending" ? "active-button" : ""}
+              onClick={() => setStatus("pending")}
+            >
+              Đang chờ duyệt
+            </BaseButton>
           </div>
 
           <div className='post-mana_box_status_ele'>
-            <BaseButton type="red" onClick={() => setStatus("approved")}>Đang hoạt động</BaseButton>
+            <BaseButton
+              type="white"
+              className={status === "approved" ? "active-button" : ""}
+              onClick={() => setStatus("approved")}
+            >
+              Đang hoạt động
+            </BaseButton>
           </div>
 
           <div className='post-mana_box_status_ele'>
-            <BaseButton type="white" onClick={() => setStatus("expired")}>Đã hết hạn</BaseButton>
+            <BaseButton
+              type="white"
+              className={status === "expired" ? "active-button" : ""}
+              onClick={() => setStatus("expired")}
+            >
+              Đã hết hạn
+            </BaseButton>
           </div>
         </div>
 

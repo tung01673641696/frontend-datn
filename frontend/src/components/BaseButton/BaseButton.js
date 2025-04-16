@@ -8,7 +8,7 @@ const WARNING = "warning_color"
 const FILTER = "button_filter"
 
 
-export default function BaseButton({ htmlType, children, type, onClick }) {
+export default function BaseButton({ htmlType, children, type, onClick, className }) {
 
   const typeObject = {
     red: RED,
@@ -20,7 +20,7 @@ export default function BaseButton({ htmlType, children, type, onClick }) {
 
   return (
     <>
-      <button type={htmlType} className={`button ${typeObject[type]}`} onClick={onClick}>
+      <button type={htmlType} className={`button ${typeObject[type]} ${className}`} onClick={onClick}>
         {children}
       </button>
     </>

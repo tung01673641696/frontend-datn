@@ -6,26 +6,21 @@ import BaseInput from '../../../components/BaseInput/BaseInput'
 import BaseButton from '../../../components/BaseButton/BaseButton'
 import { houseByOwner } from '../../../redux/reducers/house'
 import { useDispatch, useSelector } from 'react-redux'
+import { getRoomByHouse } from '../../../redux/reducers/room'
+import { toast } from 'react-toastify'
+import { addPostsByLandlord } from '../../../redux/reducers/posts'
 
 export default function PostLandlord() {
   const user = JSON.parse(localStorage.getItem("user"))
   const user_id = user.id
   const dispatch = useDispatch()
   const { listHouseByOwner } = useSelector((state) => state.houseReducer)
+  const [selectHouse, setSelectHouse] = useState("")
+  const { listRoomByHouse } = useSelector((state) => state.roomReducer)
 
   const [form, setForm] = useState({
     title: '',
-    house_id: '',
     room_id: '',
-    room_type: '',
-    area: '',
-    floor: '',
-    max_people: '',
-    price: '',
-    price_deposit: '',
-    district_id: '',
-    ward_id: '',
-    description: '',
     user_id: user_id,
   })
 
@@ -33,18 +28,49 @@ export default function PostLandlord() {
     dispatch(houseByOwner(user_id))
   }, [])
 
+  const handleHouseChange = (e) => {
+    const houseId = e.target.value
+    setSelectHouse(houseId)
+
+    if (houseId) {
+      dispatch(getRoomByHouse(houseId))
+    }
+  }
+
   const handleChange = (e) => {
     const { name, value } = e.target
     setForm({ ...form, [name]: value })
+  }
 
-    console.log(">>>>", form)
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    if (
+      !form.title ||
+      !form.room_id ||
+      !form.user_id
+    ) {
+      toast.error("Vui lòng nhập đầy đủ thông tin")
+    } else {
+      try {
+        const res = await dispatch(addPostsByLandlord(form))
+        if (res.payload.data.message) {
+          toast.success(res.payload.data.message)
+        }
+        else {
+          toast.error(res.payload.data.error)
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    }
   }
 
   return (
     <div className='post_land'>
       <HeaderUser />
 
-      <form className='post_land_box'>
+      <form className='post_land_box' onSubmit={handleSubmit}>
         <h3 className='post_land_box_title'>Thêm bài đăng</h3>
 
         <div className='post_land_box_ele'>
@@ -53,7 +79,7 @@ export default function PostLandlord() {
 
         <div className='post_land_box_ele'>
           <div className='post_land_box_ele_item'>
-            <select name='house_id' value={form.house_id}>
+            <select name='house_id' value={selectHouse} onChange={handleHouseChange}>
               <option value="" disabled>Chọn nhà</option>
               {listHouseByOwner.map(item => (
                 <option key={item.id} value={item.id}>{item.name}</option>
@@ -61,23 +87,13 @@ export default function PostLandlord() {
             </select>
           </div>
           <div className='post_land_box_ele_item'>
-            <select name='room_id'>
+            <select name='room_id' onChange={handleChange}>
               <option value="">Chọn phòng</option>
+              {listRoomByHouse.map(item => (
+                <option key={item.id} value={item.id}>{item.name}</option>
+              ))}
             </select>
           </div>
-        </div>
-
-
-        <div className='post_land_box_ele'>
-          <input type='file' />
-        </div>
-
-        <div className='post_land_box_ele'>
-          <textarea
-            name='description'
-            onChange={handleChange}
-            placeholder="Mô tả chi tiết"
-          />
         </div>
 
         <div className='post_land_box_ele'>
