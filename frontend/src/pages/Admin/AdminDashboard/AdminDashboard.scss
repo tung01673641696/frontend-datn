@@ -1,0 +1,56 @@
+.dashboard_title {
+  text-align: left;
+  font-size: 22px;
+  font-weight: 400;
+  margin-bottom: 80px;
+}
+
+.dashboard_quantity {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  .quantity_ele {
+    width: calc(100% / 3 - 20px);
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    padding: 70px 0;
+    color: white;
+    text-decoration: none;
+
+    .quantity_ele_title {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .quantity_ele_number {
+      font-size: 24px;
+    }
+  }
+}
+
+.orange {
+  background-color: #EE6323;
+}
+
+.yellow {
+  background-color: #EDA60C;
+}
+
+.green {
+  background-color: #70AB29;
+}
+
+.purple {
+  background-color: #EC0B8A;
+}
+
+.blue {
+  background-color: #0E2FEB;
+}
+
+.taro {
+  background-color: #8D09A4;
+}

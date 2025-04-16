@@ -36,6 +36,9 @@ const PostTenant = React.lazy(() => import('./pages/Tenant/PostTenant/PostTenant
 const PostManagerTenant = React.lazy(() => import('./pages/Tenant/PostManager/PostManager'))
 const RoomLikeManager = React.lazy(() => import('./pages/Tenant/RoomLikeManager/RoomLikeManager'))
 
+const AdminDashboard = React.lazy(() => import('./pages/Admin/AdminDashboard/AdminDashboard'))
+const AdminManagerUser = React.lazy(() => import('./pages/Admin/AdminManagerUser/AdminManagerUser'))
+
 export default function Routers() {
   return (
     <div>
@@ -81,6 +84,11 @@ export default function Routers() {
               <Route path='/tenant/post/user_id/:id' element={<PostTenant />} />
               <Route path='/tenant/post-manager' element={<PostManagerTenant />} />
               <Route path='/tenant/room-like-manager' element={<RoomLikeManager />} />
+            </Route>
+
+            <Route>
+              <Route path='/admin/dashboard' element={<AdminDashboard />} />
+              <Route path='/admin/manager-user' element={<AdminManagerUser />} />
             </Route>
 
           </Routes>

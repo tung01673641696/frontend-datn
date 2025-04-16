@@ -1,0 +1,38 @@
+.ad_mana_user_title {
+  text-align: left;
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.ad_mana_user_action {
+  margin: 40px 0;
+
+  .ad_mana_user_action_select {
+    background-color: #f3f3f3;
+    margin: 40px 0;
+    padding: 10px 30px;
+    text-align: left;
+
+    .ad_mana_user_action_select_title {
+      margin-right: 25px;
+    }
+
+    select {
+      padding: 5px 20px 5px 10px;
+    }
+  }
+
+  button {
+    padding: 5px 15px;
+    font-size: 14px;
+  }
+}
+
+.ant-table-thead {
+
+  th {
+    background-color: #3461b4 !important;
+    color: white !important;
+  }
+
+}

@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
 import UserApi from "../../api/UserApi";
+import { toast } from "react-toastify";
 
 export const register = createAsyncThunk(
   'user/register',
@@ -20,6 +21,26 @@ export const login = createAsyncThunk(
   }
 )
 
+export const getAllUser = createAsyncThunk(
+  "user/getAllUser",
+  async () => {
+    const getAllUser = await UserApi.getAllUser();
+    return getAllUser
+  }
+)
+
+export const deleteUser = createAsyncThunk("user/deleteUser", async (userId, thunkApi) => {
+  const deleteUser = await UserApi.deleteUser(userId)
+
+  if (deleteUser.status === 200) {
+    toast.success("Xóa người dùng thành công");
+    thunkApi.dispatch(getAllUser())
+  } else {
+    toast.error("Xóa người dùng thất bại");
+  }
+  return deleteUser
+})
+
 const access_token = localStorage.getItem('access_token')
 const user = JSON.parse(localStorage.getItem("user"))
 
@@ -29,6 +50,7 @@ const UserSlice = createSlice({
     isAuth: access_token === 'undefined' || access_token === null ? false : true,
     myInfo: user || {},
     loading: false,
+    allUser: []
   },
   extraReducers: builder => {
     builder
@@ -52,6 +74,17 @@ const UserSlice = createSlice({
         state.loading = false;
         state.user.auth = true;
         state.user = action.payload.data;
+      })
+
+      .addCase(getAllUser.pending, (state, action) => {
+        state.loading = true
+      })
+      .addCase(getAllUser.rejected, (state, action) => {
+        state.loading = false
+      })
+      .addCase(getAllUser.fulfilled, (state, action) => {
+        state.loading = false
+        state.allUser = action.payload.data;
       })
   }
 })

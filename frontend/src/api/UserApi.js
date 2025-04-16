@@ -9,6 +9,16 @@ const UserApi = {
   async login(data) {
     const url = `user/login`;
     return axiosClient.post(url, data);
+  },
+
+  async getAllUser() {
+    const url = `/user/get-all-user`;
+    return axiosClient.get(url)
+  },
+
+  async deleteUser(userId) {
+    const url = `/user/delete-user/user_id/${userId}`
+    return axiosClient.delete(url)
   }
 }
 
