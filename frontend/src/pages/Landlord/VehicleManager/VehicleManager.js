@@ -9,13 +9,25 @@ import { getAllVehicle } from '../../../redux/reducers/vehicle'
 import { useDispatch, useSelector } from 'react-redux'
 import BaseModal from '../../../components/BaseModal/BaseModal'
 import { deleteVehicle } from '../../../redux/reducers/vehicle'
+import { houseByOwner } from '../../../redux/reducers/house'
+import { getRoomByHouse } from '../../../redux/reducers/room'
 
 export default function VehicleManager() {
+  const user = JSON.parse(localStorage.getItem("user"))
+  const id_user = user.id
   const [isShow, setIsShow] = useState(false)
   const [vehicleId, setVehicleId] = useState(null)
+  const [selectHouse, setSelectHouse] = useState("")
+  const [selectRoom, setSelectRoom] = useState("")
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { allVehicle } = useSelector((state) => state.vehicleReducer)
+  const { listHouseByOwner } = useSelector((state) => state.houseReducer)
+  const { listRoomByHouse } = useSelector((state) => state.roomReducer)
+
+  useEffect(() => {
+    dispatch(houseByOwner(id_user))
+  }, [id_user])
 
   useEffect(() => {
     dispatch(getAllVehicle())
@@ -41,6 +53,21 @@ export default function VehicleManager() {
     }
   };
 
+  const handleHouseChange = (e) => {
+    const houseId = Number(e.target.value);
+    setSelectHouse(houseId)
+    setSelectRoom("")
+    if (houseId) {
+      dispatch(getRoomByHouse(houseId))
+    }
+  }
+
+  const filteredVehicle = allVehicle.filter(item => {
+    const matchHouse = selectHouse ? Number(item.house_id) === Number(selectHouse) : true;
+    const matchRoom = selectRoom ? Number(item.room_id) === Number(selectRoom) : true;
+    return matchHouse && matchRoom;
+  });
+
   return (
     <Common>
       <h3>Danh sách phương tiện</h3>
@@ -52,7 +79,7 @@ export default function VehicleManager() {
           type="red"
           content="Bạn có chắc chắn muốn xóa phương tiện không ?"
           onCancel={handleClose}
-        onConfirm={handleDelete}
+          onConfirm={handleDelete}
         />
       </>
 
@@ -60,17 +87,21 @@ export default function VehicleManager() {
         <div className='vehicle_search_left'>
           <div className='vehicle_search_left_content'>
             <span className='vehicle_search_left_content_title'>Nhà</span>
-            <select className='vehicle_search_left_content_select'>
-              <option>Tất cả nhà</option>
-              <option>Nhà Gohomy1</option>
-              <option>Nhà Gohomy2</option>
+            <select value={selectHouse} onChange={handleHouseChange} className='vehicle_search_left_content_select'>
+              <option value="" disabled>Tất cả nhà</option>
+              {listHouseByOwner.map(item => (
+                <option key={item.id} value={item.id}>{item.name}</option>
+              ))}
             </select>
           </div>
 
           <div className='vehicle_search_left_content'>
             <span className='vehicle_search_left_content_title'>Phòng</span>
-            <select className='vehicle_search_left_content_select'>
-              <option>Tất cả phòng</option>
+            <select value={selectRoom} onChange={(e) => setSelectRoom(Number(e.target.value))} className='vehicle_search_left_content_select'>
+              <option value="" disabled>Tất cả phòng</option>
+              {listRoomByHouse.map(item => (
+                <option key={item.id} value={item.id}>{item.name}</option>
+              ))}
             </select>
           </div>
         </div>
@@ -88,7 +119,7 @@ export default function VehicleManager() {
           showSizeChanger: false,
           pageSizeOptions: ['10', '20', '30'],
         }}
-        dataSource={allVehicle}
+        dataSource={filteredVehicle}
         bordered
       >
         <Column title={"STT"} dataIndex="id" key="id" />

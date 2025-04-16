@@ -20,10 +20,12 @@ export default function PostManager() {
           </div>
 
           <div className='post-mana_box_status_ele'>
-            <BaseButton type="red" onClick={() => setStatus("active")}>Đang hoạt động</BaseButton>
+            <BaseButton type="red" onClick={() => setStatus("approved")}>Đang hoạt động</BaseButton>
           </div>
 
-          <div className='post-mana_box_status_ele'></div>
+          <div className='post-mana_box_status_ele'>
+            <BaseButton type="white" onClick={() => setStatus("expired")}>Đã hết hạn</BaseButton>
+          </div>
         </div>
 
         <div className='post-mana_box_child'>

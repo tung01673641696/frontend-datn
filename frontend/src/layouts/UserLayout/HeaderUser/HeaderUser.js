@@ -17,7 +17,7 @@ export default function HeaderUser() {
       <div className='header_wrap'>
         <Navbar expand="lg">
           <Container>
-            <Navbar.Brand as={Link} to="/">WESITE TÌM KIẾM VÀ QUẢN LÍ PHÒNG TRỌ</Navbar.Brand>
+            <Navbar.Brand as={Link} to="/">HỆ THỐNG THUÊ VÀ CHO THUÊ PHÒNG TRỌ</Navbar.Brand>
 
             <Nav>
               {!user ? (
@@ -26,20 +26,16 @@ export default function HeaderUser() {
                   <span className='header_separate'>|</span>
                   <Link to="/register" className='header_user'>Đăng Ký</Link>
                 </>
-              ) : user && user.role_id === 1 ? (
-                <>
-                  <DropdownTenant />
-                </>
-              ) :
-                <>
-                  <DropdownLandlord />
-                </>
-              }
+              ) : user.role_id === 1 ? (
+                <DropdownTenant />
+              ) : user.role_id === 2 ? (
+                <DropdownLandlord />
+              ) : null}
             </Nav>
 
           </Container>
         </Navbar>
       </div>
-    </div>
+    </div >
   )
 }

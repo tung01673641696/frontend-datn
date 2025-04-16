@@ -39,8 +39,6 @@ export default function AddHouse() {
     setHouse({ ...house, [e.target.name]: e.target.value })
   }
 
-  console.log("house", house)
-
   const handleSubmit = (e) => {
     e.preventDefault()
 

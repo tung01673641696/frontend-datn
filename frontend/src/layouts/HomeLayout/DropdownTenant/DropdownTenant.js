@@ -6,8 +6,10 @@ import { Link, useNavigate } from 'react-router-dom'
 export default function DropdownTenant() {
   const navigate = useNavigate()
   const user = localStorage.getItem('user') === null ? null : JSON.parse(localStorage.getItem('user'));
+  const user_id = user.id
+
   function handleClick() {
-    navigate('/tenant/post')
+    navigate(`/tenant/post/user_id/${user_id}`)
   }
 
   const manager = [

@@ -6,7 +6,7 @@ function Banner() {
   return (
     <div className='banner'>
       <img src={Img} />
-      <span className='banner_content'>WEBSITE TÌM KIẾM, QUẢN LÍ VẬN HÀNH PHÒNG TRỌ</span>
+      <span className='banner_content'>HỆ THỐNG THUÊ VÀ CHO THUÊ PHÒNG TRỌ</span>
     </div>
   )
 }

@@ -78,7 +78,7 @@ export default function Routers() {
 
             <Route>
               <Route path='/tenant/info-tenant' element={<InfoTenant />} />
-              <Route path='/tenant/post' element={<PostTenant />} />
+              <Route path='/tenant/post/user_id/:id' element={<PostTenant />} />
               <Route path='/tenant/post-manager' element={<PostManagerTenant />} />
               <Route path='/tenant/room-like-manager' element={<RoomLikeManager />} />
             </Route>

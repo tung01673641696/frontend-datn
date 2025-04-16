@@ -25,6 +25,8 @@
       .post-item_box_right_title {
         font-size: 20px;
         margin-bottom: 10px;
+        font-size: 20px;
+        font-weight: 600;
       }
 
       .post-item_box_right_common {
@@ -35,6 +37,12 @@
       .post-item_box_right_action {
         margin-top: 15px;
         margin-bottom: 15px;
+
+        button {
+          margin-right: 10px;
+          padding: 6px 17px;
+          font-size: 14px;
+        }
       }
     }
   }

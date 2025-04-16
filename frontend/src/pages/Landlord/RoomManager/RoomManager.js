@@ -22,6 +22,8 @@ export default function RoomManager() {
   const user = JSON.parse(localStorage.getItem("user"))
   const id = user.id
 
+  console.log(">>>>>", listRoomByHouse)
+
   useEffect(() => {
     dispatch(houseByOwner(id))
   }, [])
@@ -132,7 +134,7 @@ export default function RoomManager() {
 
           <Column title={"Giá phòng"}
             render={(value) => (
-              <span>{Number(value?.price).toLocaleString('vi-VN', {  currency: 'VND' })}</span>
+              <span>{Number(value?.price).toLocaleString('vi-VN', { currency: 'VND' })}</span>
             )}
           />
 
@@ -156,7 +158,7 @@ export default function RoomManager() {
 
           <Column title={"Tình trạng phòng"}
             render={(value) => (
-              value.is_available === 1 ? (
+              value.is_available ? (
                 <span style={{ color: "green" }}>Phòng đang trống</span>
               ) : (<span style={{ color: "red" }}>Phòng đã thuê</span>)
             )
