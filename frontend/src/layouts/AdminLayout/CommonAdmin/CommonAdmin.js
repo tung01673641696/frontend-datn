@@ -4,10 +4,9 @@ import Img from '../../../assets/Images/User/user.jpg'
 import { Link } from 'react-router-dom'
 
 export default function CommonAdmin({ children }) {
-
   const manager = [
-    { id: 1, title: 'Thống kê', path: '' },
-    { id: 2, title: 'Quản lý Người dùng', path: '' },
+    { id: 1, title: 'Thống kê', path: '/admin/dashboard' },
+    { id: 2, title: 'Quản lý Người dùng', path: '/admin/manager-user' },
     { id: 3, title: 'Quản lý Bài đăng', path: '' },
   ]
 

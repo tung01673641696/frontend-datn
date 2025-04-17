@@ -19,6 +19,7 @@ export default function RoomContentNeed() {
           <span className='room_content_need_box_right_common'>Giá từ: 1.000.000-3.000.000đ /tháng</span>
           <span className='room_content_need_box_right_common'>Quận: Đống Đa</span>
           <span className='room_content_need_box_right_common'>Chi tiết: Phòng có điều hòa,vệ sinh khép kín,có ban công thoáng,giờ giấc tự do thoải mái</span>
+          <span className='room_content_need_box_right_common'>Đăng ngày: 30/4/2025</span>
           <div className='room_content_need_box_right_contact'>
             <div className='room_content_need_box_right_contact_tele'>
               <BaseButton type="red">

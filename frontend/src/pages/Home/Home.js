@@ -7,7 +7,6 @@ import Banner from '../../layouts/HomeLayout/Banner/Banner'
 import District from '../../layouts/HomeLayout/District/District'
 import RoomNew from '../../layouts/HomeLayout/RoomNew/RoomNew'
 import RoomNeed from '../../layouts/HomeLayout/RoomNeed/RoomNeed'
-import Dropdown from '../../layouts/HomeLayout/DropdownTenant/DropdownTenant'
 
 export default function Home() {
   return (

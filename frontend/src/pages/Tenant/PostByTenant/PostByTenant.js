@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import "./PostTenant.scss"
+import "./PostByTenant.scss"
 import HeaderUser from '../../../layouts/UserLayout/HeaderUser/HeaderUser'
 import Footer from '../../../layouts/UserLayout/FooterUser/FooterUser'
 import BaseInput from '../../../components/BaseInput/BaseInput'
@@ -11,7 +11,7 @@ import { getWard } from '../../../redux/reducers/address'
 import { toast } from 'react-toastify'
 import { addPostsByCustomer } from '../../../redux/reducers/posts'
 
-export default function PostTenant() {
+export default function PostByTenant() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const params = useParams()

@@ -26,9 +26,7 @@ export default function RoomNeed() {
           <CardNeed item={item} />
         ))}
       </div>
-
       <BaseButton type="red" onClick={() => handleClick()}>Xem thêm</BaseButton>
-
     </div>
   )
 }

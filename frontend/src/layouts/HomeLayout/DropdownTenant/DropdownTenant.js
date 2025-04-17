@@ -1,6 +1,5 @@
 import React from 'react'
 import "./DropdownTenant.scss"
-import { useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 
 export default function DropdownTenant() {
@@ -8,18 +7,23 @@ export default function DropdownTenant() {
   const user = localStorage.getItem('user') === null ? null : JSON.parse(localStorage.getItem('user'));
   const user_id = user.id
 
-  function handleClick() {
-    navigate(`/tenant/post/user_id/${user_id}`)
-  }
-
   const manager = [
     { id: 1, title: 'Thông tin cá nhân', path: '/tenant/info-tenant' },
     { id: 2, title: 'Quản lý bài đăng', path: '/tenant/post-manager' },
     { id: 3, title: 'Quản lý phòng yêu thích', path: '/tenant/room-like-manager' },
     { id: 4, title: 'Quản lý giỏ hàng', path: '' },
     { id: 5, title: 'Quản lý đơn hàng đã đặt', path: '' },
-    { id: 6, title: 'Đăng xuất', path: '' },
   ]
+
+  function handleClick() {
+    navigate(`/tenant/post/user_id/${user_id}`)
+  }
+
+  function handleLogout() {
+    localStorage.removeItem('user')
+    localStorage.removeItem("access_token")
+    navigate('/login')
+  }
 
   return (
     <div className='header_user'>
@@ -40,6 +44,7 @@ export default function DropdownTenant() {
           {manager?.map((item) => (
             <Link to={item?.path} className='dropdown-menu_item'>{item?.title}</Link>
           ))}
+          <li className='dropdown-menu_item' onClick={handleLogout}>Đăng xuất</li>
         </ul>
       </div>
     </div>

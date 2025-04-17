@@ -7,7 +7,6 @@ export default function Common({ children }) {
   const user = JSON.parse(localStorage.getItem("user"))
   const id = user.id
 
-
   const manager = [
     { id: 1, title: 'Trang chủ', path: '/' },
     { id: 2, title: 'Thống kê', path: '/landlord/dashboard' },
@@ -16,7 +15,6 @@ export default function Common({ children }) {
     { id: 5, title: 'Quản lý khách thuê', path: '/landlord/tenant-manager' },
     { id: 6, title: 'Quản lý phương tiện', path: '/landlord/vehicle-manager' },
   ]
-
   return (
     <div className='common'>
       <div className='common_list'>

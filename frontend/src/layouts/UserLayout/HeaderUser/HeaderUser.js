@@ -2,10 +2,8 @@ import React from 'react'
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 import "./HeaderUser.scss"
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import DropdownTenant from '../../HomeLayout/DropdownTenant/DropdownTenant';
 import DropdownLandlord from '../../HomeLayout/DropdownLandlord/DropdownLandlord';
 

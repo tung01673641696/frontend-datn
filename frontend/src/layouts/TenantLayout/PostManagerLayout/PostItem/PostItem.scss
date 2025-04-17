@@ -1,5 +1,6 @@
 .post-item {
   width: 100%;
+  margin-bottom: 30px;
 
   .post-item_box {
     display: flex;
@@ -31,7 +32,13 @@
 
       .post-item_box_right_common {
         font-size: 17px;
+        font-weight: 400;
         margin: 2px 0;
+
+        .post-item_box_right_common_time {
+          color: rgb(231, 7, 7);
+          font-weight: 500;
+        }
       }
       
       .post-item_box_right_action {

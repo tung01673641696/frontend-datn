@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDistrict } from '../../../redux/reducers/address';
 
-
 export default function District() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -29,7 +28,6 @@ export default function District() {
     slidesToShow: 4,
     rows: 2,
     slidesToScroll: 1,
-
   };
 
   return (

@@ -7,9 +7,7 @@ const BLUE = "blue_color"
 const WARNING = "warning_color"
 const FILTER = "button_filter"
 
-
 export default function BaseButton({ htmlType, children, type, onClick, className }) {
-
   const typeObject = {
     red: RED,
     white: WHITE,
@@ -17,7 +15,6 @@ export default function BaseButton({ htmlType, children, type, onClick, classNam
     warning: WARNING,
     filter: FILTER
   }
-
   return (
     <>
       <button type={htmlType} className={`button ${typeObject[type]} ${className}`} onClick={onClick}>

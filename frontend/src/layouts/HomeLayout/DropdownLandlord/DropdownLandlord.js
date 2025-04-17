@@ -1,14 +1,10 @@
 import React from 'react'
 import "./DropdownLandlord.scss"
-import { useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 
 export default function DropdownLandlord() {
   const navigate = useNavigate()
   const user = localStorage.getItem('user') === null ? null : JSON.parse(localStorage.getItem('user'));
-  function handleClick() {
-    navigate('/landlord/post')
-  }
 
   const manager = [
     { id: 1, title: 'Thông tin cá nhân', path: '/landlord/info-landlord' },
@@ -18,8 +14,17 @@ export default function DropdownLandlord() {
     { id: 5, title: 'Quản lý nhu cầu yêu thích', path: '' },
     { id: 6, title: 'Quản lý giỏ hàng', path: '' },
     { id: 7, title: 'Quản lý đơn hàng đã đặt', path: '' },
-    { id: 8, title: 'Đăng xuất', path: '' },
   ]
+
+  function handleClick() {
+    navigate('/landlord/post')
+  }
+
+  function handleLogout() {
+    localStorage.removeItem('user')
+    localStorage.removeItem("access_token")
+    navigate('/login')
+  }
 
   return (
     <div className='header_user'>
@@ -40,6 +45,7 @@ export default function DropdownLandlord() {
           {manager?.map((item) => (
             <Link to={item?.path} className='dropdown-menu_item'>{item?.title}</Link>
           ))}
+          <li className='dropdown-menu_item' onClick={handleLogout}>Đăng xuất</li>
         </ul>
       </div>
     </div>

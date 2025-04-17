@@ -3,11 +3,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import PostsApi from "../../api/PostsApi";
 import { toast } from "react-toastify";
 
-// export const getRoomByHouse = createAsyncThunk("room/getRoomByHouse", async (id) => {
-//   const listRoom = await RoomApi.getRoomByHouse(id);
-//   return listRoom
-// })
-
 export const addPostsByCustomer = createAsyncThunk("posts/addPostsByCustomer", async (data) => {
   const addPostsByCustomer = await PostsApi.addPostsByCustomer(data);
   return addPostsByCustomer
@@ -16,6 +11,27 @@ export const addPostsByCustomer = createAsyncThunk("posts/addPostsByCustomer", a
 export const addPostsByLandlord = createAsyncThunk("posts/addPostsByLandlord", async (data) => {
   const addPostsByLandlord = await PostsApi.addPostsByLandlord(data);
   return addPostsByLandlord
+})
+
+export const getPostsByOneCustomer = createAsyncThunk("posts/getPostsByOneCustomer", async (customerId) => {
+  const getPostsOneCustomer = await PostsApi.getPostsByOneCustomer(customerId);
+  return getPostsOneCustomer
+})
+
+export const getOnePostsByCustomer = createAsyncThunk("posts/getOnePostsByCustomer", async (postId) => {
+  const getOnePostsByCustomer = await PostsApi.getOnePostsByCustomer(postId);
+  return getOnePostsByCustomer
+})
+
+export const editPostsByCustomer = createAsyncThunk("posts/editPostsByCustomer", async ({ postId, data }, thunkApi) => {
+  const editPostsByCustomer = await PostsApi.editPostsByCustomer(postId, data);
+  if (editPostsByCustomer.status === 200) {
+    toast.success("Cập nhật bài đăng thành công");
+    const user = JSON.parse(localStorage.getItem("user"))
+    const user_id = user.id
+    thunkApi.dispatch(getPostsByOneCustomer(user_id))
+  }
+  return editPostsByCustomer
 })
 
 // export const deleteRoom = createAsyncThunk("room/deleteRoom", async ({ roomId, houseId }, thunkApi) => {
@@ -30,40 +46,39 @@ export const addPostsByLandlord = createAsyncThunk("posts/addPostsByLandlord", a
 //   return deleteRoom
 // })
 
-// export const getOneRoom = createAsyncThunk("room/getOneRoom", async (roomId) => {
-//   const oneRoom = await RoomApi.getOneRoom(roomId);
-//   return oneRoom
-// })
-
-// export const editRoom = createAsyncThunk("room/editRoom", async ({ roomId, data }, thunkApi) => {
-//   const editRoom = await RoomApi.editRoom(roomId, data);
-//   if (editRoom.status === 200) {
-//     toast.success("Cập nhật phòng thành công");
-//     const { house_id } = data;
-//     thunkApi.dispatch(getRoomByHouse(house_id))
-//   }
-//   return editRoom
-// })
 
 const PostsSlice = createSlice({
   name: "posts",
   initialState: {
+    postsByOneCustomer: [],
+    onePostsByCustomer: {}
+
     // listRoomByHouse: [],
     // oneRoom: {}
   },
-  // extraReducers: builder => {
-  //   builder
-  //     .addCase(getRoomByHouse.pending, (state, action) => {
-  //       state.loading = true
-  //     })
-  //     .addCase(getRoomByHouse.rejected, (state, action) => {
-  //       state.loading = false
-  //     })
-  //     .addCase(getRoomByHouse.fulfilled, (state, action) => {
-  //       state.loading = false
-  //       state.listRoomByHouse = action.payload.data;
-  //     })
-  // }
+  extraReducers: builder => {
+    builder
+      .addCase(getPostsByOneCustomer.pending, (state, action) => {
+        state.loading = true
+      })
+      .addCase(getPostsByOneCustomer.rejected, (state, action) => {
+        state.loading = false
+      })
+      .addCase(getPostsByOneCustomer.fulfilled, (state, action) => {
+        state.loading = false
+        state.postsByOneCustomer = action.payload.data;
+      })
+      .addCase(getOnePostsByCustomer.pending, (state, action) => {
+        state.loading = true
+      })
+      .addCase(getOnePostsByCustomer.rejected, (state, action) => {
+        state.loading = false
+      })
+      .addCase(getOnePostsByCustomer.fulfilled, (state, action) => {
+        state.loading = false
+        state.onePostsByCustomer = action.payload.data;
+      })
+  }
 })
 
 export default PostsSlice

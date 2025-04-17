@@ -32,7 +32,8 @@ const AddVehicle = React.lazy(() => import('./pages/Landlord/VehicleManager/AddV
 const EditVehicle = React.lazy(() => import('./pages/Landlord/VehicleManager/EditVehicle/EditVehicle'))
 
 const InfoTenant = React.lazy(() => import('./pages/Tenant/InfoTenant/InfoTenant'))
-const PostTenant = React.lazy(() => import('./pages/Tenant/PostTenant/PostTenant'))
+const PostByTenant = React.lazy(() => import('./pages/Tenant/PostByTenant/PostByTenant'))
+const EditPostByTenant = React.lazy(() => import('./pages/Tenant/EditPostByTenant/EditPostByTenant'))
 const PostManagerTenant = React.lazy(() => import('./pages/Tenant/PostManager/PostManager'))
 const RoomLikeManager = React.lazy(() => import('./pages/Tenant/RoomLikeManager/RoomLikeManager'))
 
@@ -81,7 +82,8 @@ export default function Routers() {
 
             <Route>
               <Route path='/tenant/info-tenant' element={<InfoTenant />} />
-              <Route path='/tenant/post/user_id/:id' element={<PostTenant />} />
+              <Route path='/tenant/post/user_id/:id' element={<PostByTenant />} />
+              <Route path='/tenant/edit-post/post_id/:id' element={<EditPostByTenant />} />
               <Route path='/tenant/post-manager' element={<PostManagerTenant />} />
               <Route path='/tenant/room-like-manager' element={<RoomLikeManager />} />
             </Route>

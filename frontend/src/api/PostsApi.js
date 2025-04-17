@@ -11,25 +11,26 @@ const PostsApi = {
     return axiosClient.post(url, data);
   },
 
-  // async getRoomByHouse(id) {
-  //   const url = `/room-manager/show-room/house_id/${id}`;
-  //   return axiosClient.get(url);
-  // },
+  async getPostsByOneCustomer(customerId) {
+    const url = `/posts/get-posts-by-one-customer/customer_id/${customerId}`;
+    return axiosClient.get(url);
+  },
+
+    async getOnePostsByCustomer(postId) {
+    const url = `/posts/get-one-posts-by-customer/posts_id/${postId}`
+    return axiosClient.get(url)
+  },
+
+    async editPostsByCustomer(postId, data) {
+    const url = `/posts/edit-posts-by-customer/posts_id/${postId}`
+    return axiosClient.put(url, data)
+  }
 
   // async deleteRoom(roomId) {
   //   const url = `/room-manager/delete-room/room_id/${roomId}`
   //   return axiosClient.delete(url)
   // },
 
-  // async getOneRoom(roomId) {
-  //   const url = `/room-manager/get-one-room/room_id/${roomId}`
-  //   return axiosClient.get(url)
-  // },
-
-  // async editRoom(roomId, data) {
-  //   const url = `/room-manager/edit-room/${roomId}`
-  //   return axiosClient.put(url, data)
-  // }
 }
 
 export default PostsApi
