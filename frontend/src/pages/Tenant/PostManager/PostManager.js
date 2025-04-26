@@ -14,11 +14,9 @@ export default function PostManager() {
   const [status, setStatus] = useState("pending")
   const { postsByOneCustomer } = useSelector((state) => state.postsReducer)
 
-  console.log(">>>>>>", postsByOneCustomer)
-
   useEffect(() => {
-    dispatch(getPostsByOneCustomer(id_user))
-  }, [])
+    dispatch(getPostsByOneCustomer({ customerId: id_user, status }))
+  }, [status])
 
   return (
     <div className='post-mana'>
@@ -48,12 +46,19 @@ export default function PostManager() {
           </div>
 
           <div className='post-mana_box_status_ele'>
+            <BaseButton
+              type="white"
+              className={status === "reject" ? "active-button" : ""}
+              onClick={() => setStatus("reject")}
+            >
+              Bị từ chối
+            </BaseButton>
           </div>
         </div>
 
         <div className='post-mana_box_child'>
           {postsByOneCustomer?.map((item) => (
-            <PostItem item={item}/>
+            <PostItem item={item} />
           ))}
         </div>
       </div>

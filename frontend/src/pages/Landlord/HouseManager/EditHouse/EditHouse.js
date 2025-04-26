@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import { getOneHouse } from '../../../../redux/reducers/house'
 import { editHouse } from '../../../../redux/reducers/house'
+import { toast } from 'react-toastify'
 
 export default function EditHouse() {
   const params = useParams()
@@ -56,10 +57,27 @@ export default function EditHouse() {
     setHouse({ ...house, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    dispatch(editHouse({ houseId: params.id, data: house }))
-    navigate(`/landlord/house-manager`)
+
+    if (!house.name || !house.address || !house.district_id || !house.ward_id) {
+      toast.error("Vui lòng nhập đầy đủ thông tin");
+      return;
+    }
+
+    try {
+      const res = await dispatch(editHouse({ houseId: params.id, data: house }))
+      console.log("res", res)
+      if (res.payload.data.error) {
+        toast.error(res.payload.data.error)
+
+      } else {
+        toast.success("Cập nhật nhà thành công");
+        navigate(`/landlord/house-manager`)
+      }
+    } catch (error) {
+      toast.error("Cập nhật nhà thất bại")
+    }
   }
 
   return (

@@ -22,7 +22,7 @@ export default function PostByTenant() {
   const [posts, setPosts] = useState({
     user_id: user_id,
     title: "",
-    room_type: "",  
+    room_type: "",
     price: "",
     max_people: "",
     district_id: "",
@@ -52,8 +52,7 @@ export default function PostByTenant() {
       !posts.room_type ||
       !posts.price ||
       !posts.max_people ||
-      !posts.district_id ||
-      !posts.description
+      !posts.district_id
     ) {
       toast.error("Vui lòng nhập đầy đủ thông tin")
     }
@@ -61,7 +60,8 @@ export default function PostByTenant() {
       const res = await dispatch(addPostsByCustomer(posts))
       if (res.payload.status === 200) {
         toast.success(res.payload.data.message)
-      } else {}
+        navigate(`/tenant/post-manager`)
+      } else { }
     } catch (error) {
       toast.error("Thêm bài đăng thất bại")
     }

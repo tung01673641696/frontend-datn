@@ -13,8 +13,8 @@ export const addPostsByLandlord = createAsyncThunk("posts/addPostsByLandlord", a
   return addPostsByLandlord
 })
 
-export const getPostsByOneCustomer = createAsyncThunk("posts/getPostsByOneCustomer", async (customerId) => {
-  const getPostsOneCustomer = await PostsApi.getPostsByOneCustomer(customerId);
+export const getPostsByOneCustomer = createAsyncThunk("posts/getPostsByOneCustomer", async ({ customerId, status }) => {
+  const getPostsOneCustomer = await PostsApi.getPostsByOneCustomer(customerId, status);
   return getPostsOneCustomer
 })
 
@@ -34,25 +34,41 @@ export const editPostsByCustomer = createAsyncThunk("posts/editPostsByCustomer",
   return editPostsByCustomer
 })
 
-// export const deleteRoom = createAsyncThunk("room/deleteRoom", async ({ roomId, houseId }, thunkApi) => {
-//   const deleteRoom = await RoomApi.deleteRoom(roomId)
+export const deletePostsByCustomer = createAsyncThunk("posts/deletePostsByCustomer", async (postId, thunkApi) => {
+  const deletePostsByCustomer = await PostsApi.deletePostsByCustomer(postId)
 
-//   if (deleteRoom.status === 200) {
-//     toast.success("Xóa phòng thành công");
-//     thunkApi.dispatch(getRoomByHouse(houseId))
-//   } else {
-//     toast.error("Xóa phòng thất bại");
-//   }
-//   return deleteRoom
-// })
+  if (deletePostsByCustomer.status === 200) {
+    toast.success("Xóa bài đăng thành công");
+    const user = JSON.parse(localStorage.getItem("user"))
+    const user_id = user.id
+    thunkApi.dispatch(getPostsByOneCustomer(user_id))
+    thunkApi.dispatch(getAllPostsByAllCustomer())
+  } else {
+    toast.error("Xóa bài đăng thất bại");
+  }
+  return deletePostsByCustomer
+})
+
+export const getAllPostsByAllCustomer = createAsyncThunk("posts/getAllPostsByAllCustomer", async () => {
+  const getAllPostsByAllCustomer = await PostsApi.getAllPostsByAllCustomer();
+  return getAllPostsByAllCustomer
+})
+
+export const adminApprovePostByCustomer = createAsyncThunk(
+  "posts/adminApprovePostByCustomer",
+  async (postId) => {
+    const res = await PostsApi.adminApprovePostCustomer(postId);
+    return res;
+  }
+);
 
 
 const PostsSlice = createSlice({
   name: "posts",
   initialState: {
     postsByOneCustomer: [],
-    onePostsByCustomer: {}
-
+    onePostsByCustomer: {},
+    allPostsByAllCustomer: []
     // listRoomByHouse: [],
     // oneRoom: {}
   },
@@ -77,6 +93,16 @@ const PostsSlice = createSlice({
       .addCase(getOnePostsByCustomer.fulfilled, (state, action) => {
         state.loading = false
         state.onePostsByCustomer = action.payload.data;
+      })
+      .addCase(getAllPostsByAllCustomer.pending, (state, action) => {
+        state.loading = true
+      })
+      .addCase(getAllPostsByAllCustomer.rejected, (state, action) => {
+        state.loading = false
+      })
+      .addCase(getAllPostsByAllCustomer.fulfilled, (state, action) => {
+        state.loading = false
+        state.allPostsByAllCustomer = action.payload.data;
       })
   }
 })

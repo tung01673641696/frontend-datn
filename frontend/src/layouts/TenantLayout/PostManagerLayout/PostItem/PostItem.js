@@ -1,14 +1,46 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./PostItem.scss"
 import Img from '../../../../assets/Images/NeedAvatar/avatar.png'
 import BaseButton from '../../../../components/BaseButton/BaseButton'
 import { useNavigate } from 'react-router-dom'
+import BaseModal from '../../../../components/BaseModal/BaseModal'
+import { deletePostsByCustomer } from '../../../../redux/reducers/posts'
+import { useDispatch } from 'react-redux'
 
 export default function PostItem({ item }) {
-  const navigate = useNavigate() 
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const [isShow, setIsShow] = useState(false)
+  const [selectPostsId, setSelectPostsId] = useState(null)
 
+  const handleShow = (postId) => {
+    setSelectPostsId(postId)
+    setIsShow(true)
+  }
+
+  function handleClose() {
+    setIsShow(false)
+  }
+
+  const handleDelete = async () => {
+    if (selectPostsId) {
+      await dispatch(deletePostsByCustomer(selectPostsId))
+      setIsShow(false)
+    }
+  }
+  
   return (
     <div className='post-item'>
+      <>
+        <BaseModal
+          open={isShow}
+          title="Xóa nhà"
+          type="red"
+          content="Bạn có chắc chắn muốn xóa phòng này không ?"
+          onCancel={handleClose}
+          onConfirm={handleDelete}
+        />
+      </>
       <div className='post-item_box'>
         <div className='post-item_box_left'>
           <img src={Img} />
@@ -22,9 +54,8 @@ export default function PostItem({ item }) {
           <span className='post-item_box_right_common'>Chi tiết: {item?.description}</span>
           <span className='post-item_box_right_common'>Thời gian đăng: <span className='post-item_box_right_common_time'>{item?.created_at}</span></span>
           <span className='post-item_box_right_action'>
-            <BaseButton type="blue">Xem bài đăng</BaseButton>
             <BaseButton type="warning" onClick={() => navigate(`/tenant/edit-post/post_id/${item.id}`)}>Sửa bài đăng</BaseButton>
-            <BaseButton type="red">Xóa bài đăng</BaseButton>
+            <BaseButton type="red" onClick={() => handleShow(item.id)}>Xóa bài đăng</BaseButton>
           </span>
         </div>
       </div>

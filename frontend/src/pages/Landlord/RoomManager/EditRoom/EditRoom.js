@@ -173,8 +173,17 @@ export default function EditRoom() {
       image: JSON.stringify(allImages)
     };
 
-    dispatch(editRoom({ roomId: id_room, data: updatedData }))
-    navigate(`/landlord/room-manager`)
+    try {
+      const res = await dispatch(editRoom({ roomId: id_room, data: updatedData }))
+      if (res.payload.data.error) {
+        toast.error(res.payload.data.error)
+
+      } else {
+        navigate(`/landlord/room-manager`)
+      }
+    } catch (error) {
+      toast.error("Cập nhật phòng thất bại")
+    }
   }
 
   return (

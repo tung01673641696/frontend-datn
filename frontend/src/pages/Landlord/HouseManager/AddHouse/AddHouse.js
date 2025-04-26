@@ -39,7 +39,7 @@ export default function AddHouse() {
     setHouse({ ...house, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
     if (
@@ -49,10 +49,19 @@ export default function AddHouse() {
       !house.ward_id
     ) {
       toast.error("Vui lòng nhập đầy đủ thông tin")
+      return
     }
-    else {
-      dispatch(addHouse(house))
-      navigate(`/landlord/house-manager`)
+    try {
+      const res = await dispatch(addHouse(house))
+      if (res.payload.data.st) {
+        toast.error(res.payload.data.st)
+
+      } else {
+        toast.success("Thêm nhà thành công");
+        navigate(`/landlord/house-manager`)
+      }
+    } catch (error) {
+      toast.error("Thêm phòng thất bại")
     }
   }
 

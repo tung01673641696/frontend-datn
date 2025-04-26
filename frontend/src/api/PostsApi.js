@@ -11,25 +11,35 @@ const PostsApi = {
     return axiosClient.post(url, data);
   },
 
-  async getPostsByOneCustomer(customerId) {
+  async getPostsByOneCustomer(customerId, status) {
     const url = `/posts/get-posts-by-one-customer/customer_id/${customerId}`;
-    return axiosClient.get(url);
+    return axiosClient.get(url, {params: {status:status}});
   },
 
-    async getOnePostsByCustomer(postId) {
+  async getOnePostsByCustomer(postId) {
     const url = `/posts/get-one-posts-by-customer/posts_id/${postId}`
     return axiosClient.get(url)
   },
 
-    async editPostsByCustomer(postId, data) {
+  async editPostsByCustomer(postId, data) {
     const url = `/posts/edit-posts-by-customer/posts_id/${postId}`
     return axiosClient.put(url, data)
-  }
+  },
 
-  // async deleteRoom(roomId) {
-  //   const url = `/room-manager/delete-room/room_id/${roomId}`
-  //   return axiosClient.delete(url)
-  // },
+  async deletePostsByCustomer(postId) {
+    const url = `/posts/delete-posts-by-customer/posts_id/${postId}`
+    return axiosClient.delete(url)
+  },
+
+  async getAllPostsByAllCustomer() {
+    const url = `/admin/get-all-posts-by-all-customer`
+    return axiosClient.get(url)
+  },
+
+  async adminApprovePostCustomer(postId) {
+    const url = `/admin/approve-posts-by-customer/${postId}`;
+    return axiosClient.put(url);
+  }
 
 }
 
