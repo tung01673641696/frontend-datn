@@ -3,15 +3,17 @@ import "./RoomNeed.scss"
 import CardNeed from '../../../components/CardNeed/CardNeed'
 import { useNavigate } from 'react-router-dom'
 import BaseButton from '../../../components/BaseButton/BaseButton'
+import { getAllPostsByAllCustomer } from '../../../redux/reducers/posts'
+import { useDispatch, useSelector } from 'react-redux'
 
 export default function RoomNeed() {
+  const dispatch = useDispatch()
   const navigate = useNavigate()
-  const [roomNeed, setRoomNeed] = useState([])
+  const { allPostsByAllCustomer } = useSelector((state) => state.postsReducer)
+  console.log(">>>>>>>>>", allPostsByAllCustomer)
 
   useEffect(() => {
-    fetch("http://localhost:3001/room-need")
-      .then((res) => res.json())
-      .then((data) => setRoomNeed(data))
+    dispatch(getAllPostsByAllCustomer())
   }, [])
 
   function handleClick() {
@@ -22,7 +24,7 @@ export default function RoomNeed() {
   return (
     <div className='room-need'>
       <div className='room-need_wrap'>
-        {roomNeed?.slice(0, 6).map((item) => (
+        {allPostsByAllCustomer?.slice(0, 6).map((item) => (
           <CardNeed item={item} />
         ))}
       </div>

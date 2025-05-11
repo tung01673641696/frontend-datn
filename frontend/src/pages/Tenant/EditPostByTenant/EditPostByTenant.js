@@ -81,8 +81,7 @@ export default function EditPostByTenant() {
       !posts.room_type ||
       !posts.price ||
       !posts.max_people ||
-      !posts.district_id ||
-      !posts.description
+      !posts.district_id
 
     ) {
       toast.error("Vui lòng nhập đầy đủ thông tin")
@@ -156,9 +155,7 @@ export default function EditPostByTenant() {
         <div className='edit_post_tenant_box_ele'>
           <BaseButton type="red">Cập nhật bài đăng</BaseButton>
         </div>
-
       </form>
-
       <Footer />
     </div>
   )

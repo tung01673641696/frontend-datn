@@ -39,6 +39,11 @@ const PostsApi = {
   async adminApprovePostCustomer(postId) {
     const url = `/admin/approve-posts-by-customer/${postId}`;
     return axiosClient.put(url);
+  },
+
+  async adminRejectPostCustomer(postId) {
+    const url = `/admin/reject-posts-by-customer/${postId}`;
+    return axiosClient.put(url);
   }
 
 }

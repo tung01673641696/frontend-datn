@@ -27,7 +27,7 @@ export default function PostByTenant() {
     max_people: "",
     district_id: "",
     ward_id: "",
-    description: ""
+    description: "",
   })
 
   useEffect(() => {

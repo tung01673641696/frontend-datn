@@ -29,7 +29,7 @@ export const editPostsByCustomer = createAsyncThunk("posts/editPostsByCustomer",
     toast.success("Cập nhật bài đăng thành công");
     const user = JSON.parse(localStorage.getItem("user"))
     const user_id = user.id
-    thunkApi.dispatch(getPostsByOneCustomer(user_id))
+    thunkApi.dispatch(getPostsByOneCustomer({ customerId: user_id, status: 'pending' }))
   }
   return editPostsByCustomer
 })
@@ -42,7 +42,6 @@ export const deletePostsByCustomer = createAsyncThunk("posts/deletePostsByCustom
     const user = JSON.parse(localStorage.getItem("user"))
     const user_id = user.id
     thunkApi.dispatch(getPostsByOneCustomer(user_id))
-    thunkApi.dispatch(getAllPostsByAllCustomer())
   } else {
     toast.error("Xóa bài đăng thất bại");
   }
@@ -62,6 +61,13 @@ export const adminApprovePostByCustomer = createAsyncThunk(
   }
 );
 
+export const adminRejectPostByCustomer = createAsyncThunk(
+  "posts/adminRejectPostByCustomer",
+  async (postId) => {
+    const res = await PostsApi.adminRejectPostCustomer(postId);
+    return res;
+  }
+);
 
 const PostsSlice = createSlice({
   name: "posts",

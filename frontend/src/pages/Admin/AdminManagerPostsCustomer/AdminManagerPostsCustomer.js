@@ -11,6 +11,7 @@ import { getAllPostsByAllCustomer } from '../../../redux/reducers/posts'
 import { deletePostsByCustomer } from '../../../redux/reducers/posts'
 import { toast } from 'react-toastify'
 import { adminApprovePostByCustomer } from '../../../redux/reducers/posts'
+import { adminRejectPostByCustomer } from '../../../redux/reducers/posts'
 
 export default function AdminManagerPostsCustomer() {
   const navigate = useNavigate()
@@ -36,8 +37,7 @@ export default function AdminManagerPostsCustomer() {
   }
 
   const { allPostsByAllCustomer } = useSelector((state) => state.postsReducer)
-
-  console.log(">>>>>>>", allPostsByAllCustomer)
+  console.log(">>>>>>>>>", allPostsByAllCustomer)
 
   useEffect(() => {
     dispatch(getAllPostsByAllCustomer())
@@ -55,6 +55,20 @@ export default function AdminManagerPostsCustomer() {
         dispatch(getAllPostsByAllCustomer());
       } else {
         toast.error("Duyệt bài thất bại");
+      }
+    } catch (error) {
+      toast.error("Đã có lỗi xảy ra");
+    }
+  }
+
+  const handleReject = async (postId) => {
+    try {
+      const res = await dispatch(adminRejectPostByCustomer(postId));
+      if (res.payload.status === 200) {
+        toast.success("Từ chối bài đăng thành công");
+        dispatch(getAllPostsByAllCustomer());
+      } else {
+        toast.error("Từ chối bài đăng thất bại");
       }
     } catch (error) {
       toast.error("Đã có lỗi xảy ra");
@@ -128,7 +142,7 @@ export default function AdminManagerPostsCustomer() {
               <div className='flex flex-col gap-1'>
                 <BaseButton type="blue" onClick="">Xem</BaseButton>
                 <BaseButton type="green" onClick={() => handleApprove(item.id)}>Duyệt</BaseButton>
-                <BaseButton type="warning" onClick="">Từ chối</BaseButton>
+                <BaseButton type="warning" onClick={() => handleReject(item.id)}>Từ chối</BaseButton>
                 <BaseButton type="red" onClick={() => handleShow(item.id)}>Xóa</BaseButton>
               </div>
             )}

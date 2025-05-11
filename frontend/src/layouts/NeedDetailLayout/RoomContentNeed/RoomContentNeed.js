@@ -4,6 +4,8 @@ import Img from '../../../assets/Images/NeedAvatar/avatar.png'
 import BaseButton from '../../../components/BaseButton/BaseButton'
 
 export default function RoomContentNeed() {
+  const user = JSON.parse(localStorage.getItem("user"))
+
   return (
     <div className='room_content_need'>
 
@@ -20,22 +22,24 @@ export default function RoomContentNeed() {
           <span className='room_content_need_box_right_common'>Quận: Đống Đa</span>
           <span className='room_content_need_box_right_common'>Chi tiết: Phòng có điều hòa,vệ sinh khép kín,có ban công thoáng,giờ giấc tự do thoải mái</span>
           <span className='room_content_need_box_right_common'>Đăng ngày: 30/4/2025</span>
-          <div className='room_content_need_box_right_contact'>
-            <div className='room_content_need_box_right_contact_tele'>
-              <BaseButton type="red">
-                <i class="bi bi-telephone" style={{ marginRight: "5px" }}></i>
-                Liên hệ ngay
-              </BaseButton>
-            </div>
 
-            <div className='room_content_need_box_right_contact_like'>
-              <BaseButton type="white">
-                <i class="bi bi-heart" style={{ marginRight: "5px" }}></i>
-                Yêu thích tin đăng
-              </BaseButton>
-            </div>
-          </div>
+          {user.role_id === 2 && (
+            <div className='room_content_need_box_right_contact'>
+              <div className='room_content_need_box_right_contact_tele'>
+                <BaseButton type="red">
+                  <i class="bi bi-telephone" style={{ marginRight: "5px" }}></i>
+                  Liên hệ ngay
+                </BaseButton>
+              </div>
 
+              <div className='room_content_need_box_right_contact_like'>
+                <BaseButton type="white">
+                  <i class="bi bi-heart" style={{ marginRight: "5px" }}></i>
+                  Yêu thích tin đăng
+                </BaseButton>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
