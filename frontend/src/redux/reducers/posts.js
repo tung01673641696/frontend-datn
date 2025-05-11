@@ -69,14 +69,18 @@ export const adminRejectPostByCustomer = createAsyncThunk(
   }
 );
 
+export const getAllPostsByAllCustomerActive = createAsyncThunk("posts/getAllPostsByAllCustomerAtive", async () => {
+  const getAllPostsByAllCustomerActive = await PostsApi.getAllPostsByAllCustomerActive();
+  return getAllPostsByAllCustomerActive
+})
+
 const PostsSlice = createSlice({
   name: "posts",
   initialState: {
     postsByOneCustomer: [],
     onePostsByCustomer: {},
-    allPostsByAllCustomer: []
-    // listRoomByHouse: [],
-    // oneRoom: {}
+    allPostsByAllCustomer: [],
+    allPostsByAllCustomerActive: []
   },
   extraReducers: builder => {
     builder
@@ -109,6 +113,16 @@ const PostsSlice = createSlice({
       .addCase(getAllPostsByAllCustomer.fulfilled, (state, action) => {
         state.loading = false
         state.allPostsByAllCustomer = action.payload.data;
+      })
+      .addCase(getAllPostsByAllCustomerActive.pending, (state, action) => {
+        state.loading = true
+      })
+      .addCase(getAllPostsByAllCustomerActive.rejected, (state, action) => {
+        state.loading = false
+      })
+      .addCase(getAllPostsByAllCustomerActive.fulfilled, (state, action) => {
+        state.loading = false
+        state.allPostsByAllCustomerActive = action.payload.data;
       })
   }
 })

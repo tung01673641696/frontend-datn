@@ -44,6 +44,11 @@ const PostsApi = {
   async adminRejectPostCustomer(postId) {
     const url = `/admin/reject-posts-by-customer/${postId}`;
     return axiosClient.put(url);
+  },
+
+  async getAllPostsByAllCustomerActive() {
+    const url = `/get-all-posts-by-all-customer-active`
+    return axiosClient.get(url)
   }
 
 }

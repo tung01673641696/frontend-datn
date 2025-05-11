@@ -20,7 +20,7 @@ export default function CardNeed({ item }) {
       <div className='need_content'>
         <span className='need_content_title'>{item?.title}</span>
         <span>Loại phòng: {item?.room_type}</span>
-        <span>Giá từ: {item?.price}</span>
+        <span>Giá: {Number(item.price).toLocaleString('vi-VN')}đ</span>
         <span>{item?.ward_name} - {item?.district_name}</span>
       </div>
     </div>
