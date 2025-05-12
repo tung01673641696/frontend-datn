@@ -10,7 +10,6 @@ export default function RoomNeed() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { allPostsByAllCustomerActive } = useSelector((state) => state.postsReducer)
-  console.log("++++++++++", allPostsByAllCustomerActive)
 
   useEffect(() => {
     dispatch(getAllPostsByAllCustomerActive())

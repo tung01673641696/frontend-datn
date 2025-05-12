@@ -3,16 +3,19 @@ import "./RoomNew.scss"
 import CardRoom from '../../../components/CardRoom/CardRoom'
 import { useNavigate } from 'react-router-dom'
 import BaseButton from '../../../components/BaseButton/BaseButton'
+import { getAllPostsByAllLandlordActive } from '../../../redux/reducers/posts'
+import { useDispatch, useSelector } from 'react-redux'
 
 export default function RoomNew() {
   const [room, setRoom] = useState([])
+  const dispatch = useDispatch()
   const navigate = useNavigate()
-
+  const { allPostsByAllLandlordActive } = useSelector((state) => state.postsReducer)
   useEffect(() => {
-    fetch("http://localhost:3001/room")
-      .then((response) => response.json())
-      .then((data) => setRoom(data))
+    dispatch(getAllPostsByAllLandlordActive())
   }, [])
+
+  console.log("???????", allPostsByAllLandlordActive)
 
   function handleClick() {
     navigate(`/search-room`)
@@ -21,7 +24,7 @@ export default function RoomNew() {
   return (
     <div className='room'>
       <div className='room_wrap'>
-        {room?.slice(0, 10).map((item) => (
+        {allPostsByAllLandlordActive?.slice(0, 10).map((item) => (
           <CardRoom item={item} />
         ))}
       </div>

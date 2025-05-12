@@ -7,7 +7,7 @@ export default function CommonAdmin({ children }) {
   const manager = [
     { id: 1, title: 'Thống kê', path: '/admin/dashboard' },
     { id: 2, title: 'Quản lý Người dùng', path: '/admin/manager-user' },
-    { id: 3, title: 'Quản lý Bài đăng của chủ nhà', path: '' },
+    { id: 3, title: 'Quản lý Bài đăng của chủ nhà', path: '/admin/manager-posts-landlord' },
     { id: 4, title: 'Quản lý Bài đăng của khách hàng', path: '/admin/manager-posts-customer' },
   ]
 

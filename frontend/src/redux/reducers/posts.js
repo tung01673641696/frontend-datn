@@ -13,9 +13,9 @@ export const addPostsByLandlord = createAsyncThunk("posts/addPostsByLandlord", a
   return addPostsByLandlord
 })
 
-export const getPostsByOneCustomer = createAsyncThunk("posts/getPostsByOneCustomer", async ({ customerId, status }) => {
-  const getPostsOneCustomer = await PostsApi.getPostsByOneCustomer(customerId, status);
-  return getPostsOneCustomer
+export const getPostsByOnePeople = createAsyncThunk("posts/getPostsByOnePeople", async ({ peopleId, status }) => {
+  const getPostsOnePeople = await PostsApi.getPostsByOnePeople(peopleId, status);
+  return getPostsOnePeople
 })
 
 export const getOnePostsByCustomer = createAsyncThunk("posts/getOnePostsByCustomer", async (postId) => {
@@ -29,7 +29,7 @@ export const editPostsByCustomer = createAsyncThunk("posts/editPostsByCustomer",
     toast.success("Cập nhật bài đăng thành công");
     const user = JSON.parse(localStorage.getItem("user"))
     const user_id = user.id
-    thunkApi.dispatch(getPostsByOneCustomer({ customerId: user_id, status: 'pending' }))
+    thunkApi.dispatch(getPostsByOnePeople({ customerId: user_id, status: 'pending' }))
   }
   return editPostsByCustomer
 })
@@ -41,7 +41,7 @@ export const deletePostsByCustomer = createAsyncThunk("posts/deletePostsByCustom
     toast.success("Xóa bài đăng thành công");
     const user = JSON.parse(localStorage.getItem("user"))
     const user_id = user.id
-    thunkApi.dispatch(getPostsByOneCustomer(user_id))
+    thunkApi.dispatch(getPostsByOnePeople(user_id))
   } else {
     toast.error("Xóa bài đăng thất bại");
   }
@@ -53,18 +53,18 @@ export const getAllPostsByAllCustomer = createAsyncThunk("posts/getAllPostsByAll
   return getAllPostsByAllCustomer
 })
 
-export const adminApprovePostByCustomer = createAsyncThunk(
-  "posts/adminApprovePostByCustomer",
+export const adminApprovePost = createAsyncThunk(
+  "posts/adminApprovePost",
   async (postId) => {
-    const res = await PostsApi.adminApprovePostCustomer(postId);
+    const res = await PostsApi.adminApprovePost(postId);
     return res;
   }
 );
 
-export const adminRejectPostByCustomer = createAsyncThunk(
-  "posts/adminRejectPostByCustomer",
+export const adminRejectPost = createAsyncThunk(
+  "posts/adminRejectPost",
   async (postId) => {
-    const res = await PostsApi.adminRejectPostCustomer(postId);
+    const res = await PostsApi.adminRejectPost(postId);
     return res;
   }
 );
@@ -74,25 +74,37 @@ export const getAllPostsByAllCustomerActive = createAsyncThunk("posts/getAllPost
   return getAllPostsByAllCustomerActive
 })
 
+export const getAllPostsByAllLandlordActive = createAsyncThunk("posts/getAllPostsByAllLandlordAtive", async () => {
+  const getAllPostsByAllLandlordActive = await PostsApi.getAllPostsByAllLandlordActive();
+  return getAllPostsByAllLandlordActive
+})
+
+export const getAllPostsByAllLandlord = createAsyncThunk("posts/getAllPostsByAllLandlord", async () => {
+  const getAllPostsByAllLandlord = await PostsApi.getAllPostsByAllLandlord();
+  return getAllPostsByAllLandlord
+})
+
 const PostsSlice = createSlice({
   name: "posts",
   initialState: {
-    postsByOneCustomer: [],
+    postsByOnePeople: [],
     onePostsByCustomer: {},
     allPostsByAllCustomer: [],
-    allPostsByAllCustomerActive: []
+    allPostsByAllCustomerActive: [],
+    allPostsByAllLandlordActive: [],
+    allPostsByAllLandlord: []
   },
   extraReducers: builder => {
     builder
-      .addCase(getPostsByOneCustomer.pending, (state, action) => {
+      .addCase(getPostsByOnePeople.pending, (state, action) => {
         state.loading = true
       })
-      .addCase(getPostsByOneCustomer.rejected, (state, action) => {
+      .addCase(getPostsByOnePeople.rejected, (state, action) => {
         state.loading = false
       })
-      .addCase(getPostsByOneCustomer.fulfilled, (state, action) => {
+      .addCase(getPostsByOnePeople.fulfilled, (state, action) => {
         state.loading = false
-        state.postsByOneCustomer = action.payload.data;
+        state.postsByOnePeople = action.payload.data;
       })
       .addCase(getOnePostsByCustomer.pending, (state, action) => {
         state.loading = true
@@ -123,6 +135,27 @@ const PostsSlice = createSlice({
       .addCase(getAllPostsByAllCustomerActive.fulfilled, (state, action) => {
         state.loading = false
         state.allPostsByAllCustomerActive = action.payload.data;
+      })
+      .addCase(getAllPostsByAllLandlord.pending, (state, action) => {
+        state.loading = true
+      })
+      .addCase(getAllPostsByAllLandlord.rejected, (state, action) => {
+        state.loading = false
+      })
+      .addCase(getAllPostsByAllLandlord.fulfilled, (state, action) => {
+        state.loading = false
+        state.allPostsByAllLandlord = action.payload.data;
+      })
+
+      .addCase(getAllPostsByAllLandlordActive.pending, (state, action) => {
+        state.loading = true
+      })
+      .addCase(getAllPostsByAllLandlordActive.rejected, (state, action) => {
+        state.loading = false
+      })
+      .addCase(getAllPostsByAllLandlordActive.fulfilled, (state, action) => {
+        state.loading = false
+        state.allPostsByAllLandlordActive = action.payload.data;
       })
   }
 })

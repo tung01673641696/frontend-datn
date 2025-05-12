@@ -11,8 +11,8 @@ const PostsApi = {
     return axiosClient.post(url, data);
   },
 
-  async getPostsByOneCustomer(customerId, status) {
-    const url = `/posts/get-posts-by-one-customer/customer_id/${customerId}`;
+  async getPostsByOnePeople(peopleId, status) {
+    const url = `/posts/get-posts-by-one-people/people_id/${peopleId}`;
     return axiosClient.get(url, {params: {status:status}});
   },
 
@@ -36,20 +36,30 @@ const PostsApi = {
     return axiosClient.get(url)
   },
 
-  async adminApprovePostCustomer(postId) {
-    const url = `/admin/approve-posts-by-customer/${postId}`;
+  async adminApprovePost(postId) {
+    const url = `/admin/approve-posts/${postId}`;
     return axiosClient.put(url);
   },
 
-  async adminRejectPostCustomer(postId) {
-    const url = `/admin/reject-posts-by-customer/${postId}`;
+  async adminRejectPost(postId) {
+    const url = `/admin/reject-posts/${postId}`;
     return axiosClient.put(url);
   },
 
   async getAllPostsByAllCustomerActive() {
     const url = `/get-all-posts-by-all-customer-active`
     return axiosClient.get(url)
-  }
+  },
+
+  async getAllPostsByAllLandlordActive() {
+    const url = `/get-all-posts-by-all-landlord-active`
+    return axiosClient.get(url)
+  },
+
+  async getAllPostsByAllLandlord() {
+    const url = `/admin/get-all-posts-by-all-landlord`
+    return axiosClient.get(url)
+  },
 
 }
 

@@ -31,7 +31,6 @@ export default function PostLandlord() {
   const handleHouseChange = (e) => {
     const houseId = e.target.value
     setSelectHouse(houseId)
-
     if (houseId) {
       dispatch(getRoomByHouse(houseId))
     }
@@ -44,7 +43,6 @@ export default function PostLandlord() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-
     if (
       !form.title ||
       !form.room_id ||
@@ -87,7 +85,7 @@ export default function PostLandlord() {
             </select>
           </div>
           <div className='post_land_box_ele_item'>
-            <select name='room_id' onChange={handleChange}>
+            <select name='room_id' value={form.room_id} onChange={handleChange}>
               <option value="">Chọn phòng</option>
               {listRoomByHouse.map(item => (
                 <option key={item.id} value={item.id}>{item.name}</option>

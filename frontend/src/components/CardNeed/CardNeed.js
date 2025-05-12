@@ -5,9 +5,8 @@ import { useNavigate } from 'react-router-dom'
 
 export default function CardNeed({ item }) {
   const navigate = useNavigate()
-
   function handleClick() {
-    navigate(`/need-detail`)
+    navigate(`/need-detail/${item.id}`)
     window.scrollTo(0, 0)
   }
 

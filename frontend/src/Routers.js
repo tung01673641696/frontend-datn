@@ -41,6 +41,7 @@ const RoomLikeManager = React.lazy(() => import('./pages/Tenant/RoomLikeManager/
 const AdminDashboard = React.lazy(() => import('./pages/Admin/AdminDashboard/AdminDashboard'))
 const AdminManagerUser = React.lazy(() => import('./pages/Admin/AdminManagerUser/AdminManagerUser'))
 const AdminManagerPostsCustomer = React.lazy(() => import('./pages/Admin/AdminManagerPostsCustomer/AdminManagerPostsCustomer'))
+const AdminManagerPostsLandlord = React.lazy(() => import('./pages/Admin/AdminManagerPostsLandlord/AdminManagerPostsLandlord'))
 
 export default function Routers() {
   return (
@@ -56,7 +57,7 @@ export default function Routers() {
               <Route path='/search-room' element={<SearchRoom />} />
               <Route path='/search-need' element={<SearchNeed />} />
               <Route path='/room-detail' element={<RoomDetail />} />
-              <Route path='/need-detail' element={<NeedDetail />} />
+              <Route path='/need-detail/:post_id' element={<NeedDetail />} />
             </Route>
 
             <Route>
@@ -95,6 +96,7 @@ export default function Routers() {
               <Route path='/admin/dashboard' element={<AdminDashboard />} />
               <Route path='/admin/manager-user' element={<AdminManagerUser />} />
               <Route path='/admin/manager-posts-customer' element={<AdminManagerPostsCustomer />} />
+              <Route path='/admin/manager-posts-landlord' element={<AdminManagerPostsLandlord />} />
             </Route>
 
           </Routes>

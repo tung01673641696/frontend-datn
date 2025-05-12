@@ -10,11 +10,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getAllPostsByAllCustomer } from '../../../redux/reducers/posts'
 import { deletePostsByCustomer } from '../../../redux/reducers/posts'
 import { toast } from 'react-toastify'
-import { adminApprovePostByCustomer } from '../../../redux/reducers/posts'
-import { adminRejectPostByCustomer } from '../../../redux/reducers/posts'
+import { adminApprovePost } from '../../../redux/reducers/posts'
+import { adminRejectPost } from '../../../redux/reducers/posts'
 
 export default function AdminManagerPostsCustomer() {
-  const navigate = useNavigate()
   const dispatch = useDispatch()
   const [statusFilter, setStatusFilter] = useState("pending");
   const [isShow, setIsShow] = useState(false)
@@ -37,7 +36,6 @@ export default function AdminManagerPostsCustomer() {
   }
 
   const { allPostsByAllCustomer } = useSelector((state) => state.postsReducer)
-  console.log(">>>>>>>>>", allPostsByAllCustomer)
 
   useEffect(() => {
     dispatch(getAllPostsByAllCustomer())
@@ -49,7 +47,7 @@ export default function AdminManagerPostsCustomer() {
 
   const handleApprove = async (postId) => {
     try {
-      const res = await dispatch(adminApprovePostByCustomer(postId));
+      const res = await dispatch(adminApprovePost(postId));
       if (res.payload.status === 200) {
         toast.success("Duyệt bài thành công");
         dispatch(getAllPostsByAllCustomer());
@@ -63,7 +61,7 @@ export default function AdminManagerPostsCustomer() {
 
   const handleReject = async (postId) => {
     try {
-      const res = await dispatch(adminRejectPostByCustomer(postId));
+      const res = await dispatch(adminRejectPost(postId));
       if (res.payload.status === 200) {
         toast.success("Từ chối bài đăng thành công");
         dispatch(getAllPostsByAllCustomer());
