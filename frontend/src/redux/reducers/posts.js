@@ -84,6 +84,11 @@ export const getAllPostsByAllLandlord = createAsyncThunk("posts/getAllPostsByAll
   return getAllPostsByAllLandlord
 })
 
+export const getAllPostByLandlordActiveByDistrict = createAsyncThunk("posts/getAllPostByLandlordActiveByDistrict", async (districtId) => {
+  const getAllPostByLandlordActiveByDistrict = await PostsApi.getAllPostsByAllLandlordActiveByDistrict(districtId);
+  return getAllPostByLandlordActiveByDistrict
+})
+
 const PostsSlice = createSlice({
   name: "posts",
   initialState: {
@@ -92,7 +97,8 @@ const PostsSlice = createSlice({
     allPostsByAllCustomer: [],
     allPostsByAllCustomerActive: [],
     allPostsByAllLandlordActive: [],
-    allPostsByAllLandlord: []
+    allPostsByAllLandlord: [],
+    allPostsByLandlordActiveByDistrict: []
   },
   extraReducers: builder => {
     builder
@@ -156,6 +162,17 @@ const PostsSlice = createSlice({
       .addCase(getAllPostsByAllLandlordActive.fulfilled, (state, action) => {
         state.loading = false
         state.allPostsByAllLandlordActive = action.payload.data;
+      })
+
+      .addCase(getAllPostByLandlordActiveByDistrict.pending, (state, action) => {
+        state.loading = true
+      })
+      .addCase(getAllPostByLandlordActiveByDistrict.rejected, (state, action) => {
+        state.loading = false
+      })
+      .addCase(getAllPostByLandlordActiveByDistrict.fulfilled, (state, action) => {
+        state.loading = false
+        state.allPostsByLandlordActiveByDistrict = action.payload.data;
       })
   }
 })

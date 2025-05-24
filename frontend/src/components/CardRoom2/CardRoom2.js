@@ -2,23 +2,45 @@ import React from 'react'
 import './CardRoom2.scss'
 import Img from '../../assets/Images/Room/room.jpg'
 
-export default function CardRoom2() {
+export default function CardRoom2({ item }) {
   return (
     <div className='card-room2'>
       <div className='card-room2_img'>
-        <img src={Img} />
+        {item.image && (() => {
+          try {
+            const rawImages = JSON.parse(item.image);
+            const images = rawImages.map(link => {
+              if (link.includes('imgur.com') && !link.includes('i.imgur.com')) {
+                const id = link.split('/').pop();
+                return `https://i.imgur.com/${id}.jpg`;
+              }
+              return link;
+            });
+
+            return images[0] ? (
+              <img
+                src={images[0]}
+                alt="Room"
+                style={{ width: '100%', objectFit: 'cover' }}
+              />
+            ) : null;
+          } catch (error) {
+            console.error("Lỗi khi parse image:", error);
+            return null;
+          }
+        })()}
       </div>
 
       <div className='card-room2_content'>
-        <span className='card-room2_content_title'>Phòng trọ mới đầy đủ nội thất trung tâm thành phố</span>
-        <span className='card-room2_content_price'>4.000.000đ / tháng</span>
+        <span className='card-room2_content_title'>{item?.title}</span>
+        <span className='card-room2_content_price'>{item.price ? `${Number(item.price).toLocaleString('vi-VN')}đ / tháng` : "Đang cập nhật"}</span>
         <span className='card-room2_content_address'>
           <i class="bi bi-geo-alt" style={{ marginRight: "5px" }}></i>
-          250 Kim Giang,Quận Hoàng Mai,Hà Nội
+          {item.ward_name}
         </span>
         <span className='card-room2_content_district'>
           <i class="bi bi-house-door" style={{ marginRight: "5px" }}></i>
-          Quận Hoàng Mai
+          {item.district_name}
         </span>
       </div>
     </div>

@@ -54,7 +54,7 @@ export default function Routers() {
 
             <Route>
               <Route path='/' element={<Home />} />
-              <Route path='/search-room' element={<SearchRoom />} />
+              <Route path='/search-room/district_id/:district_id' element={<SearchRoom />} />
               <Route path='/search-need' element={<SearchNeed />} />
               <Route path='/room-detail' element={<RoomDetail />} />
               <Route path='/need-detail/:post_id' element={<NeedDetail />} />

@@ -7,6 +7,7 @@ import Banner from '../../layouts/HomeLayout/Banner/Banner'
 import District from '../../layouts/HomeLayout/District/District'
 import RoomNew from '../../layouts/HomeLayout/RoomNew/RoomNew'
 import RoomNeed from '../../layouts/HomeLayout/RoomNeed/RoomNeed'
+import Service from '../../layouts/HomeLayout/Service/Service'
 
 export default function Home() {
   return (
@@ -23,6 +24,9 @@ export default function Home() {
 
       <Title text={"TÌM PHÒNG THEO NHU CẦU"} />
       <RoomNeed />
+
+      <Title text={"DỊCH VỤ TIỆN ÍCH"} />
+      <Service />
 
       <FooterUser />
     </div>

@@ -15,8 +15,6 @@ export default function RoomNew() {
     dispatch(getAllPostsByAllLandlordActive())
   }, [])
 
-  console.log("???????", allPostsByAllLandlordActive)
-
   function handleClick() {
     navigate(`/search-room`)
   }

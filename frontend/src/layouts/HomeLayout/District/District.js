@@ -16,8 +16,8 @@ export default function District() {
     dispatch(getDistrict())
   }, [])
 
-  function handleClick() {
-    navigate(`/search-room`)
+  function handleClick(districtId) {
+    navigate(`/search-room/district_id/${districtId}`)
   }
 
   const settings = {
@@ -34,7 +34,7 @@ export default function District() {
     <div className='district'>
       <Slider {...settings}>
         {district?.map((item) => (
-          <div key={item.id} className='district_card' onClick={() => handleClick()}>
+          <div key={item.id} className='district_card' onClick={() => handleClick(item.id)}>
             <div className='district_card_img'>
               <img src={item.image} />
             </div>
