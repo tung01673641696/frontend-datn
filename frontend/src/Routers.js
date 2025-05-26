@@ -9,8 +9,8 @@ const SearchRoom = React.lazy(() => import('./pages/SearchRoom/SearchRoom'))
 const SearchNeed = React.lazy(() => import('./pages/SearchNeed/SearchNeed'))
 const RoomDetail = React.lazy(() => import('./pages/RoomDetail/RoomDetail'))
 const NeedDetail = React.lazy(() => import('./pages/NeedDetail/NeedDetail'))
+const InfoUser = React.lazy(() => import('./pages/InfoUser/InfoUser'))
 
-const InfoLandlord = React.lazy(() => import('./pages/Landlord/InfoLandlord/InfoLandlord'))
 const PostLandlord = React.lazy(() => import('./pages/Landlord/PostLandlord/PostLandlord'))
 const CustomerManager = React.lazy(() => import('./pages/Landlord/CustomerManager/CustomerManager'))
 const PostManagerLandlord = React.lazy(() => import('./pages/Landlord/PostManager/PostManager'))
@@ -32,7 +32,6 @@ const VehicleManager = React.lazy(() => import('./pages/Landlord/VehicleManager/
 const AddVehicle = React.lazy(() => import('./pages/Landlord/VehicleManager/AddVehicle/AddVehicle'))
 const EditVehicle = React.lazy(() => import('./pages/Landlord/VehicleManager/EditVehicle/EditVehicle'))
 
-const InfoTenant = React.lazy(() => import('./pages/Tenant/InfoTenant/InfoTenant'))
 const PostByTenant = React.lazy(() => import('./pages/Tenant/PostByTenant/PostByTenant'))
 const EditPostByTenant = React.lazy(() => import('./pages/Tenant/EditPostByTenant/EditPostByTenant'))
 const PostManagerTenant = React.lazy(() => import('./pages/Tenant/PostManager/PostManager'))
@@ -58,10 +57,10 @@ export default function Routers() {
               <Route path='/search-need' element={<SearchNeed />} />
               <Route path='/room-detail' element={<RoomDetail />} />
               <Route path='/need-detail/:post_id' element={<NeedDetail />} />
+              <Route path='/info-user' element={<InfoUser />} />
             </Route>
 
             <Route>
-              <Route path='/landlord/info-landlord' element={<InfoLandlord />} />
               <Route path='/landlord/post' element={<PostLandlord />} />
               <Route path='/landlord/customer-manager' element={<CustomerManager />} />
               <Route path='/landlord/post-manager' element={<PostManagerLandlord />} />
@@ -85,7 +84,6 @@ export default function Routers() {
             </Route>
 
             <Route>
-              <Route path='/tenant/info-tenant' element={<InfoTenant />} />
               <Route path='/tenant/post/user_id/:id' element={<PostByTenant />} />
               <Route path='/tenant/edit-post/post_id/:id' element={<EditPostByTenant />} />
               <Route path='/tenant/post-manager' element={<PostManagerTenant />} />

@@ -1,14 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./DropdownTenant.scss"
 import { Link, useNavigate } from 'react-router-dom'
+import BaseModal from '../../../components/BaseModal/BaseModal'
 
 export default function DropdownTenant() {
+  const [isShow, setIsShow] = useState(false)
   const navigate = useNavigate()
   const user = localStorage.getItem('user') === null ? null : JSON.parse(localStorage.getItem('user'));
   const user_id = user.id
 
+  function handleShow() {
+    setIsShow(true)
+  }
+
+  function handleClose() {
+    setIsShow(false)
+  }
+
+  function handleLogout() {
+    localStorage.removeItem('user')
+    localStorage.removeItem("access_token")
+    navigate('/login')
+  }
+
   const manager = [
-    { id: 1, title: 'Thông tin cá nhân', path: '/tenant/info-tenant' },
+    { id: 1, title: 'Thông tin cá nhân', path: '/info-user' },
     { id: 2, title: 'Quản lý bài đăng', path: '/tenant/post-manager' },
     { id: 3, title: 'Quản lý phòng yêu thích', path: '/tenant/room-like-manager' },
     { id: 4, title: 'Quản lý giỏ hàng', path: '' },
@@ -17,12 +33,6 @@ export default function DropdownTenant() {
 
   function handleClick() {
     navigate(`/tenant/post/user_id/${user_id}`)
-  }
-
-  function handleLogout() {
-    localStorage.removeItem('user')
-    localStorage.removeItem("access_token")
-    navigate('/login')
   }
 
   return (
@@ -34,6 +44,17 @@ export default function DropdownTenant() {
         </span>
       </div>
 
+      <>
+        <BaseModal
+          open={isShow}
+          title="Đăng xuất"
+          type="red"
+          content="Bạn có chắc chắn muốn đăng xuất ?"
+          onCancel={handleClose}
+          onConfirm={handleLogout}
+        />
+      </>
+
       <div class="dropdown">
         <span className=" dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
           <i className="bi bi-person-circle"></i>
@@ -44,7 +65,7 @@ export default function DropdownTenant() {
           {manager?.map((item) => (
             <Link to={item?.path} className='dropdown-menu_item'>{item?.title}</Link>
           ))}
-          <li className='dropdown-menu_item' onClick={handleLogout}>Đăng xuất</li>
+          <li className='dropdown-menu_item' onClick={() => handleShow()}>Đăng xuất</li>
         </ul>
       </div>
     </div>

@@ -38,17 +38,16 @@ export default function Login() {
     }
     try {
       const res = await dispatch(login(data));
-      console.log('res',res)
+      console.log('res', res)
       if (res.payload.data) {
         localStorage.setItem("access_token", res.payload.data.token)
         localStorage.setItem("user", JSON.stringify(res.payload.data.user))
-        //update state auth trong redux
 
         if (res.payload.data.user.role_id === 1) {
           navigate(`/`)
         }
         else if (res.payload.data.user.role_id === 2) {
-          navigate(`/landlord/dashboard`)
+          navigate(`/`)
         }
       }
     } catch (error) {
