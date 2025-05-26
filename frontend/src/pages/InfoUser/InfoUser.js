@@ -17,17 +17,26 @@ export default function InfoUser() {
         <h3>Thông tin cá nhân</h3>
 
         <div className='info-user_box_item'>
-          <BaseInput placeholder="Họ và tên" />
+          <div className='info-user_box_item_label'>Tài khoản:</div>
+          <div className='info-user_box_item_content'>
+            {!user.role_id ? (
+              <></>
+            ) : user.role_id === 1 ? (
+              <>Người thuê</>
+            ) : user.role_id === 2 ? (
+              <>Chủ nhà</>
+            ) : null
+            }
+          </div>
         </div>
 
         <div className='info-user_box_item'>
-          <BaseInput placeholder="Họ và tên" />
+          <div className='info-user_box_item_label'>Họ và tên:</div>
+          <div className='info-user_box_item_content'>{user?.name}</div>
         </div>
         <div className='info-user_box_item'>
-          <BaseInput placeholder="Số điện thoại" />
-        </div>
-        <div className='info-user_box_item'>
-          <BaseButton type="red">Lưu chỉnh sửa</BaseButton>
+          <div className='info-user_box_item_label'>Số điện thoại:</div>
+          <div className='info-user_box_item_content'>{user?.phone}</div>
         </div>
       </div>
 
