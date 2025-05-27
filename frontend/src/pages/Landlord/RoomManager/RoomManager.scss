@@ -30,28 +30,14 @@
     }
   }
 
-  .room_mana_status {
-    display: flex;
-    margin-bottom: 40px;
-
-    .room_mana_status_item {
-      margin-right: 50px;
-
-      span {
-        margin-left: 5px;
-      }
-    }
-  }
-
   button {
-    margin-right: 7px;
+    margin-right: 3px;
     padding: 5px 10px;
     font-size: 14px;
   }
 }
 
 .ant-table-thead {
-
   th {
     background-color: #3461b4 !important;
     color: white !important;

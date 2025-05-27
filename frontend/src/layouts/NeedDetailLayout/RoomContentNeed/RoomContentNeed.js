@@ -41,13 +41,6 @@ export default function RoomContentNeed() {
                   Liên hệ ngay
                 </BaseButton>
               </div>
-
-              <div className='room_content_need_box_right_contact_like'>
-                <BaseButton type="white">
-                  <i class="bi bi-heart" style={{ marginRight: "5px" }}></i>
-                  Yêu thích tin đăng
-                </BaseButton>
-              </div>
             </div>
           )}
         </div>

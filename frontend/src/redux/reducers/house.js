@@ -10,9 +10,6 @@ export const houseByOwner = createAsyncThunk("house/houseByOwner", async (id) =>
 
 export const addHouse = createAsyncThunk("house/addHouse", async (data) => {
   const addHouse = await HouseApi.addHouse(data);
-  if (addHouse.status === 200) {
-    toast.success("Thêm nhà thành công");
-  }
   return addHouse
 })
 

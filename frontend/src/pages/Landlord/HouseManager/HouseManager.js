@@ -100,8 +100,8 @@ export default function HouseManager() {
         <Column title={"Thao tác"}
           render={(item) => (
             <>
-              <BaseButton type="warning" onClick={() => navigate(`/landlord/house-manager/edit-house/${item.id}`)}>Sửa</BaseButton>
-              <BaseButton type="red" onClick={() => handleShow(item.id)}>Xóa</BaseButton>
+              <BaseButton type="warning" onClick={() => navigate(`/landlord/house-manager/edit-house/${item.id}`)}>Sửa nhà</BaseButton>
+              <BaseButton type="red" onClick={() => handleShow(item.id)}>Xóa nhà</BaseButton>
             </>
           )}
         />

@@ -53,8 +53,10 @@ export default function AddHouse() {
     }
     try {
       const res = await dispatch(addHouse(house))
-      if (res.payload.data.st) {
-        toast.error(res.payload.data.st)
+
+      console.log(">>>>>", res)
+      if (res.payload.data.error) {
+        toast.error(res.payload.data.error)
 
       } else {
         toast.success("Thêm nhà thành công");

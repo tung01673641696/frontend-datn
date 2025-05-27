@@ -1,0 +1,52 @@
+.view_room {
+  width: 80%;
+  border: 1px solid #385995;
+  margin-left: 5%;
+  margin-top: 4%;
+
+  .view_room_title {
+    width: 100%;
+    display: block;
+    background-color: #385995;
+    text-align: left;
+    padding: 5px 25px;
+    color: white;
+  }
+
+  .view_room_box {
+    width: 100%;
+    padding: 40px 30px;
+
+    .view_room_box_child {
+      width: 100%;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      text-align: left;
+
+      .view_room_box_child_item {
+        width: calc(100% / 3 - 10px);
+        border-radius: 10px;
+
+        .view_room_box_child_item_title {
+          font-weight: 600;
+          margin-right: 7px;
+        }
+      }
+    }
+
+    .view_room_box_child2 {
+      width: 100%;
+      margin-bottom: 20px;
+      text-align: left;
+      
+      .view_room_box_child2_title {
+        font-weight: 600;
+      }
+    }
+
+    .view_room_box_child3 {
+      text-align: right;
+    }
+  }
+}

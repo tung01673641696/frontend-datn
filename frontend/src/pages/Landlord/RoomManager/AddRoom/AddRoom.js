@@ -58,7 +58,11 @@ export default function AddRoom() {
   }, [])
 
   const handleChange = (e) => {
-    setRoom({ ...room, [e.target.name]: e.target.value })
+    const { name, value } = e.target;
+    setRoom({
+      ...room,
+      [name]: name === "is_available" ? Number(value) : value
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -97,6 +101,7 @@ export default function AddRoom() {
     }
     try {
       const res = await dispatch(addRoom(data))
+      console.log(">>>>>", res)
       if (res.payload.data.status) {
         toast.error(res.payload.data.message)
 

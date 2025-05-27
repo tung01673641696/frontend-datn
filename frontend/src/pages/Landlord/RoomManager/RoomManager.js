@@ -92,18 +92,6 @@ export default function RoomManager() {
           </select>
         </div>
 
-        <div className='room_mana_status'>
-          <div className='room_mana_status_item'>
-            <input type='checkbox' />
-            <span>Chỉ hiện phòng trống</span>
-          </div>
-
-          <div className='room_mana_status_item'>
-            <input type='checkbox' />
-            <span>Chỉ hiện phòng đang ở</span>
-          </div>
-        </div>
-
         <Table style={{ textAlignLast: 'center' }}
           pagination={{
             defaultPageSize: 10,
@@ -144,18 +132,6 @@ export default function RoomManager() {
             )}
           />
 
-          <Column title={"Số người tối đa"}
-            render={(value) => (
-              <span>{value?.user_number}</span>
-            )}
-          />
-
-          <Column title={"Số người hiện tại"}
-            render={(value) => (
-              <span>{value?.number_people_sp}</span>
-            )}
-          />
-
           <Column title={"Tình trạng phòng"}
             render={(value) => (
               value.is_available ? (
@@ -168,6 +144,7 @@ export default function RoomManager() {
           <Column title={"Thao tác"}
             render={(item) => (
               <>
+                <BaseButton type="blue" onClick={() => navigate(`/landlord/room-manager/view-room/room_id/${item.id}`)}>Xem</BaseButton>
                 <BaseButton type="warning" onClick={() => navigate(`/landlord/room-manager/edit-room/room_id/${item.id}`)}>Sửa</BaseButton>
                 <BaseButton type="red" onClick={() => handleShow(item.id)}>Xóa</BaseButton>
               </>
