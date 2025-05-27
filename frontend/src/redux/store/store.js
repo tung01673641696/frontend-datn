@@ -6,6 +6,7 @@ import RoomSlice from "../reducers/room";
 import TenantSlice from "../reducers/tenant";
 import VehicleSlice from "../reducers/vehicle";
 import PostsSlice from "../reducers/posts";
+import categorySlice from "../reducers/category";
 
 export const store = configureStore({
   reducer: {
@@ -15,6 +16,7 @@ export const store = configureStore({
     roomReducer: RoomSlice.reducer,
     tenantReducer: TenantSlice.reducer,
     vehicleReducer: VehicleSlice.reducer,
-    postsReducer: PostsSlice.reducer
+    postsReducer: PostsSlice.reducer,
+    categoryReducer: categorySlice.reducer
   }
 })

@@ -6,8 +6,18 @@ import "slick-carousel/slick/slick-theme.css";
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Img from '../../../assets/Images/Service/service.png'
+import { getCategory } from '../../../redux/reducers/category';
 
 export default function Service() {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const { category } = useSelector((state) => state.categoryReducer)
+  console.log("ca", category)
+  useEffect(() => {
+    dispatch(getCategory())
+  }, [])
+
   const service = [
     {
       id: 1,
@@ -48,10 +58,10 @@ export default function Service() {
   return (
     <div className='service'>
       <Slider {...settings}>
-        {service?.map((item) => (
+        {category?.map((item) => (
           <div key={item.id} className='service_card'>
             <div className='service_card_img'>
-              <img src={Img} />
+              <img src={item.image} />
             </div>
             <span className='service_card_name'>{item?.name}</span>
           </div>
