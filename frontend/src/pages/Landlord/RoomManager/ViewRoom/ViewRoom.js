@@ -4,7 +4,7 @@ import Common from '../../../../layouts/LandlordLayout/Common/Common'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import { getOneRoom } from '../../../../redux/reducers/room'
-import BaseButton from '../../../../components/BaseButton/BaseButton'
+import { Link } from 'react-router-dom'
 
 export default function ViewRoom() {
   const params = useParams()
@@ -22,7 +22,7 @@ export default function ViewRoom() {
   return (
     <Common>
       <form className='view_room'>
-        <span className='view_room_title'>Thông tin phòng 101 - Nhà gohomy1</span>
+        <span className='view_room_title'>Thông tin phòng {oneRoom?.name} - Nhà {oneRoom?.house_name}</span>
         <div className='view_room_box'>
           <div className='view_room_box_child'>
             <div className='view_room_box_child_item'>
@@ -96,7 +96,7 @@ export default function ViewRoom() {
                       key={index}
                       src={toDirectImgurLink(url)}
                       alt={`room-${index}`}
-                      style={{ width: '150px',height: '150px', marginRight: '10px', marginTop: '20px', objectFit: 'cover', borderRadius: '8px' }}
+                      style={{ width: '150px', height: '150px', marginRight: '10px', marginTop: '20px', objectFit: 'cover', borderRadius: '8px' }}
                     />
                   ));
                 } catch (err) {
@@ -108,11 +108,11 @@ export default function ViewRoom() {
           </div>
           <div className='view_room_box_child2'>
             <div className='view_room_box_child2_title'>Mô tả</div>
-            <div>{oneRoom?.description}</div>
+            <div style={{ whiteSpace: 'pre-line' }}>{oneRoom?.description?.replace(/\\n/g, '\n')}</div>
           </div>
 
           <div className='view_room_box_child3'>
-            <BaseButton type="blue">Quay lại</BaseButton>
+            <Link className='view_room_box_child3_back' to="#" onClick={() => navigate(-1)}>Quay lại</Link>
           </div>
         </div>
       </form>

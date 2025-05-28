@@ -1,5 +1,5 @@
 .view_room {
-  width: 80%;
+  width: 70%;
   border: 1px solid #385995;
   margin-left: 5%;
   margin-top: 4%;
@@ -25,7 +25,7 @@
       text-align: left;
 
       .view_room_box_child_item {
-        width: calc(100% / 3 - 10px);
+        width: calc(100% / 3);
         border-radius: 10px;
 
         .view_room_box_child_item_title {
@@ -47,6 +47,12 @@
 
     .view_room_box_child3 {
       text-align: right;
+
+      .view_room_box_child3_back {
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: 400;
+      }
     }
   }
 }
