@@ -28,7 +28,7 @@ export default function PostItem({ item }) {
       setIsShow(false)
     }
   }
-  
+
   return (
     <div className='post-item'>
       <>
@@ -47,13 +47,13 @@ export default function PostItem({ item }) {
         </div>
         <div className='post-item_box_right'>
           <span className='post-item_box_right_title'>{item?.title}</span>
-          <span className='post-item_box_right_common'>Số người ở: {item?.max_people}</span>
           <span className='post-item_box_right_common'>Loại phòng: {item?.room_type}</span>
           <span className='post-item_box_right_common'>Giá phòng: {Number(item?.price).toLocaleString('vi-VN')}đ / tháng</span>
-          <span className='post-item_box_right_common'>Vị trí: {item?.name_ward ? `${item?.name_ward}` : ''} {item?.name_district}</span>
-          <span className='post-item_box_right_common'>Chi tiết: {item?.description}</span>
+          <span className='post-item_box_right_common'>Số người ở: {item?.max_people}</span>
+          <span className='post-item_box_right_common'>Vị trí: {item?.name_ward ? `${item?.name_ward}` : ''} , {item?.name_district}</span>
           <span className='post-item_box_right_common'>Thời gian đăng: <span className='post-item_box_right_common_time'>{item?.created_at}</span></span>
           <span className='post-item_box_right_action'>
+            <BaseButton type="blue">Xem chi tiết</BaseButton>
             <BaseButton type="warning" onClick={() => navigate(`/tenant/edit-post/post_id/${item.id}`)}>Sửa bài đăng</BaseButton>
             <BaseButton type="red" onClick={() => handleShow(item.id)}>Xóa bài đăng</BaseButton>
           </span>

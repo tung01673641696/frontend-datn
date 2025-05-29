@@ -43,8 +43,8 @@ export default function AdminManagerUser() {
   }
 
   const filteredUsers = selectedRole
-  ? allUser.filter(user => user.role === selectedRole)
-  : allUser
+    ? allUser.filter(user => user.role === selectedRole)
+    : allUser
 
   return (
     <CommonAdmin>
@@ -66,7 +66,7 @@ export default function AdminManagerUser() {
           <span className='ad_mana_user_action_select_title'>Chọn loại user</span>
           <select value={selectedRole} onChange={handleRoleChange}>
             <option value="" disabled>Chọn loại user</option>
-            <option value="customer">Khách hàng</option>
+            <option value="tenant">Khách hàng</option>
             <option value="landlord">Chủ nhà</option>
           </select>
         </div>

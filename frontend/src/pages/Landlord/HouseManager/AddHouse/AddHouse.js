@@ -22,7 +22,11 @@ export default function AddHouse() {
     address: "",
     user_id: user_id,
     district_id: "",
-    ward_id: ""
+    ward_id: "",
+    electric_price: "",
+    water_price: "",
+    service_record_day: "",
+    service_cal_day: ""
   })
 
   useEffect(() => {
@@ -46,15 +50,18 @@ export default function AddHouse() {
       !house.name ||
       !house.address ||
       !house.district_id ||
-      !house.ward_id
+      !house.ward_id ||
+      !house.electric_price ||
+      !house.water_price ||
+      !house.service_record_day ||
+      !house.service_cal_day
     ) {
       toast.error("Vui lòng nhập đầy đủ thông tin")
       return
     }
     try {
       const res = await dispatch(addHouse(house))
-
-      console.log(">>>>>", res)
+      console.log(">>>>> HOUSE SUBMIT DATA", house)
       if (res.payload.data.error) {
         toast.error(res.payload.data.error)
 
@@ -74,37 +81,76 @@ export default function AddHouse() {
 
         <div className='add_house_content'>
           <div className='add_house_content_ele'>
-            <BaseInput name="name" placeholder="Tên nhà" onChange={handleChange} />
+            <div className='add_house_content_ele_child'>
+              <div className='add_house_content_ele_child_title'>Tên nhà</div>
+              <BaseInput name="name" onChange={handleChange} />
+            </div>
+
+            <div className='add_house_content_ele_child'>
+              <div className='add_house_content_ele_child_title'>Địa chỉ chi tiết</div>
+              <BaseInput name="address" onChange={handleChange} />
+            </div>
+
           </div>
           <div className='add_house_content_ele'>
-            <select>
-              <option value="">Hà Nội</option>
-            </select>
+            <div className='add_house_content_ele_child1'>
+              <div className='add_house_content_ele_child1_title'>Tỉnh / Tp</div>
+              <select>
+                <option value="">Hà Nội</option>
+              </select>
+            </div>
+            <div className='add_house_content_ele_child1'>
+              <div className='add_house_content_ele_child1_title'>Quận / Huyện</div>
+              <select name='district_id' onChange={handleDistrictChange}>
+                <option value="">Vui lòng chọn</option>
+                {district.map(item => (
+                  <option key={item.id} value={item.id}>{item.name}</option>
+                ))}
+              </select>
+            </div>
+            <div className='add_house_content_ele_child1'>
+              <div className='add_house_content_ele_child1_title'>Phường / Xã</div>
+              <select name='ward_id' onChange={handleChange}>
+                <option value="">Vui lòng chọn</option>
+                {ward.map(item => (
+                  <option key={item.id} value={item.id}>{item.name}</option>
+                ))}
+              </select>
+            </div>
           </div>
 
           <div className='add_house_content_ele'>
-            <select name='district_id' onChange={handleDistrictChange}>
-              <option value="">Chọn Quận / Huyện</option>
-              {district.map(item => (
-                <option key={item.id} value={item.id}>{item.name}</option>
-              ))}
-            </select>
+            <div className='add_house_content_ele_child'>
+              <div className='add_house_content_ele_child_title'>Tiền điện / 1 số</div>
+              <BaseInput name="electric_price" type='number' value={house.electric_price} onChange={handleChange} />
+            </div>
+            <div className='add_house_content_ele_child'>
+              <div className='add_house_content_ele_child_title'>Tiền nước / 1 khối</div>
+              <BaseInput name="water_price" type='number' value={house.water_price} onChange={handleChange} />
+            </div>
+          </div>
+          <div className='add_house_content_ele'>
+            <div className='add_house_content_ele_child'>
+              <div className='add_house_content_ele_child_title'>Ngày ghi số điện nước</div>
+              <select name="service_record_day" value={house.service_record_day} onChange={handleChange}>
+                <option value="">Vui lòng chọn</option>
+                {[...Array(31)].map((_, i) => (
+                  <option key={i + 1} value={i + 1}>{i + 1}</option>
+                ))}
+              </select>
+            </div>
+            <div className='add_house_content_ele_child'>
+              <div className='add_house_content_ele_child_title'>Ngày chốt số điện nước</div>
+              <select name="service_cal_day" value={house.service_cal_day} onChange={handleChange}>
+                <option value="">Vui lòng chọn</option>
+                {[...Array(31)].map((_, i) => (
+                  <option key={i + 1} value={i + 1}>{i + 1}</option>
+                ))}
+              </select>
+            </div>
           </div>
 
-          <div className='add_house_content_ele'>
-            <select name='ward_id' onChange={handleChange}>
-              <option value="">Chọn Phường / Xã</option>
-              {ward.map(item => (
-                <option key={item.id} value={item.id}>{item.name}</option>
-              ))}
-            </select>
-          </div>
-
-          <div className='add_house_content_ele'>
-            <BaseInput name="address" placeholder="Địa chỉ chi tiết" onChange={handleChange} />
-          </div>
-
-          <div className='add_house_content_ele'>
+          <div className='add_house_content_ele1'>
             <BaseButton type="blue">Thêm nhà</BaseButton>
           </div>
         </div>

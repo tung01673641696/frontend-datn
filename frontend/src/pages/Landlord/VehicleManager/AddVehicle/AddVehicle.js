@@ -62,8 +62,7 @@ export default function AddVehicle() {
     e.preventDefault()
     if (
       !vehicle.tenant_id ||
-      !vehicle.type_vehicle ||
-      !vehicle.description
+      !vehicle.type_vehicle
     ) {
       toast.error("Vui lòng nhập đầy đủ thông tin")
     } else {

@@ -9,11 +9,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getRoomByHouse } from '../../../redux/reducers/room'
 import { toast } from 'react-toastify'
 import { addPostsByLandlord } from '../../../redux/reducers/posts'
+import { useNavigate } from 'react-router-dom'
 
 export default function PostLandlord() {
   const user = JSON.parse(localStorage.getItem("user"))
   const user_id = user.id
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const { listHouseByOwner } = useSelector((state) => state.houseReducer)
   const [selectHouse, setSelectHouse] = useState("")
   const { listRoomByHouse } = useSelector((state) => state.roomReducer)
@@ -54,6 +56,7 @@ export default function PostLandlord() {
         const res = await dispatch(addPostsByLandlord(form))
         if (res.payload.data.message) {
           toast.success(res.payload.data.message)
+          navigate(`/landlord/post-manager`)
         }
         else {
           toast.error(res.payload.data.error)

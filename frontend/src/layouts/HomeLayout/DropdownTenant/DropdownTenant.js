@@ -56,7 +56,7 @@ export default function DropdownTenant() {
       </>
 
       <div class="dropdown">
-        <span className=" dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+        <span className=" dropdown-toggle">
           <i className="bi bi-person-circle"></i>
           <span>{user?.name}</span>
         </span>

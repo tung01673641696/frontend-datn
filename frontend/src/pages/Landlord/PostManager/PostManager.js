@@ -14,6 +14,8 @@ export default function PostManager() {
   const [status, setStatus] = useState("pending")
   const { postsByOnePeople } = useSelector((state) => state.postsReducer)
 
+  console.log("?????", postsByOnePeople)
+
   useEffect(() => {
     dispatch(getPostsByOnePeople({ peopleId: id_user, status }))
   }, [status])
