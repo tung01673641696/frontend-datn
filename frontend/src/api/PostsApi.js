@@ -13,7 +13,7 @@ const PostsApi = {
 
   async getPostsByOnePeople(peopleId, status) {
     const url = `/posts/get-posts-by-one-people/people_id/${peopleId}`;
-    return axiosClient.get(url, {params: {status:status}});
+    return axiosClient.get(url, { params: { status: status } });
   },
 
   async getOnePostsByCustomer(postId) {
@@ -60,11 +60,12 @@ const PostsApi = {
     const url = `/admin/get-all-posts-by-all-landlord`
     return axiosClient.get(url)
   },
- 
+
   async getAllPostsByAllLandlordActiveByDistrict(districtId) {
     const url = `/get-all-posts-by-all-landlord-active-by-district/district_id/${districtId}`
     return axiosClient.get(url)
-  }
+  },
+
 }
 
 export default PostsApi

@@ -7,10 +7,11 @@ import { getAllPostsByAllLandlordActive } from '../../../redux/reducers/posts'
 import { useDispatch, useSelector } from 'react-redux'
 
 export default function RoomNew() {
-  const [room, setRoom] = useState([])
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { allPostsByAllLandlordActive } = useSelector((state) => state.postsReducer)
+
+  console.log("<<<<<<<<<<", allPostsByAllLandlordActive)
   useEffect(() => {
     dispatch(getAllPostsByAllLandlordActive())
   }, [])

@@ -56,7 +56,7 @@ export default function Routers() {
               <Route path='/' element={<Home />} />
               <Route path='/search-room/district_id/:district_id' element={<SearchRoom />} />
               <Route path='/search-need' element={<SearchNeed />} />
-              <Route path='/room-detail' element={<RoomDetail />} />
+              <Route path='/room-detail/room_id/:id' element={<RoomDetail />} />
               <Route path='/need-detail/:post_id' element={<NeedDetail />} />
               <Route path='/info-user' element={<InfoUser />} />
             </Route>
@@ -71,7 +71,7 @@ export default function Routers() {
               <Route path='landlord/house-manager/add-house' element={<AddHouse />} />
               <Route path='landlord/house-manager/edit-house/:id' element={<EditHouse />} />
 
-              <Route path='/landlord/room-manager' element={<RoomManager />} />
+              <Route path='/landlord/room-manager/house_id/:house_id' element={<RoomManager />} />
               <Route path='/landlord/room-manager/view-room/room_id/:id' element={<ViewRoom />} />
               <Route path='/landlord/room-manager/add-room' element={<AddRoom />} />
               <Route path='/landlord/room-manager/edit-room/room_id/:id' element={<EditRoom />} />

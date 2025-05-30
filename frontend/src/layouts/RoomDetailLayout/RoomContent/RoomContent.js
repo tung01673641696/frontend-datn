@@ -1,31 +1,39 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './RoomContent.scss'
 import BaseButton from '../../../components/BaseButton/BaseButton'
 
-export default function RoomContent() {
+export default function RoomContent({ room }) {
   const user = JSON.parse(localStorage.getItem("user"))
+  const [showPhone, setShowPhone] = useState(false)
 
   return (
     <div className='room-content'>
-      <h4>Phòng trọ mới giá rẻ,đầy đủ nội thất,tiện nghi,an toàn phòng cháy chữa cháy</h4>
-      <span className='room-content_price'>Giá: 4.000.000đ / tháng</span>
-      <span className='room-content_area'>Diện tích: 35m2</span>
-      <span className='room-content_address'>Địa chỉ: 250 Kim Giang,Hoàng Mai,Hà Nội</span>
-      <span className='room-content_land'>Chủ nhà: Nguyễn Đình Diệm</span>
+      <h4>{room?.title}</h4>
+      <span className='room-content_price'>Giá: {room.price ? `${Number(room.price).toLocaleString('vi-VN')}đ` : "Đang cập nhật"}</span>
+      <span className='room-content_common'>Diện tích: {room?.area}m2</span>
+      <span className='room-content_common'>Địa chỉ: {room?.house_address}</span>
+      <div className='room-content_des'>
+        <span className='room-content_des_title'>
+          Mô tả chi tiết
+        </span>
+        <span className='room-content_des_text' style={{ whiteSpace: 'pre-line' }}>
+          {room?.description?.replace(/\\n/g, '\n')}
+        </span>
+      </div>
+
 
       {user.role_id === 1 && (
         <div className='room-content_contact'>
           <div className='room-content_contact_tele'>
-            <BaseButton type="red">
+            <BaseButton type="red" onClick={() => setShowPhone(true)}>
               <i class="bi bi-telephone"></i>
-              Liên hệ ngay
+              {showPhone ? room?.telephone_landlord : "Liên hệ ngay"}
             </BaseButton>
           </div>
 
           <div className='room-content_contact_like'>
-            <BaseButton type="white">
-              <i class="bi bi-heart"></i>
-              Yêu thích phòng
+            <BaseButton type="blue">
+              Giữ chỗ
             </BaseButton>
           </div>
         </div>

@@ -20,13 +20,24 @@
     margin: 40px 0;
     padding: 10px 30px;
     text-align: left;
+    display: flex;
 
-    .room_mana_select_title {
-      margin-right: 25px;
+    .room_mana_select_left {
+      width: 50%;
+
+      .room_mana_select_left_title {
+        margin-right: 25px;
+      }
+
+      select {
+        padding: 5px 20px 5px 10px;
+      }
     }
 
-    select {
-      padding: 5px 20px 5px 10px;
+    .room_mana_select_right {
+      width: 50%;
+      display: flex;
+      justify-content: right;
     }
   }
 
@@ -34,6 +45,74 @@
     margin-right: 3px;
     padding: 5px 10px;
     font-size: 14px;
+  }
+
+  .room_mana_cards {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .room_mana_card {
+      border: 1px solid #ccc;
+
+      .room_mana_card_header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        color: white;
+
+        h4 {
+          margin: 0;
+          font-size: 18px;
+          font-weight: 400;
+        }
+
+        button {
+          margin-left: 5px;
+        }
+      }
+
+      .room_mana_card_fun {
+        display: flex;
+        justify-content: left;
+        padding: 0px 30px 20px 30px;
+      }
+
+      .room_mana_card_header.room_available {
+        background-color: #0c3c58;
+      }
+
+      .room_mana_card_header.room_rented {
+        background-color: #00c4b3;
+      }
+
+      .room_mana_card_header.room_reserved {
+        background-color: rgb(222, 120, 4);
+      }
+
+      .room_mana_card_table {
+        width: 95%;
+        margin: 20px auto;
+        border: 1px solid #ddd;
+
+        td,
+        th {
+          padding: 8px;
+          text-align: left;
+          font-size: 15px;
+        }
+
+        td {
+          width: 16.66%;
+          border: 1px solid rgb(213, 207, 207);
+        }
+
+        .room_room_mana_card_table_title {
+          font-weight: 500;
+        }
+      }
+    }
   }
 }
 

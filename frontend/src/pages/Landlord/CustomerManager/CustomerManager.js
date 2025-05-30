@@ -25,15 +25,15 @@ export default function CustomerManager() {
     <div className='customer_manager'>
       <HeaderUser />
       <div className='customer_manager_main'>
-        <h3>Quản lý khách hàng tiềm năng</h3>
+        <h3>Khách hàng giữ chỗ</h3>
 
         <div className='customer_manager_main_status'>
           <div className='customer_manager_main_status_ele'>
-            <BaseButton type="white" onClick="">Chưa tư vấn</BaseButton>
+            <BaseButton type="white" onClick="">Chờ xác nhận</BaseButton>
           </div>
 
           <div className='customer_manager_main_status_ele'>
-            <BaseButton type="red" onClick="">Đã tư vấn</BaseButton>
+            <BaseButton type="red" onClick="">Đã xác nhận</BaseButton>
           </div>
 
           <div className='customer_manager_main_status_ele'></div>

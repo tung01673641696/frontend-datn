@@ -10,10 +10,16 @@ export default function Common({ children }) {
   const manager = [
     { id: 1, title: 'Trang chủ', path: '/' },
     { id: 2, title: 'Thống kê', path: '/landlord/dashboard' },
-    { id: 3, title: 'Quản lý nhà', path: `/landlord/house-manager` },
-    { id: 4, title: 'Quản lý phòng', path: '/landlord/room-manager' },
-    { id: 5, title: 'Quản lý khách thuê', path: '/landlord/tenant-manager' },
-    { id: 6, title: 'Quản lý phương tiện', path: '/landlord/vehicle-manager' },
+    { id: 3, title: 'Danh sách nhà', path: `/landlord/house-manager` },
+    {
+      id: 4,
+      title: 'Khách thuê',
+      children: [
+        { id: 41, title: 'Danh sách khách thuê', path: '/landlord/tenant-manager' },
+        { id: 42, title: 'Danh sách hợp đồng', path: '' },
+        { id: 43, title: 'Danh sách phương tiện', path: '/landlord/vehicle-manager' },
+      ]
+    },
   ]
   return (
     <div className='common'>
@@ -31,14 +37,36 @@ export default function Common({ children }) {
 
         <div className='common_list_link'>
           {manager?.map((item) => (
-            <Link to={item?.path} className='common_list_link_ele'>{item?.title}</Link>
+            item.path ? (
+              <Link
+                key={item.id}
+                to={item.path}
+                className='common_list_link_ele'
+              >
+                {item.title}
+              </Link>
+            ) : (
+              <div key={item.id} className='common_list_link_ele has_submenu'>
+                <span className="main_menu_title">{item.title}</span>
+                {item.children && (
+                  <div className='submenu'>
+                    {item.children.map((child) => (
+                      <Link key={child.id} to={child.path} className='submenu_item'>
+                        {child.title}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )
           ))}
         </div>
+
       </div>
 
       <div className='common_content'>
         {children}
       </div>
-    </div>
+    </div >
   )
 }

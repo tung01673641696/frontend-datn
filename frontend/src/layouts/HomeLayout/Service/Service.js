@@ -13,7 +13,6 @@ export default function Service() {
   const dispatch = useDispatch()
 
   const { category } = useSelector((state) => state.categoryReducer)
-  console.log("ca", category)
   useEffect(() => {
     dispatch(getCategory())
   }, [])

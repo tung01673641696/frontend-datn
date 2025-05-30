@@ -3,29 +3,25 @@ import './RoomImage.scss'
 import Img1 from '../../../assets/Images/RoomDetail/1.jpg'
 import Img2 from '../../../assets/Images/RoomDetail/2.jpg'
 
-export default function RoomImage() {
+export default function RoomImage({ room }) {
+  const images = room?.image ? JSON.parse(room.image) : []
+  const parsedImages = images.map((url) => {
+    const match = url.match(/imgur\.com\/([a-zA-Z0-9]+)/)
+    return match ? `https://i.imgur.com/${match[1]}.jpg` : url
+  })
+
   return (
     <div className='room-image'>
       <div className='room-image_big'>
-        <img src={Img1} />
+        {parsedImages[0] && <img src={parsedImages[0]} alt="Ảnh lớn" />}
       </div>
 
       <div className='room-image_small'>
-        <div className='room-image_mall_ele'>
-          <img src={Img2} />
-        </div>
-
-        <div className='room-image_mall_ele'>
-          <img src={Img2} />
-        </div>
-
-        <div className='room-image_mall_ele'>
-          <img src={Img2} />
-        </div>
-
-        <div className='room-image_mall_ele'>
-          <img src={Img2} />
-        </div>
+        {parsedImages.slice(0, 5).map((img, index) => (
+          <div className='room-image_mall_ele' key={index}>
+            <img src={img} alt={`Ảnh nhỏ ${index + 1}`} />
+          </div>
+        ))}
       </div>
     </div>
   )

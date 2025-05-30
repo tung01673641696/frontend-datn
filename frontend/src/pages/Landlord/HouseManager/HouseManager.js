@@ -10,6 +10,7 @@ import { houseByOwner } from '../../../redux/reducers/house'
 import BaseModal from '../../../components/BaseModal/BaseModal'
 import { deleteHouse } from '../../../redux/reducers/house'
 
+
 export default function HouseManager() {
   const [isShow, setIsShow] = useState(false)
   const [selectHouseId, setSelectHouseId] = useState(null)
@@ -19,6 +20,8 @@ export default function HouseManager() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { listHouseByOwner } = useSelector((state) => state.houseReducer)
+
+  console.log(">>>>>>", listHouseByOwner)
 
   function handleClick() {
     navigate(`/landlord/house-manager/add-house`)
@@ -80,20 +83,20 @@ export default function HouseManager() {
         />
 
         <Column title={"Số phòng"}
-          render={(value) => (
-            <span>{value?.room_number}</span>
+          render={(item) => (
+            <span className='link_page_room' onClick={() => navigate(`/landlord/room-manager/house_id/${item.id}`)}>{item?.room_number} phòng</span>
           )}
         />
 
         <Column title={"Số phòng trống"}
-          render={(value) => (
-            <span>{value?.room_number_null}</span>
+          render={(item) => (
+            <span>{item?.room_number_null}</span>
           )}
         />
 
         <Column title={"Địa chỉ"}
-          render={(value) => (
-            <span>{value?.address},{value?.ward?.name},{value?.district?.name}</span>
+          render={(item) => (
+            <span>{item?.address},{item?.ward?.name},{item?.district?.name}</span>
           )}
         />
 

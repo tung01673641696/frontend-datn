@@ -1,10 +1,18 @@
 import React from 'react'
 import './CardRoom2.scss'
 import Img from '../../assets/Images/Room/room.jpg'
+import { useNavigate } from 'react-router-dom'
 
 export default function CardRoom2({ item }) {
+  const navigate = useNavigate()
+
+  function handleClick() {
+    navigate(`/room-detail/room_id/${item.id}`)
+    window.scrollTo(0, 0)
+  }
+
   return (
-    <div className='card-room2'>
+    <div className='card-room2' onClick={() => handleClick()}>
       <div className='card-room2_img'>
         {item.image && (() => {
           try {

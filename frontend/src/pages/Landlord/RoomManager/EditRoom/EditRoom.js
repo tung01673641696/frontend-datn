@@ -32,7 +32,7 @@ export default function EditRoom() {
     area: "",
     user_number: "",
     description: "",
-    is_available: ""
+    status: ""
   })
   const [images, setImages] = useState([])
   const allImages = [...oldImages, ...newImages];
@@ -61,7 +61,7 @@ export default function EditRoom() {
         area: oneRoom?.area || "",
         user_number: oneRoom?.user_number || "",
         description: oneRoom?.description || "",
-        is_available: oneRoom?.is_available?.toString() || ""
+        status: oneRoom?.status || ""
       });
 
 
@@ -144,7 +144,7 @@ export default function EditRoom() {
       user_number: room.user_number,
       image: JSON.stringify(allImages),
       description: room.description,
-      is_available: room.is_available
+      status: room.status
     }
 
     if (
@@ -157,7 +157,7 @@ export default function EditRoom() {
       !room.area ||
       !room.user_number ||
       !room.description ||
-      room.is_available === ""
+      room.status === ""
     ) {
       toast.error("Vui lòng nhập đầy đủ thông tin");
       return
@@ -241,10 +241,11 @@ export default function EditRoom() {
             </div>
 
             <div className='edit_room_box_child_item'>
-              <select name="is_available" value={room.is_available} onChange={handleChange} className='edit_room_box_child_select'>
+              <select name="status" value={room.status} onChange={handleChange} className='edit_room_box_child_select'>
                 <option value="" disabled>Tình trạng phòng</option>
-                <option value="1">Đang trống</option>
-                <option value="0">Đã cho thuê</option>
+                <option value="available">Đang trống</option>
+                <option value="reserved">Đang cọc</option>
+                <option value="rented">Đang ở</option>
               </select>
             </div>
           </div>

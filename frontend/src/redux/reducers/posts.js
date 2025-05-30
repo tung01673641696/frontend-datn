@@ -98,7 +98,8 @@ const PostsSlice = createSlice({
     allPostsByAllCustomerActive: [],
     allPostsByAllLandlordActive: [],
     allPostsByAllLandlord: [],
-    allPostsByLandlordActiveByDistrict: []
+    allPostsByLandlordActiveByDistrict: [],
+    postByRoomId: {}
   },
   extraReducers: builder => {
     builder

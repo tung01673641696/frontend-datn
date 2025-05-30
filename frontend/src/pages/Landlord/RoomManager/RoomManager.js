@@ -2,14 +2,13 @@ import React, { useEffect, useState } from 'react'
 import "./RoomManager.scss"
 import Common from '../../../layouts/LandlordLayout/Common/Common'
 import BaseButton from '../../../components/BaseButton/BaseButton'
-import { Table } from 'antd'
-import Column from 'antd/es/table/Column'
 import { useNavigate } from 'react-router-dom'
 import { houseByOwner } from '../../../redux/reducers/house'
 import { useDispatch, useSelector } from 'react-redux'
 import { getRoomByHouse } from '../../../redux/reducers/room'
 import BaseModal from '../../../components/BaseModal/BaseModal'
 import { deleteRoom } from '../../../redux/reducers/room'
+import { useParams } from 'react-router-dom'
 
 export default function RoomManager() {
   const [selectedHouse, setSelectedHouse] = useState("")
@@ -21,6 +20,7 @@ export default function RoomManager() {
   const { listRoomByHouse } = useSelector((state) => state.roomReducer)
   const user = JSON.parse(localStorage.getItem("user"))
   const id = user.id
+  const { houseId } = useParams()
 
   console.log(">>>>>", listRoomByHouse)
 
@@ -30,9 +30,13 @@ export default function RoomManager() {
 
   useEffect(() => {
     if (listHouseByOwner.length > 0) {
-      setSelectedHouse(listHouseByOwner[0].id);
+      if (houseId) {
+        setSelectedHouse(houseId)
+      } else {
+        setSelectedHouse(listHouseByOwner[0].id)
+      }
     }
-  }, [listHouseByOwner]);
+  }, [listHouseByOwner, houseId]);
 
   useEffect(() => {
     if (selectedHouse) {
@@ -67,7 +71,7 @@ export default function RoomManager() {
       <>
         <BaseModal
           open={isShow}
-          title="Xóa nhà"
+          title="Xóa phòng"
           type="red"
           content="Bạn có chắc chắn muốn xóa phòng này không ?"
           onCancel={handleClose}
@@ -76,81 +80,77 @@ export default function RoomManager() {
       </>
 
       <div className='room_mana'>
-        <div className='room_mana_add'>
-          <BaseButton type="blue" onClick={handleClick}>Thêm phòng</BaseButton>
-        </div>
-
         <div className='room_mana_select'>
-          <span className='room_mana_select_title'>Chọn nhà</span>
-          <select
-            value={selectedHouse}
-            onChange={(e) => setSelectedHouse(e.target.value)}
-          >
-            {listHouseByOwner?.map((item) => (
-              <option key={item?.id} value={item?.id}>{item?.name}</option>
-            ))}
-          </select>
+          <div className='room_mana_select_left'>
+            <span className='room_mana_select_left_title'>Chọn nhà</span>
+            <select
+              value={selectedHouse}
+              onChange={(e) => setSelectedHouse(e.target.value)}
+            >
+              {listHouseByOwner?.map((item) => (
+                <option key={item?.id} value={item?.id}>{item?.name}</option>
+              ))}
+            </select>
+          </div>
+
+          <div className='room_mana_select_right'>
+            <BaseButton type="blue" onClick={handleClick}>Thêm phòng</BaseButton>
+          </div>
         </div>
 
-        <Table style={{ textAlignLast: 'center' }}
-          pagination={{
-            defaultPageSize: 10,
-            showSizeChanger: false,
-            pageSizeOptions: ['10', '20', '30'],
-          }}
-          dataSource={listRoomByHouse}
-          bordered
-        >
-          <Column title={"STT"} render={(_, __, index) => <span>{index + 1}</span>} key="id" />
-          <Column title={"Tên phòng"}
-            render={(item) => (
-              <span>{item?.name}</span>
-            )}
-          />
+        <div className="room_mana_cards">
+          {listRoomByHouse?.map((room, index) => (
+            <div className='room_mana_card' key={room.id}>
+              <div className={`room_mana_card_header 
+                  ${room.status === 'available' ? 'room_available' :
+                  room.status === 'reserved' ? 'room_reserved' :
+                    'room_rented'}`}
+              >
+                <h4>
+                  Phòng: {room.name} - {
+                    room.status === "available" ? "Đang trống" :
+                      room.status === "reserved" ? "Đang cọc" :
+                        "Đang ở"
+                  }
+                </h4>
+                <div>
+                  <BaseButton type="warning" onClick={() => navigate(`/landlord/room-manager/edit-room/room_id/${room.id}`)}>Cập nhật thông tin</BaseButton>
+                  <BaseButton type="red" onClick={() => handleShow(room.id)}>Xóa phòng</BaseButton>
+                </div>
+              </div>
 
-          <Column title={"Loại phòng"}
-            render={(item) => (
-              <span>{item?.room_type}</span>
-            )}
-          />
+              <table className="room_mana_card_table">
+                <tbody>
+                  <tr>
+                    <td className='room_mana_card_table_title'>Giá</td>
+                    <td className='room_mana_card_table_title'>Diện tích</td>
+                    <td className='room_mana_card_table_title'>Số người tối đa</td>
+                    <td className='room_mana_card_table_title'>Số người ở hiện tại</td>
+                    <td className='room_mana_card_table_title'>Hợp đồng đang có</td>
+                    <td className='room_mana_card_table_title'>Ngày trống</td>
+                  </tr>
 
-          <Column title={"Tầng"}
-            render={(item) => (
-              <span>{item?.floor}</span>
-            )}
-          />
+                  <tr>
+                    <td>{room.price}</td>
+                    <td>{room.area}</td>
+                    <td>{room.user_number}</td>
+                    <td>{room.current_people || 0}</td>
+                    <td>chưa có hợp đồng</td>
+                    <td>30/5/2025</td>
+                  </tr>
+                </tbody>
+              </table>
 
-          <Column title={"Giá phòng"}
-            render={(value) => (
-              <span>{Number(value?.price).toLocaleString('vi-VN', { currency: 'VND' })}</span>
-            )}
-          />
+              <div className='room_mana_card_fun'>
+                <BaseButton type="blue" onClick={() => navigate(`/landlord/room-manager/view-room/room_id/${room.id}`)}>Thông tin phòng</BaseButton>
+                <BaseButton type="red">Tạo hợp đồng</BaseButton>
+                <BaseButton type="green">Giữ chỗ</BaseButton>
+              </div>
 
-          <Column title={"Diện tích"}
-            render={(value) => (
-              <span>{value?.area}</span>
-            )}
-          />
+            </div>
+          ))}
+        </div>
 
-          <Column title={"Tình trạng phòng"}
-            render={(value) => (
-              value.is_available ? (
-                <span style={{ color: "green" }}>Phòng đang trống</span>
-              ) : (<span style={{ color: "red" }}>Phòng đã thuê</span>)
-            )
-            }
-          />
-
-          <Column title={"Thao tác"}
-            render={(item) => (
-              <>
-                <BaseButton type="blue" onClick={() => navigate(`/landlord/room-manager/view-room/room_id/${item.id}`)}>Xem</BaseButton>
-                <BaseButton type="warning" onClick={() => navigate(`/landlord/room-manager/edit-room/room_id/${item.id}`)}>Sửa</BaseButton>
-                <BaseButton type="red" onClick={() => handleShow(item.id)}>Xóa</BaseButton>
-              </>
-            )}
-          />
-        </Table>
       </div>
     </Common>
   )

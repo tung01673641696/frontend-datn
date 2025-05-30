@@ -101,7 +101,7 @@ export default function EditHouse() {
   return (
     < Common >
       <form className='add_house' onSubmit={handleSubmit}>
-        <span >Cập nhật nhà</span>
+        <span className='add_house_title'>Cập nhật nhà</span>
 
         <div className='add_house_content'>
           <div className='add_house_content_ele'>

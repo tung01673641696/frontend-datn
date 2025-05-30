@@ -37,33 +37,4 @@
       }
     }
   }
-
-  &_below {
-    display: flex;
-    flex-direction: column;
-
-    .room-info_below_title {
-      font-size: 20px;
-      font-weight: 400;
-      margin-bottom: 15px;
-    }
-
-    .room-info_below_wrap {
-      display: flex;
-      flex-direction: column;
-
-      .room-info_below_ele {
-        margin-bottom: 10px;
-
-        .room-info_below_ele_title {
-          font-size: 16px;
-          color: rgb(111, 108, 108);
-        }
-
-        .room-info_below_ele_value {
-          color: #D60909;
-        }
-      }
-    }
-  }
 }

@@ -1,12 +1,12 @@
-import React from 'react'
-import "./CardRoom.scss"
+import React, { useEffect } from 'react'
+import "./CardRoom.scss"  
 import { useNavigate } from 'react-router-dom'
 
 export default function CardRoom({ item }) {
   const navigate = useNavigate()
 
   function handleClick() {
-    navigate(`/room-detail`)
+    navigate(`/room-detail/room_id/${item.room_id}`)
     window.scrollTo(0, 0)
   }
 

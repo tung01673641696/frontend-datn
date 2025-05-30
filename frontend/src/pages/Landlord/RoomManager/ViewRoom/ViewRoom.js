@@ -68,9 +68,17 @@ export default function ViewRoom() {
 
             <div className='view_room_box_child_item'>
               <span className='view_room_box_child_item_title'>Tình trạng phòng:</span>
-              <span>{oneRoom.is_available ? (
-                <span style={{ color: "green" }}>Phòng đang trống</span>
-              ) : (<span style={{ color: "red" }}>Phòng đã thuê</span>)}</span>
+              <span>
+                {oneRoom.status === 'available' && (
+                  <span style={{ color: 'red' }}>Phòng đang trống</span>
+                )}
+                {oneRoom.status === 'reserved' && (
+                  <span style={{ color: 'orange' }}>Đang được giữ chỗ</span>
+                )}
+                {oneRoom.status === 'rented' && (
+                  <span style={{ color: 'green' }}>Phòng đã thuê</span>
+                )}
+              </span>
             </div>
           </div>
 

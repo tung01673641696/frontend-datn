@@ -40,11 +40,12 @@ export const editRoom = createAsyncThunk("room/editRoom", async ({ roomId, data 
   return editRoom
 })
 
+
 const RoomSlice = createSlice({
   name: "room",
   initialState: {
     listRoomByHouse: [],
-    oneRoom: {}
+    oneRoom: {},
   },
   extraReducers: builder => {
     builder
@@ -69,6 +70,7 @@ const RoomSlice = createSlice({
         state.loading = false
         state.oneRoom = action.payload.data;
       })
+
   }
 })
 

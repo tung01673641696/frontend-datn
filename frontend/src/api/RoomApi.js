@@ -24,7 +24,8 @@ const RoomApi = {
   async editRoom(roomId, data) {
     const url = `/room-manager/edit-room/${roomId}`
     return axiosClient.put(url, data)
-  }
+  },
+
 }
 
 export default RoomApi

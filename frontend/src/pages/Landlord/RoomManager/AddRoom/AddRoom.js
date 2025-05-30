@@ -21,7 +21,7 @@ export default function AddRoom() {
     area: "",
     user_number: "",
     description: "",
-    is_available: ""
+    status: ""
   })
 
   const [images, setImages] = useState([])
@@ -59,10 +59,10 @@ export default function AddRoom() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setRoom({
-      ...room,
-      [name]: name === "is_available" ? Number(value) : value
-    });
+    setRoom((prev) => ({
+      ...prev,
+      [name]: value
+    }));
   };
 
   const handleSubmit = async (e) => {
@@ -79,7 +79,7 @@ export default function AddRoom() {
       user_number: room.user_number,
       image: images,
       description: room.description,
-      is_available: room.is_available
+      status: room.status
     }
     console.log(data)
 
@@ -94,7 +94,7 @@ export default function AddRoom() {
       !room.user_number ||
       images.length === 0 ||
       !room.description ||
-      room.is_available === ""
+      room.status === ""
     ) {
       toast.error("Vui lòng nhập đầy đủ thông tin");
       return
@@ -107,7 +107,7 @@ export default function AddRoom() {
 
       } else {
         toast.success("Thêm phòng thành công");
-        navigate(`/landlord/room-manager`)
+        navigate(`/landlord/house-manager`)
       }
     } catch (error) {
       toast.error("Thêm phòng thất bại")
@@ -169,10 +169,11 @@ export default function AddRoom() {
             </div>
 
             <div className='add_room_box_child_item'>
-              <select name="is_available" value={room.is_available} onChange={handleChange} className='add_room_box_child_select'>
+              <select name="status" value={room.status} onChange={handleChange} className='add_room_box_child_select'>
                 <option value="" disabled>Tình trạng phòng</option>
-                <option value="1">Đang trống</option>
-                <option value="0">Đã cho thuê</option>
+                <option value="available">Đang trống</option>
+                <option value="reserved">Đang cọc</option>
+                <option value="rented">Đang ở</option>
               </select>
             </div>
           </div>

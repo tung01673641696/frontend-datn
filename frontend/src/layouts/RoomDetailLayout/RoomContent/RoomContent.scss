@@ -20,22 +20,21 @@
     color: #D60909;
   }
 
-  &_area {
+  &_common {
     display: block;
     font-size: 18px;
     margin-bottom: 10px;
   }
 
-  &_address {
-    display: block;
+  &_des {
     font-size: 18px;
-    margin-bottom: 10px;
-  }
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 40px;
 
-  &_land {
-    display: block;
-    font-size: 18px;
-    margin-bottom: 30px;
+    .room-content_des_text {
+      font-size: 16px;
+    }
   }
 
   &_contact {
@@ -48,7 +47,7 @@
 
       button {
         width: 100%;
-        padding: 10px 0;
+        padding: 7px 0;
         font-size: 18px;
 
         i {
@@ -62,7 +61,7 @@
 
       button {
         width: 100%;
-        padding: 10px 0;
+        padding: 7px 0;
         font-size: 18px;
 
         i {

@@ -17,8 +17,8 @@ export default function CustomerItem() {
           <span className='customer_item_ele_content_child'>Thích: P101 - Nhà Gohomy1</span>
           <span className='customer_item_ele_content_child'>14h 22/03/2025</span>
           <span className='customer_item_ele_content_action'>
-            <BaseButton type="white">Chưa tư vấn</BaseButton>
-            <BaseButton type="red">Đã tư vấn</BaseButton>
+            <BaseButton type="white">Xác nhận</BaseButton>
+            <BaseButton type="red">Xóa</BaseButton>
           </span> 
         </div>
       </div>
