@@ -26,9 +26,8 @@ export default function DropdownTenant() {
   const manager = [
     { id: 1, title: 'Thông tin cá nhân', path: '/info-user' },
     { id: 2, title: 'Quản lý bài đăng', path: '/tenant/post-manager' },
-    { id: 3, title: 'Quản lý phòng yêu thích', path: '/tenant/room-like-manager' },
-    { id: 4, title: 'Quản lý giỏ hàng', path: '' },
-    { id: 5, title: 'Quản lý đơn hàng đã đặt', path: '' },
+    { id: 3, title: 'Phòng giữ chỗ', path: '/tenant/room-like-manager' },
+    { id: 4, title: 'Xem hợp đồng', path: '' },
   ]
 
   function handleClick() {

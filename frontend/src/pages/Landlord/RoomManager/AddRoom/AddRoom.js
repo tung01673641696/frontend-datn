@@ -5,7 +5,7 @@ import BaseInput from '../../../../components/BaseInput/BaseInput'
 import BaseButton from '../../../../components/BaseButton/BaseButton'
 import { useDispatch, useSelector } from 'react-redux'
 import { addHouse } from '../../../../redux/reducers/house'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { houseByOwner } from '../../../../redux/reducers/house'
 import { toast } from 'react-toastify'
 import { addRoom } from '../../../../redux/reducers/room'
@@ -29,7 +29,7 @@ export default function AddRoom() {
   const id = user.id
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { listHouseByOwner } = useSelector((state) => state.houseReducer)
+  const { houseId } = useParams()
 
   const handleChangeImage = (event) => {
     const files = Array.from(event.target.files);
@@ -53,10 +53,6 @@ export default function AddRoom() {
     });
   };
 
-  useEffect(() => {
-    dispatch(houseByOwner(id))
-  }, [])
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setRoom((prev) => ({
@@ -69,7 +65,7 @@ export default function AddRoom() {
     e.preventDefault();
 
     const data = {
-      house_id: room.house_id,
+      house_id: houseId,
       room_type: room.room_type,
       name: room.name,
       floor: room.floor,
@@ -84,7 +80,6 @@ export default function AddRoom() {
     console.log(data)
 
     if (
-      !room.house_id ||
       !room.room_type ||
       !room.name ||
       !room.floor ||
@@ -121,19 +116,11 @@ export default function AddRoom() {
 
         <div className='add_room_box'>
           <div className='add_room_box_child'>
-            <div className='add_room_box_child_item1'>
-              <select name="house_id" value={room.house_id} onChange={handleChange} className='add_room_box_child_select'>
-                <option value="" disabled>Chọn nhà</option>
-                {listHouseByOwner.map(item => (
-                  <option key={item.id} value={item.id}>{item.name}</option>
-                ))}
-              </select>
-            </div>
-            <div className='add_room_box_child_item1'>
+            <div className='add_room_box_child_item'>
               <BaseInput type='number' name="name" value={room.name} onChange={handleChange} placeholder="Tên phòng" />
             </div>
 
-            <div className='add_room_box_child_item1'>
+            <div className='add_room_box_child_item'>
               <select name="room_type" value={room.room_type} onChange={handleChange} className='add_room_box_child_select'>
                 <option value="" disabled>Loại phòng</option>
                 <option value="trọ thường">Trọ thường</option>

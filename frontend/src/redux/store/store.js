@@ -7,6 +7,7 @@ import TenantSlice from "../reducers/tenant";
 import VehicleSlice from "../reducers/vehicle";
 import PostsSlice from "../reducers/posts";
 import categorySlice from "../reducers/category";
+import RentalRequestSlice from "../reducers/rentalRequest";
 
 export const store = configureStore({
   reducer: {
@@ -17,6 +18,7 @@ export const store = configureStore({
     tenantReducer: TenantSlice.reducer,
     vehicleReducer: VehicleSlice.reducer,
     postsReducer: PostsSlice.reducer,
-    categoryReducer: categorySlice.reducer
+    categoryReducer: categorySlice.reducer,
+    rentalrequestReducer: RentalRequestSlice.reducer
   }
 })

@@ -11,8 +11,8 @@ import { deleteRoom } from '../../../redux/reducers/room'
 import { useParams } from 'react-router-dom'
 
 export default function RoomManager() {
-  const [selectedHouse, setSelectedHouse] = useState("")
   const [isShow, setIsShow] = useState(false)
+  const [selectedHouse, setSelectedHouse] = useState("")
   const [selectRoomId, setSelectRoomId] = useState(null)
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -45,7 +45,7 @@ export default function RoomManager() {
   }, [dispatch, selectedHouse]);
 
   function handleClick() {
-    navigate(`/landlord/room-manager/add-room`)
+    navigate(`/landlord/room-manager/add-room/house_id/${selectedHouse}`)
   }
 
   const handleShow = (roomId) => {

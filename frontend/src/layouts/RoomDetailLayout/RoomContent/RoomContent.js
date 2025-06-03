@@ -1,10 +1,31 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './RoomContent.scss'
 import BaseButton from '../../../components/BaseButton/BaseButton'
+import { useDispatch } from 'react-redux'
+import { toast } from 'react-toastify'
+import { rentalRequest } from '../../../redux/reducers/rentalRequest'
+
 
 export default function RoomContent({ room }) {
+  const dispatch = useDispatch()
   const user = JSON.parse(localStorage.getItem("user"))
   const [showPhone, setShowPhone] = useState(false)
+  const userId = user.id
+  const roomId = room.id
+
+  const handleRentalRequest = async () => {
+    try {
+      const result = await dispatch(rentalRequest({ userId, roomId })).unwrap();
+      toast.success("Giữ chỗ thành công, chờ xác nhận");
+    } catch (error) {
+      console.log("Lỗi giữ chỗ:", error);
+      if (error?.message === "Bạn đã gửi yêu cầu giữ phòng này rồi.") {
+        toast.error("Bạn đã gửi yêu cầu giữ phòng này rồi.");
+      } else {
+        toast.error("Có lỗi xảy ra");
+      }
+    }
+  };
 
   return (
     <div className='room-content'>
@@ -31,11 +52,13 @@ export default function RoomContent({ room }) {
             </BaseButton>
           </div>
 
-          <div className='room-content_contact_like'>
-            <BaseButton type="blue">
-              Giữ chỗ
-            </BaseButton>
-          </div>
+          {room.status !== 'reserved' && room.status !== 'rented' && (
+            <div className='room-content_contact_like'>
+              <BaseButton type="blue" onClick={handleRentalRequest}>
+                Giữ chỗ
+              </BaseButton>
+            </div>
+          )}
         </div>
       )}
     </div>

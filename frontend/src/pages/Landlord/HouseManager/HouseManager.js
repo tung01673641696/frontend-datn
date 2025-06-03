@@ -21,8 +21,6 @@ export default function HouseManager() {
   const dispatch = useDispatch()
   const { listHouseByOwner } = useSelector((state) => state.houseReducer)
 
-  console.log(">>>>>>", listHouseByOwner)
-
   function handleClick() {
     navigate(`/landlord/house-manager/add-house`)
   }

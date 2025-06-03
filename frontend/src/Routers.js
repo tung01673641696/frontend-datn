@@ -12,7 +12,7 @@ const NeedDetail = React.lazy(() => import('./pages/NeedDetail/NeedDetail'))
 const InfoUser = React.lazy(() => import('./pages/InfoUser/InfoUser'))
 
 const PostLandlord = React.lazy(() => import('./pages/Landlord/PostLandlord/PostLandlord'))
-const CustomerManager = React.lazy(() => import('./pages/Landlord/CustomerManager/CustomerManager'))
+const ReserveManager = React.lazy(() => import('./pages/Landlord/ReserveManager/ReserveManager'))
 const PostManagerLandlord = React.lazy(() => import('./pages/Landlord/PostManager/PostManager'))
 
 const Dashboard = React.lazy(() => import('./pages/Landlord/Dashboard/Dashboard'))
@@ -63,7 +63,6 @@ export default function Routers() {
 
             <Route>
               <Route path='/landlord/post' element={<PostLandlord />} />
-              <Route path='/landlord/customer-manager' element={<CustomerManager />} />
               <Route path='/landlord/post-manager' element={<PostManagerLandlord />} />
 
               <Route path='/landlord/dashboard' element={<Dashboard />} />
@@ -71,9 +70,9 @@ export default function Routers() {
               <Route path='landlord/house-manager/add-house' element={<AddHouse />} />
               <Route path='landlord/house-manager/edit-house/:id' element={<EditHouse />} />
 
-              <Route path='/landlord/room-manager/house_id/:house_id' element={<RoomManager />} />
+              <Route path='/landlord/room-manager/house_id/:houseId' element={<RoomManager />} />
               <Route path='/landlord/room-manager/view-room/room_id/:id' element={<ViewRoom />} />
-              <Route path='/landlord/room-manager/add-room' element={<AddRoom />} />
+              <Route path='/landlord/room-manager/add-room/house_id/:houseId' element={<AddRoom />} />
               <Route path='/landlord/room-manager/edit-room/room_id/:id' element={<EditRoom />} />
 
               <Route path='/landlord/tenant-manager' element={<TenantManager />} />
@@ -83,6 +82,8 @@ export default function Routers() {
               <Route path='/landlord/vehicle-manager' element={<VehicleManager />} />
               <Route path='/landlord/vehicle-manager/add-vehicle' element={<AddVehicle />} />
               <Route path='/landlord/vehicle-manager/edit-vehicle/vehicle_id/:id' element={<EditVehicle />} />
+
+              <Route path='/landlord/reserve-manager' element={<ReserveManager />} />
             </Route>
 
             <Route>
