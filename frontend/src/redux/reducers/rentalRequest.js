@@ -20,6 +20,23 @@ export const getAllRentalRequest = createAsyncThunk("rentalRequest/getAllRentalR
   return AllRentalRequest
 })
 
+export const rejectRentalRequest = createAsyncThunk(
+  'rentalRequest/rejectRentalRequest',
+  async (id) => {
+    const rejectRentalRequest = await RentalRequestApi.RejectRentalRequest(id);
+    return rejectRentalRequest
+  }
+);
+
+export const approveRentalRequest = createAsyncThunk(
+  'rentalRequest/approveRentalRequest',
+  async (id) => {
+    const response = await RentalRequestApi.ApproveRentalRequest(id);
+    return response;
+  }
+);
+
+
 const RentalRequestSlice = createSlice({
   name: "rental_request",
 
@@ -39,6 +56,25 @@ const RentalRequestSlice = createSlice({
         state.loading = false
         state.allRentalRequest = action.payload.data.data;
       })
+
+      .addCase(rejectRentalRequest.fulfilled, (state, action) => {
+        const rejectedId = action.meta.arg;
+        const index = state.allRentalRequest.findIndex(item => item.id === rejectedId);
+        if (index !== -1) {
+          state.allRentalRequest[index].status = 'reject';
+        }
+        toast.success("Đã từ chối yêu cầu giữ phòng");
+      })
+
+      .addCase(approveRentalRequest.fulfilled, (state, action) => {
+        const approvedId = action.meta.arg;
+        const index = state.allRentalRequest.findIndex(item => item.id === approvedId);
+        if (index !== -1) {
+          state.allRentalRequest[index].status = 'approved';
+        }
+        toast.success("Đã xác nhận yêu cầu giữ phòng");
+      })
+
   }
 
 })
