@@ -30,9 +30,17 @@ export const rejectRentalRequest = createAsyncThunk(
 
 export const approveRentalRequest = createAsyncThunk(
   'rentalRequest/approveRentalRequest',
-  async (id) => {
-    const response = await RentalRequestApi.ApproveRentalRequest(id);
-    return response;
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await RentalRequestApi.ApproveRentalRequest(id);
+      return response;
+    } catch (error) {
+      if (error.response) {
+        toast.error(error.response.data.message || "Có lỗi xảy ra");
+        return rejectWithValue(error.response.data);
+      }
+      throw error;
+    }
   }
 );
 
@@ -68,10 +76,11 @@ const RentalRequestSlice = createSlice({
 
       .addCase(approveRentalRequest.fulfilled, (state, action) => {
         const approvedId = action.meta.arg;
-        const index = state.allRentalRequest.findIndex(item => item.id === approvedId);
-        if (index !== -1) {
-          state.allRentalRequest[index].status = 'approved';
+        const approvedRequest = state.allRentalRequest.find(item => item.id === approvedId);
+        if (approvedRequest) {
+          approvedRequest.status = 'approved';
         }
+
         toast.success("Đã xác nhận yêu cầu giữ phòng");
       })
 

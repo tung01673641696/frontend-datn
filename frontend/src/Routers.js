@@ -12,7 +12,7 @@ const NeedDetail = React.lazy(() => import('./pages/NeedDetail/NeedDetail'))
 const InfoUser = React.lazy(() => import('./pages/InfoUser/InfoUser'))
 
 const PostLandlord = React.lazy(() => import('./pages/Landlord/PostLandlord/PostLandlord'))
-const ReserveManager = React.lazy(() => import('./pages/Landlord/ReserveManager/ReserveManager'))
+const RentalRequestManager = React.lazy(() => import('./pages/Landlord/RentalRequestManager/RentalRequestManager'))
 const PostManagerLandlord = React.lazy(() => import('./pages/Landlord/PostManager/PostManager'))
 
 const Dashboard = React.lazy(() => import('./pages/Landlord/Dashboard/Dashboard'))
@@ -83,7 +83,7 @@ export default function Routers() {
               <Route path='/landlord/vehicle-manager/add-vehicle' element={<AddVehicle />} />
               <Route path='/landlord/vehicle-manager/edit-vehicle/vehicle_id/:id' element={<EditVehicle />} />
 
-              <Route path='/landlord/reserve-manager' element={<ReserveManager />} />
+              <Route path='/landlord/rental-request-manager' element={<RentalRequestManager />} />
             </Route>
 
             <Route>

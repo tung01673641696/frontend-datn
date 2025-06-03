@@ -1,13 +1,40 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import "./CustomerItem.scss"
 import Img from '../../../../assets/Images/User/client.jpg'
 import BaseButton from '../../../../components/BaseButton/BaseButton'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { rejectRentalRequest } from '../../../../redux/reducers/rentalRequest'
 import { approveRentalRequest } from '../../../../redux/reducers/rentalRequest'
+import BaseModal from '../../../../components/BaseModal/BaseModal'
+import CreateDepositContract from '../../../../pages/Landlord/RentalRequestManager/CreateDepositContract/CreateDepositContract'
+import { createDepositContract } from '../../../../redux/reducers/contract'
+import { toast } from 'react-toastify'
 
 export default function CustomerItem({ item }) {
   const dispatch = useDispatch()
+  const [showDepositModal, setShowDepositModal] = useState(false);
+  const allRentalRequest = useSelector(state => state.rentalrequestReducer.data || [])
+
+  const [formData, setFormData] = useState({
+    renter_id: item?.renter_id || '',
+    room_id: item?.room_id || '',
+    name: item?.renter_name || '',
+    phone: item?.renter_phone || '',
+    type: 'deposit',
+    amount: '',
+    start_date: '',
+    note: '',
+    status: 'signed'
+  });
+
+  const handleOpenDepositModal = () => {
+    setFormData(prev => ({
+      ...prev,
+      renter_id: item.renter_id,
+      room_id: item.room_id,
+    }));
+    setShowDepositModal(true);
+  };
 
   const handleReject = () => {
     dispatch(rejectRentalRequest(item.id))
@@ -15,6 +42,31 @@ export default function CustomerItem({ item }) {
 
   const handleApprove = () => {
     dispatch(approveRentalRequest(item.id))
+  }
+
+  const alreadyApproved = item?.status === 'pending' &&
+    allRentalRequest?.some(
+      req => req.room_name === item.room_name &&
+        req.house_name === item.house_name &&
+        req.status === 'approved'
+    );
+
+  const handleConfirmCreateDepositContract = async () => {
+    const { renter_id, room_id, amount, start_date, note } = formData;
+
+    if (!amount || !start_date) {
+      alert("Vui lòng nhập đầy đủ số tiền cọc và ngày vào.");
+      return;
+    }
+
+    try {
+      console.log("data", formData)
+      await dispatch(createDepositContract(formData));
+      toast.success("Tạo hợp đồng cọc thành công")
+      setShowDepositModal(false);
+    } catch (error) {
+      toast.error("Lỗi tạo hợp đồng:");
+    }
   }
 
   return (
@@ -38,12 +90,21 @@ export default function CustomerItem({ item }) {
               </>
             ) : item?.status === 'approved' ? (
               <>
-                <BaseButton type="green">Tạo hợp đồng cọc</BaseButton>
+                <BaseButton type="green" onClick={handleOpenDepositModal}>Tạo hợp đồng cọc</BaseButton>
                 <BaseButton type="red" onClick={handleReject}>Từ chối</BaseButton>
               </>
-            ) : <><BaseButton type="white" onClick={handleApprove}>Xác nhận</BaseButton></>}
+            ) : <><BaseButton type="white" onClick={handleApprove} disabled={alreadyApproved}>Xác nhận</BaseButton></>}
           </span>
         </div>
+
+        <BaseModal
+          open={showDepositModal}
+          type="red"
+          title="Tạo hợp đồng cọc"
+          content={<CreateDepositContract formData={formData} setFormData={setFormData} />}
+          onCancel={() => setShowDepositModal(false)}
+          onConfirm={handleConfirmCreateDepositContract}
+        />
       </div>
     </div>
   )

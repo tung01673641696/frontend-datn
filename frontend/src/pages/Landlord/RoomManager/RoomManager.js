@@ -144,7 +144,6 @@ export default function RoomManager() {
               <div className='room_mana_card_fun'>
                 <BaseButton type="blue" onClick={() => navigate(`/landlord/room-manager/view-room/room_id/${room.id}`)}>Thông tin phòng</BaseButton>
                 <BaseButton type="red">Tạo hợp đồng</BaseButton>
-                <BaseButton type="green">Giữ chỗ</BaseButton>
               </div>
 
             </div>

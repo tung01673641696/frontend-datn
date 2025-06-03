@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import './ReserveManager.scss'
+import './RentalRequestManager.scss'
 import HeaderUser from '../../../layouts/UserLayout/HeaderUser/HeaderUser'
 import Footer from '../../../layouts/UserLayout/FooterUser/FooterUser'
 import BaseButton from '../../../components/BaseButton/BaseButton'
@@ -8,14 +8,13 @@ import CustomerItem from '../../../layouts/LandlordLayout/CustomerManagerLayout/
 import { getAllRentalRequest } from '../../../redux/reducers/rentalRequest'
 
 
-export default function ReserveManager() {
+export default function RentalRequestManager() {
   const dispatch = useDispatch()
   const user = JSON.parse(localStorage.getItem("user"))
   const { id } = user
   const [statusRental, setStatusRental] = useState('pending');
 
   const { allRentalRequest } = useSelector((state) => state.rentalrequestReducer)
-  console.log(">>>>>", allRentalRequest)
 
   useEffect(() => {
     dispatch(getAllRentalRequest(id))

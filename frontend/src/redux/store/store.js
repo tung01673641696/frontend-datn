@@ -8,6 +8,7 @@ import VehicleSlice from "../reducers/vehicle";
 import PostsSlice from "../reducers/posts";
 import categorySlice from "../reducers/category";
 import RentalRequestSlice from "../reducers/rentalRequest";
+import ContractSlice from "../reducers/contract";
 
 export const store = configureStore({
   reducer: {
@@ -19,6 +20,7 @@ export const store = configureStore({
     vehicleReducer: VehicleSlice.reducer,
     postsReducer: PostsSlice.reducer,
     categoryReducer: categorySlice.reducer,
-    rentalrequestReducer: RentalRequestSlice.reducer
+    rentalrequestReducer: RentalRequestSlice.reducer,
+    contractReducer: ContractSlice.reducer
   }
 })

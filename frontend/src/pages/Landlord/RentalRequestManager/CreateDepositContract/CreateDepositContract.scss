@@ -1,0 +1,21 @@
+.deposit_contract {
+  padding: 0 20px;
+  .deposit_contract_item {
+    margin: 15px 0;
+    display: flex;
+    justify-content: space-between;
+
+    label {
+      min-width: 25%;
+      
+    }
+
+    input {
+      width: 70%;
+    }
+
+    textarea {
+      width: 70%;
+    }
+  }
+}
