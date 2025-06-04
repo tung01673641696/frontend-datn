@@ -1,4 +1,4 @@
-.card-room-like {
+.card-deposit-contract {
   width: calc(100% / 2 - 10px);
   display: flex;
   justify-content: space-between;
@@ -24,11 +24,10 @@
     text-align: left;
     padding: 0 15px;
 
-    .card-room-like_content_title {
-      margin-bottom: 6px;
+    .card-deposit-contract_content_title {
       font-size: 18px;
       font-weight: 500;
-      min-height: 52px;
+      padding-bottom: 10px;
 
       display: -webkit-box;
       -webkit-box-orient: vertical;
@@ -36,18 +35,26 @@
       overflow: hidden;
     }
 
-    .card-room-like_content_price {
+    .card-deposit-contract_content_price {
       font-weight: 500;
       color: #D60909;
     }
 
-    .card-room-like_content_address {
+    .card-deposit-contract_content_address {
       margin: 2px 0;
 
       display: -webkit-box;
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 1;
       overflow: hidden;
+    }
+
+    .card-deposit-contract_content_button {
+      margin: 7px 0;
+      button {
+        font-size: 14px;
+        padding: 3px 10px;
+      }
     }
   }
 }

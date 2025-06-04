@@ -1,0 +1,36 @@
+.detail_deposit_contract {
+  background-color: #f3f3f3;
+
+  .detail_deposit_contract_box {
+    width: 50%;
+    margin: 40px auto;
+    padding: 30px 80px;
+    background-color: white;
+
+    h3 {
+      font-size: 22px;
+      margin-bottom: 50px;
+    }
+
+    .detail_deposit_contract_box_item {
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+
+      h4 {
+        font-size: 20px;
+      }
+
+      span {
+        font-size: 17px;
+      }
+    }
+
+    .detail_deposit_contract_box_button {
+      button {
+        margin-right: 15px;
+      }
+    }
+  }
+}

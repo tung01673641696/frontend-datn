@@ -60,12 +60,15 @@ export default function CustomerItem({ item }) {
     }
 
     try {
-      console.log("data", formData)
-      await dispatch(createDepositContract(formData));
+      await dispatch(createDepositContract(formData)).unwrap();
       toast.success("Tạo hợp đồng cọc thành công")
       setShowDepositModal(false);
     } catch (error) {
-      toast.error("Lỗi tạo hợp đồng:");
+      if (error?.status === 409) {
+        toast.warning(error?.data?.message || "Hợp đồng cọc đã tồn tại.");
+      } else {
+        toast.error("Lỗi tạo hợp đồng cọc");
+      }
     }
   }
 
