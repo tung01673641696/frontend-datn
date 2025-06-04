@@ -92,7 +92,7 @@ export default function Routers() {
               <Route path='/tenant/edit-post/post_id/:id' element={<EditPostByTenant />} />
               <Route path='/tenant/post-manager' element={<PostManagerTenant />} />
               <Route path='/tenant/deposit-contract-manager' element={<DepositContractManager />} />
-              <Route path='/tenant/detail-deposit-contract' element={<DetailDepositContract />} />
+              <Route path='/tenant/deposit-contract-detail/renter/:renterId/room/:roomId' element={<DetailDepositContract />} />
             </Route>
 
             <Route>

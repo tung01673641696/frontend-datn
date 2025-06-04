@@ -18,12 +18,47 @@ export const createDepositContract = createAsyncThunk(
   }
 );
 
+export const getAllDepositContractByRenter = createAsyncThunk("contract/getAllDepositContractByRenter", async (renterId) => {
+  const allDepositContractByRenter = await ContractApi.getAllDepositContractByRenter(renterId);
+  return allDepositContractByRenter;
+});
+
+export const getDepositContractDetail = createAsyncThunk(
+  "contract/getDepositContractDetail",
+  async ({ renterId, roomId }) => {
+    const depositContractDetail = await ContractApi.getDepositContractDetail(renterId, roomId);
+    return depositContractDetail;
+  }
+);
+
+
+
+
+
+
 const ContractSlice = createSlice({
   name: "contract",
   initialState: {
-
+    allDepositContractByRenter: [],
+    depositContractDetail: {}
   },
+  extraReducers: builder => {
+    builder
+      .addCase(getAllDepositContractByRenter.pending, (state, action) => {
+        state.loading = true
+      })
+      .addCase(getAllDepositContractByRenter.rejected, (state, action) => {
+        state.loading = false
+      })
+      .addCase(getAllDepositContractByRenter.fulfilled, (state, action) => {
+        state.loading = false
+        state.allDepositContractByRenter = action.payload.data.deposit_contracts;
+      })
 
+      .addCase(getDepositContractDetail.fulfilled, (state, action) => {
+        state.depositContractDetail = action.payload.data;
+      })
+  }
 })
 
 export default ContractSlice

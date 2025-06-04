@@ -1,10 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './DetailDepositContract.scss'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import HeaderUser from '../../../layouts/UserLayout/HeaderUser/HeaderUser'
 import Footer from '../../../layouts/UserLayout/FooterUser/FooterUser'
 import BaseButton from '../../../components/BaseButton/BaseButton'
+import { getDepositContractDetail } from '../../../redux/reducers/contract'
+import { useParams } from 'react-router-dom'
 
 export default function DetailDepositContract() {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const { renterId, roomId } = useParams()
+  const { depositContractDetail } = useSelector((state) => state.contractReducer)
+
+  console.log(">>>>>>>", depositContractDetail)
+
+  useEffect(() => {
+    if (renterId && roomId) {
+      dispatch(getDepositContractDetail({ renterId, roomId }))
+    }
+  }, [renterId, roomId])
+
+
   return (
     <div className='detail_deposit_contract'>
       <HeaderUser />
@@ -12,26 +30,28 @@ export default function DetailDepositContract() {
       <div className='detail_deposit_contract_box'>
         <h3>Chi tiết hợp đồng cọc</h3>
 
-        <div className='detail_deposit_contract_box_item'>
-          <h4>Đại diện bên thuê</h4>
-          <span>Họ và tên: Hoàng Thanh Tùng</span>
-          <span>Số điện thoại: 0373641696</span>
+        <div className='detail_deposit_contract_box_flex'>
+          <div className='detail_deposit_contract_box_flex_item'>
+            <h4>Đại diện bên thuê</h4>
+            <span>Họ và tên: {depositContractDetail?.renter?.name}</span>
+            <span>Số điện thoại: {depositContractDetail?.renter?.phone}</span>
+          </div>
+
+          <div className='detail_deposit_contract_box_flex_item'>
+            <h4>Đại diện bên chủ nhà</h4>
+            <span>Họ và tên: {depositContractDetail?.landlord?.name}</span>
+            <span>Số điện thoại: {depositContractDetail?.landlord?.phone}</span>
+          </div>
         </div>
 
-        <div className='detail_deposit_contract_box_item'>
-          <h4>Đại diện bên chủ nhà</h4>
-          <span>Họ và tên: Đỗ Văn Hiểu</span>
-          <span>Số điện thoại: 0373641696</span>
-        </div>
-
-        <div className='detail_deposit_contract_box_item'>
+        <div className='detail_deposit_contract_box_flex1'>
           <h4>Thông tin phòng</h4>
-          <span>Phòng 101 - Nhà Gohomy1</span>
-          <span>Địa chỉ: 250 Kim Giang, quận Hoàng Mai</span>
-          <span>giá thuê: 4.000.000đ / tháng</span>
-          <span>Đã cọc: 1.000.000đ</span>
-          <span>Ngày khách vào ở: 4/6/2035</span>
-          <span>Cam kết: Nếu đến ngày 4/6/2025,Khách hàng không đến kí hợp đồng thuê phòng thì số tiền cọc sẽ không được hoàn lại</span>
+          <span>Phòng {depositContractDetail?.room?.name} - Nhà {depositContractDetail?.house?.name}</span>
+          <span>Địa chỉ: {depositContractDetail?.house?.address}</span>
+          <span>giá thuê: {depositContractDetail?.room.price ? `${Number(depositContractDetail?.room?.price).toLocaleString('vi-VN')}đ` : "Đang cập nhật"} / tháng</span>
+          <span>Đã cọc: {depositContractDetail?.contract?.deposit_amount ? `${Number(depositContractDetail?.contract?.deposit_amount).toLocaleString('vi-VN')}đ` : "Đang cập nhật"}</span>
+          <span>Ngày khách vào ở: {depositContractDetail?.contract?.start_date}</span>
+          <span>Cam kết: Nếu đến ngày {depositContractDetail?.contract?.start_date},Khách hàng không đến kí hợp đồng thuê phòng thì số tiền cọc sẽ không được hoàn lại</span>
         </div>
 
         <div className='detail_deposit_contract_box_button'>

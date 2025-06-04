@@ -12,11 +12,30 @@
       margin-bottom: 50px;
     }
 
-    .detail_deposit_contract_box_item {
+    .detail_deposit_contract_box_flex {
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 30px;
+
+      .detail_deposit_contract_box_flex_item {
+        display: flex;
+        flex-direction: column;
+
+        h4 {
+          font-size: 20px;
+        }
+
+        span {
+          font-size: 17px;
+        }
+      }
+    }
+
+    .detail_deposit_contract_box_flex1 {
       text-align: left;
       display: flex;
       flex-direction: column;
-      margin-bottom: 20px;
 
       h4 {
         font-size: 20px;
@@ -28,6 +47,8 @@
     }
 
     .detail_deposit_contract_box_button {
+      margin: 20px 0;
+
       button {
         margin-right: 15px;
       }
