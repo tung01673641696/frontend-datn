@@ -13,11 +13,18 @@ export default function Common({ children }) {
     { id: 3, title: 'Danh sách nhà', path: `/landlord/house-manager` },
     {
       id: 4,
-      title: 'Khách thuê',
+      title: 'Quản lý khách thuê',
       children: [
-        { id: 41, title: 'Danh sách khách thuê', path: '/landlord/tenant-manager' },
-        { id: 42, title: 'Danh sách hợp đồng', path: '' },
-        { id: 43, title: 'Danh sách phương tiện', path: '/landlord/vehicle-manager' },
+        { id: 7, title: 'Danh sách khách thuê', path: '/landlord/tenant-manager' },
+        { id: 8, title: 'Danh sách phương tiện', path: '/landlord/vehicle-manager' },
+      ]
+    },
+    {
+      id: 5,
+      title: 'Quản lý hợp đồng',
+      children: [
+        { id: 9, title: 'Quản lý hợp đồng cọc', path: '' },
+        { id: 10, title: 'Quản lý hợp đồng thuê', path: '' },
       ]
     },
   ]

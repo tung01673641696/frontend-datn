@@ -1,7 +1,46 @@
 .search-need {
   &_wrap {
     background-color: #F4F4F4;
-    padding: 40px 0;
+    padding: 2px 0;
+  }
 
+  .search-need-fil {
+    width: 100%;
+    background-color: #f4f4f4;
+    padding-top: 10px;
+
+    .search-need_filter {
+      display: flex;
+      width: 70%;
+      margin: auto;
+      padding: 20px 0;
+      background-color: #ffffff;
+
+      .search-need_filter_title {
+        width: 30%;
+        text-align: left;
+        padding-left: 50px;
+        font-size: 20px;
+        font-weight: 600;
+      }
+
+      .search-need_filter_flex {
+        display: flex;
+        justify-content: flex-start;
+        width: 70%;
+
+        .search-need_filter_flex_item {
+          margin-right: 50px;
+
+          span {
+            margin-right: 10px;
+          }
+
+          select {
+            padding: 4px 7px;
+          }
+        }
+      }
+    }
   }
 }

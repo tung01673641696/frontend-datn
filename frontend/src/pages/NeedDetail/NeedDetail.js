@@ -3,7 +3,6 @@ import './NeedDetail.scss'
 import HeaderUser from '../../layouts/UserLayout/HeaderUser/HeaderUser'
 import Footer from '../../layouts/UserLayout/FooterUser/FooterUser'
 import RoomContentNeed from '../../layouts/NeedDetailLayout/RoomContentNeed/RoomContentNeed'
-import RoomNeedSame from '../../layouts/NeedDetailLayout/RoomNeedSame/RoomNeedSame'
 import { useParams } from 'react-router-dom'
 
 export default function NeedDetail() {
@@ -14,8 +13,8 @@ export default function NeedDetail() {
       <HeaderUser />
 
       <div className='search-need_wrap'>
+        <div className='search-need_wrap_title'>Chi tiết tìm phòng theo nhu cầu</div>
         <RoomContentNeed id={id}/>
-        <RoomNeedSame />
       </div>
 
       <Footer />
