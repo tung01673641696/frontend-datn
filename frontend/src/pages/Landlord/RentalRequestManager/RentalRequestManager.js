@@ -13,7 +13,6 @@ export default function RentalRequestManager() {
   const user = JSON.parse(localStorage.getItem("user"))
   const { id } = user
   const [statusRental, setStatusRental] = useState('pending');
-
   const { allRentalRequest } = useSelector((state) => state.rentalrequestReducer)
 
   useEffect(() => {

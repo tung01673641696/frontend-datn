@@ -5,7 +5,7 @@ import BaseButton from '../../../components/BaseButton/BaseButton'
 import { getAllPostByLandlordActiveByDistrict } from '../../../redux/reducers/posts'
 import { useSelector, useDispatch } from 'react-redux'
 
-export default function ListRoom({ districtId }) {
+export default function ListRoom({ districtId, minPrice, maxPrice }) {
   const dispatch = useDispatch()
   const { allPostsByLandlordActiveByDistrict } = useSelector((state) => state.postsReducer)
 
@@ -15,14 +15,17 @@ export default function ListRoom({ districtId }) {
     }
   }, [districtId])
 
-  console.log("huhu", allPostsByLandlordActiveByDistrict)
+  const filtered = allPostsByLandlordActiveByDistrict.filter(item => {
+    const price = Number(item.price)
+    return (!minPrice || price > minPrice) && (!maxPrice || price <= maxPrice)
+  })
 
   return (
     <div className='list-room'>
       <h4>Danh sách phòng</h4>
 
       <div className='list-room_all'>
-        {allPostsByLandlordActiveByDistrict?.slice(0, 10).map((item) => (
+        {filtered?.slice(0, 10).map((item) => (
           <CardRoom2 item={item} />
         ))}
       </div>

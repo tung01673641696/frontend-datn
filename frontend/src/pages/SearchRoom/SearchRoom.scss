@@ -1,22 +1,46 @@
 .search-room {
   &_wrap {
     background-color: #F4F4F4;
-    padding: 40px 0;
-
+    padding: 2px 0;
   }
-}
 
-.info {
+  .search-room-fil {
+    width: 100%;
+    background-color: #f4f4f4;
+    padding-top: 10px;
 
-  .info_select {
-    display: flex;
-    justify-content: space-between;
-
-    .info_select_ele {
-      width: calc(100% / 3 - 20px);
+    .search_room_filter {
       display: flex;
-      flex-direction: column;
+      width: 70%;
+      margin: auto;
+      padding: 20px 0;
+      background-color: #ffffff;
+
+      .search_room_filter_title {
+        width: 30%;
+        text-align: left;
+        padding-left: 50px;
+        font-size: 20px;
+        font-weight: 600;
+      }
+
+      .search_room_filter_flex {
+        display: flex;
+        justify-content: flex-start;
+        width: 70%;
+
+        .search_room_filter_flex_item {
+          margin-right: 50px;
+
+          span {
+            margin-right: 10px;
+          }
+
+          select {
+            padding: 4px 7px;
+          }
+        }
+      }
     }
   }
-
 }

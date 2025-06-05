@@ -11,7 +11,6 @@ export default function RoomNew() {
   const navigate = useNavigate()
   const { allPostsByAllLandlordActive } = useSelector((state) => state.postsReducer)
 
-  console.log("<<<<<<<<<<", allPostsByAllLandlordActive)
   useEffect(() => {
     dispatch(getAllPostsByAllLandlordActive())
   }, [])

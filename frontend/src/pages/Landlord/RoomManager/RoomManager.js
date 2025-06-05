@@ -109,8 +109,8 @@ export default function RoomManager() {
                 <h4>
                   Phòng: {room.name} - {
                     room.status === "available" ? "Đang trống" :
-                      room.status === "reserved" ? "Đang cọc" :
-                        "Đang ở"
+                      room.status === "rented" ? "Đang ở" :
+                        "Đang cọc"
                   }
                 </h4>
                 <div>
@@ -144,7 +144,7 @@ export default function RoomManager() {
               <div className='room_mana_card_fun'>
                 <BaseButton type="blue" onClick={() => navigate(`/landlord/room-manager/view-room/room_id/${room.id}`)}>Thông tin phòng</BaseButton>
                 <BaseButton type="green">Khách thuê</BaseButton>
-                <BaseButton type="red">Tạo hợp đồng</BaseButton>
+                <BaseButton type="red" onClick={() => navigate(`/landlord/room-manager/create-contract`)}>Tạo hợp đồng</BaseButton>
               </div>
 
             </div>

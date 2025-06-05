@@ -9,6 +9,8 @@ import BaseModal from '../../../../components/BaseModal/BaseModal'
 import CreateDepositContract from '../../../../pages/Landlord/RentalRequestManager/CreateDepositContract/CreateDepositContract'
 import { createDepositContract } from '../../../../redux/reducers/contract'
 import { toast } from 'react-toastify'
+import { getAllRentalRequest } from '../../../../redux/reducers/rentalRequest'
+import { getDepositContractDetail } from '../../../../redux/reducers/contract'
 
 export default function CustomerItem({ item }) {
   const dispatch = useDispatch()
@@ -27,11 +29,19 @@ export default function CustomerItem({ item }) {
     status: 'signed'
   });
 
+
   const handleOpenDepositModal = () => {
     setFormData(prev => ({
       ...prev,
       renter_id: item.renter_id,
       room_id: item.room_id,
+      name: item.renter_name,
+      phone: item.renter_phone,
+      type: 'deposit',
+      amount: '',
+      start_date: '',
+      note: '',
+      status: 'signed'
     }));
     setShowDepositModal(true);
   };
@@ -63,6 +73,7 @@ export default function CustomerItem({ item }) {
       await dispatch(createDepositContract(formData)).unwrap();
       toast.success("Tạo hợp đồng cọc thành công")
       setShowDepositModal(false);
+
     } catch (error) {
       if (error?.status === 409) {
         toast.warning(error?.data?.message || "Hợp đồng cọc đã tồn tại.");
@@ -71,6 +82,7 @@ export default function CustomerItem({ item }) {
       }
     }
   }
+
 
   return (
     <div className='customer_item'>
@@ -96,7 +108,10 @@ export default function CustomerItem({ item }) {
                 <BaseButton type="green" onClick={handleOpenDepositModal}>Tạo hợp đồng cọc</BaseButton>
                 <BaseButton type="red" onClick={handleReject}>Từ chối</BaseButton>
               </>
-            ) : <><BaseButton type="white" onClick={handleApprove} disabled={alreadyApproved}>Xác nhận</BaseButton></>}
+            )
+              : (
+                <><BaseButton type="red" onClick={handleApprove} disabled={alreadyApproved}>Xóa giao dịch</BaseButton></>
+              )}
           </span>
         </div>
 

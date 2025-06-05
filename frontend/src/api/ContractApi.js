@@ -14,7 +14,12 @@ const ContractApi = {
   async getDepositContractDetail(renterId, roomId) {
     const url = `/contract/deposit-contract-detail/renter/${renterId}/room/${roomId}`;
     return axiosClient.get(url);
-  }
+  },
+
+  cancelContract(contractId) {
+    return axiosClient.put(`/contract/cancel/${contractId}`)
+  },
+
 }
 
 export default ContractApi

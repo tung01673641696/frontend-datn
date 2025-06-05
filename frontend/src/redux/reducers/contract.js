@@ -31,16 +31,25 @@ export const getDepositContractDetail = createAsyncThunk(
   }
 );
 
-
-
-
+export const cancelDepositContract = createAsyncThunk(
+  "contract/cancelDepositContract",
+  async (contractId, thunkAPI) => {
+    try {
+      const res = await ContractApi.cancelContract(contractId);
+      return res.data;
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err.response.data);
+    }
+  }
+);
 
 
 const ContractSlice = createSlice({
   name: "contract",
   initialState: {
     allDepositContractByRenter: [],
-    depositContractDetail: {}
+    depositContractDetail: {},
+    isDepositContractExists: false,
   },
   extraReducers: builder => {
     builder
@@ -58,6 +67,7 @@ const ContractSlice = createSlice({
       .addCase(getDepositContractDetail.fulfilled, (state, action) => {
         state.depositContractDetail = action.payload.data;
       })
+
   }
 })
 

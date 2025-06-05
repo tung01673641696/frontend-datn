@@ -9,21 +9,19 @@ import RoomDescript from '../../layouts/RoomDetailLayout/RoomDescript/RoomDescri
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import { getOneRoom } from '../../redux/reducers/room'
-import { getPostByRoomId } from '../../redux/reducers/posts'
 
 export default function RoomDetail() {
   const params = useParams()
   const dispatch = useDispatch()
-  const id_room = params.id
+  const id = params.id
 
   const { oneRoom } = useSelector((state) => state.roomReducer)
 
-  console.log(">>>>>>>>", oneRoom)
-
-
   useEffect(() => {
-    dispatch(getOneRoom(id_room))
-  }, [id_room])
+    if (!oneRoom || oneRoom.room_id !== id) {
+      dispatch(getOneRoom(id));
+    }
+  }, [id])
 
   return (
     <div className='room-detail'>

@@ -7,7 +7,7 @@ export default function CardRoom2({ item }) {
   const navigate = useNavigate()
 
   function handleClick() {
-    navigate(`/room-detail/room_id/${item.id}`)
+    navigate(`/room-detail/room_id/${item.room_id}`)
     window.scrollTo(0, 0)
   }
 
