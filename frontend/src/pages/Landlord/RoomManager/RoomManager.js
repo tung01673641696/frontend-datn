@@ -22,8 +22,6 @@ export default function RoomManager() {
   const id = user.id
   const { houseId } = useParams()
 
-  console.log(">>>>>", listRoomByHouse)
-
   useEffect(() => {
     dispatch(houseByOwner(id))
   }, [])

@@ -10,12 +10,12 @@ import CreateDepositContract from '../../../../pages/Landlord/RentalRequestManag
 import { createDepositContract } from '../../../../redux/reducers/contract'
 import { toast } from 'react-toastify'
 import { getAllRentalRequest } from '../../../../redux/reducers/rentalRequest'
-import { getDepositContractDetail } from '../../../../redux/reducers/contract'
 
 export default function CustomerItem({ item }) {
   const dispatch = useDispatch()
   const [showDepositModal, setShowDepositModal] = useState(false);
   const allRentalRequest = useSelector(state => state.rentalrequestReducer.data || [])
+
 
   const [formData, setFormData] = useState({
     renter_id: item?.renter_id || '',
@@ -92,10 +92,10 @@ export default function CustomerItem({ item }) {
         </div>
 
         <div className='customer_item_ele_content'>
-          <span className='customer_item_ele_content_child'>{item?.renter_name}</span>
-          <span className='customer_item_ele_content_child'>{item?.renter_phone}</span>
-          <span className='customer_item_ele_content_child'>Thích: P{item?.room_name} - Nhà {item?.house_name}</span>
-          <span className='customer_item_ele_content_child'>Địa chỉ nhà: {item?.house_address}</span>
+          <span className='customer_item_ele_content_child'>{item?.renter_name || item?.renter.name}</span>
+          <span className='customer_item_ele_content_child'>{item?.renter_phone || item?.renter.phone}</span>
+          <span className='customer_item_ele_content_child'>Thích: P{item?.room_name || item?.room.name} - Nhà {item?.house_name || item?.house.name}</span>
+          <span className='customer_item_ele_content_child'>Địa chỉ nhà: {item?.house_address || item?.house.address}</span>
           <span className='customer_item_ele_content_child'>{item?.reserved_at}</span>
           <span className='customer_item_ele_content_action'>
             {item?.status === 'pending' ? (
@@ -103,15 +103,20 @@ export default function CustomerItem({ item }) {
                 <BaseButton type="white" onClick={handleApprove}>Xác nhận</BaseButton>
                 <BaseButton type="red" onClick={handleReject}>Từ chối</BaseButton>
               </>
-            ) : item?.status === 'approved' ? (
+            ) : ['approved'].includes(item?.status) ? (
               <>
                 <BaseButton type="green" onClick={handleOpenDepositModal}>Tạo hợp đồng cọc</BaseButton>
-                <BaseButton type="red" onClick={handleReject}>Từ chối</BaseButton>
+                <BaseButton type="red">Từ chối</BaseButton>
               </>
             )
-              : (
-                <><BaseButton type="red" onClick={handleApprove} disabled={alreadyApproved}>Xóa giao dịch</BaseButton></>
-              )}
+              : ['signed'].includes(item?.status) ? (
+                <>
+                  <BaseButton type="blue" onClick={handleReject}>Xem hợp đồng cọc</BaseButton>
+                </>
+              )
+                : (
+                  <><BaseButton type="red" onClick={handleApprove} disabled={alreadyApproved}>Xóa giao dịch</BaseButton></>
+                )}
           </span>
         </div>
 

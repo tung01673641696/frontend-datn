@@ -6,21 +6,32 @@ import Footer from '../../../layouts/UserLayout/FooterUser/FooterUser'
 import BaseButton from '../../../components/BaseButton/BaseButton'
 import CustomerItem from '../../../layouts/LandlordLayout/CustomerManagerLayout/CustomerItem/CustomerItem'
 import { getAllRentalRequest } from '../../../redux/reducers/rentalRequest'
-
+import { getAllDepositContractsByLandlord } from '../../../redux/reducers/contract'
 
 export default function RentalRequestManager() {
   const dispatch = useDispatch()
   const user = JSON.parse(localStorage.getItem("user"))
   const { id } = user
-  const [statusRental, setStatusRental] = useState('pending');
+  const [statusRental, setStatusRental] = useState(['pending']);
   const { allRentalRequest } = useSelector((state) => state.rentalrequestReducer)
+  const { allDepositContractsByLandlord } = useSelector((state) => state.contractReducer)
+
+  console.log("<<<<<<<<", allRentalRequest)
+  console.log(">>>>>>", allDepositContractsByLandlord)
 
   useEffect(() => {
     dispatch(getAllRentalRequest(id))
+    dispatch(getAllDepositContractsByLandlord(id))
   }, [])
 
-  const filteredRequests = allRentalRequest?.filter(
-    (item) => item.status === statusRental
+
+  const mergedRequests = [
+    ...allRentalRequest.map(item => ({ ...item, type: 'rental_request' })),
+    ...allDepositContractsByLandlord.map(item => ({ ...item, type: 'contract' }))
+  ];
+
+  const filteredRequests = mergedRequests?.filter(
+    (item) => statusRental.includes(item.status)
   );
 
   return (
@@ -32,8 +43,8 @@ export default function RentalRequestManager() {
         <div className='customer_manager_main_status'>
           <div className='customer_manager_main_status_ele'>
             <BaseButton
-              type={statusRental === 'pending' ? 'red' : 'white'}
-              onClick={() => setStatusRental('pending')}
+              type={statusRental.includes('pending') ? 'red' : 'white'}
+              onClick={() => setStatusRental(['pending'])}
             >
               Chờ xác nhận
             </BaseButton>
@@ -41,8 +52,8 @@ export default function RentalRequestManager() {
 
           <div className='customer_manager_main_status_ele'>
             <BaseButton
-              type={statusRental === 'approved' ? 'red' : 'white'}
-              onClick={() => setStatusRental('approved')}
+              type={statusRental.includes('approved') || statusRental.includes('signed') ? 'red' : 'white'}
+              onClick={() => setStatusRental(['approved', 'signed'])}
             >
               Đã xác nhận
             </BaseButton>
@@ -50,8 +61,8 @@ export default function RentalRequestManager() {
 
           <div className='customer_manager_main_status_ele'>
             <BaseButton
-              type={statusRental === 'reject' ? 'red' : 'white'}
-              onClick={() => setStatusRental('reject')}
+              type={statusRental.includes('reject') || statusRental.includes('cancelled') ? 'red' : 'white'}
+              onClick={() => setStatusRental(['reject', 'cancelled'])}
             >
               Từ chối
             </BaseButton>

@@ -43,11 +43,20 @@ export const cancelDepositContract = createAsyncThunk(
   }
 );
 
+export const getAllDepositContractsByLandlord = createAsyncThunk(
+  "contract/getAllDepositContractsByLandlord",
+  async (landlordId) => {
+    const allDepositContractsByLandlord = await ContractApi.getAllDepositContractsByLandlord(landlordId);
+    return allDepositContractsByLandlord;
+  }
+);
+
 
 const ContractSlice = createSlice({
   name: "contract",
   initialState: {
     allDepositContractByRenter: [],
+    allDepositContractsByLandlord: [],
     depositContractDetail: {},
     isDepositContractExists: false,
   },
@@ -66,6 +75,11 @@ const ContractSlice = createSlice({
 
       .addCase(getDepositContractDetail.fulfilled, (state, action) => {
         state.depositContractDetail = action.payload.data;
+      })
+
+      .addCase(getAllDepositContractsByLandlord.fulfilled, (state, action) => {
+        state.loading = false
+        state.allDepositContractsByLandlord = action.payload.data.deposit_contracts;
       })
 
   }
