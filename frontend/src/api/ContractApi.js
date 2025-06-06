@@ -16,8 +16,12 @@ const ContractApi = {
     return axiosClient.get(url);
   },
 
-  cancelContract(contractId) {
+  async cancelContract(contractId) {
     return axiosClient.put(`/contract/cancel/${contractId}`)
+  },
+
+  async confirmDepositContract(contractId) {
+    return axiosClient.put(`/contract/confirm/${contractId}`)
   },
 
   async getAllDepositContractsByLandlord(landlordId) {

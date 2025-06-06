@@ -43,6 +43,18 @@ export const cancelDepositContract = createAsyncThunk(
   }
 );
 
+export const confirmDepositContract = createAsyncThunk(
+  "contract/confirmDepositContract",
+  async (contractId, thunkAPI) => {
+    try {
+      const res = await ContractApi.confirmDepositContract(contractId);
+      return res.data;
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err.response.data);
+    }
+  }
+);
+
 export const getAllDepositContractsByLandlord = createAsyncThunk(
   "contract/getAllDepositContractsByLandlord",
   async (landlordId) => {

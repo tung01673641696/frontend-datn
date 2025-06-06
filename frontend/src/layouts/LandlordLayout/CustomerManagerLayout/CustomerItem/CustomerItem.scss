@@ -5,6 +5,20 @@
   .customer_item_ele {
     display: flex;
     border: 1px solid #858181;
+    position: relative;
+
+    .customer_item_ele_posision {
+      position: absolute;
+      top: -10px;
+      left: -20px;
+      background-color: #007bff;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 13px;
+      z-index: 1;
+    }
+
 
     .customer_item_ele_avatar {
       width: 30%;

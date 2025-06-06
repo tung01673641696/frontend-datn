@@ -10,14 +10,16 @@ import { useParams } from 'react-router-dom'
 import { cancelDepositContract } from '../../../redux/reducers/contract'
 import BaseModal from '../../../components/BaseModal/BaseModal'
 import { toast } from 'react-toastify'
+import { confirmDepositContract } from '../../../redux/reducers/contract'
 
 export default function DetailDepositContract() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const user = JSON.parse(localStorage.getItem('user'))
   const { renterId, roomId } = useParams()
   const { depositContractDetail } = useSelector((state) => state.contractReducer)
   const [openModal, setOpenModal] = useState(false)
-
+  const [openModalConfirm, setOpenModalConfirm] = useState(false)
 
   console.log(">>>>>>>", depositContractDetail)
 
@@ -37,6 +39,19 @@ export default function DetailDepositContract() {
       navigate('/tenant/deposit-contract-manager', { state: { statusRental: 'reject' } });
     } catch (error) {
       console.error("Hủy hợp đồng thất bại:", error);
+    }
+  };
+
+
+  const handleConfirmContract = async () => {
+    if (!depositContractDetail?.contract?.contract_id) return;
+
+    try {
+      await dispatch(confirmDepositContract(depositContractDetail.contract.contract_id));
+      setOpenModalConfirm(false);
+      toast.success("Xác nhận hợp đồng cọc thành công");
+    } catch (error) {
+      console.error("Xác nhận hợp đồng cọc thất bại:", error);
     }
   };
 
@@ -73,8 +88,19 @@ export default function DetailDepositContract() {
         </div>
 
         <div className='detail_deposit_contract_box_button'>
-          <BaseButton type="red" onClick={() => setOpenModal(true)}>Hủy hợp đồng cọc</BaseButton>
-          <BaseButton onClick={() => navigate(-1)}>Quay lại</BaseButton>
+          {user?.role_id === 1 && (
+            <div className='detail_deposit_contract_box_button'>
+              <BaseButton type="blue" onClick={() => setOpenModalConfirm(true)}>Xác nhận</BaseButton>
+              <BaseButton type="red" onClick={() => setOpenModal(true)}>Hủy hợp đồng cọc</BaseButton>
+              <BaseButton onClick={() => navigate(-1)}>Quay lại</BaseButton>
+            </div>
+          )}
+
+          {user?.role_id !== 1 && (
+            <div className='detail_deposit_contract_box_button'>
+              <BaseButton onClick={() => navigate(-1)}>Quay lại</BaseButton>
+            </div>
+          )}
         </div>
 
         <BaseModal
@@ -84,6 +110,16 @@ export default function DetailDepositContract() {
           content="Bạn có chắc chắn muốn hủy hợp đồng cọc này không? Hành động này không thể hoàn tác."
           onCancel={() => setOpenModal(false)}
           onConfirm={handleCancelContract}
+        />
+
+
+        <BaseModal
+          open={openModalConfirm}
+          type="red"
+          title="Xác nhận hợp đồng cọc"
+          content="Bạn có muốn xác nhận hợp đồng cọc"
+          onCancel={() => setOpenModalConfirm(false)}
+          onConfirm={handleConfirmContract}
         />
       </div>
       <Footer />

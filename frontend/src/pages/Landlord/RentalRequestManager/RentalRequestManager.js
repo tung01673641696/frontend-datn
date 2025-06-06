@@ -30,6 +30,8 @@ export default function RentalRequestManager() {
     ...allDepositContractsByLandlord.map(item => ({ ...item, type: 'contract' }))
   ];
 
+  console.log("mergedRequests>>>", mergedRequests)
+
   const filteredRequests = mergedRequests?.filter(
     (item) => statusRental.includes(item.status)
   );

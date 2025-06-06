@@ -3,6 +3,7 @@ import "./CustomerItem.scss"
 import Img from '../../../../assets/Images/User/client.jpg'
 import BaseButton from '../../../../components/BaseButton/BaseButton'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { rejectRentalRequest } from '../../../../redux/reducers/rentalRequest'
 import { approveRentalRequest } from '../../../../redux/reducers/rentalRequest'
 import BaseModal from '../../../../components/BaseModal/BaseModal'
@@ -13,9 +14,12 @@ import { getAllRentalRequest } from '../../../../redux/reducers/rentalRequest'
 
 export default function CustomerItem({ item }) {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [showDepositModal, setShowDepositModal] = useState(false);
   const allRentalRequest = useSelector(state => state.rentalrequestReducer.data || [])
 
+  const renter_id = item.renter.id
+  const room_id = item.room.id
 
   const [formData, setFormData] = useState({
     renter_id: item?.renter_id || '',
@@ -71,7 +75,7 @@ export default function CustomerItem({ item }) {
 
     try {
       await dispatch(createDepositContract(formData)).unwrap();
-      toast.success("Tạo hợp đồng cọc thành công")
+      toast.success("Tạo hợp đồng cọc thành công, đợi khách thuê vào xác nhận")
       setShowDepositModal(false);
 
     } catch (error) {
@@ -90,6 +94,8 @@ export default function CustomerItem({ item }) {
         <div className='customer_item_ele_avatar'>
           <img src={Img} />
         </div>
+
+        <div className='customer_item_ele_posision'>Khách thuê chưa xác nhận</div>
 
         <div className='customer_item_ele_content'>
           <span className='customer_item_ele_content_child'>{item?.renter_name || item?.renter.name}</span>
@@ -111,24 +117,24 @@ export default function CustomerItem({ item }) {
             )
               : ['signed'].includes(item?.status) ? (
                 <>
-                  <BaseButton type="blue" onClick={handleReject}>Xem hợp đồng cọc</BaseButton>
-                </>
-              )
-                : (
-                  <><BaseButton type="red" onClick={handleApprove} disabled={alreadyApproved}>Xóa giao dịch</BaseButton></>
+                  <BaseButton type="blue" onClick = {() => navigate(`/tenant/deposit-contract-detail/renter/${renter_id}/room/${room_id}`)}>Xem hợp đồng cọc</BaseButton>
+          </>
+          )
+          : (
+          <><BaseButton type="red" onClick={handleApprove} disabled={alreadyApproved}>Xóa giao dịch</BaseButton></>
                 )}
-          </span>
-        </div>
-
-        <BaseModal
-          open={showDepositModal}
-          type="red"
-          title="Tạo hợp đồng cọc"
-          content={<CreateDepositContract formData={formData} setFormData={setFormData} />}
-          onCancel={() => setShowDepositModal(false)}
-          onConfirm={handleConfirmCreateDepositContract}
-        />
+        </span>
       </div>
+
+      <BaseModal
+        open={showDepositModal}
+        type="red"
+        title="Tạo hợp đồng cọc"
+        content={<CreateDepositContract formData={formData} setFormData={setFormData} />}
+        onCancel={() => setShowDepositModal(false)}
+        onConfirm={handleConfirmCreateDepositContract}
+      />
     </div>
+    </div >
   )
 }
