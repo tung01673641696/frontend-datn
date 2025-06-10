@@ -1,5 +1,5 @@
 import React from 'react'
-import './DepositContractManager.scss'
+import './ContractManager.scss'
 import Common from '../../../layouts/LandlordLayout/Common/Common'
 import { Table } from 'antd'
 import Column from 'antd/es/table/Column'
@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import BaseModal from '../../../components/BaseModal/BaseModal'
 
-export default function DepositContractManager() {
+export default function ContractManager() {
   const user = JSON.parse(localStorage.getItem("user"))
   const id = user.id
   const navigate = useNavigate()
@@ -23,19 +23,19 @@ export default function DepositContractManager() {
       'price': '4.500.000đ',
       'deposit_price': '4.500.000đ',
       'date': '20/06/2025',
-      'status': 'Đang cọc'
+      'status': 'Còn hạn'
     }
   ]
 
   return (
     <Common>
-      <h3 className='deposit_contract_mana_title'>Quản lý hợp đồng cọc</h3>
+      <h3 className='deposit_contract_mana_title'>Quản lý hợp đồng thuê</h3>
 
 
       <div className='deposit_contract_mana'>
         <div className='deposit_contract_mana_select'>
 
-          <span className='deposit_contract_mana_select_title'>Chọn trạng thái hợp đồng cọc</span>
+          <span className='deposit_contract_mana_select_title'>Chọn trạng thái hợp đồng thuê</span>
           <select
           // value={selectedHouse}
           // onChange={(e) => setSelectedHouse(e.target.value)}
@@ -76,33 +76,39 @@ export default function DepositContractManager() {
           />
 
           <Column title={"Giá thuê"}
-          render={(item) => (
-            <span>{item?.price}</span>
-          )}
+            render={(item) => (
+              <span>{item?.price}</span>
+            )}
           />
 
           <Column title={"Đặt cọc"}
-          render={(item) => (
-            <span>{item?.deposit_price}</span>
-          )}
+            render={(item) => (
+              <span>{item?.deposit_price}</span>
+            )}
           />
-          <Column title={"Ngày khách vào ở"}
-          render={(item) => (
-            <span>{item?.date}</span>
-          )}
+          <Column title={"Ngày bắt đầu"}
+            render={(item) => (
+              <span>{item?.date}</span>
+            )}
+          />
+
+          <Column title={"Ngày kết thúc"}
+            render={(item) => (
+              <span>{item?.date}</span>
+            )}
           />
 
           <Column title={"Trạng thái"}
-          render={(item) => (
-            <span>{item?.status}</span>
-          )}
+            render={(item) => (
+              <span>{item?.status}</span>
+            )}
           />
 
           <Column title={"Hành động"}
             render={(item) => (
               <>
                 <BaseButton type="blue">Xem</BaseButton>
-                
+
               </>
             )}
           />

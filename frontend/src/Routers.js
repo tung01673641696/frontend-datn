@@ -27,6 +27,7 @@ const EditRoom = React.lazy(() => import('./pages/Landlord/RoomManager/EditRoom/
 
 const CreateContract = React.lazy(() => import('./pages/Landlord/RentalRequestManager/CreateContract/CreateContract'))
 const DepositContractManagerByLandlord = React.lazy(() => import('./pages/Landlord/DepositContractManager/DepositContractManager'))
+const ContractManagerByLandlord = React.lazy(() => import('./pages/Landlord/ContractManager/ContractManager'))
 
 const TenantManager = React.lazy(() => import('./pages/Landlord/TenantManager/TenantManager'))
 const AddTenant = React.lazy(() => import('./pages/Landlord/TenantManager/AddTenant/AddTenant'))
@@ -44,7 +45,7 @@ const DepositContractManager = React.lazy(() => import('./pages/Tenant/DepositCo
 const DetailDepositContract = React.lazy(() => import('./pages/Tenant/DetailDepositContract/DetailDepositContract'))
 const DetailRentalContract = React.lazy(() => import('./pages/Tenant/DetailRentalContract/DetailRentalContract'))
 
-const ContractManager = React.lazy(() => import('./pages/Tenant/ContractManager/ContractManager'))
+const ContractManagerByRenter = React.lazy(() => import('./pages/Tenant/ContractManager/ContractManager'))
 
 const AdminDashboard = React.lazy(() => import('./pages/Admin/AdminDashboard/AdminDashboard'))
 const AdminManagerUser = React.lazy(() => import('./pages/Admin/AdminManagerUser/AdminManagerUser'))
@@ -85,6 +86,8 @@ export default function Routers() {
 
               <Route path='/landlord/create-contract/renter_id/:renterId?/room_id/:roomId' element={<CreateContract />} />
               <Route path='/landlord/deposit-contract-manager-by-landlord' element={<DepositContractManagerByLandlord />} />
+              <Route path='/landlord/contract-manager-by-landlord' element={<ContractManagerByLandlord />} />
+
 
               <Route path='/landlord/tenant-manager' element={<TenantManager />} />
               <Route path='/landlord/tenant-manager/add-tenant' element={<AddTenant />} />
@@ -105,7 +108,7 @@ export default function Routers() {
               <Route path='/tenant/deposit-contract-manager' element={<DepositContractManager />} />
               <Route path='/tenant/deposit-contract-detail/renter/:renterId/room/:roomId' element={<DetailDepositContract />} />
 
-              <Route path='/tenant/contract-manager' element={<ContractManager />} />
+              <Route path='/tenant/contract-manager' element={<ContractManagerByRenter />} />
               <Route path='/tenant/detail-rental-contract' element={<DetailRentalContract />} />
 
             </Route>
