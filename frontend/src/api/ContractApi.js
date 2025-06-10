@@ -7,7 +7,7 @@ const ContractApi = {
   },
 
   async getAllDepositContractByRenter(renterId) {
-    const url = `/contract/all-deposit-contract/renter/${renterId}`
+    const url = `/contract/all-deposit-contract-by-renter/renter/${renterId}`
     return axiosClient.get(url)
   },
 

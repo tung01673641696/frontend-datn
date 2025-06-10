@@ -23,7 +23,7 @@ export default function Common({ children }) {
       id: 5,
       title: 'Quản lý hợp đồng',
       children: [
-        { id: 9, title: 'Quản lý hợp đồng cọc', path: '' },
+        { id: 9, title: 'Quản lý hợp đồng cọc', path: '/landlord/deposit-contract-manager-by-landlord' },
         { id: 10, title: 'Quản lý hợp đồng thuê', path: '' },
       ]
     },

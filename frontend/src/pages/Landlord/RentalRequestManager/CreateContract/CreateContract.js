@@ -61,6 +61,16 @@ export default function CreateContract() {
     }
   }, [detailUser]);
 
+  useEffect(() => {
+    if (detailTenantByRoom) {
+      setContract((prev) => ({
+        ...prev,
+        name: detailTenantByRoom.name || "",
+        phone: detailTenantByRoom.phone || "",
+      }));
+    }
+  }, [detailTenantByRoom]);
+
   const [contract, setContract] = useState({
     room_id: room_id,
     name: "",
