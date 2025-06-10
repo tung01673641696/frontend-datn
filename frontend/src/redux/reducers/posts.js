@@ -103,73 +103,29 @@ const PostsSlice = createSlice({
   },
   extraReducers: builder => {
     builder
-      .addCase(getPostsByOnePeople.pending, (state, action) => {
-        state.loading = true
-      })
-      .addCase(getPostsByOnePeople.rejected, (state, action) => {
-        state.loading = false
-      })
       .addCase(getPostsByOnePeople.fulfilled, (state, action) => {
         state.loading = false
         state.postsByOnePeople = action.payload.data;
-      })
-      .addCase(getOnePostsByCustomer.pending, (state, action) => {
-        state.loading = true
-      })
-      .addCase(getOnePostsByCustomer.rejected, (state, action) => {
-        state.loading = false
       })
       .addCase(getOnePostsByCustomer.fulfilled, (state, action) => {
         state.loading = false
         state.onePostsByCustomer = action.payload.data;
       })
-      .addCase(getAllPostsByAllCustomer.pending, (state, action) => {
-        state.loading = true
-      })
-      .addCase(getAllPostsByAllCustomer.rejected, (state, action) => {
-        state.loading = false
-      })
       .addCase(getAllPostsByAllCustomer.fulfilled, (state, action) => {
         state.loading = false
         state.allPostsByAllCustomer = action.payload.data;
-      })
-      .addCase(getAllPostsByAllCustomerActive.pending, (state, action) => {
-        state.loading = true
-      })
-      .addCase(getAllPostsByAllCustomerActive.rejected, (state, action) => {
-        state.loading = false
       })
       .addCase(getAllPostsByAllCustomerActive.fulfilled, (state, action) => {
         state.loading = false
         state.allPostsByAllCustomerActive = action.payload.data;
       })
-      .addCase(getAllPostsByAllLandlord.pending, (state, action) => {
-        state.loading = true
-      })
-      .addCase(getAllPostsByAllLandlord.rejected, (state, action) => {
-        state.loading = false
-      })
       .addCase(getAllPostsByAllLandlord.fulfilled, (state, action) => {
         state.loading = false
         state.allPostsByAllLandlord = action.payload.data;
       })
-
-      .addCase(getAllPostsByAllLandlordActive.pending, (state, action) => {
-        state.loading = true
-      })
-      .addCase(getAllPostsByAllLandlordActive.rejected, (state, action) => {
-        state.loading = false
-      })
       .addCase(getAllPostsByAllLandlordActive.fulfilled, (state, action) => {
         state.loading = false
         state.allPostsByAllLandlordActive = action.payload.data;
-      })
-
-      .addCase(getAllPostByLandlordActiveByDistrict.pending, (state, action) => {
-        state.loading = true
-      })
-      .addCase(getAllPostByLandlordActiveByDistrict.rejected, (state, action) => {
-        state.loading = false
       })
       .addCase(getAllPostByLandlordActiveByDistrict.fulfilled, (state, action) => {
         state.loading = false

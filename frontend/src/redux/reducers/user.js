@@ -41,6 +41,11 @@ export const deleteUser = createAsyncThunk("user/deleteUser", async (userId, thu
   return deleteUser
 })
 
+export const getDetailUser = createAsyncThunk("user/getDetailUser", async (userId) => {
+  const detailUser = await UserApi.getDetailUser(userId);
+  return detailUser
+})
+
 const access_token = localStorage.getItem('access_token')
 const user = JSON.parse(localStorage.getItem("user"))
 
@@ -50,7 +55,8 @@ const UserSlice = createSlice({
     isAuth: access_token === 'undefined' || access_token === null ? false : true,
     myInfo: user || {},
     loading: false,
-    allUser: []
+    allUser: [],
+    detailUser: {}
   },
   extraReducers: builder => {
     builder
@@ -85,6 +91,10 @@ const UserSlice = createSlice({
       .addCase(getAllUser.fulfilled, (state, action) => {
         state.loading = false
         state.allUser = action.payload.data;
+      })
+      .addCase(getDetailUser.fulfilled, (state, action) => {
+        state.loading = false
+        state.detailUser = action.payload.data;
       })
   }
 })

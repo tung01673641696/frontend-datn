@@ -25,7 +25,7 @@ const ViewRoom = React.lazy(() => import('./pages/Landlord/RoomManager/ViewRoom/
 const AddRoom = React.lazy(() => import('./pages/Landlord/RoomManager/AddRoom/AddRoom'))
 const EditRoom = React.lazy(() => import('./pages/Landlord/RoomManager/EditRoom/EditRoom'))
 
-const CreateContract = React.lazy(() => import('./pages/Landlord/RoomManager/CreateContract/CreateContract'))
+const CreateContract = React.lazy(() => import('./pages/Landlord/RentalRequestManager/CreateContract/CreateContract'))
 
 const TenantManager = React.lazy(() => import('./pages/Landlord/TenantManager/TenantManager'))
 const AddTenant = React.lazy(() => import('./pages/Landlord/TenantManager/AddTenant/AddTenant'))
@@ -40,6 +40,7 @@ const EditPostByTenant = React.lazy(() => import('./pages/Tenant/EditPostByTenan
 const PostManagerTenant = React.lazy(() => import('./pages/Tenant/PostManager/PostManager'))
 const DepositContractManager = React.lazy(() => import('./pages/Tenant/DepositContractManager/DepositContractManager'))
 const DetailDepositContract = React.lazy(() => import('./pages/Tenant/DetailDepositContract/DetailDepositContract'))
+const DetailRentalContract = React.lazy(() => import('./pages/Tenant/DetailRentalContract/DetailRentalContract'))
 
 const AdminDashboard = React.lazy(() => import('./pages/Admin/AdminDashboard/AdminDashboard'))
 const AdminManagerUser = React.lazy(() => import('./pages/Admin/AdminManagerUser/AdminManagerUser'))
@@ -77,8 +78,8 @@ export default function Routers() {
               <Route path='/landlord/room-manager/view-room/room_id/:id' element={<ViewRoom />} />
               <Route path='/landlord/room-manager/add-room/house_id/:houseId' element={<AddRoom />} />
               <Route path='/landlord/room-manager/edit-room/room_id/:id' element={<EditRoom />} />
-              
-              <Route path='/landlord/room-manager/create-contract' element={<CreateContract />} />
+
+              <Route path='/landlord/create-contract/renter_id/:renterId?/room_id/:roomId' element={<CreateContract />} />
 
               <Route path='/landlord/tenant-manager' element={<TenantManager />} />
               <Route path='/landlord/tenant-manager/add-tenant' element={<AddTenant />} />
@@ -97,6 +98,7 @@ export default function Routers() {
               <Route path='/tenant/post-manager' element={<PostManagerTenant />} />
               <Route path='/tenant/deposit-contract-manager' element={<DepositContractManager />} />
               <Route path='/tenant/deposit-contract-detail/renter/:renterId/room/:roomId' element={<DetailDepositContract />} />
+              <Route path='/tenant/detail-rental-contract' element={<DetailRentalContract />} />
             </Route>
 
             <Route>

@@ -54,12 +54,6 @@ const RentalRequestSlice = createSlice({
 
   extraReducers: builder => {
     builder
-      .addCase(getAllRentalRequest.pending, (state, action) => {
-        state.loading = true
-      })
-      .addCase(getAllRentalRequest.rejected, (state, action) => {
-        state.loading = false
-      })
       .addCase(getAllRentalRequest.fulfilled, (state, action) => {
         state.loading = false
         state.allRentalRequest = action.payload.data.data;

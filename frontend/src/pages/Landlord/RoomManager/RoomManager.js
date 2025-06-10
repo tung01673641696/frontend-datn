@@ -9,6 +9,7 @@ import { getRoomByHouse } from '../../../redux/reducers/room'
 import BaseModal from '../../../components/BaseModal/BaseModal'
 import { deleteRoom } from '../../../redux/reducers/room'
 import { useParams } from 'react-router-dom'
+import { getDetailTenantByRoom } from '../../../redux/reducers/tenant'
 
 export default function RoomManager() {
   const [isShow, setIsShow] = useState(false)
@@ -21,6 +22,8 @@ export default function RoomManager() {
   const user = JSON.parse(localStorage.getItem("user"))
   const id = user.id
   const { houseId } = useParams()
+
+  console.log(">>>>>", listRoomByHouse)
 
   useEffect(() => {
     dispatch(houseByOwner(id))
@@ -142,7 +145,7 @@ export default function RoomManager() {
               <div className='room_mana_card_fun'>
                 <BaseButton type="blue" onClick={() => navigate(`/landlord/room-manager/view-room/room_id/${room.id}`)}>Thông tin phòng</BaseButton>
                 <BaseButton type="green">Khách thuê</BaseButton>
-                <BaseButton type="red" onClick={() => navigate(`/landlord/room-manager/create-contract`)}>Tạo hợp đồng</BaseButton>
+                <BaseButton type="red" onClick={() => navigate(`/landlord/create-contract/renter_id/room_id/${room.id}`)}>Tạo hợp đồng</BaseButton>
               </div>
 
             </div>

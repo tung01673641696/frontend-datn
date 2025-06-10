@@ -43,44 +43,36 @@ export const getTenantByRoom = createAsyncThunk("tenant/getTenantByRoom", async 
   return getTenantByRoom
 })
 
+export const getDetailTenantByRoom = createAsyncThunk("tenant/getDetailTenantByRoom", async (roomId) => {
+  const getDetailTenantByRoom = await TenantApi.getDetailTenantByRoom(roomId);
+  return getDetailTenantByRoom
+})
+
 const TenantSlice = createSlice({
   name: "tenant",
   initialState: {
     allTenant: [],
     oneTenant: {},
-    listTenantByRoom: []
+    listTenantByRoom: [],
+    detailTenantByRoom: {}
   },
   extraReducers: builder => {
     builder
-      .addCase(getAllTenant.pending, (state, action) => {
-        state.loading = true
-      })
-      .addCase(getAllTenant.rejected, (state, action) => {
-        state.loading = false
-      })
       .addCase(getAllTenant.fulfilled, (state, action) => {
         state.loading = false
         state.allTenant = action.payload.data;
-      })
-      .addCase(getOneTenant.pending, (state, action) => {
-        state.loading = true
-      })
-      .addCase(getOneTenant.rejected, (state, action) => {
-        state.loading = false
       })
       .addCase(getOneTenant.fulfilled, (state, action) => {
         state.loading = false
         state.oneTenant = action.payload.data;
       })
-      .addCase(getTenantByRoom.pending, (state, action) => {
-        state.loading = true
-      })
-      .addCase(getTenantByRoom.rejected, (state, action) => {
-        state.loading = false
-      })
       .addCase(getTenantByRoom.fulfilled, (state, action) => {
         state.loading = false
         state.listTenantByRoom = action.payload.data;
+      })
+      .addCase(getDetailTenantByRoom.fulfilled, (state, action) => {
+        state.loading = false
+        state.detailTenantByRoom = action.payload.data;
       })
   }
 })

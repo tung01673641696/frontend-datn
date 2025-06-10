@@ -48,6 +48,7 @@ export default function DetailDepositContract() {
 
     try {
       await dispatch(confirmDepositContract(depositContractDetail.contract.contract_id));
+      await dispatch(getDepositContractDetail({ renterId, roomId }));
       setOpenModalConfirm(false);
       toast.success("Xác nhận hợp đồng cọc thành công");
     } catch (error) {
@@ -90,8 +91,12 @@ export default function DetailDepositContract() {
         <div className='detail_deposit_contract_box_button'>
           {user?.role_id === 1 && (
             <div className='detail_deposit_contract_box_button'>
-              <BaseButton type="blue" onClick={() => setOpenModalConfirm(true)}>Xác nhận</BaseButton>
-              <BaseButton type="red" onClick={() => setOpenModal(true)}>Hủy hợp đồng cọc</BaseButton>
+              {depositContractDetail?.contract?.status === 'pending' && (
+                <>
+                  <BaseButton type="blue" onClick={() => setOpenModalConfirm(true)}>Xác nhận</BaseButton>
+                  <BaseButton type="red" onClick={() => setOpenModal(true)}>Hủy hợp đồng cọc</BaseButton>
+                </>
+              )}
               <BaseButton onClick={() => navigate(-1)}>Quay lại</BaseButton>
             </div>
           )}

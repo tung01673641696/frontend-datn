@@ -1,8 +1,8 @@
 .create_contract {
-  width: 60%;
+  width: 70%;
   border: 1px solid #385995;
-  margin-left: 10%;
-  margin-top: 4%;
+  margin-left: 8%;
+  margin-top: 1%;
 
   .create_contract_title {
     width: 100%;
@@ -19,6 +19,23 @@
     .create_contract_box_title {
       font-size: 22px;
       font-weight: 600;
+    }
+
+    .create_contract_box_item1 {
+      display: flex;
+      justify-content: space-between;
+      margin: 20px 0;
+
+      .create_contract_box_item_child1 {
+        width: calc(100% / 3 - 10px);
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+
+        input {
+          padding: 4px 10px;
+        }
+      }
     }
 
     .create_contract_box_item {
@@ -38,9 +55,13 @@
       }
     }
 
-    .create_contract_box_item1 {
+    .create_contract_box_item2 {
       display: flex;
       justify-content: flex-end;
+
+      button {
+        margin-left: 10px;
+      }
     }
   }
 }

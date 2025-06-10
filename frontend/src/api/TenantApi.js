@@ -29,7 +29,12 @@ const TenantApi = {
   async getTenantByRoom(roomId) {
     const url = `/tenant-manager/get-tenant-by-room/room_id/${roomId}`
     return axiosClient.get(url)
-  }
+  },
+
+  async getDetailTenantByRoom(roomId) {
+    const url = `/get-detail-tenant-by-room/room_id/${roomId}`;
+    return axiosClient.get(url);
+  },
 }
 
 export default TenantApi

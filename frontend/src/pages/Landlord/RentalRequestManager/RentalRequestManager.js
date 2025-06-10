@@ -27,7 +27,11 @@ export default function RentalRequestManager() {
 
   const mergedRequests = [
     ...allRentalRequest.map(item => ({ ...item, type: 'rental_request' })),
-    ...allDepositContractsByLandlord.map(item => ({ ...item, type: 'contract' }))
+    ...allDepositContractsByLandlord.map(item => ({
+      ...item,
+      type: 'contract',
+      status: item.status === 'pending' ? 'pending_contract' : item.status
+    }))
   ];
 
   console.log("mergedRequests>>>", mergedRequests)
@@ -54,8 +58,8 @@ export default function RentalRequestManager() {
 
           <div className='customer_manager_main_status_ele'>
             <BaseButton
-              type={statusRental.includes('approved') || statusRental.includes('signed') ? 'red' : 'white'}
-              onClick={() => setStatusRental(['approved', 'signed'])}
+              type={statusRental.includes('pending_contract') || statusRental.includes('approved') || statusRental.includes('signed') ? 'red' : 'white'}
+              onClick={() => setStatusRental(['approved', 'signed', 'pending_contract'])}
             >
               Đã xác nhận
             </BaseButton>
@@ -72,9 +76,10 @@ export default function RentalRequestManager() {
         </div>
 
         <div className='customer_manager_main_child'>
-          {filteredRequests?.map((item) => (
-            <CustomerItem item={item} />
-          ))}
+          {filteredRequests?.map((item) => {
+            const hasContract = allDepositContractsByLandlord.some(contract => contract.rental_request_id === item.id);
+            return <CustomerItem key={item.id} item={item} hasContract={hasContract} />;
+          })}
         </div>
       </div>
       <Footer />

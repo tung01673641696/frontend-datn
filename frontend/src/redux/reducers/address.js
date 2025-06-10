@@ -30,21 +30,9 @@ const addressSlice = createSlice({
 
   extraReducers: builder => {
     builder
-      .addCase(getDistrict.pending, (state, action) => {
-        state.loadingAddress = true
-      })
-      .addCase(getDistrict.rejected, (state, action) => {
-        state.loadingAddress = false
-      })
       .addCase(getDistrict.fulfilled, (state, action) => {
         state.loadingAddress = false
         state.district = action.payload.data;
-      })
-      .addCase(getWard.pending, (state, action) => {
-        state.loadingAddress = true
-      })
-      .addCase(getWard.rejected, (state, action) => {
-        state.loadingAddress = false
       })
       .addCase(getWard.fulfilled, (state, action) => {
         state.loadingAddress = false

@@ -19,7 +19,12 @@ const UserApi = {
   async deleteUser(userId) {
     const url = `/user/delete-user/user_id/${userId}`
     return axiosClient.delete(url)
-  }
+  },
+
+  async getDetailUser(userId) {
+    const url = `/user/get-detail-user/user_id/${userId}`
+    return axiosClient.get(url)
+  },
 }
 
 export default UserApi

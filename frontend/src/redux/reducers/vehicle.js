@@ -46,21 +46,9 @@ const VehicleSlice = createSlice({
   },
   extraReducers: builder => {
     builder
-      .addCase(getAllVehicle.pending, (state, action) => {
-        state.loading = true
-      })
-      .addCase(getAllVehicle.rejected, (state, action) => {
-        state.loading = false
-      })
       .addCase(getAllVehicle.fulfilled, (state, action) => {
         state.loading = false
         state.allVehicle = action.payload.data;
-      })
-      .addCase(getOneVehicle.pending, (state, action) => {
-        state.loading = true
-      })
-      .addCase(getOneVehicle.rejected, (state, action) => {
-        state.loading = false
       })
       .addCase(getOneVehicle.fulfilled, (state, action) => {
         state.loading = false

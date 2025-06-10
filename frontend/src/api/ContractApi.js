@@ -29,6 +29,11 @@ const ContractApi = {
     return axiosClient.get(url);
   },
 
+  async createContract(data) {
+    const url = `/contract/create-contract`
+    return axiosClient.post(url, data)
+  },
+
 }
 
 export default ContractApi

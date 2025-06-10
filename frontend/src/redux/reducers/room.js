@@ -48,23 +48,11 @@ const RoomSlice = createSlice({
   },
   extraReducers: builder => {
     builder
-      .addCase(getRoomByHouse.pending, (state, action) => {
-        state.loading = true
-      })
-      .addCase(getRoomByHouse.rejected, (state, action) => {
-        state.loading = false
-      })
       .addCase(getRoomByHouse.fulfilled, (state, action) => {
         state.loading = false
         state.listRoomByHouse = action.payload.data;
       })
 
-      .addCase(getOneRoom.pending, (state, action) => {
-        state.loading = true
-      })
-      .addCase(getOneRoom.rejected, (state, action) => {
-        state.loading = false
-      })
       .addCase(getOneRoom.fulfilled, (state, action) => {
         state.loading = false
         state.oneRoom = action.payload.data;

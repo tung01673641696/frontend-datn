@@ -18,7 +18,7 @@ export default function CardDepositContract({ item }) {
       </div>
 
       <div className='card-deposit-contract_content'>
-        <span className='card-deposit-contract_content_title'>Hợp đồng cọc giữ phòng</span>
+        <span className='card-deposit-contract_content_title'>Hợp đồng cọc</span>
         <span className='card-deposit-contract_content_ele'>Phòng {item?.room_name} - Nhà {item?.house_name}</span>
         <span className='card-deposit-contract_content_address'>
           <span>Địa chỉ: </span>

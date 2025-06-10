@@ -63,6 +63,18 @@ export const getAllDepositContractsByLandlord = createAsyncThunk(
   }
 );
 
+export const createContract = createAsyncThunk(
+  "contract/createContract",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await ContractApi.createContract(data);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response);
+    }
+  }
+);
+
 
 const ContractSlice = createSlice({
   name: "contract",
@@ -74,12 +86,6 @@ const ContractSlice = createSlice({
   },
   extraReducers: builder => {
     builder
-      .addCase(getAllDepositContractByRenter.pending, (state, action) => {
-        state.loading = true
-      })
-      .addCase(getAllDepositContractByRenter.rejected, (state, action) => {
-        state.loading = false
-      })
       .addCase(getAllDepositContractByRenter.fulfilled, (state, action) => {
         state.loading = false
         state.allDepositContractByRenter = action.payload.data.deposit_contracts;

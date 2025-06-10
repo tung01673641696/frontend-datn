@@ -1,0 +1,63 @@
+.detail_rental_contract {
+  background-color: #f3f3f3;
+
+  .detail_rental_contract_box {
+    width: 60%;
+    margin: 40px auto;
+    padding: 30px 80px;
+    background-color: white;
+
+    h3 {
+      font-size: 22px;
+      margin-bottom: 50px;
+    }
+
+    .detail_rental_contract_box_flex {
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 30px;
+
+      .detail_rental_contract_box_flex_item {
+        display: flex;
+        flex-direction: column;
+        width: calc(100% / 2 - 30px);
+
+        h4 {
+          font-size: 20px;
+        }
+
+        span {
+          font-size: 17px;
+        }
+      }
+    }
+
+    .detail_rental_contract_box_flex1 {
+      margin-bottom: 50px;
+
+      .detail_rental_contract_box_flex1_item {
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+        margin-bottom: 15px;
+
+        h4 {
+          font-size: 20px;
+        }
+
+        span {
+          font-size: 17px;
+        }
+      }
+    }
+
+    .detail_deposit_contract_box_button {
+      margin: 20px 0;
+
+      button {
+        margin-right: 10px;
+      }
+    }
+  }
+}

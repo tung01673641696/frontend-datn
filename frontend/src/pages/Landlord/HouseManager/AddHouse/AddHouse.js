@@ -61,7 +61,6 @@ export default function AddHouse() {
     }
     try {
       const res = await dispatch(addHouse(house))
-      console.log(">>>>> HOUSE SUBMIT DATA", house)
       if (res.payload.data.error) {
         toast.error(res.payload.data.error)
 
