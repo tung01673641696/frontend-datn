@@ -1,0 +1,52 @@
+.contract_mana_title {
+  text-align: left;
+  font-size: 22px;
+  font-weight: 400;
+
+
+}
+
+.contract_mana {
+  width: 100%;
+
+  .contract_mana_select {
+    background-color: #f3f3f3;
+    margin: 40px 0;
+    padding: 10px 40px;
+    text-align: left;
+    display: flex;
+
+    .contract_mana_select_title {
+      margin-right: 25px;
+      padding-top: 5px;
+    }
+
+    select {
+      padding: 5px 20px 5px 10px;
+    }
+  }
+}
+
+
+
+table {
+
+  .button {
+    padding: 5px 12px;
+    margin-right: 8px;
+  }
+}
+
+.ant-table-thead {
+  th {
+    background-color: #3461b4 !important;
+    color: white !important;
+  }
+
+}
+
+.link_page_room {
+  background-color: #D60909;
+  color: white;
+  padding: 8px 20px;
+}

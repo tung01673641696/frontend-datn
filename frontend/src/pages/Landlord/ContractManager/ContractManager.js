@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import './ContractManager.scss'
 import Common from '../../../layouts/LandlordLayout/Common/Common'
 import { Table } from 'antd'
@@ -7,44 +7,43 @@ import BaseButton from '../../../components/BaseButton/BaseButton'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import BaseModal from '../../../components/BaseModal/BaseModal'
+import { landlordGetAllContract } from '../../../redux/reducers/contract'
 
 export default function ContractManager() {
   const user = JSON.parse(localStorage.getItem("user"))
   const id = user.id
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const { allContract } = useSelector((state) => state.contractReducer)
+  const [selectedStatus, setSelectedStatus] = useState('');
 
-  const detail_contract = [
-    {
-      'id': 1,
-      'name_house': 'Gohomy1',
-      'name_room': '101',
-      'name_people': 'Nguyễn Ngọc Giỏi',
-      'price': '4.500.000đ',
-      'deposit_price': '4.500.000đ',
-      'date': '20/06/2025',
-      'status': 'Còn hạn'
-    }
-  ]
+  useEffect(() => {
+    dispatch(landlordGetAllContract(id));
+  }, []);
+
+  console.log(">>>>>>a", allContract)
+
+  const filteredContracts = selectedStatus
+    ? allContract.filter(contract => contract.status === selectedStatus)
+    : allContract;
 
   return (
     <Common>
-      <h3 className='deposit_contract_mana_title'>Quản lý hợp đồng thuê</h3>
+      <h3 className='contract_mana_title'>Quản lý hợp đồng thuê</h3>
 
 
-      <div className='deposit_contract_mana'>
-        <div className='deposit_contract_mana_select'>
+      <div className='contract_mana'>
+        <div className='contract_mana_select'>
 
-          <span className='deposit_contract_mana_select_title'>Chọn trạng thái hợp đồng thuê</span>
+          <span className='contract_mana_select_title'>Chọn trạng thái hợp đồng thuê</span>
           <select
-          // value={selectedHouse}
-          // onChange={(e) => setSelectedHouse(e.target.value)}
+            value={selectedStatus}
+            onChange={(e) => setSelectedStatus(e.target.value)}
           >
-            {/* {listHouseByOwner?.map((item) => (
-                <option key={item?.id} value={item?.id}>{item?.name}</option>
-              ))} */}
+            <option value="">Tất cả</option>
+            <option value="signed">Đang thuê</option>
+            <option value="cancelled">Đã hết hạn</option>
           </select>
-
         </div>
 
         <Table style={{ textAlignLast: 'center' }}
@@ -53,54 +52,54 @@ export default function ContractManager() {
             showSizeChanger: false,
             pageSizeOptions: ['10', '20', '30'],
           }}
-          dataSource={detail_contract}
+          dataSource={filteredContracts}
           bordered
         >
           <Column title={"STT"} render={(_, __, index) => index + 1} key="id" />
           <Column title={"Tên nhà"}
             render={(item) => (
-              <span>{item?.name_house}</span>
+              <span>{item?.house?.name}</span>
             )}
           />
 
           <Column title={"Tên phòng"}
             render={(item) => (
-              <span>{item?.name_room}</span>
+              <span>{item?.room?.name}</span>
             )}
           />
 
           <Column title={"Người kí HĐ cọc"}
             render={(item) => (
-              <span>{item?.name_people}</span>
+              <span>{item?.tenant?.name}</span>
             )}
           />
 
           <Column title={"Giá thuê"}
             render={(item) => (
-              <span>{item?.price}</span>
+              <span>{item.room.price ? `${Number(item.room.price).toLocaleString('vi-VN')}đ` : "Đang cập nhật"}</span>
             )}
           />
 
           <Column title={"Đặt cọc"}
             render={(item) => (
-              <span>{item?.deposit_price}</span>
+              <span>{item.room.price_deposit ? `${Number(item.room.price_deposit).toLocaleString('vi-VN')}đ` : "Đang cập nhật"}</span>
             )}
           />
           <Column title={"Ngày bắt đầu"}
             render={(item) => (
-              <span>{item?.date}</span>
+              <span>{item?.start_date}</span>
             )}
           />
 
           <Column title={"Ngày kết thúc"}
             render={(item) => (
-              <span>{item?.date}</span>
+              <span>{item?.end_date}</span>
             )}
           />
 
           <Column title={"Trạng thái"}
             render={(item) => (
-              <span>{item?.status}</span>
+              <span>{item?.status === 'signed' ? 'Đang thuê' : 'đã hết hạn'}</span>
             )}
           />
 

@@ -75,6 +75,22 @@ export const createContract = createAsyncThunk(
   }
 );
 
+export const landlordGetAllDepositContract = createAsyncThunk(
+  "contract/landlordGetAllDepositContract",
+  async (landlordId) => {
+    const allDepositContract = await ContractApi.landlordGetAllDepositContract(landlordId);
+    return allDepositContract;
+  }
+);
+
+export const landlordGetAllContract = createAsyncThunk(
+  "contract/landlordGetAllContract",
+  async (landlordId) => {
+    const landlordGetAllContract = await ContractApi.landlordGetAllContract(landlordId);
+    return landlordGetAllContract;
+  }
+);
+
 
 const ContractSlice = createSlice({
   name: "contract",
@@ -83,6 +99,8 @@ const ContractSlice = createSlice({
     allDepositContractsByLandlord: [],
     depositContractDetail: {},
     isDepositContractExists: false,
+    allDepositContract: [],
+    allContract: [],
   },
   extraReducers: builder => {
     builder
@@ -98,6 +116,16 @@ const ContractSlice = createSlice({
       .addCase(getAllDepositContractsByLandlord.fulfilled, (state, action) => {
         state.loading = false
         state.allDepositContractsByLandlord = action.payload.data.deposit_contracts;
+      })
+
+      .addCase(landlordGetAllDepositContract.fulfilled, (state, action) => {
+        state.loading = false
+        state.allDepositContract = action.payload.data.deposit_contract;
+      })
+
+      .addCase(landlordGetAllContract.fulfilled, (state, action) => {
+        state.loading = false
+        state.allContract = action.payload.data.contract;
       })
 
   }

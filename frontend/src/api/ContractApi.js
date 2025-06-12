@@ -34,6 +34,16 @@ const ContractApi = {
     return axiosClient.post(url, data)
   },
 
+  async landlordGetAllDepositContract(landlordId) {
+    const url = `/contract/manager-contract/landlord-get-all-deposit-contract/landlord/${landlordId}`;
+    return axiosClient.get(url);
+  },
+
+  async landlordGetAllContract(landlordId) {
+    const url = `/contract/manager-contract/landlord-get-all-contract/landlord/${landlordId}`;
+    return axiosClient.get(url);
+  },
+
 }
 
 export default ContractApi
