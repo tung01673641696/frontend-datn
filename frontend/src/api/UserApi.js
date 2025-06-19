@@ -21,6 +21,11 @@ const UserApi = {
     return axiosClient.delete(url)
   },
 
+  async restoreUser(userId) {
+    const url = `/user/restore-user/user_id/${userId}`
+    return axiosClient.put(url)
+  },
+
   async getDetailUser(userId) {
     const url = `/user/get-detail-user/user_id/${userId}`
     return axiosClient.get(url)

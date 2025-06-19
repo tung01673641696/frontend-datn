@@ -11,8 +11,8 @@ const PostsApi = {
     return axiosClient.post(url, data);
   },
 
-  async getPostsByOnePeople(peopleId, status) {
-    const url = `/posts/get-posts-by-one-people/people_id/${peopleId}`;
+  async landlordGetAllPost(landlordId, status) {
+    const url = `/posts/landlord-get-all-post/landlord_id/${landlordId}`;
     return axiosClient.get(url, { params: { status: status } });
   },
 

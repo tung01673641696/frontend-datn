@@ -9,11 +9,13 @@ import { getAllUser } from '../../../redux/reducers/user'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteUser } from '../../../redux/reducers/user'
+import { restoreUser } from '../../../redux/reducers/user'
 
 export default function AdminManagerUser() {
   const [isShow, setIsShow] = useState(false)
   const [selectUserId, setSelectUserId] = useState(null)
-  const [selectedRole, setSelectedRole] = useState("")
+  const [selectedRole, setSelectedRole] = useState("");
+  const [selectedStatus, setSelectedStatus] = useState("");
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { allUser } = useSelector((state) => state.userReducer)
@@ -42,9 +44,16 @@ export default function AdminManagerUser() {
     setSelectedRole(e.target.value)
   }
 
-  const filteredUsers = selectedRole
-    ? allUser.filter(user => user.role === selectedRole)
-    : allUser
+  const filteredUsers = allUser.filter(user => {
+    const matchRole = selectedRole ? user.role === selectedRole : true;
+    const matchStatus = selectedStatus ? user.status === selectedStatus : true;
+    return matchRole && matchStatus;
+  });
+
+  const handleRestore = async (userId) => {
+    await dispatch(restoreUser(userId));
+    dispatch(getAllUser());
+  }
 
   return (
     <CommonAdmin>
@@ -66,8 +75,15 @@ export default function AdminManagerUser() {
           <span className='ad_mana_user_action_select_title'>Chọn loại user</span>
           <select value={selectedRole} onChange={handleRoleChange}>
             <option value="" disabled>Chọn loại user</option>
-            <option value="tenant">Khách hàng</option>
+            <option value="tenant">Người thuê</option>
             <option value="landlord">Chủ nhà</option>
+          </select>
+
+          <span className='ad_mana_user_action_select_title'>Trạng thái</span>
+          <select value={selectedStatus} onChange={(e) => setSelectedStatus(e.target.value)}>
+            <option value="">Tất cả trạng thái</option>
+            <option value="active">Đang hoạt động</option>
+            <option value="inactive">Dừng hoạt động</option>
           </select>
         </div>
 
@@ -97,7 +113,7 @@ export default function AdminManagerUser() {
             render={(item) => (
               <span>
                 {item?.role === 'landlord' && 'Chủ nhà'}
-                {item?.role === 'customer' && 'Khách hàng'}
+                {item?.role === 'tenant' && 'Người thuê'}
               </span>
             )}
           />
@@ -110,7 +126,11 @@ export default function AdminManagerUser() {
 
           <Column title={"Thao tác"}
             render={(item) => (
-              <BaseButton type="red" onClick={() => handleShow(item.id)}>Xóa</BaseButton>
+              item.status === "active" ? (
+                <BaseButton type="red" onClick={() => handleShow(item.id)}>Dừng hoạt động</BaseButton>
+              ) : (
+                <BaseButton type="green" onClick={() => handleRestore(item.id)}>Hoạt động trở lại</BaseButton>
+              )
             )}
           />
         </Table>

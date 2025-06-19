@@ -144,8 +144,16 @@ export default function RoomManager() {
 
               <div className='room_mana_card_fun'>
                 <BaseButton type="blue" onClick={() => navigate(`/landlord/room-manager/view-room/room_id/${room.id}`)}>Thông tin phòng</BaseButton>
-                <BaseButton type="green">Khách thuê</BaseButton>
-                <BaseButton type="red" onClick={() => navigate(`/landlord/create-contract/renter_id/room_id/${room.id}`)}>Tạo hợp đồng</BaseButton>
+
+                {room.status === "rented" ? (
+                  <>
+                    <BaseButton type="green">Khách thuê</BaseButton>
+                    <BaseButton type="blue" onClick={() => navigate(`/tenant/detail-rental-contract/room_id/${room.id}`)}>Xem hợp đồng</BaseButton>
+                    <BaseButton type="warning">Tạo hóa đơn dịch vụ</BaseButton>
+                  </>
+                ) : (
+                  <BaseButton type="blue" onClick={() => navigate(`/landlord/create-contract/renter_id/room_id/${room.id}`)}>Tạo hợp đồng</BaseButton>
+                )}
               </div>
 
             </div>

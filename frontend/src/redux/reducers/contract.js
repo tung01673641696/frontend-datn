@@ -91,6 +91,14 @@ export const landlordGetAllContract = createAsyncThunk(
   }
 );
 
+export const getRentalContractDetail = createAsyncThunk(
+  "contract/getRentalContractDetail",
+  async (roomId) => {
+    const rentalContractDetail = await ContractApi.getRentalContractDetail(roomId);
+    return rentalContractDetail;
+  }
+);
+
 
 const ContractSlice = createSlice({
   name: "contract",
@@ -101,6 +109,7 @@ const ContractSlice = createSlice({
     isDepositContractExists: false,
     allDepositContract: [],
     allContract: [],
+    rentalContractDetail: {}
   },
   extraReducers: builder => {
     builder
@@ -126,6 +135,11 @@ const ContractSlice = createSlice({
       .addCase(landlordGetAllContract.fulfilled, (state, action) => {
         state.loading = false
         state.allContract = action.payload.data.contract;
+      })
+
+      .addCase(getRentalContractDetail.fulfilled, (state, action) => {
+        state.loading = false
+        state.rentalContractDetail = action.payload.data;
       })
 
   }

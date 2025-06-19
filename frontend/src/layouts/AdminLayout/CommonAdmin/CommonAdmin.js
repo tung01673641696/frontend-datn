@@ -7,8 +7,13 @@ export default function CommonAdmin({ children }) {
   const manager = [
     { id: 1, title: 'Thống kê', path: '/admin/dashboard' },
     { id: 2, title: 'Quản lý Người dùng', path: '/admin/manager-user' },
-    { id: 3, title: 'Quản lý Bài đăng của chủ nhà', path: '/admin/manager-posts-landlord' },
-    { id: 4, title: 'Quản lý Bài đăng của khách hàng', path: '/admin/manager-posts-customer' },
+    {
+      id: 3, title: 'Quản lý bài đăng',
+      children: [
+        { id: 4, title: 'Bài đăng của chủ nhà', path: '/admin/manager-posts-landlord' },
+        { id: 5, title: 'Bài đăng của người thuê', path: '/admin/manager-posts-customer' },
+      ]
+    }
   ]
 
   return (
@@ -27,7 +32,28 @@ export default function CommonAdmin({ children }) {
 
         <div className='common_admin_list_link'>
           {manager?.map((item) => (
-            <Link to={item?.path} className='common_admin_list_link_ele'>{item?.title}</Link>
+            item.path ? (
+              <Link
+                key={item.id}
+                to={item.path}
+                className='common_admin_list_link_ele'
+              >
+                {item.title}
+              </Link>
+            ) : (
+              <div key={item.id} className='common_admin_list_link_ele has_submenu'>
+                <span className="main_menu_title">{item.title}</span>
+                {item.children && (
+                  <div className='submenu'>
+                    {item.children.map((child) => (
+                      <Link key={child.id} to={child.path} className='submenu_item'>
+                        {child.title}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )
           ))}
         </div>
       </div>

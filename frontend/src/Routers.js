@@ -109,7 +109,7 @@ export default function Routers() {
               <Route path='/tenant/deposit-contract-detail/renter/:renterId/room/:roomId' element={<DetailDepositContract />} />
 
               <Route path='/tenant/contract-manager' element={<ContractManagerByRenter />} />
-              <Route path='/tenant/detail-rental-contract' element={<DetailRentalContract />} />
+              <Route path='/tenant/detail-rental-contract/room_id/:roomId' element={<DetailRentalContract />} />
 
             </Route>
 

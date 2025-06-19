@@ -6,13 +6,24 @@ import HeaderUser from '../../../layouts/UserLayout/HeaderUser/HeaderUser'
 import Footer from '../../../layouts/UserLayout/FooterUser/FooterUser'
 import BaseButton from '../../../components/BaseButton/BaseButton'
 import BaseModal from '../../../components/BaseModal/BaseModal'
+import { useParams } from 'react-router-dom'
+import { getRentalContractDetail } from '../../../redux/reducers/contract'
 
 export default function DetailRentalContract() {
   const user = JSON.parse(localStorage.getItem('user'))
+  const { rentalContractDetail } = useSelector((state) => state.contractReducer)
   const [openModal, setOpenModal] = useState(false)
   const [openModalConfirm, setOpenModalConfirm] = useState(false)
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const params = useParams()
+  const roomId = params.roomId
+
+  useEffect(() => {
+    dispatch(getRentalContractDetail(roomId))
+  }, [])
+
+  console.log(">>>>>", rentalContractDetail)
 
   return (
     <div className='detail_rental_contract'>
@@ -24,41 +35,38 @@ export default function DetailRentalContract() {
         <div className='detail_rental_contract_box_flex'>
           <div className='detail_rental_contract_box_flex_item'>
             <h4>Đại diện bên thuê</h4>
-            <span>Họ và tên: Hoàng Thanh Tùng</span>
-            <span>CMT / CCCD : 030099013846</span>
-            <span>Số điện thoại: 0373641696</span>
+            <span>Họ và tên: {rentalContractDetail?.renter?.name}</span>
+            <span>CMT / CCCD : {rentalContractDetail?.renter?.identity_number}</span>
+            <span>Số điện thoại: {rentalContractDetail?.renter?.phone}</span>
           </div>
 
           <div className='detail_rental_contract_box_flex_item'>
             <h4>Đại diện bên chủ nhà</h4>
-            <span>Họ và tên: Đỗ Văn Hiểu</span>
-            <span>CMT / CCCD : 030099013846</span>
-            <span>Số điện thoại: 0373641696</span>
+            <span>Họ và tên: {rentalContractDetail?.owner?.name}</span>
+            <span>Số điện thoại: {rentalContractDetail?.owner?.phone}</span>
           </div>
         </div>
 
         <div className='detail_rental_contract_box_flex'>
           <div className='detail_rental_contract_box_flex_item'>
             <h4>Thông tin phòng</h4>
-            <span>Phòng 101 - Nhà Gohomy1</span>
-            <span>Địa chỉ: 250 Kim Giang, Hoàng Mai, Hà Nội</span>
-            <span>giá thuê: 2.500.000đ / tháng</span>
+            <span>Phòng {rentalContractDetail?.room?.name} - Nhà {rentalContractDetail?.house?.name}</span>
+            <span>Địa chỉ: {rentalContractDetail?.house?.address}</span>
+            <span>giá thuê: {rentalContractDetail?.room?.price ? `${Number(rentalContractDetail.room.price).toLocaleString('vi-VN')}đ` : "Đang cập nhật"} / tháng</span>
           </div>
 
           <div className='detail_rental_contract_box_flex_item'>
             <h4>Thời hạn hợp đồng</h4>
-            <span>Thời hạn hợp đồng: 6 tháng</span>
-            <span>Hợp đồng tính từ ngày: 10/6/2025</span>
-            <span>Hợp đồng kết thúc ngày: 10/12/2025</span>
+            <span>Hợp đồng tính từ ngày: {rentalContractDetail?.start_date}</span>
+            <span>Hợp đồng kết thúc ngày: {rentalContractDetail?.end_date}</span>
           </div>
         </div>
 
         <div className='detail_rental_contract_box_flex'>
           <div className='detail_rental_contract_box_flex_item'>
             <h4>Thông tin dịch vụ</h4>
-            <span>Tiền điện: 4.000đ / 1 số</span>
-            <span>Tiền nước: 30.000đ / 1 khối</span>
-            <span>Dịch vụ chung: 100.000đ / người</span>
+            <span>Tiền điện: {rentalContractDetail?.house?.electric_price}đ / 1 số</span>
+            <span>Tiền nước: {rentalContractDetail?.house?.water_price}đ / 1 khối</span>  
           </div>
         </div>
 
@@ -107,7 +115,7 @@ export default function DetailRentalContract() {
           type="red"
           title="Xác nhận hủy hợp đồng thuê phòng"
           content="Bạn có chắc chắn muốn hủy hợp đồng thuê phòng này không? Hành động này không thể hoàn tác."
-        onCancel={() => setOpenModal(false)}
+          onCancel={() => setOpenModal(false)}
         // onConfirm={handleCancelContract}
         />
 
@@ -117,7 +125,7 @@ export default function DetailRentalContract() {
           type="red"
           title="Xác nhận hợp đồng thuê phòng"
           content="Bạn chắc chắn muốn xác nhận hợp đồng thuê phòng ?"
-        onCancel={() => setOpenModalConfirm(false)}
+          onCancel={() => setOpenModalConfirm(false)}
         // onConfirm={handleConfirmContract}
         />
       </div>

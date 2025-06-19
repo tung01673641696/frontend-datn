@@ -16,24 +16,6 @@ import { adminRejectPost } from '../../../redux/reducers/posts'
 export default function AdminManagerPostsLandlord() {
   const dispatch = useDispatch()
   const [statusFilter, setStatusFilter] = useState("pending");
-  const [isShow, setIsShow] = useState(false)
-  const [selectPostsId, setSelectPostsId] = useState(null)
-
-  const handleShow = (postId) => {
-    setSelectPostsId(postId)
-    setIsShow(true)
-  }
-
-  function handleClose() {
-    setIsShow(false)
-  }
-
-  const handleDelete = async () => {
-    if (selectPostsId) {
-      await dispatch(deletePostsByCustomer(selectPostsId))
-      setIsShow(false)
-    }
-  }
 
   const { allPostsByAllLandlord } = useSelector((state) => state.postsReducer)
   console.log(">>>>>>", allPostsByAllLandlord)
@@ -76,18 +58,7 @@ export default function AdminManagerPostsLandlord() {
 
   return (
     <CommonAdmin>
-      <h3 className='ad_mana_post_cus_title'>Quản Lý Bài đăng của chủ nhà</h3>
-
-      <>
-        <BaseModal
-          open={isShow}
-          title="Xóa nhà"
-          type="red"
-          content="Bạn có chắc chắn muốn xóa phòng này không ?"
-          onCancel={handleClose}
-          onConfirm={handleDelete}
-        />
-      </>
+      <h3 className='ad_mana_post_cus_title'>Bài đăng của chủ nhà</h3>
 
       <div className='ad_mana_post_cus_action'>
         <div className='ad_mana_post_cus_action_select'>
@@ -136,13 +107,22 @@ export default function AdminManagerPostsLandlord() {
             }}
           />
 
-          <Column title={"Thao tác"} width={200}
+          <Column title={"Thao tác"} width={250}
             render={(item) => (
-              <div className='flex flex-col gap-1'>
+              <div className='flex'>
                 <BaseButton type="blue" onClick="">Xem</BaseButton>
-                <BaseButton type="green" onClick={() => handleApprove(item.id)}>Duyệt</BaseButton>
-                <BaseButton type="warning" onClick={() => handleReject(item.id)}>Từ chối</BaseButton>
-                <BaseButton type="red" onClick={() => handleShow(item.id)}>Xóa</BaseButton>
+
+                {item.status === "pending" && (
+                  <BaseButton type="green" onClick={() => handleApprove(item.id)}>Duyệt</BaseButton>
+                )}
+
+                {item.status === "pending" && (
+                  <BaseButton type="red" onClick={() => handleReject(item.id)}>Từ chối</BaseButton>
+                )}
+
+                {item.status === "reject" && (
+                  <BaseButton type="red" onClick="">Xóa</BaseButton>
+                )}
               </div>
             )}
           />

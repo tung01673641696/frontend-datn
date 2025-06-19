@@ -13,9 +13,9 @@ export const addPostsByLandlord = createAsyncThunk("posts/addPostsByLandlord", a
   return addPostsByLandlord
 })
 
-export const getPostsByOnePeople = createAsyncThunk("posts/getPostsByOnePeople", async ({ peopleId, status }) => {
-  const getPostsOnePeople = await PostsApi.getPostsByOnePeople(peopleId, status);
-  return getPostsOnePeople
+export const landlordGetAllPost = createAsyncThunk("posts/landlordGetAllPost", async ({ landlordId, status }) => {
+  const getAllPost = await PostsApi.landlordGetAllPost(landlordId, status);
+  return getAllPost
 })
 
 export const getOnePostsByCustomer = createAsyncThunk("posts/getOnePostsByCustomer", async (postId) => {
@@ -29,7 +29,7 @@ export const editPostsByCustomer = createAsyncThunk("posts/editPostsByCustomer",
     toast.success("Cập nhật bài đăng thành công");
     const user = JSON.parse(localStorage.getItem("user"))
     const user_id = user.id
-    thunkApi.dispatch(getPostsByOnePeople({ customerId: user_id, status: 'pending' }))
+    thunkApi.dispatch(landlordGetAllPost({ customerId: user_id, status: 'pending' }))
   }
   return editPostsByCustomer
 })
@@ -41,7 +41,7 @@ export const deletePostsByCustomer = createAsyncThunk("posts/deletePostsByCustom
     toast.success("Xóa bài đăng thành công");
     const user = JSON.parse(localStorage.getItem("user"))
     const user_id = user.id
-    thunkApi.dispatch(getPostsByOnePeople(user_id))
+    thunkApi.dispatch(landlordGetAllPost(user_id))
   } else {
     toast.error("Xóa bài đăng thất bại");
   }
@@ -92,7 +92,7 @@ export const getAllPostByLandlordActiveByDistrict = createAsyncThunk("posts/getA
 const PostsSlice = createSlice({
   name: "posts",
   initialState: {
-    postsByOnePeople: [],
+    postsByOneLandlord: [],
     onePostsByCustomer: {},
     allPostsByAllCustomer: [],
     allPostsByAllCustomerActive: [],
@@ -103,9 +103,9 @@ const PostsSlice = createSlice({
   },
   extraReducers: builder => {
     builder
-      .addCase(getPostsByOnePeople.fulfilled, (state, action) => {
+      .addCase(landlordGetAllPost.fulfilled, (state, action) => {
         state.loading = false
-        state.postsByOnePeople = action.payload.data;
+        state.postsByOneLandlord = action.payload.data;
       })
       .addCase(getOnePostsByCustomer.fulfilled, (state, action) => {
         state.loading = false

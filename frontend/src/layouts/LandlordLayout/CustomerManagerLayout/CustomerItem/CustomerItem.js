@@ -18,6 +18,7 @@ export default function CustomerItem({ item }) {
   const navigate = useNavigate()
   const [showDepositModal, setShowDepositModal] = useState(false);
   const allRentalRequest = useSelector(state => state.rentalrequestReducer.data || [])
+  const [hasRentalContract, setHasRentalContract] = useState(false);
 
   const renter_id = item?.renter?.id || item?.renter_id;
   const room_id = item?.room?.id || item?.room_id;
@@ -94,6 +95,12 @@ export default function CustomerItem({ item }) {
     navigate(`/landlord/create-contract/renter_id/${renter_id}/room_id/${item?.room?.id}`)
   }
 
+  useEffect(() => {
+    const check = localStorage.getItem(`contract_created_${renter_id}_${room_id}`);
+    if (check === 'true') {
+      setHasRentalContract(true);
+    }
+  }, []);
 
   return (
     <div className='customer_item'>
@@ -102,15 +109,16 @@ export default function CustomerItem({ item }) {
           <img src={Img} />
         </div>
 
-        <div className='customer_item_ele_posision'>
-          {item?.status === 'pending_contract' && (
-            <div className='customer_item_ele_posision_status1'>Khách thuê chưa xác nhận cọc</div>
-          )}
-
-          {item?.status === 'signed' && (
-            <div className='customer_item_ele_posision_status2'>Khách thuê đã xác nhận cọc</div>
-          )}
-        </div>
+        {item?.status !== 'pending' && item?.status !== 'approved' && (
+          <div className='customer_item_ele_posision'>
+            {item?.status === 'pending_contract' && (
+              <div className='customer_item_ele_posision_status1'>Chờ khách thuê xác nhận cọc</div>
+            )}
+            {item?.status === 'signed' && (
+              <div className='customer_item_ele_posision_status2'>Khách thuê đã xác nhận cọc</div>
+            )}
+          </div>
+        )}
 
         <div className='customer_item_ele_content'>
           <span className='customer_item_ele_content_child'>{item?.renter_name || item?.renter.name}</span>
@@ -127,19 +135,28 @@ export default function CustomerItem({ item }) {
             ) : ['approved'].includes(item?.status) ? (
               <>
                 <BaseButton type="green" onClick={handleOpenDepositModal}>Tạo hợp đồng cọc</BaseButton>
-                <BaseButton type="red">Từ chối</BaseButton>
+                <BaseButton type="red" onClick={handleReject}>Từ chối</BaseButton>
               </>
             )
               : ['signed'].includes(item?.status) ? (
                 <>
                   <BaseButton type="blue" onClick={() => navigate(`/tenant/deposit-contract-detail/renter/${renter_id}/room/${room_id}`)}>Xem hợp đồng cọc</BaseButton>
 
-                  <BaseButton type="green" onClick={handleCreateContract}>Tạo hợp đồng thuê</BaseButton>
+                  {hasRentalContract ? (
+                    <BaseButton type="blue" onClick={() => navigate(`/tenant/detail-rental-contract/room_id/${room_id}`)}>
+                      Xem hợp đồng thuê
+                    </BaseButton>
+                  ) : (
+                    <BaseButton type="green" onClick={handleCreateContract}>Tạo hợp đồng thuê</BaseButton>
+                  )}
                 </>
               )
-                : (
-                  <><BaseButton type="blue" onClick={handleApprove} disabled={alreadyApproved}>Xem hợp đồng cọc</BaseButton></>
-                )}
+                : ['reject'].includes(item?.status) ? (
+                  <><BaseButton type="red" onClick="">Xóa</BaseButton></>
+                )
+                  : (
+                    <><BaseButton type="blue" onClick={() => navigate(`/tenant/deposit-contract-detail/renter/${renter_id}/room/${room_id}`)}>Xem hợp đồng cọc</BaseButton></>
+                  )}
           </span>
         </div>
 

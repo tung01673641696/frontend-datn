@@ -22,8 +22,6 @@ export default function CreateContract() {
   const { detailUser } = useSelector((state) => state.userReducer)
   const { detailTenantByRoom } = useSelector((state) => state.tenantReducer)
 
-  console.log("........", detailTenantByRoom)
-
   const contractParams = {
     renter_id: renter_id,
     room_id: room_id,
@@ -100,8 +98,8 @@ export default function CreateContract() {
     try {
       const res = await dispatch(createContract(contract)).unwrap()
       toast.success("Tạo hợp đồng thuê thành công");
-      console.log("eeeee", contract)
-
+      localStorage.setItem(`contract_created_${renter_id}_${room_id}`, 'true');
+      navigate(-1);
     } catch (error) {
       if (error?.status === 409) {
         toast.error(error?.data?.error || "Phòng đã có hợp đồng thuê.");

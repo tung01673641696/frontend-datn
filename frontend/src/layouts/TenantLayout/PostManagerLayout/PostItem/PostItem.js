@@ -29,6 +29,8 @@ export default function PostItem({ item }) {
     }
   }
 
+  
+
   return (
     <div className='post-item'>
       <>
@@ -43,7 +45,11 @@ export default function PostItem({ item }) {
       </>
       <div className='post-item_box'>
         <div className='post-item_box_left'>
-          <img src={Img} />
+          <img
+            src={item?.image ? JSON.parse(item.image)[0] : Img}
+            alt="ảnh phòng"
+            style={{ width: "100%", height: "35vh", objectFit: "cover" }}
+          />
         </div>
         <div className='post-item_box_right'>
           <span className='post-item_box_right_title'>{item?.title}</span>

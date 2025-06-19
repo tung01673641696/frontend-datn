@@ -16,24 +16,6 @@ import { adminRejectPost } from '../../../redux/reducers/posts'
 export default function AdminManagerPostsCustomer() {
   const dispatch = useDispatch()
   const [statusFilter, setStatusFilter] = useState("pending");
-  const [isShow, setIsShow] = useState(false)
-  const [selectPostsId, setSelectPostsId] = useState(null)
-
-  const handleShow = (postId) => {
-    setSelectPostsId(postId)
-    setIsShow(true)
-  }
-
-  function handleClose() {
-    setIsShow(false)
-  }
-
-  const handleDelete = async () => {
-    if (selectPostsId) {
-      await dispatch(deletePostsByCustomer(selectPostsId))
-      setIsShow(false)
-    }
-  }
 
   const { allPostsByAllCustomer } = useSelector((state) => state.postsReducer)
 
@@ -75,18 +57,7 @@ export default function AdminManagerPostsCustomer() {
 
   return (
     <CommonAdmin>
-      <h3 className='ad_mana_post_cus_title'>Quản Lý Bài đăng của khách hàng</h3>
-
-      <>
-        <BaseModal
-          open={isShow}
-          title="Xóa nhà"
-          type="red"
-          content="Bạn có chắc chắn muốn xóa phòng này không ?"
-          onCancel={handleClose}
-          onConfirm={handleDelete}
-        />
-      </>
+      <h3 className='ad_mana_post_cus_title'>Bài đăng của người thuê</h3>
 
       <div className='ad_mana_post_cus_action'>
         <div className='ad_mana_post_cus_action_select'>
@@ -135,13 +106,12 @@ export default function AdminManagerPostsCustomer() {
             }}
           />
 
-          <Column title={"Thao tác"} width={200}
+          <Column title={"Thao tác"} width={250}
             render={(item) => (
-              <div className='flex flex-col gap-1'>
+              <div className='flex'>
                 <BaseButton type="blue" onClick="">Xem</BaseButton>
                 <BaseButton type="green" onClick={() => handleApprove(item.id)}>Duyệt</BaseButton>
-                <BaseButton type="warning" onClick={() => handleReject(item.id)}>Từ chối</BaseButton>
-                <BaseButton type="red" onClick={() => handleShow(item.id)}>Xóa</BaseButton>
+                <BaseButton type="red" onClick={() => handleReject(item.id)}>Từ chối</BaseButton>
               </div>
             )}
           />

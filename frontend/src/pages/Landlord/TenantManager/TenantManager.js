@@ -148,9 +148,9 @@ export default function TenantManager() {
           )}
         />
 
-        <Column title={"Ghi chú"}
+        <Column title={"phân quyền"}
           render={(value) => (
-            <span>{value?.tenant?.note}</span>
+            <span>Người đại diện hợp đồng</span>
           )}
         />
 

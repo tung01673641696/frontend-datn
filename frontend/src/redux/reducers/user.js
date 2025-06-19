@@ -41,6 +41,11 @@ export const deleteUser = createAsyncThunk("user/deleteUser", async (userId, thu
   return deleteUser
 })
 
+export const restoreUser = createAsyncThunk("user/restoreUser", async (userId) => {
+  const restoreUser = await UserApi.restoreUser(userId)
+  return restoreUser
+})
+
 export const getDetailUser = createAsyncThunk("user/getDetailUser", async (userId) => {
   const detailUser = await UserApi.getDetailUser(userId);
   return detailUser

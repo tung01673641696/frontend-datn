@@ -44,6 +44,11 @@ const ContractApi = {
     return axiosClient.get(url);
   },
 
+  async getRentalContractDetail(roomId) {
+    const url = `/contract/rental-contract-detail/room/${roomId}`;
+    return axiosClient.get(url);
+  },
+
 }
 
 export default ContractApi

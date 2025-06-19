@@ -34,12 +34,14 @@
 
 .flex {
   display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+
   button {
-    width: calc(100% / 2 - 3px);
-    margin-bottom: 3px;
-    padding: 5px 15px;
+    margin: 0 2px;
+    width: calc(100% / 3 - 2px);
+    padding: 5px;
     font-size: 14px;
   }
 }
