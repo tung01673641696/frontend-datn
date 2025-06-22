@@ -69,8 +69,8 @@ export default function RoomManager() {
   }
 
   const handleOpenListTenantModal = (roomId) => {
+    setSelectRoomId(roomId);
     dispatch(getTenantByRoom(roomId))
-    console.log(">>>>>>>", listTenantByRoom)
     setShowListTenantModal(true);
   };
 
@@ -173,9 +173,8 @@ export default function RoomManager() {
           type="blue"
           width="58%"
           title="Khách thuê của phòng"
-          content={<ListTenant tenants={listTenantByRoom} />}
+          content={<ListTenant tenants={listTenantByRoom} roomId={selectRoomId} />}
           onCancel={() => setShowListTenantModal(false)}
-          onConfirm=""
         />
       </div>
     </Common>

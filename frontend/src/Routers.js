@@ -30,7 +30,6 @@ const DepositContractManagerByLandlord = React.lazy(() => import('./pages/Landlo
 const ContractManagerByLandlord = React.lazy(() => import('./pages/Landlord/ContractManager/ContractManager'))
 
 const TenantManager = React.lazy(() => import('./pages/Landlord/TenantManager/TenantManager'))
-const AddTenant = React.lazy(() => import('./pages/Landlord/TenantManager/AddTenant/AddTenant'))
 const EditTenant = React.lazy(() => import('./pages/Landlord/TenantManager/EditTenant/EditTenant'))
 
 const PostByTenant = React.lazy(() => import('./pages/Tenant/PostByTenant/PostByTenant'))
@@ -88,7 +87,6 @@ export default function Routers() {
 
 
               <Route path='/landlord/tenant-manager' element={<TenantManager />} />
-              <Route path='/landlord/tenant-manager/add-tenant' element={<AddTenant />} />
               <Route path='/landlord/tenant-manager/edit-tenant/tenant_id/:id' element={<EditTenant />} />
 
               <Route path='/landlord/rental-request-manager' element={<RentalRequestManager />} />

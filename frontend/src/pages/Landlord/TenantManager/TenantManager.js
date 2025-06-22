@@ -41,10 +41,6 @@ export default function TenantManager() {
     dispatch(getAllTenant())
   }, [])
 
-  function handleClick() {
-    navigate(`/landlord/tenant-manager/add-tenant`);
-  }
-
   const handleShow = (tenantId) => {
     setTenantId(tenantId)
     setIsShow(true)
@@ -107,10 +103,6 @@ export default function TenantManager() {
               ))}
             </select>
           </div>
-        </div>
-
-        <div className='tenant-mana_act_add'>
-          <BaseButton type="blue" onClick={handleClick}>Thêm khách thuê</BaseButton>
         </div>
       </div>
 
