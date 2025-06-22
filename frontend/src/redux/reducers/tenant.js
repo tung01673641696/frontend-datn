@@ -8,8 +8,8 @@ export const addTenant = createAsyncThunk("tenant/addTenant", async (data) => {
   return addTenant
 })
 
-export const getAllTenant = createAsyncThunk("tenant/getAllTenant", async () => {
-  const getAllTenant = await TenantApi.getAllTenant();
+export const getAllTenant = createAsyncThunk("tenant/getAllTenant", async (status = "active") => {
+  const getAllTenant = await TenantApi.getAllTenant(status);
   return getAllTenant
 })
 
@@ -18,7 +18,9 @@ export const deleteTenant = createAsyncThunk("tenant/deleteTenant", async (tenan
 
   if (deleteTenant.status === 200) {
     toast.success("Xóa khách thuê thành công");
-    thunkApi.dispatch(getAllTenant())
+    const state = thunkApi.getState();
+    const currentStatus = state.tenantReducer.currentStatus || "active";
+    thunkApi.dispatch(getAllTenant(currentStatus));
   } else {
     toast.error("Xóa khách thuê thất bại");
   }
@@ -54,13 +56,15 @@ const TenantSlice = createSlice({
     allTenant: [],
     oneTenant: {},
     listTenantByRoom: [],
-    detailTenantByRoom: {}
+    detailTenantByRoom: {},
+    currentStatus: "active",
   },
   extraReducers: builder => {
     builder
       .addCase(getAllTenant.fulfilled, (state, action) => {
         state.loading = false
         state.allTenant = action.payload.data;
+        state.currentStatus = action.meta.arg;
       })
       .addCase(getOneTenant.fulfilled, (state, action) => {
         state.loading = false

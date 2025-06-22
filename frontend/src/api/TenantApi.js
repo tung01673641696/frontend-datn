@@ -6,8 +6,8 @@ const TenantApi = {
     return axiosClient.post(url, data);
   },
 
-  async getAllTenant() {
-    const url = `/tenant-manager/get-all-tenant`;
+  async getAllTenant(status = "active") {
+    const url = `/tenant-manager/get-all-tenant?status=${status}`;
     return axiosClient.get(url);
   },
 

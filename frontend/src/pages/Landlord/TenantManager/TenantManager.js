@@ -19,8 +19,11 @@ export default function TenantManager() {
   const user = JSON.parse(localStorage.getItem("user"))
   const id_user = user.id
   const { listHouseByOwner } = useSelector((state) => state.houseReducer)
+
   const [selectHouse, setSelectHouse] = useState("")
   const [selectRoom, setSelectRoom] = useState("")
+  const [status, setStatus] = useState("active")
+
   const { listRoomByHouse } = useSelector((state) => state.roomReducer)
   const { allTenant } = useSelector((state) => state.tenantReducer)
 
@@ -38,8 +41,8 @@ export default function TenantManager() {
   }
 
   useEffect(() => {
-    dispatch(getAllTenant())
-  }, [])
+    dispatch(getAllTenant(status))
+  }, [status])
 
   const handleShow = (tenantId) => {
     setTenantId(tenantId)
@@ -103,6 +106,18 @@ export default function TenantManager() {
               ))}
             </select>
           </div>
+
+          <div className='tenant-mana_act_search_ele'>
+            <span className='tenant-mana_act_search_ele_name'>Tình trạng</span>
+            <select
+              className='tenant-mana_act_search_ele_select'
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
+            >
+              <option value="active">Đang ở</option>
+              <option value="inactive">Đã chuyển đi</option>
+            </select>
+          </div>
         </div>
       </div>
 
@@ -140,9 +155,9 @@ export default function TenantManager() {
           )}
         />
 
-        <Column title={"phân quyền"}
+        <Column title={"Tình trạng"}
           render={(value) => (
-            <span>Người đại diện hợp đồng</span>
+            <span>{value?.tenant?.deleted_at ? "Đã chuyển đi" : "Đang ở"}</span>
           )}
         />
 
