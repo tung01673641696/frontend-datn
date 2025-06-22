@@ -11,22 +11,16 @@ export default function Common({ children }) {
     { id: 1, title: 'Trang chủ', path: '/' },
     { id: 2, title: 'Thống kê', path: '/landlord/dashboard' },
     { id: 3, title: 'Quản lý nhà', path: `/landlord/house-manager` },
-    {
-      id: 4,
-      title: 'Quản lý khách thuê',
-      children: [
-        { id: 7, title: 'Danh sách khách thuê', path: '/landlord/tenant-manager' },
-        { id: 8, title: 'Danh sách phương tiện', path: '/landlord/vehicle-manager' },
-      ]
-    },
+    { id: 4, title: 'Quản lý khách thuê', path: '/landlord/tenant-manager' },
     {
       id: 5,
       title: 'Quản lý hợp đồng',
       children: [
-        { id: 9, title: 'Quản lý hợp đồng cọc', path: '/landlord/deposit-contract-manager-by-landlord' },
-        { id: 10, title: 'Quản lý hợp đồng thuê', path: '/landlord/contract-manager-by-landlord' },
+        { id: 6, title: 'Quản lý hợp đồng cọc', path: '/landlord/deposit-contract-manager-by-landlord' },
+        { id: 7, title: 'Quản lý hợp đồng thuê', path: '/landlord/contract-manager-by-landlord' },
       ]
     },
+    { id: 8, title: 'Hóa đơn dịch vụ', path: '/landlord/service-bill-manager' }
   ]
   return (
     <div className='common'>

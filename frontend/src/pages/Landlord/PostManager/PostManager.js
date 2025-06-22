@@ -3,7 +3,7 @@ import "./PostManager.scss"
 import HeaderUser from '../../../layouts/UserLayout/HeaderUser/HeaderUser'
 import Footer from '../../../layouts/UserLayout/FooterUser/FooterUser'
 import BaseButton from '../../../components/BaseButton/BaseButton'
-import PostItem from '../../../layouts/TenantLayout/PostManagerLayout/PostItem/PostItem'
+import PostItemByLandlord from '../../../layouts/LandlordLayout/PostManagerLayout/PostItemByLandlord/PostItemByLandlord'
 import { landlordGetAllPost } from '../../../redux/reducers/posts'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -13,8 +13,6 @@ export default function PostManager() {
   const dispatch = useDispatch()
   const [status, setStatus] = useState("pending")
   const { postsByOneLandlord } = useSelector((state) => state.postsReducer)
-
-  console.log("?????", postsByOneLandlord)
 
   useEffect(() => {
     dispatch(landlordGetAllPost({ landlordId: id_user, status }))
@@ -60,7 +58,7 @@ export default function PostManager() {
 
         <div className='post-mana_box_child'>
           {postsByOneLandlord?.map((item) => (
-            <PostItem item={item} />
+            <PostItemByLandlord item={item} />
           ))}
         </div>
       </div>

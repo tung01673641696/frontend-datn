@@ -162,7 +162,7 @@ export default function CustomerItem({ item }) {
 
         <BaseModal
           open={showDepositModal}
-          type="red"
+          type="blue"
           title="Tạo hợp đồng cọc"
           content={<CreateDepositContract formData={formData} setFormData={setFormData} />}
           onCancel={() => setShowDepositModal(false)}

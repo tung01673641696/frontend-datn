@@ -11,7 +11,8 @@ export default function BaseModal({
   title,
   content,
   onCancel,
-  onConfirm
+  onConfirm,
+  width
 }) {
   const typeObject = {
     red: RED,
@@ -23,7 +24,7 @@ export default function BaseModal({
       {
         open && (
           <div className='overlay'>
-            <div className='base-modal'>
+            <div className='base-modal' style={{ width: width || "30%" }}>
               <div className={`base-modal_header ${typeObject[type]}`}>
                 <div className='base-modal_header_title'>
                   {title}
@@ -40,7 +41,7 @@ export default function BaseModal({
 
               <div className='base-modal_footer'>
                 <BaseButton type="white" onClick={onCancel}>Hủy</BaseButton>
-                <BaseButton type="red" onClick={onConfirm}>Xác nhận</BaseButton>
+                <BaseButton type={type} onClick={onConfirm}>Xác nhận</BaseButton>
               </div>
             </div>
           </div>

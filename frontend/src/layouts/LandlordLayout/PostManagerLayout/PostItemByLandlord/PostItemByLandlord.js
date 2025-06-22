@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
-import "./PostItem.scss"
-import Img from '../../../../assets/Images/NeedAvatar/avatar.png'
+import "./PostItemByLandlord.scss"
 import BaseButton from '../../../../components/BaseButton/BaseButton'
 import { useNavigate } from 'react-router-dom'
 import BaseModal from '../../../../components/BaseModal/BaseModal'
 import { deletePostsByCustomer } from '../../../../redux/reducers/posts'
 import { useDispatch } from 'react-redux'
 
-export default function PostItem({ item }) {
+export default function PostItemByLandlord({ item }) {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [isShow, setIsShow] = useState(false)
@@ -29,7 +28,7 @@ export default function PostItem({ item }) {
     }
   }
 
-  
+
 
   return (
     <div className='post-item'>
@@ -46,7 +45,7 @@ export default function PostItem({ item }) {
       <div className='post-item_box'>
         <div className='post-item_box_left'>
           <img
-            src={item?.image ? JSON.parse(item.image)[0] : Img}
+            src={item?.image ? JSON.parse(item.image)[0] : ""}
             alt="ảnh phòng"
             style={{ width: "100%", height: "35vh", objectFit: "cover" }}
           />

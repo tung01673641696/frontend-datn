@@ -13,7 +13,7 @@ export default function CommonAdmin({ children }) {
         { id: 4, title: 'Bài đăng của chủ nhà', path: '/admin/manager-posts-landlord' },
         { id: 5, title: 'Bài đăng của người thuê', path: '/admin/manager-posts-customer' },
       ]
-    }
+    },
   ]
 
   return (

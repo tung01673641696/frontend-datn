@@ -16,6 +16,11 @@ const PostsApi = {
     return axiosClient.get(url, { params: { status: status } });
   },
 
+  async tenantGetAllPost(tenantId, status) {
+    const url = `/posts/tenant-get-all-post/tenant_id/${tenantId}`;
+    return axiosClient.get(url, { params: { status: status } });
+  },
+
   async getOnePostsByCustomer(postId) {
     const url = `/posts/get-one-posts-by-customer/posts_id/${postId}`
     return axiosClient.get(url)

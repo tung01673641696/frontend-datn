@@ -1,0 +1,44 @@
+.list_tenant_info {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 30px 0;
+
+  .list_tenant_info_item {
+    width: calc(100% / 2 - 10px);
+    border: 1px solid #26C281;
+    margin: 10px 0;
+
+    .list_tenant_info_item_name {
+      width: 100%;
+      display: block;
+      background-color: #26C281;
+      color: white;
+      padding: 5px 15px;
+    }
+
+    .list_tenant_info_item_flex {
+      display: flex;
+      padding: 20px;
+
+      .list_tenant_info_item_flex_image {
+        width: 30%;
+
+        img {
+          width: 70%;
+        }
+      }
+
+      .list_tenant_info_item_flex_content {
+        width: 65%;
+        display: flex;
+        flex-direction: column;
+
+        .list_tenant_info_item_flex_content_button {
+          display: flex;
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+}

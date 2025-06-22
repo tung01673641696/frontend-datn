@@ -9,7 +9,8 @@ import { getRoomByHouse } from '../../../redux/reducers/room'
 import BaseModal from '../../../components/BaseModal/BaseModal'
 import { deleteRoom } from '../../../redux/reducers/room'
 import { useParams } from 'react-router-dom'
-import { getDetailTenantByRoom } from '../../../redux/reducers/tenant'
+import ListTenant from '../../../layouts/LandlordLayout/RoomManagerLayout/ListTenant/ListTenant'
+import { getTenantByRoom } from '../../../redux/reducers/tenant'
 
 export default function RoomManager() {
   const [isShow, setIsShow] = useState(false)
@@ -23,7 +24,9 @@ export default function RoomManager() {
   const id = user.id
   const { houseId } = useParams()
 
-  console.log(">>>>>", listRoomByHouse)
+
+  const { listTenantByRoom } = useSelector((state) => state.tenantReducer)
+  const [showListTenantModal, setShowListTenantModal] = useState(false);
 
   useEffect(() => {
     dispatch(houseByOwner(id))
@@ -64,6 +67,12 @@ export default function RoomManager() {
       setIsShow(false)
     }
   }
+
+  const handleOpenListTenantModal = (roomId) => {
+    dispatch(getTenantByRoom(roomId))
+    console.log(">>>>>>>", listTenantByRoom)
+    setShowListTenantModal(true);
+  };
 
   return (
     <Common>
@@ -147,7 +156,7 @@ export default function RoomManager() {
 
                 {room.status === "rented" ? (
                   <>
-                    <BaseButton type="green">Khách thuê</BaseButton>
+                    <BaseButton type="green" onClick={() => handleOpenListTenantModal(room.id)}>Khách thuê</BaseButton>
                     <BaseButton type="blue" onClick={() => navigate(`/tenant/detail-rental-contract/room_id/${room.id}`)}>Xem hợp đồng</BaseButton>
                     <BaseButton type="warning">Tạo hóa đơn dịch vụ</BaseButton>
                   </>
@@ -155,11 +164,19 @@ export default function RoomManager() {
                   <BaseButton type="blue" onClick={() => navigate(`/landlord/create-contract/renter_id/room_id/${room.id}`)}>Tạo hợp đồng</BaseButton>
                 )}
               </div>
-
             </div>
           ))}
         </div>
 
+        <BaseModal
+          open={showListTenantModal}
+          type="blue"
+          width="58%"
+          title="Khách thuê của phòng"
+          content={<ListTenant tenants={listTenantByRoom} />}
+          onCancel={() => setShowListTenantModal(false)}
+          onConfirm=""
+        />
       </div>
     </Common>
   )

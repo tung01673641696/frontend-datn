@@ -18,6 +18,11 @@ export const landlordGetAllPost = createAsyncThunk("posts/landlordGetAllPost", a
   return getAllPost
 })
 
+export const tenantGetAllPost = createAsyncThunk("posts/tenantGetAllPost", async ({ tenantId, status }) => {
+  const getAllPost = await PostsApi.tenantGetAllPost(tenantId, status);
+  return getAllPost
+})
+
 export const getOnePostsByCustomer = createAsyncThunk("posts/getOnePostsByCustomer", async (postId) => {
   const getOnePostsByCustomer = await PostsApi.getOnePostsByCustomer(postId);
   return getOnePostsByCustomer
@@ -93,6 +98,7 @@ const PostsSlice = createSlice({
   name: "posts",
   initialState: {
     postsByOneLandlord: [],
+    postsByOneTenant: [],
     onePostsByCustomer: {},
     allPostsByAllCustomer: [],
     allPostsByAllCustomerActive: [],
@@ -106,6 +112,10 @@ const PostsSlice = createSlice({
       .addCase(landlordGetAllPost.fulfilled, (state, action) => {
         state.loading = false
         state.postsByOneLandlord = action.payload.data;
+      })
+      .addCase(tenantGetAllPost.fulfilled, (state, action) => {
+        state.loading = false
+        state.postsByOneTenant = action.payload.data;
       })
       .addCase(getOnePostsByCustomer.fulfilled, (state, action) => {
         state.loading = false

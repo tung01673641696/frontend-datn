@@ -33,10 +33,6 @@ const TenantManager = React.lazy(() => import('./pages/Landlord/TenantManager/Te
 const AddTenant = React.lazy(() => import('./pages/Landlord/TenantManager/AddTenant/AddTenant'))
 const EditTenant = React.lazy(() => import('./pages/Landlord/TenantManager/EditTenant/EditTenant'))
 
-const VehicleManager = React.lazy(() => import('./pages/Landlord/VehicleManager/VehicleManager'))
-const AddVehicle = React.lazy(() => import('./pages/Landlord/VehicleManager/AddVehicle/AddVehicle'))
-const EditVehicle = React.lazy(() => import('./pages/Landlord/VehicleManager/EditVehicle/EditVehicle'))
-
 const PostByTenant = React.lazy(() => import('./pages/Tenant/PostByTenant/PostByTenant'))
 const EditPostByTenant = React.lazy(() => import('./pages/Tenant/EditPostByTenant/EditPostByTenant'))
 const PostManagerTenant = React.lazy(() => import('./pages/Tenant/PostManager/PostManager'))
@@ -46,6 +42,8 @@ const DetailDepositContract = React.lazy(() => import('./pages/Tenant/DetailDepo
 const DetailRentalContract = React.lazy(() => import('./pages/Tenant/DetailRentalContract/DetailRentalContract'))
 
 const ContractManagerByRenter = React.lazy(() => import('./pages/Tenant/ContractManager/ContractManager'))
+
+const ServiceBillManager = React.lazy(() => import('./pages/Landlord/ServiceBillManager/ServiceBillManager'))
 
 const AdminDashboard = React.lazy(() => import('./pages/Admin/AdminDashboard/AdminDashboard'))
 const AdminManagerUser = React.lazy(() => import('./pages/Admin/AdminManagerUser/AdminManagerUser'))
@@ -93,11 +91,9 @@ export default function Routers() {
               <Route path='/landlord/tenant-manager/add-tenant' element={<AddTenant />} />
               <Route path='/landlord/tenant-manager/edit-tenant/tenant_id/:id' element={<EditTenant />} />
 
-              <Route path='/landlord/vehicle-manager' element={<VehicleManager />} />
-              <Route path='/landlord/vehicle-manager/add-vehicle' element={<AddVehicle />} />
-              <Route path='/landlord/vehicle-manager/edit-vehicle/vehicle_id/:id' element={<EditVehicle />} />
-
               <Route path='/landlord/rental-request-manager' element={<RentalRequestManager />} />
+
+              <Route path='landlord/service-bill-manager' element={<ServiceBillManager />} />
             </Route>
 
             <Route>

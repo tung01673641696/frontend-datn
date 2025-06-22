@@ -13,7 +13,7 @@ export default function NeedDetail() {
       <HeaderUser />
 
       <div className='search-need_wrap'>
-        <div className='search-need_wrap_title'>Chi tiết tìm phòng theo nhu cầu</div>
+        <div className='search-need_wrap_title'>Chi tiết nhu cầu của người thuê</div>
         <RoomContentNeed id={id}/>
       </div>
 
