@@ -120,7 +120,7 @@ export default function DetailDepositContract() {
 
         <BaseModal
           open={openModalConfirm}
-          type="red"
+          type="blue"
           title="Xác nhận hợp đồng cọc"
           content="Bạn có muốn xác nhận hợp đồng cọc"
           onCancel={() => setOpenModalConfirm(false)}

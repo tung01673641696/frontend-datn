@@ -11,9 +11,11 @@ import { deleteRoom } from '../../../redux/reducers/room'
 import { useParams } from 'react-router-dom'
 import ListTenant from '../../../layouts/LandlordLayout/RoomManagerLayout/ListTenant/ListTenant'
 import { getTenantByRoom } from '../../../redux/reducers/tenant'
+import AddServiceBill from '../ServiceBillManager/AddServiceBill/AddServiceBill'
 
 export default function RoomManager() {
   const [isShow, setIsShow] = useState(false)
+  const [showAddBill, setShowAddBill] = useState(false)
   const [selectedHouse, setSelectedHouse] = useState("")
   const [selectRoomId, setSelectRoomId] = useState(null)
   const navigate = useNavigate()
@@ -72,6 +74,11 @@ export default function RoomManager() {
     setSelectRoomId(roomId);
     dispatch(getTenantByRoom(roomId))
     setShowListTenantModal(true);
+  };
+
+  const handleOpenAddBillModal = (roomId) => {
+    setSelectRoomId(roomId);
+    setShowAddBill(true)
   };
 
   return (
@@ -158,7 +165,7 @@ export default function RoomManager() {
                   <>
                     <BaseButton type="green" onClick={() => handleOpenListTenantModal(room.id)}>Khách thuê</BaseButton>
                     <BaseButton type="blue" onClick={() => navigate(`/tenant/detail-rental-contract/room_id/${room.id}`)}>Xem hợp đồng</BaseButton>
-                    <BaseButton type="warning">Tạo hóa đơn dịch vụ</BaseButton>
+                    <BaseButton type="warning" onClick={() => handleOpenAddBillModal(room.id)}>Tạo hóa đơn dịch vụ</BaseButton>
                   </>
                 ) : (
                   <BaseButton type="blue" onClick={() => navigate(`/landlord/create-contract/renter_id/room_id/${room.id}`)}>Tạo hợp đồng</BaseButton>
@@ -175,6 +182,15 @@ export default function RoomManager() {
           title="Khách thuê của phòng"
           content={<ListTenant tenants={listTenantByRoom} roomId={selectRoomId} />}
           onCancel={() => setShowListTenantModal(false)}
+        />
+
+        <BaseModal
+          open={showAddBill}
+          type="blue"
+          width="58%"
+          title="Thêm hóa đơn dịch vụ"
+          content={<AddServiceBill houseId={selectedHouse} roomId={selectRoomId} />}
+          onCancel={() => setShowAddBill(false)}
         />
       </div>
     </Common>

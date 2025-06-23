@@ -44,7 +44,7 @@ export default function RentalRequestManager() {
     <div className='customer_manager'>
       <HeaderUser />
       <div className='customer_manager_main'>
-        <h3>Khách hàng giữ phòng</h3>
+        <h3>Khách hàng giữ chỗ</h3>
 
         <div className='customer_manager_main_status'>
           <div className='customer_manager_main_status_ele'>

@@ -157,7 +157,7 @@ export default function TenantManager() {
 
         <Column title={"Tình trạng"}
           render={(value) => (
-            <span>{value?.tenant?.deleted_at ? "Đã chuyển đi" : "Đang ở"}</span>
+            <span style={{ color: value?.tenant?.deleted_at ? 'red' : 'green' }}>{value?.tenant?.deleted_at ? "Đã chuyển đi" : "Đang ở"}</span>
           )}
         />
 
