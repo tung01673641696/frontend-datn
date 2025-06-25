@@ -12,17 +12,21 @@
   .contract_mana_select {
     background-color: #f3f3f3;
     margin: 40px 0;
-    padding: 10px 40px;
+    padding: 20px 40px;
     text-align: left;
     display: flex;
 
-    .contract_mana_select_title {
-      margin-right: 25px;
-      padding-top: 5px;
-    }
+    .contract_mana_select_item {
+      margin: 0 10px;
 
-    select {
-      padding: 5px 20px 5px 10px;
+      .contract_mana_select_item_title {
+        margin-right: 25px;
+        padding-top: 5px;
+      }
+
+      select {
+        padding: 5px 20px 5px 10px;
+      }
     }
   }
 }

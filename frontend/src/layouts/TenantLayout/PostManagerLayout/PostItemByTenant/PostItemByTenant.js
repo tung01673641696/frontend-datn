@@ -8,7 +8,7 @@ import { deletePostsByCustomer } from '../../../../redux/reducers/posts'
 import { useDispatch } from 'react-redux'
 import { tenantGetAllPost } from '../../../../redux/reducers/posts'
 
-export default function PostItemByTenant({ item }) {
+export default function PostItemByTenant({ item, status, tenantId }) {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [isShow, setIsShow] = useState(false)
@@ -26,6 +26,7 @@ export default function PostItemByTenant({ item }) {
   const handleDelete = async () => {
     if (selectPostsId) {
       await dispatch(deletePostsByCustomer(selectPostsId))
+      await dispatch(tenantGetAllPost({ tenantId, status }))
       setIsShow(false)
     }
   }
@@ -53,8 +54,8 @@ export default function PostItemByTenant({ item }) {
           <span className='post-item_box_right_common'>Số người ở: {item?.max_people}</span>
           <span className='post-item_box_right_common'>Vị trí: {item?.name_ward ? `${item?.name_ward}` : ''} , {item?.name_district}</span>
           <span className='post-item_box_right_common'>Thời gian đăng: <span className='post-item_box_right_common_time'>{item?.created_at}</span></span>
+          <span className='post-item_box_right_common'>Mong muốn: {item?.description}</span>
           <span className='post-item_box_right_action'>
-            <BaseButton type="blue">Xem chi tiết</BaseButton>
             <BaseButton type="warning" onClick={() => navigate(`/tenant/edit-post/post_id/${item.id}`)}>Sửa bài đăng</BaseButton>
             <BaseButton type="red" onClick={() => handleShow(item.id)}>Xóa bài đăng</BaseButton>
           </span>

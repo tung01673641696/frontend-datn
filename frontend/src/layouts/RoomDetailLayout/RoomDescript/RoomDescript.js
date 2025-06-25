@@ -15,7 +15,7 @@ export default function RoomDescript({ room }) {
 
           <div className='room-info_below_ele'>
             <span className='room-info_below_ele_title'>Nước: </span>
-            <span className='room-info_below_ele_value'>{room.water_price ? `${Number(room.electric_price).toLocaleString('vi-VN')}đ` : "0đ"} / khối</span>
+            <span className='room-info_below_ele_value'>{room.water_price ? `${Number(room.water_price).toLocaleString('vi-VN')}đ` : "0đ"} / khối</span>
           </div>
         </div>
       </div>

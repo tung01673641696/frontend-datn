@@ -26,7 +26,7 @@ export default function DropdownLandlord() {
     { id: 1, title: 'Thông tin cá nhân', path: '/info-user' },
     { id: 2, title: 'Quản lý chung', path: '/landlord/dashboard' },
     { id: 3, title: 'Quản lý bài đăng', path: '/landlord/post-manager' },
-    { id: 4, title: 'Khách hàng cọc phòng', path: '/landlord/rental-request-manager' },
+    { id: 4, title: 'Khách hàng giữ chỗ', path: '/landlord/rental-request-manager' },
   ]
 
   function handleClick() {
@@ -39,7 +39,7 @@ export default function DropdownLandlord() {
       <div className='header_user_write' onClick={handleClick}>
         <i class="bi bi-pencil-square"></i>
         <span>
-          Đăng phòng
+          Đăng phòng cho thuê
         </span>
       </div>
 

@@ -72,10 +72,10 @@ export default function PostByTenant() {
       <HeaderUser />
 
       <form className='post_tenant_box' onSubmit={handleSubmit}>
-        <h3 className='post_tenant_box_title'>Thêm bài đăng</h3>
+        <h3 className='post_tenant_box_title'>Đăng tin tìm phòng</h3>
 
         <div className='post_tenant_box_ele'>
-          <BaseInput name="title" onChange={handleChange} placeholder="Tiêu đề bài đăng" />
+          <BaseInput name="title" onChange={handleChange} placeholder="Tiêu đề tin đăng" />
         </div>
 
         <div className='post_tenant_box_ele'>
@@ -128,7 +128,7 @@ export default function PostByTenant() {
         </div>
 
         <div className='post_tenant_box_ele'>
-          <BaseButton type="red">Đăng bài</BaseButton>
+          <BaseButton type="red">Đăng tin</BaseButton>
         </div>
 
       </form>

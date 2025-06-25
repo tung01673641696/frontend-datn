@@ -6,44 +6,86 @@ import Column from 'antd/es/table/Column'
 import BaseButton from '../../../components/BaseButton/BaseButton'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import BaseModal from '../../../components/BaseModal/BaseModal'
 import { landlordGetAllContract } from '../../../redux/reducers/contract'
+import { houseByOwner } from '../../../redux/reducers/house'
+import { getRoomByHouse } from '../../../redux/reducers/room'
 
 export default function ContractManager() {
   const user = JSON.parse(localStorage.getItem("user"))
   const id = user.id
-  const navigate = useNavigate()
   const dispatch = useDispatch()
   const { allContract } = useSelector((state) => state.contractReducer)
   const [selectedStatus, setSelectedStatus] = useState('');
+  const [selectHouse, setSelectHouse] = useState("")
+  const [selectRoom, setSelectRoom] = useState("")
+  const { listHouseByOwner } = useSelector((state) => state.houseReducer)
+  const { listRoomByHouse } = useSelector((state) => state.roomReducer)
 
   useEffect(() => {
     dispatch(landlordGetAllContract(id));
   }, []);
 
-  console.log(">>>>>>a", allContract)
+  useEffect(() => {
+    dispatch(houseByOwner(id))
+  }, [id])
 
-  const filteredContracts = selectedStatus
-    ? allContract.filter(contract => contract.status === selectedStatus)
-    : allContract;
+  const handleHouseChange = (e) => {
+    const houseId = Number(e.target.value);
+    setSelectHouse(houseId)
+    setSelectRoom("")
+    if (houseId) {
+      dispatch(getRoomByHouse(houseId))
+    }
+  }
+
+  const filteredContracts = allContract.filter(contract => {
+    const matchStatus = selectedStatus ? contract.status === selectedStatus : true;
+    const matchHouse = selectHouse ? contract.house?.id === selectHouse : true;
+    const matchRoom = selectRoom ? contract.room?.id === selectRoom : true;
+    return matchStatus && matchHouse && matchRoom;
+  });
 
   return (
     <Common>
-      <h3 className='contract_mana_title'>Quản lý hợp đồng thuê</h3>
+      <h3 className='contract_mana_title'>Quản lý hợp đồng</h3>
 
 
       <div className='contract_mana'>
         <div className='contract_mana_select'>
+          <div className='contract_mana_select_item'>
+            <select
+              value={selectHouse}
+              onChange={handleHouseChange}
+            >
+              <option value="">Chọn nhà</option>
+              {listHouseByOwner.map(item => (
+                <option key={item.id} value={item.id}>{item.name}</option>
+              ))}
+            </select>
+          </div>
 
-          <span className='contract_mana_select_title'>Chọn trạng thái hợp đồng thuê</span>
-          <select
-            value={selectedStatus}
-            onChange={(e) => setSelectedStatus(e.target.value)}
-          >
-            <option value="">Tất cả</option>
-            <option value="signed">Đang thuê</option>
-            <option value="cancelled">Đã hết hạn</option>
-          </select>
+          <div className='contract_mana_select_item'>
+            <select
+              value={selectRoom}
+              onChange={(e) => setSelectRoom(Number(e.target.value))}
+            >
+              <option value="">Chọn phòng</option>
+              {listRoomByHouse.map(item => (
+                <option key={item.id} value={item.id}>{item.name}</option>
+              ))}
+            </select>
+          </div>
+
+          <div className='contract_mana_select_item'>
+            <select
+              value={selectedStatus}
+              onChange={(e) => setSelectedStatus(e.target.value)}
+            >
+              <option value="">Trạng thái hợp đồng</option>
+              <option value="signed">Đang thuê</option>
+              <option value="cancelled">Đã hết hạn</option>
+            </select>
+          </div>
         </div>
 
         <Table style={{ textAlignLast: 'center' }}
@@ -71,29 +113,6 @@ export default function ContractManager() {
           <Column title={"Người kí HĐ cọc"}
             render={(item) => (
               <span>{item?.tenant?.name}</span>
-            )}
-          />
-
-          <Column title={"Giá thuê"}
-            render={(item) => (
-              <span>{item.room.price ? `${Number(item.room.price).toLocaleString('vi-VN')}đ` : "Đang cập nhật"}</span>
-            )}
-          />
-
-          <Column title={"Đặt cọc"}
-            render={(item) => (
-              <span>{item.room.price_deposit ? `${Number(item.room.price_deposit).toLocaleString('vi-VN')}đ` : "Đang cập nhật"}</span>
-            )}
-          />
-          <Column title={"Ngày bắt đầu"}
-            render={(item) => (
-              <span>{item?.start_date}</span>
-            )}
-          />
-
-          <Column title={"Ngày kết thúc"}
-            render={(item) => (
-              <span>{item?.end_date}</span>
             )}
           />
 

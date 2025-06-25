@@ -46,6 +46,7 @@ export const deletePostsByCustomer = createAsyncThunk("posts/deletePostsByCustom
     toast.success("Xóa bài đăng thành công");
     const user = JSON.parse(localStorage.getItem("user"))
     const user_id = user.id
+    thunkApi.dispatch(tenantGetAllPost(user_id))
     thunkApi.dispatch(landlordGetAllPost(user_id))
   } else {
     toast.error("Xóa bài đăng thất bại");

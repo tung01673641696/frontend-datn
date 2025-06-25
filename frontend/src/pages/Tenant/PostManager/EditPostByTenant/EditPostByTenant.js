@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import "./EditPostByTenant.scss"
-import HeaderUser from '../../../layouts/UserLayout/HeaderUser/HeaderUser'
-import Footer from '../../../layouts/UserLayout/FooterUser/FooterUser'
-import BaseInput from '../../../components/BaseInput/BaseInput'
-import BaseButton from '../../../components/BaseButton/BaseButton'
+import HeaderUser from '../../../../layouts/UserLayout/HeaderUser/HeaderUser'
+import Footer from '../../../../layouts/UserLayout/FooterUser/FooterUser'
+import BaseInput from '../../../../components/BaseInput/BaseInput'
+import BaseButton from '../../../../components/BaseButton/BaseButton'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { getDistrict } from '../../../redux/reducers/address'
-import { getWard } from '../../../redux/reducers/address'
+import { getDistrict } from '../../../../redux/reducers/address'
+import { getWard } from '../../../../redux/reducers/address'
 import { toast } from 'react-toastify'
-import { editPostsByCustomer, getOnePostsByCustomer } from '../../../redux/reducers/posts'
+import { editPostsByCustomer, getOnePostsByCustomer } from '../../../../redux/reducers/posts'
 
 export default function EditPostByTenant() {
   const navigate = useNavigate()

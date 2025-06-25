@@ -17,6 +17,8 @@ export default function RoomDetail() {
 
   const { oneRoom } = useSelector((state) => state.roomReducer)
 
+  console.log("chi tiết", oneRoom)
+
   useEffect(() => {
     if (!oneRoom || oneRoom.room_id !== id) {
       dispatch(getOneRoom(id));

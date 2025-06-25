@@ -58,7 +58,7 @@ export default function PostManager() {
 
         <div className='post-mana_box_child'>
           {postsByOneLandlord?.map((item) => (
-            <PostItemByLandlord item={item} />
+            <PostItemByLandlord item={item} landlordId={id_user} status={status}/>
           ))}
         </div>
       </div>

@@ -5,8 +5,9 @@ import { useNavigate } from 'react-router-dom'
 import BaseModal from '../../../../components/BaseModal/BaseModal'
 import { deletePostsByCustomer } from '../../../../redux/reducers/posts'
 import { useDispatch } from 'react-redux'
+import { landlordGetAllPost } from '../../../../redux/reducers/posts'
 
-export default function PostItemByLandlord({ item }) {
+export default function PostItemByLandlord({ item, status, landlordId }) {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [isShow, setIsShow] = useState(false)
@@ -24,6 +25,7 @@ export default function PostItemByLandlord({ item }) {
   const handleDelete = async () => {
     if (selectPostsId) {
       await dispatch(deletePostsByCustomer(selectPostsId))
+      await dispatch(landlordGetAllPost({ landlordId, status }))
       setIsShow(false)
     }
   }

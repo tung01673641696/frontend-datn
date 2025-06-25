@@ -19,8 +19,6 @@ export default function DepositContractManagerr() {
     dispatch(getAllDepositContractByRenter(id));
   }, [id]);
 
-  console.log("tất cả hợp đồng cọc của lâm", allDepositContractByRenter)
-
   return (
     <div className='deposit_contract_manager'>
       <HeaderUser />

@@ -3,31 +3,48 @@ import './ServiceBillManager.scss'
 import Common from '../../../layouts/LandlordLayout/Common/Common'
 import { Table } from 'antd'
 import Column from 'antd/es/table/Column'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { DatePicker } from 'antd'
+import { houseByOwner } from '../../../redux/reducers/house'
+import { getRoomByHouse } from '../../../redux/reducers/room'
+import { getAllServiceBill } from '../../../redux/reducers/bill'
+
 import dayjs from 'dayjs'
 import 'dayjs/locale/vi'
 import locale from 'antd/es/date-picker/locale/vi_VN'
 dayjs.locale('vi')
 
 export default function ServiceBillManager() {
-  const [selectedMonth, setSelectedMonth] = useState(null)
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const user = JSON.parse(localStorage.getItem("user"))
+  const id_user = user.id
 
-  const handleChange = (date, dateString) => {
-    setSelectedMonth(dateString) // VD: "06/2025"
-    console.log("Chọn:", dateString)
-  }
+  const [selectHouse, setSelectHouse] = useState("")
+  const [selectRoom, setSelectRoom] = useState("")
 
-  const info = [
-    {
-      id: 1,
-      house: 'Gohomy1',
-      room: '101',
-      tenant: 'Hoàng Thanh Tùng',
-      price_house: '2.500.000',
-      price_service: '1.500.000',
-      total: '4.000.000'
+  const { listHouseByOwner } = useSelector((state) => state.houseReducer)
+  const { listRoomByHouse } = useSelector((state) => state.roomReducer)
+  const { allServiceBill } = useSelector((state) => state.billReducer)
+
+  console.log(">>>>>>>>>", allServiceBill)
+
+  useEffect(() => {
+    dispatch(houseByOwner(id_user))
+  }, [id_user])
+
+  const handleHouseChange = (e) => {
+    const houseId = Number(e.target.value);
+    setSelectHouse(houseId)
+    setSelectRoom("")
+    if (houseId) {
+      dispatch(getRoomByHouse(houseId))
     }
-  ]
+  }
+  useEffect(() => {
+    dispatch(getAllServiceBill({ house_id: selectHouse, room_id: selectRoom }))
+  }, [])
 
 
   return (
@@ -35,24 +52,35 @@ export default function ServiceBillManager() {
       <h3 className='service_title'>Quản lý hóa đơn dịch vụ</h3>
 
       <div className='service_select'>
-        <select>
-          <option>Tất cả nhà</option>
+        <select value={selectHouse} onChange={handleHouseChange}>
+          <option value="" disabled>Tất cả nhà</option>
+          {listHouseByOwner.map(item => (
+            <option key={item.id} value={item.id}>{item.name}</option>
+          ))}
         </select>
 
-        <select>
-          <option>Tất cả phòng</option>
+        <select
+          value={selectRoom}
+          onChange={(e) => setSelectRoom(Number(e.target.value))}
+        >
+          <option value="">Tất cả phòng</option>
+          {listRoomByHouse.map(item => (
+            <option key={item.id} value={item.id}>{item.name}</option>
+          ))}
         </select>
 
         <DatePicker
-
           picker="month"
+          disabledDate={(current) => current && current < dayjs().startOf('month')}
           format="MM/YYYY"
           locale={locale}
           placeholder="Chọn tháng/năm"
         />
 
         <select>
-          <option>Tình trạng</option>
+          <option value="">Tình trạng</option>
+          <option value="">Chưa thanh toán</option>
+          <option value="">Đã thanh toán</option>
         </select>
       </div>
 
@@ -62,43 +90,37 @@ export default function ServiceBillManager() {
           showSizeChanger: false,
           pageSizeOptions: ['10', '20', '30'],
         }}
-        dataSource={info}
+        dataSource={allServiceBill}
         bordered
       >
         <Column title={"STT"} render={(_, __, index) => index + 1} key="id" />
         <Column title={"Nhà"}
           render={(item) => (
-            <span>{item?.house}</span>
+            <span>{item?.house_name}</span>
           )}
         />
 
         <Column title={"Phòng"}
           render={(item) => (
-            <span className='link_page_room'>{item?.room}</span>
+            <span>{item?.room_name}</span>
           )}
         />
 
         <Column title={"Khách thuê"}
           render={(item) => (
-            <span>{item?.tenant}</span>
+            <span>{item?.tenant_name}</span>
           )}
         />
 
-        <Column title={"Tiền nhà"}
+        <Column title={"Tháng / năm"}
           render={(item) => (
-            <span>{item?.price_house}</span>
+            <span>{item?.billing_date}</span>
           )}
         />
 
         <Column title={"Tiền dịch vụ"}
           render={(item) => (
-            <span>{item?.price_service}</span>
-          )}
-        />
-
-        <Column title={"Tổng tiền"}
-          render={(item) => (
-            <span>{item?.total}</span>
+            <span>{item?.total_amount}</span>
           )}
         />
       </Table>

@@ -152,7 +152,7 @@ export default function CustomerItem({ item }) {
                 </>
               )
                 : ['reject'].includes(item?.status) ? (
-                  <><BaseButton type="red" onClick="">Xóa</BaseButton></>
+                  <></>
                 )
                   : (
                     <><BaseButton type="blue" onClick={() => navigate(`/tenant/deposit-contract-detail/renter/${renter_id}/room/${room_id}`)}>Xem hợp đồng cọc</BaseButton></>

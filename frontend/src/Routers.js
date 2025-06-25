@@ -26,14 +26,13 @@ const AddRoom = React.lazy(() => import('./pages/Landlord/RoomManager/AddRoom/Ad
 const EditRoom = React.lazy(() => import('./pages/Landlord/RoomManager/EditRoom/EditRoom'))
 
 const CreateContract = React.lazy(() => import('./pages/Landlord/RentalRequestManager/CreateContract/CreateContract'))
-const DepositContractManagerByLandlord = React.lazy(() => import('./pages/Landlord/DepositContractManager/DepositContractManager'))
 const ContractManagerByLandlord = React.lazy(() => import('./pages/Landlord/ContractManager/ContractManager'))
 
 const TenantManager = React.lazy(() => import('./pages/Landlord/TenantManager/TenantManager'))
 const EditTenant = React.lazy(() => import('./pages/Landlord/TenantManager/EditTenant/EditTenant'))
 
 const PostByTenant = React.lazy(() => import('./pages/Tenant/PostByTenant/PostByTenant'))
-const EditPostByTenant = React.lazy(() => import('./pages/Tenant/EditPostByTenant/EditPostByTenant'))
+const EditPostByTenant = React.lazy(() => import('./pages/Tenant/PostManager/EditPostByTenant/EditPostByTenant'))
 const PostManagerTenant = React.lazy(() => import('./pages/Tenant/PostManager/PostManager'))
 
 const DepositContractManager = React.lazy(() => import('./pages/Tenant/DepositContractManager/DepositContractManager'))
@@ -82,7 +81,6 @@ export default function Routers() {
               <Route path='/landlord/room-manager/edit-room/room_id/:id' element={<EditRoom />} />
 
               <Route path='/landlord/create-contract/renter_id/:renterId?/room_id/:roomId' element={<CreateContract />} />
-              <Route path='/landlord/deposit-contract-manager-by-landlord' element={<DepositContractManagerByLandlord />} />
               <Route path='/landlord/contract-manager-by-landlord' element={<ContractManagerByLandlord />} />
 
 

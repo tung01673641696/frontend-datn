@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import "./RoomContentNeed.scss"
 import { useParams } from 'react-router-dom'
@@ -10,8 +10,10 @@ export default function RoomContentNeed() {
   const { post_id } = useParams()
   const dispatch = useDispatch()
   const user = JSON.parse(localStorage.getItem("user"))
+  const [showPhone, setShowPhone] = useState(false)
 
   const { onePostsByCustomer } = useSelector((state) => state.postsReducer)
+  console.log(">>>>>>>>", onePostsByCustomer)
 
   useEffect(() => {
     dispatch(getOnePostsByCustomer(post_id))
@@ -36,9 +38,11 @@ export default function RoomContentNeed() {
           {user.role_id === 2 && (
             <div className='room_content_need_box_right_contact'>
               <div className='room_content_need_box_right_contact_tele'>
-                <BaseButton type="red">
-                  <i class="bi bi-telephone" style={{ marginRight: "5px" }}></i>
-                  Liên hệ ngay
+                <BaseButton type="red" onClick={() => setShowPhone(true)}>
+                  <i className="bi bi-telephone" style={{ marginRight: "5px" }}></i>
+                  {showPhone
+                    ? onePostsByCustomer?.user?.phone || 'Không có số điện thoại'
+                    : 'Liên hệ ngay'}
                 </BaseButton>
               </div>
             </div>

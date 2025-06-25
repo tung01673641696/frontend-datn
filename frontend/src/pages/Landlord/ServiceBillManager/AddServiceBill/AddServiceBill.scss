@@ -5,6 +5,10 @@
     input {
       margin-left: 10px;
     }
+
+    .add_bill_date_title {
+      margin-right: 15px;
+    }
   }
 
   .add_bill_table {
@@ -29,9 +33,15 @@
       width: 100px;
       height: 30px;
     }
+
+
   }
 
   button {
     margin-left: 20px;
   }
+}
+
+.ant-picker-outlined {
+  border-color: unset !important;
 }

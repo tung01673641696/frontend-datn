@@ -40,7 +40,7 @@ export default function DropdownTenant() {
       <div className='header_user_write' onClick={handleClick}>
         <i class="bi bi-pencil-square"></i>
         <span>
-          Đăng bài tìm phòng
+          Đăng tin tìm phòng
         </span>
       </div>
 

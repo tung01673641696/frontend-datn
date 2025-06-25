@@ -84,9 +84,8 @@ export default function TenantManager() {
       <div className='tenant-mana_act'>
         <div className='tenant-mana_act_search'>
           <div className='tenant-mana_act_search_ele'>
-            <span className='tenant-mana_act_search_ele_name'>Nhà</span>
             <select value={selectHouse} onChange={handleHouseChange} className='tenant-mana_act_search_ele_select'>
-              <option value="" disabled>Tất cả nhà</option>
+              <option value="" disabled>Chọn nhà</option>
               {listHouseByOwner.map(item => (
                 <option key={item.id} value={item.id}>{item.name}</option>
               ))}
@@ -94,13 +93,12 @@ export default function TenantManager() {
           </div>
 
           <div className='tenant-mana_act_search_ele'>
-            <span className='tenant-mana_act_search_ele_name'>Phòng</span>
             <select
               className='tenant-mana_act_search_ele_select'
               value={selectRoom}
               onChange={(e) => setSelectRoom(Number(e.target.value))}
             >
-              <option value="">Tất cả phòng</option>
+              <option value="">Chọn phòng</option>
               {listRoomByHouse.map(item => (
                 <option key={item.id} value={item.id}>{item.name}</option>
               ))}
@@ -108,12 +106,12 @@ export default function TenantManager() {
           </div>
 
           <div className='tenant-mana_act_search_ele'>
-            <span className='tenant-mana_act_search_ele_name'>Tình trạng</span>
             <select
               className='tenant-mana_act_search_ele_select'
               value={status}
               onChange={(e) => setStatus(e.target.value)}
             >
+              <option value="">Tình trạng</option>
               <option value="active">Đang ở</option>
               <option value="inactive">Đã chuyển đi</option>
             </select>

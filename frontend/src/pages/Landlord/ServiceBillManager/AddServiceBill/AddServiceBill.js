@@ -6,6 +6,11 @@ import { getOneHouse } from '../../../../redux/reducers/house';
 import { addBill } from '../../../../redux/reducers/bill';
 import BaseButton from '../../../../components/BaseButton/BaseButton';
 import { toast } from 'react-toastify';
+import { DatePicker } from 'antd'
+import dayjs from 'dayjs'
+import 'dayjs/locale/vi'
+import locale from 'antd/es/date-picker/locale/vi_VN'
+dayjs.locale('vi')
 
 export default function AddServiceBill({ houseId, roomId }) {
   const dispatch = useDispatch()
@@ -32,12 +37,11 @@ export default function AddServiceBill({ houseId, roomId }) {
       return;
     }
 
-    const [year, month] = selectedMonth.split('-');
+    const billingDate = `${selectedMonth}-01`;
 
     const billData = {
       room_id: roomId,
-      month: parseInt(month),
-      year: parseInt(year),
+      billing_date: selectedMonth,
       electric_usage: electricUsage,
       water_usage: waterUsage,
       electric_price: electricPrice,
@@ -56,11 +60,21 @@ export default function AddServiceBill({ houseId, roomId }) {
   return (
     <div className='add_bill'>
       <div className='add_bill_date'>
-        <span>Chọn tháng</span>
-        <input
-          type="month"
-          value={selectedMonth}
-          onChange={(e) => setSelectedMonth(e.target.value)}
+        <span className='add_bill_date_title'>Chọn tháng</span>
+        <DatePicker
+          picker="month"
+          disabledDate={(current) => current && current < dayjs().startOf('month')}
+          format="MM/YYYY"
+          locale={locale}
+          placeholder="Chọn tháng/năm"
+          onChange={(date) => {
+            if (date) {
+              const formatted = dayjs(date).startOf('month').format('YYYY-MM-DD');
+              setSelectedMonth(formatted);
+            } else {
+              setSelectedMonth('');
+            }
+          }}
         />
       </div>
 
