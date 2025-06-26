@@ -15,7 +15,12 @@ const BillApi = {
   async updateStatusBill(id) {
     const url = `/bill/update-bill/${id}`;
     return axiosClient.put(url);
-  }
+  },
+
+  async getDetailBill(id) {
+    const url = `/bill/get-detail-bill/${id}`
+    return axiosClient.get(url)
+  },
 }
 
 export default BillApi

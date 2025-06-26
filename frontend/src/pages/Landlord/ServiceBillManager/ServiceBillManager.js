@@ -11,6 +11,7 @@ import { houseByOwner } from '../../../redux/reducers/house'
 import { getRoomByHouse } from '../../../redux/reducers/room'
 import { getAllServiceBill } from '../../../redux/reducers/bill'
 import { updateStatusBill } from '../../../redux/reducers/bill'
+import ShowServiceBill from './ShowServiceBill/ShowServiceBill'
 import BaseModal from '../../../components/BaseModal/BaseModal'
 import dayjs from 'dayjs'
 import 'dayjs/locale/vi'
@@ -27,6 +28,7 @@ export default function ServiceBillManager() {
   const [selectDate, setSelectDate] = useState(null);
   const [selectStatus, setSelectStatus] = useState("");
 
+  const [showDetailServiceBill, setShowDetailServiceBill] = useState(false)
   const [showConfirmUpdateServiceBill, setShowConfirmUpdateServiceBill] = useState(false)
   const [selectedBillId, setSelectedBillId] = useState(null);
 
@@ -71,6 +73,15 @@ export default function ServiceBillManager() {
       setSelectedBillId(null);
     }
   };
+
+  const handleShowDetailServiceBill = async (id) => {
+    setSelectedBillId(id);
+    setShowDetailServiceBill(true)
+  };
+
+  function handleClose() {
+    setShowDetailServiceBill(false)
+  }
 
   return (
     <Common>
@@ -140,13 +151,13 @@ export default function ServiceBillManager() {
 
         <Column title={"Tháng / năm"}
           render={(item) => (
-            <span>{item?.billing_date}</span>
+            <span>{dayjs(item?.billing_date).format('M/YYYY')}</span>
           )}
         />
 
         <Column title={"Tiền dịch vụ"}
           render={(item) => (
-            <span>{item?.total_amount}</span>
+            <span>{Number(item?.total_amount)?.toLocaleString('vi-VN')}</span>
           )}
         />
 
@@ -166,7 +177,7 @@ export default function ServiceBillManager() {
         <Column title={"Xem hóa đơn"}
           render={(item) => (
             <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
-              <BaseButton type="blue">Xem</BaseButton>
+              <BaseButton type="blue" onClick={() => handleShowDetailServiceBill(item.id)}>Xem</BaseButton>
 
               {item.status === 'unpaid' && (
                 <BaseButton
@@ -184,16 +195,26 @@ export default function ServiceBillManager() {
         />
       </Table>
 
-      <>
-        <BaseModal
-          open={showConfirmUpdateServiceBill}
-          title="Cập nhật trạng thái hóa đơn dịch vụ"
-          type="blue"
-          content="Bạn có chắc chắn chuyển trạng thái hóa đơn dịch vụ sang đã thanh toán"
-          onCancel={handleClose}
-          onConfirm={handleUpdateServiceBill}
-        />
-      </>
+
+      <BaseModal
+        open={showConfirmUpdateServiceBill}
+        title="Cập nhật trạng thái hóa đơn dịch vụ"
+        type="blue"
+        content="Bạn có chắc chắn chuyển trạng thái hóa đơn dịch vụ sang đã thanh toán"
+        onCancel={handleClose}
+        onConfirm={handleUpdateServiceBill}
+      />
+
+      <BaseModal
+        open={showDetailServiceBill}
+        title="Chi tiết hóa đơn dịch vụ"
+        type="blue"
+        width="50%"
+        content={<ShowServiceBill billId={selectedBillId} />}
+        onCancel={handleClose}
+        onConfirm={handleUpdateServiceBill}
+      />
+
     </Common>
   )
 }

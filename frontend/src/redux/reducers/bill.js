@@ -26,10 +26,19 @@ export const updateStatusBill = createAsyncThunk(
   }
 );
 
+export const getDetailBill = createAsyncThunk(
+  "bill/getDetailBill",
+  async (id) => {
+    const res = await BillApi.getDetailBill(id);
+    return res.data.data;
+  }
+);
+
 const BillSlice = createSlice({
   name: "bill",
   initialState: {
-    allServiceBill: []
+    allServiceBill: [],
+    serviceBillDetail: {},
   },
 
   extraReducers: builder => {
@@ -38,6 +47,9 @@ const BillSlice = createSlice({
         state.loading = false
         state.allServiceBill = action.payload.data.data;
       })
+    builder.addCase(getDetailBill.fulfilled, (state, action) => {
+      state.serviceBillDetail = action.payload;
+    })
   }
 
 
