@@ -12,9 +12,17 @@ export const addBill = createAsyncThunk("bill/addBill", async (data) => {
 export const getAllServiceBill = createAsyncThunk(
   "bill/getAllServiceBill",
   async (filters = {}) => {
-    const query = new URLSearchParams(filters).toString();
-    const allServiceBill = await BillApi.getAllServiceBill(query);
+    const allServiceBill = await BillApi.getAllServiceBill(filters);
     return allServiceBill;
+  }
+);
+
+export const updateStatusBill = createAsyncThunk(
+  "bill/updateStatusBill",
+  async ({ id }, { dispatch }) => {
+    const res = await BillApi.updateStatusBill(id);
+    dispatch(getAllServiceBill());
+    return res;
   }
 );
 

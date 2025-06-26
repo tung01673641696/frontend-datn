@@ -6,10 +6,15 @@ const BillApi = {
     return axiosClient.post(url, data)
   },
 
-  async getAllServiceBill(params = {}) {
-    const queryString = new URLSearchParams(params).toString();
-    const url = `/bill/get-all-service-bill?${queryString}`;
+  async getAllServiceBill(filters = {}) {
+    const query = new URLSearchParams(filters).toString();
+    const url = `/bill/get-all-service-bill?${query}`;
     return axiosClient.get(url);
+  },
+
+  async updateStatusBill(id) {
+    const url = `/bill/update-bill/${id}`;
+    return axiosClient.put(url);
   }
 }
 
