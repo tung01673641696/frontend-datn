@@ -12,10 +12,13 @@ import { useParams } from 'react-router-dom'
 import ListTenant from '../../../layouts/LandlordLayout/RoomManagerLayout/ListTenant/ListTenant'
 import { getTenantByRoom } from '../../../redux/reducers/tenant'
 import AddServiceBill from '../ServiceBillManager/AddServiceBill/AddServiceBill'
+import DetailRentalContract from '../../Tenant/DetailRentalContract/DetailRentalContract'
 
 export default function RoomManager() {
   const [isShow, setIsShow] = useState(false)
   const [showAddBill, setShowAddBill] = useState(false)
+  const [showViewContract, setShowViewContract] = useState(false)
+
   const [selectedHouse, setSelectedHouse] = useState("")
   const [selectRoomId, setSelectRoomId] = useState(null)
   const navigate = useNavigate()
@@ -79,6 +82,11 @@ export default function RoomManager() {
   const handleOpenAddBillModal = (roomId) => {
     setSelectRoomId(roomId);
     setShowAddBill(true)
+  };
+
+  const handleShowContract = (roomId) => {
+    setSelectRoomId(roomId);
+    setShowViewContract(true)
   };
 
   return (
@@ -163,9 +171,9 @@ export default function RoomManager() {
 
                 {room.status === "rented" ? (
                   <>
-                    <BaseButton type="green" onClick={() => handleOpenListTenantModal(room.id)}>Khách thuê</BaseButton>
-                    <BaseButton type="blue" onClick={() => navigate(`/tenant/detail-rental-contract/room_id/${room.id}`)}>Xem hợp đồng</BaseButton>
-                    <BaseButton type="warning" onClick={() => handleOpenAddBillModal(room.id)}>Tạo hóa đơn dịch vụ</BaseButton>
+                    <BaseButton type="warning" onClick={() => handleOpenListTenantModal(room.id)}>Khách thuê</BaseButton>
+                    <BaseButton type="green" onClick={() => handleShowContract(room.id)}>Xem hợp đồng</BaseButton>
+                    <BaseButton type="red" onClick={() => handleOpenAddBillModal(room.id)}>Tạo hóa đơn dịch vụ</BaseButton>
                   </>
                 ) : (
                   <BaseButton type="blue" onClick={() => navigate(`/landlord/create-contract/renter_id/room_id/${room.id}`)}>Tạo hợp đồng</BaseButton>
@@ -191,6 +199,15 @@ export default function RoomManager() {
           title="Thêm hóa đơn dịch vụ"
           content={<AddServiceBill houseId={selectedHouse} roomId={selectRoomId} />}
           onCancel={() => setShowAddBill(false)}
+        />
+
+        <BaseModal
+          open={showViewContract}
+          type="blue"
+          width="50%"
+          title="Xem chi tiết hợp đồng thuê"
+          content={<DetailRentalContract roomId={selectRoomId}/>}
+          onCancel={() => setShowViewContract(false)}
         />
       </div>
     </Common>

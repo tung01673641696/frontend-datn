@@ -2,7 +2,7 @@
   text-align: left;
   font-size: 22px;
   font-weight: 400;
-  margin-bottom: 80px;
+  margin-bottom: 55px;
 }
 
 .dashboard_quantity {
@@ -12,21 +12,21 @@
   flex-wrap: wrap;
 
   .quantity_ele {
-    width: calc(100% / 3 - 20px);
+    width: calc(100% / 2 - 20px);
     margin-bottom: 30px;
     display: flex;
     flex-direction: column;
-    padding: 70px 0;
+    padding: 80px 0;
     color: white;
     text-decoration: none;
 
     .quantity_ele_title {
-      font-size: 18px;
+      font-size: 20px;
       margin-bottom: 10px;
     }
 
     .quantity_ele_number {
-      font-size: 24px;
+      font-size: 28px;
     }
   }
 }

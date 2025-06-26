@@ -58,7 +58,7 @@ export default function DropdownTenant() {
       <div class="dropdown">
         <span className=" dropdown-toggle">
           <i className="bi bi-person-circle"></i>
-          <span>{user?.name}</span>
+          <span>{user?.name} (người thuê)</span>
         </span>
 
         <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">

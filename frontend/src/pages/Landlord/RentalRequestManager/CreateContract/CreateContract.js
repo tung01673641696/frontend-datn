@@ -78,6 +78,14 @@ export default function CreateContract() {
     end_date: "",
   })
 
+  const getToday = () => {
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    return `${yyyy}-${mm}-${dd}`;
+  };
+
   const handleChange = (e) => {
     console.log("e", e.target.value)
     setContract({ ...contract, [e.target.name]: e.target.value })
@@ -137,14 +145,20 @@ export default function CreateContract() {
             <div className='create_contract_box_item_child'>
               <span>Thuê từ ngày</span>
               <input
-                type="date" name="start_date" onChange={handleChange}
+                type="date"
+                name="start_date"
+                onChange={handleChange}
+                min={getToday()}
               />
             </div>
 
             <div className='create_contract_box_item_child'>
               <span>Thuê đến ngày</span>
               <input
-                type="date" name="end_date" onChange={handleChange}
+                type="date"
+                name="end_date"
+                onChange={handleChange}
+                min={getToday()}
               />
             </div>
           </div>

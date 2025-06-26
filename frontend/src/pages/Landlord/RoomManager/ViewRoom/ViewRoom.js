@@ -11,6 +11,7 @@ export default function ViewRoom() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const id_room = params.id
+  console.log("<<<<<<<",id_room)
   const { oneRoom } = useSelector((state) => state.roomReducer)
 
   console.log(">>>>>", oneRoom)

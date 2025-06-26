@@ -16,8 +16,8 @@ export default function Dashboard() {
       id: 2,
       title: 'Số phòng',
       number: 40,
-      path: '/landlord/room-manager',
-      color: 'yellow'
+      path: '/landlord/house-manager',
+      color: 'blue'
     },
     {
       id: 3,
@@ -27,24 +27,10 @@ export default function Dashboard() {
       color: 'green'
     },
     {
-      id: 4,
-      title: 'Số phương tiện',
-      number: 80,
-      path: '/landlord/vehicle-manager',
-      color: 'purple'
-    },
-    {
       id: 5,
       title: 'Số bài đăng',
       number: 20,
       path: '/landlord/house-manager',
-      color: 'blue'
-    },
-    {
-      id: 6,
-      title: 'Số khách hàng tiềm năng',
-      number: 30,
-      path: '/landlord/dashboard',
       color: 'taro'
     }
   ]

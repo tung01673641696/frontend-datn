@@ -123,6 +123,12 @@ export default function ServiceBillManager() {
             <span>{item?.total_amount}</span>
           )}
         />
+
+        <Column title={"Tình trạng"}
+          render={(item) => (
+            <span>{item?.total_amount}</span>
+          )}
+        />
       </Table>
     </Common>
   )

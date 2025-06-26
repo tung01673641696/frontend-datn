@@ -85,7 +85,7 @@ export default function TenantManager() {
         <div className='tenant-mana_act_search'>
           <div className='tenant-mana_act_search_ele'>
             <select value={selectHouse} onChange={handleHouseChange} className='tenant-mana_act_search_ele_select'>
-              <option value="" disabled>Chọn nhà</option>
+              <option value="">Chọn nhà</option>
               {listHouseByOwner.map(item => (
                 <option key={item.id} value={item.id}>{item.name}</option>
               ))}

@@ -12,11 +12,13 @@ import { createDepositContract } from '../../../../redux/reducers/contract'
 import CreateContract from '../../../../pages/Landlord/RentalRequestManager/CreateContract/CreateContract'
 import { toast } from 'react-toastify'
 import { getAllRentalRequest } from '../../../../redux/reducers/rentalRequest'
+import DetailRentalContract from '../../../../pages/Tenant/DetailRentalContract/DetailRentalContract'
 
 export default function CustomerItem({ item }) {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [showDepositModal, setShowDepositModal] = useState(false);
+  const [showViewContract, setShowViewContract] = useState(false)
   const allRentalRequest = useSelector(state => state.rentalrequestReducer.data || [])
   const [hasRentalContract, setHasRentalContract] = useState(false);
 
@@ -102,6 +104,10 @@ export default function CustomerItem({ item }) {
     }
   }, []);
 
+  const handleShowContract = () => {
+    setShowViewContract(true)
+  };
+
   return (
     <div className='customer_item'>
       <div className='customer_item_ele'>
@@ -143,7 +149,7 @@ export default function CustomerItem({ item }) {
                   <BaseButton type="blue" onClick={() => navigate(`/tenant/deposit-contract-detail/renter/${renter_id}/room/${room_id}`)}>Xem hợp đồng cọc</BaseButton>
 
                   {hasRentalContract ? (
-                    <BaseButton type="blue" onClick={() => navigate(`/tenant/detail-rental-contract/room_id/${room_id}`)}>
+                    <BaseButton type="blue" onClick={() => handleShowContract(room_id)}>
                       Xem hợp đồng thuê
                     </BaseButton>
                   ) : (
@@ -167,6 +173,15 @@ export default function CustomerItem({ item }) {
           content={<CreateDepositContract formData={formData} setFormData={setFormData} />}
           onCancel={() => setShowDepositModal(false)}
           onConfirm={handleConfirmCreateDepositContract}
+        />
+
+        <BaseModal
+          open={showViewContract}
+          type="blue"
+          width="50%"
+          title="Xem chi tiết hợp đồng thuê"
+          content={<DetailRentalContract roomId={room_id} />}
+          onCancel={() => setShowViewContract(false)}
         />
       </div>
     </div >
