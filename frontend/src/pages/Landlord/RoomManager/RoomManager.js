@@ -190,6 +190,8 @@ export default function RoomManager() {
           title="Khách thuê của phòng"
           content={<ListTenant tenants={listTenantByRoom} roomId={selectRoomId} />}
           onCancel={() => setShowListTenantModal(false)}
+          showCancel={false}
+          showConfirm={false}
         />
 
         <BaseModal
@@ -199,6 +201,8 @@ export default function RoomManager() {
           title="Thêm hóa đơn dịch vụ"
           content={<AddServiceBill houseId={selectedHouse} roomId={selectRoomId} />}
           onCancel={() => setShowAddBill(false)}
+          showCancel={false}
+          showConfirm={false}
         />
 
         <BaseModal
@@ -206,8 +210,10 @@ export default function RoomManager() {
           type="blue"
           width="50%"
           title="Xem chi tiết hợp đồng thuê"
-          content={<DetailRentalContract roomId={selectRoomId}/>}
+          content={<DetailRentalContract roomId={selectRoomId} />}
           onCancel={() => setShowViewContract(false)}
+          showCancel={false}
+          showConfirm={false}
         />
       </div>
     </Common>

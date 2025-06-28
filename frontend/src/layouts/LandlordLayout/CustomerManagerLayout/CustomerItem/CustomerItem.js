@@ -182,6 +182,8 @@ export default function CustomerItem({ item }) {
           title="Xem chi tiết hợp đồng thuê"
           content={<DetailRentalContract roomId={room_id} />}
           onCancel={() => setShowViewContract(false)}
+          showCancel={false}
+          showConfirm={false}
         />
       </div>
     </div >

@@ -61,11 +61,6 @@ export default function ServiceBillManager() {
     dispatch(getAllServiceBill(filters));
   }, [selectHouse, selectRoom, selectDate, selectStatus, dispatch]);
 
-
-  function handleClose() {
-    setShowConfirmUpdateServiceBill(false)
-  }
-
   const handleUpdateServiceBill = async () => {
     if (selectedBillId) {
       await dispatch(updateStatusBill({ id: selectedBillId }));
@@ -80,6 +75,7 @@ export default function ServiceBillManager() {
   };
 
   function handleClose() {
+    setShowConfirmUpdateServiceBill(false)
     setShowDetailServiceBill(false)
   }
 
@@ -213,6 +209,8 @@ export default function ServiceBillManager() {
         content={<ShowServiceBill billId={selectedBillId} />}
         onCancel={handleClose}
         onConfirm={handleUpdateServiceBill}
+        showCancel={false}
+        showConfirm={false}
       />
 
     </Common>

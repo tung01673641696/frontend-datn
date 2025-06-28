@@ -92,35 +92,6 @@ export default function DetailRentalContract({ roomId }) {
           <span>- Bên nào vi phạm điều khoản chung thì phải chịu trách nhiệm trước pháp luật.</span>
         </div>
       </div>
-
-      <div className='detail_rental_contract_button'>
-        {user?.role_id === 1 && (
-          <div className='detail_deposit_contract_button'>
-            <BaseButton type="blue" onClick={() => setOpenModalConfirm(true)}>Xác nhận</BaseButton>
-            <BaseButton type="red" onClick={() => setOpenModal(true)}>Hủy hợp đồng thuê</BaseButton>
-            <BaseButton onClick={() => navigate(-1)}>Quay lại</BaseButton>
-          </div>
-        )}
-      </div>
-
-      <BaseModal
-        open={openModal}
-        type="red"
-        title="Xác nhận hủy hợp đồng thuê phòng"
-        content="Bạn có chắc chắn muốn hủy hợp đồng thuê phòng này không? Hành động này không thể hoàn tác."
-        onCancel={() => setOpenModal(false)}
-      // onConfirm={handleCancelContract}
-      />
-
-
-      <BaseModal
-        open={openModalConfirm}
-        type="red"
-        title="Xác nhận hợp đồng thuê phòng"
-        content="Bạn chắc chắn muốn xác nhận hợp đồng thuê phòng ?"
-        onCancel={() => setOpenModalConfirm(false)}
-      // onConfirm={handleConfirmContract}
-      />
     </div>
   )
 }

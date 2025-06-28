@@ -149,6 +149,8 @@ export default function ContractManager() {
           title="Xem chi tiết hợp đồng thuê"
           content={<DetailRentalContract roomId={selectedContract} />}
           onCancel={() => setShowViewContract(false)}
+          showCancel={false}
+          showConfirm={false}
         />
       </div>
     </Common>

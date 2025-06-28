@@ -12,7 +12,9 @@ export default function BaseModal({
   content,
   onCancel,
   onConfirm,
-  width
+  width,
+  showCancel = true,
+  showConfirm = true
 }) {
   const typeObject = {
     red: RED,
@@ -40,8 +42,8 @@ export default function BaseModal({
               </div>
 
               <div className='base-modal_footer'>
-                <BaseButton type="white" onClick={onCancel}>Hủy</BaseButton>
-                <BaseButton type={type} onClick={onConfirm}>Xác nhận</BaseButton>
+                {showCancel && <BaseButton type="white" onClick={onCancel}>Hủy</BaseButton>}
+                {showConfirm && <BaseButton type={type} onClick={onConfirm}>Xác nhận</BaseButton>}
               </div>
             </div>
           </div>
