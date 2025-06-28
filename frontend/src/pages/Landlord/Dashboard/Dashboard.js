@@ -8,28 +8,28 @@ export default function Dashboard() {
     {
       id: 1,
       title: 'Số nhà',
-      number: 6,
+      number: 3,
       path: '/landlord/house-manager',
       color: 'orange'
     },
     {
       id: 2,
       title: 'Số phòng',
-      number: 40,
+      number: 12,
       path: '/landlord/house-manager',
       color: 'blue'
     },
     {
       id: 3,
       title: 'Số khách thuê',
-      number: 100,
+      number: 24,
       path: '/landlord/tenant-manager',
       color: 'green'
     },
     {
       id: 5,
       title: 'Số bài đăng',
-      number: 20,
+      number: 4,
       path: '/landlord/house-manager',
       color: 'taro'
     }

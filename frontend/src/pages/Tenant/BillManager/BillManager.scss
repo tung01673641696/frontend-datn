@@ -1,0 +1,27 @@
+.bill_manager {
+  background-color: #f3f3f3;
+
+  .bill_manager_main {
+    width: 70%;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: white;
+
+    .bill_manager_main_title {
+      font-size: 22px;
+      margin-bottom: 50px;
+    }
+
+  }
+}
+
+.ant-table-thead {
+  th {
+    background-color: #3461b4 !important;
+    color: white !important;
+  }
+}
+
+.ant-picker-outlined {
+  border-color: unset !important;
+}

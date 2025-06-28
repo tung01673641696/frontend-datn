@@ -39,6 +39,8 @@ const DepositContractManager = React.lazy(() => import('./pages/Tenant/DepositCo
 const DetailDepositContract = React.lazy(() => import('./pages/Tenant/DetailDepositContract/DetailDepositContract'))
 const DetailRentalContract = React.lazy(() => import('./pages/Tenant/DetailRentalContract/DetailRentalContract'))
 
+const BillManagerByTenant = React.lazy(() => import('./pages/Tenant/BillManager/BillManager'))
+
 const ContractManagerByRenter = React.lazy(() => import('./pages/Tenant/ContractManager/ContractManager'))
 
 const ServiceBillManager = React.lazy(() => import('./pages/Landlord/ServiceBillManager/ServiceBillManager'))
@@ -102,6 +104,8 @@ export default function Routers() {
 
               <Route path='/tenant/contract-manager' element={<ContractManagerByRenter />} />
               <Route path='/tenant/detail-rental-contract/room_id/:roomId' element={<DetailRentalContract />} />
+
+              <Route path='/tenant/bill-manager' element={<BillManagerByTenant />} />
 
             </Route>
 

@@ -34,11 +34,20 @@ export const getDetailBill = createAsyncThunk(
   }
 );
 
+export const getAllServiceBillByTenant = createAsyncThunk(
+  "bill/getAllServiceBillByTenant",
+  async (id) => {
+    const res = await BillApi.getAllServiceBillByTenant(id);
+    return res.data.data;
+  }
+);
+
 const BillSlice = createSlice({
   name: "bill",
   initialState: {
     allServiceBill: [],
     serviceBillDetail: {},
+    allServiceBillByTenant: []
   },
 
   extraReducers: builder => {
@@ -47,9 +56,12 @@ const BillSlice = createSlice({
         state.loading = false
         state.allServiceBill = action.payload.data.data;
       })
-    builder.addCase(getDetailBill.fulfilled, (state, action) => {
-      state.serviceBillDetail = action.payload;
-    })
+      .addCase(getDetailBill.fulfilled, (state, action) => {
+        state.serviceBillDetail = action.payload;
+      })
+      .addCase(getAllServiceBillByTenant.fulfilled, (state, action) => {
+        state.allServiceBillByTenant = action.payload;
+      })
   }
 
 

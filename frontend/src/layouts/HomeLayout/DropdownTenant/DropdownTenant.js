@@ -28,7 +28,7 @@ export default function DropdownTenant() {
     { id: 2, title: 'Quản lý bài đăng', path: '/tenant/post-manager' },
     { id: 3, title: 'Hợp đồng cọc', path: '/tenant/deposit-contract-manager' },
     { id: 4, title: 'Hợp đồng thuê phòng', path: '/tenant/contract-manager' },
-    { id: 5, title: 'Xem hóa đơn dịch vụ', path: '' },
+    { id: 5, title: 'Xem hóa đơn dịch vụ', path: '/tenant/bill-manager' },
   ]
 
   function handleClick() {

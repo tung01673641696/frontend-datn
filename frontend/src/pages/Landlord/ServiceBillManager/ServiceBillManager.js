@@ -85,7 +85,7 @@ export default function ServiceBillManager() {
 
       <div className='service_select'>
         <select value={selectHouse} onChange={handleHouseChange}>
-          <option value="" disabled>Tất cả nhà</option>
+          <option value="">Tất cả nhà</option>
           {listHouseByOwner.map(item => (
             <option key={item.id} value={item.id}>{item.name}</option>
           ))}

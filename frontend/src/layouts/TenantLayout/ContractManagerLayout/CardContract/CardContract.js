@@ -11,12 +11,14 @@ export default function CardContract({ item }) {
   const navigate = useNavigate()
   const user = JSON.parse(localStorage.getItem("user"))
   const renterId = user.id
-  const roomId = item.room.id
+
+  const [selectRoomId, setSelectRoomId] = useState()
 
   const [showViewContract, setShowViewContract] = useState(false)
 
-  const handleShowContract = () => {
-    // setSelectRoomId(roomId);
+  const handleShowContract = (roomId) => {
+    console.log(">>>>>>", roomId)
+    setSelectRoomId(roomId);
     setShowViewContract(true)
   };
 
@@ -37,7 +39,7 @@ export default function CardContract({ item }) {
         <span className='card-contract_content_price'>Giá: {item.room.price ? `${Number(item.room.price).toLocaleString('vi-VN')}đ` : "Đang cập nhật"}</span>
 
         <div className='card-contract_content_button'>
-          <BaseButton type="blue" onClick={() => handleShowContract(roomId)}>Xem hợp đồng thuê</BaseButton>
+          <BaseButton type="blue" onClick={() => handleShowContract(item.room.id)}>Xem hợp đồng thuê</BaseButton>
         </div>
       </div>
 
@@ -46,7 +48,7 @@ export default function CardContract({ item }) {
         type="blue"
         width="50%"
         title="Xem chi tiết hợp đồng thuê"
-        content={<DetailRentalContract roomId={roomId} />}
+        content={<DetailRentalContract roomId={selectRoomId} />}
         onCancel={() => setShowViewContract(false)}
         showCancel={false}
         showConfirm={false}

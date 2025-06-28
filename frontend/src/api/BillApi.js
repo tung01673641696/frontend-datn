@@ -8,7 +8,7 @@ const BillApi = {
 
   async getAllServiceBill(filters = {}) {
     const query = new URLSearchParams(filters).toString();
-    const url = `/bill/get-all-service-bill?${query}`;
+    const url = `/bill/get-all-service-bill-by-landlord?${query}`;
     return axiosClient.get(url);
   },
 
@@ -19,6 +19,11 @@ const BillApi = {
 
   async getDetailBill(id) {
     const url = `/bill/get-detail-bill/${id}`
+    return axiosClient.get(url)
+  },
+
+  async getAllServiceBillByTenant(tenantId) {
+    const url = `/bill/get-all-service-bill-by-tenant/${tenantId}`
     return axiosClient.get(url)
   },
 }
