@@ -14,6 +14,7 @@ export default function ListTenant({ tenants, roomId }) {
   const [showAddTenantModal, setShowAddTenantModal] = useState(false);
   const [isShowDeleteTenant, setIsShowDeleteTenant] = useState(false)
   const [selectedTenantId, setSelectedTenantId] = useState(null);
+  const [tenantList, setTenantList] = useState(tenants);
 
   const handleAddListTenantModal = () => {
     setShowAddTenantModal(true);
@@ -23,6 +24,14 @@ export default function ListTenant({ tenants, roomId }) {
     setSelectedTenantId(tenantId);
     setIsShowDeleteTenant(true)
   }
+
+  useEffect(() => {
+    setTenantList(tenants)
+  }, [tenants]);
+
+  const handleAddTenantToList = (newTenant) => {
+    setTenantList(prev => [...prev, newTenant])
+  };
 
   function handleClose() {
     setIsShowDeleteTenant(false)
@@ -42,7 +51,7 @@ export default function ListTenant({ tenants, roomId }) {
       <BaseButton type="blue" onClick={() => handleAddListTenantModal()}>Thêm khách thuê</BaseButton>
 
       <div className='list_tenant_info'>
-        {tenants?.map((tenant) => {
+        {tenantList?.map((tenant) => {
           return (
             <div className='list_tenant_info_item'>
               <span className='list_tenant_info_item_name'>{tenant?.name}</span>
@@ -82,9 +91,15 @@ export default function ListTenant({ tenants, roomId }) {
         type="blue"
         width="35%"
         title="Thêm khách thuê"
-        content={<AddTenant roomId={roomId} />}
+        content={<AddTenant
+          roomId={roomId}
+          onAddSuccess={(newTenant) => {
+            setShowAddTenantModal(false);
+            dispatch(getTenantByRoom(roomId));
+          }} />}
         onCancel={() => setShowAddTenantModal(false)}
-        onConfirm=""
+        showCancel={false}
+        showConfirm={false}
       />
     </div>
   )

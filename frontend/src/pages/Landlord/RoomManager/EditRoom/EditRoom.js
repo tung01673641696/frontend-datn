@@ -179,7 +179,7 @@ export default function EditRoom() {
         toast.error(res.payload.data.error)
 
       } else {
-        navigate(`/landlord/room-manager`)
+        navigate(`/landlord/room-manager/house_id/${room.house_id}`)
       }
     } catch (error) {
       toast.error("Cập nhật phòng thất bại")

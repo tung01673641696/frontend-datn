@@ -35,7 +35,7 @@ export default function RoomContentNeed() {
           <span className='room_content_need_box_right_common'>Chi tiết: {onePostsByCustomer?.description}</span>
           <span className='room_content_need_box_right_common'>Đăng ngày: {onePostsByCustomer.created_at && new Date(onePostsByCustomer.created_at).toLocaleDateString('vi-VN')}</span>
 
-          {user.role_id === 2 && (
+          {user?.role_id === 2 && (
             <div className='room_content_need_box_right_contact'>
               <div className='room_content_need_box_right_contact_tele'>
                 <BaseButton type="red" onClick={() => setShowPhone(true)}>

@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom'
 import { addTenant } from '../../../../redux/reducers/tenant'
 import { toast } from 'react-toastify'
 
-export default function AddTenant({ roomId }) {
+export default function AddTenant({ roomId, onAddSuccess }) {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -48,8 +48,11 @@ export default function AddTenant({ roomId }) {
     } else {
       try {
         const res = await dispatch(addTenant(payload))
-        if (res.payload.data.message) {
-          toast.success(res.payload.data.message)
+        if (res.payload?.data?.tenant) {
+          toast.success("Thêm khách thuê thành công")
+          onAddSuccess?.(res.payload.data.tenant)
+        } else {
+          toast.error("Thêm khách thuê thất bại")
         }
       } catch (error) {
         console.log(error)

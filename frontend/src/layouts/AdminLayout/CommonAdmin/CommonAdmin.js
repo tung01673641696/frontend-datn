@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 export default function CommonAdmin({ children }) {
   const manager = [
     { id: 1, title: 'Thống kê', path: '/admin/dashboard' },
-    { id: 2, title: 'Quản lý Người dùng', path: '/admin/manager-user' },
+    { id: 2, title: 'Quản lý tài khoản người dùng', path: '/admin/manager-user' },
     {
       id: 3, title: 'Quản lý bài đăng',
       children: [

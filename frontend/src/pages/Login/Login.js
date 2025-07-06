@@ -39,9 +39,14 @@ export default function Login() {
     try {
       const res = await dispatch(login(data));
       console.log('res', res)
+      if (res.type === "user/login/rejected") {
+        toast.error(res.payload?.message || "Sai tài khoản hoặc mật khẩu");
+        return;
+      }
       if (res.payload.data) {
         localStorage.setItem("access_token", res.payload.data.token)
         localStorage.setItem("user", JSON.stringify(res.payload.data.user))
+        toast.success("Đăng nhập thành công")
 
         if (res.payload.data.user.role_id === 1) {
           navigate(`/`)

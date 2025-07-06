@@ -12,7 +12,7 @@ import 'dayjs/locale/vi'
 import locale from 'antd/es/date-picker/locale/vi_VN'
 dayjs.locale('vi')
 
-export default function AddServiceBill({ houseId, roomId }) {
+export default function AddServiceBill({ houseId, roomId, onClose }) {
   const dispatch = useDispatch()
   const { oneHouse } = useSelector((state) => state.houseReducer)
   const [electricUsage, setElectricUsage] = useState(0)
@@ -52,6 +52,7 @@ export default function AddServiceBill({ houseId, roomId }) {
     try {
       const res = await dispatch(addBill(billData)).unwrap();
       toast.success("Tạo hóa đơn thành công");
+      if (onClose) onClose();
     } catch (error) {
       toast.error("Tạo hóa đơn thất bại");
     }

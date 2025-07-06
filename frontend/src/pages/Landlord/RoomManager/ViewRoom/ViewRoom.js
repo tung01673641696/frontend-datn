@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import "./ViewRoom.scss"
 import Common from '../../../../layouts/LandlordLayout/Common/Common'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useLocation } from 'react-router-dom'
 import { getOneRoom } from '../../../../redux/reducers/room'
 import { Link } from 'react-router-dom'
 
@@ -11,7 +11,10 @@ export default function ViewRoom() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const id_room = params.id
-  console.log("<<<<<<<",id_room)
+
+  const location = useLocation()
+  const houseId = location.state?.houseId
+
   const { oneRoom } = useSelector((state) => state.roomReducer)
 
   console.log(">>>>>", oneRoom)
@@ -121,7 +124,7 @@ export default function ViewRoom() {
           </div>
 
           <div className='view_room_box_child3'>
-            <Link className='view_room_box_child3_back' to="#" onClick={() => navigate(-1)}>Quay lại</Link>
+            <Link className='view_room_box_child3_back' to={`/landlord/room-manager/house_id/${houseId}`}>Quay lại</Link>
           </div>
         </div>
       </form>

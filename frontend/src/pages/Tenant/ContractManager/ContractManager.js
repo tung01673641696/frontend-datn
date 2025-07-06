@@ -14,9 +14,10 @@ export default function ContractManager() {
   const { id } = user
 
   const { allContractByTenant } = useSelector((state) => state.contractReducer)
+  console.log(">>>>>>>", allContractByTenant)
 
   useEffect(() => {
-    dispatch(tenantGetAllContract(2))
+    dispatch(tenantGetAllContract(1))
   }, [])
 
   return (

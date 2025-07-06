@@ -102,7 +102,7 @@ export default function AddRoom() {
 
       } else {
         toast.success("Thêm phòng thành công");
-        navigate(`/landlord/house-manager`)
+        navigate(`/landlord/room-manager/house_id/${houseId}`)
       }
     } catch (error) {
       toast.error("Thêm phòng thất bại")

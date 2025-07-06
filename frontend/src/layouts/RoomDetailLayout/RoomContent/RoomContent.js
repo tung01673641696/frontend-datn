@@ -10,8 +10,8 @@ export default function RoomContent({ room }) {
   const dispatch = useDispatch()
   const user = JSON.parse(localStorage.getItem("user"))
   const [showPhone, setShowPhone] = useState(false)
-  const userId = user.id
-  const roomId = room.id
+  const userId = user?.id
+  const roomId = room?.id
 
   const handleRentalRequest = async () => {
     try {
@@ -43,7 +43,7 @@ export default function RoomContent({ room }) {
       </div>
 
 
-      {user.role_id === 1 && (
+      {user?.role_id === 1 && (
         <div className='room-content_contact'>
           <div className='room-content_contact_tele'>
             <BaseButton type="red" onClick={() => setShowPhone(true)}>

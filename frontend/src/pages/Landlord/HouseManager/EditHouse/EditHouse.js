@@ -26,9 +26,7 @@ export default function EditHouse() {
     district_id: "",
     ward_id: "",
     electric_price: "",
-    water_price: "",
-    service_record_day: "",
-    service_cal_day: ""
+    water_price: ""
   })
 
   useEffect(() => {
@@ -44,9 +42,7 @@ export default function EditHouse() {
         district_id: oneHouse?.district?.id || "",
         ward_id: oneHouse?.ward?.id || "",
         electric_price: oneHouse?.electric_price || "",
-        water_price: oneHouse?.water_price || "",
-        service_record_day: oneHouse?.service_record_day || "",
-        service_cal_day: oneHouse?.service_cal_day
+        water_price: oneHouse?.water_price || ""
       });
     }
   }, [oneHouse]);
@@ -75,9 +71,7 @@ export default function EditHouse() {
       !house.district_id ||
       !house.ward_id ||
       !house.electric_price ||
-      !house.water_price ||
-      !house.service_record_day ||
-      !house.service_cal_day
+      !house.water_price
     ) {
       toast.error("Vui lòng nhập đầy đủ thông tin");
       return;
@@ -152,26 +146,6 @@ export default function EditHouse() {
             <div className='add_house_content_ele_child'>
               <div className='add_house_content_ele_child_title'>Tiền nước / 1 khối</div>
               <BaseInput name="water_price" type='number' value={house.water_price} onChange={handleChange} />
-            </div>
-          </div>
-          <div className='add_house_content_ele'>
-            <div className='add_house_content_ele_child'>
-              <div className='add_house_content_ele_child_title'>Ngày ghi số điện nước</div>
-              <select name="service_record_day" value={house.service_record_day} onChange={handleChange}>
-                <option value="">Vui lòng chọn</option>
-                {[...Array(31)].map((_, i) => (
-                  <option key={i + 1} value={i + 1}>{i + 1}</option>
-                ))}
-              </select>
-            </div>
-            <div className='add_house_content_ele_child'>
-              <div className='add_house_content_ele_child_title'>Ngày chốt số điện nước</div>
-              <select name="service_cal_day" value={house.service_cal_day} onChange={handleChange}>
-                <option value="">Vui lòng chọn</option>
-                {[...Array(31)].map((_, i) => (
-                  <option key={i + 1} value={i + 1}>{i + 1}</option>
-                ))}
-              </select>
             </div>
           </div>
 

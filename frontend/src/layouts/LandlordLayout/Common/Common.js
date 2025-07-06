@@ -13,7 +13,7 @@ export default function Common({ children }) {
     { id: 3, title: 'Quản lý nhà', path: `/landlord/house-manager` },
     { id: 4, title: 'Quản lý khách thuê', path: '/landlord/tenant-manager' },
     { id: 5, title: 'Quản lý hợp đồng', path: '/landlord/contract-manager-by-landlord' },
-    { id: 6, title: 'Hóa đơn dịch vụ', path: '/landlord/service-bill-manager' }
+    { id: 6, title: 'Quản lý hóa đơn dịch vụ', path: '/landlord/service-bill-manager' }
   ]
   return (
     <div className='common'>

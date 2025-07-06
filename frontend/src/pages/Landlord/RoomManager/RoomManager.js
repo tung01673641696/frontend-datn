@@ -167,7 +167,13 @@ export default function RoomManager() {
               </table>
 
               <div className='room_mana_card_fun'>
-                <BaseButton type="blue" onClick={() => navigate(`/landlord/room-manager/view-room/room_id/${room.id}`)}>Thông tin phòng</BaseButton>
+                <BaseButton type="blue"
+                  onClick={() => navigate(`/landlord/room-manager/view-room/room_id/${room.id}`, {
+                    state: { houseId: selectedHouse }
+                  })}
+                >
+                  Thông tin phòng
+                </BaseButton>
 
                 {room.status === "rented" ? (
                   <>
@@ -199,7 +205,11 @@ export default function RoomManager() {
           type="blue"
           width="58%"
           title="Thêm hóa đơn dịch vụ"
-          content={<AddServiceBill houseId={selectedHouse} roomId={selectRoomId} />}
+          content={<AddServiceBill
+            houseId={selectedHouse}
+            roomId={selectRoomId}
+            onClose={() => setShowAddBill(false)}
+          />}
           onCancel={() => setShowAddBill(false)}
           showCancel={false}
           showConfirm={false}

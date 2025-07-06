@@ -21,6 +21,7 @@ export default function CustomerItem({ item }) {
   const [showViewContract, setShowViewContract] = useState(false)
   const allRentalRequest = useSelector(state => state.rentalrequestReducer.data || [])
   const [hasRentalContract, setHasRentalContract] = useState(false);
+  const [hasDepositContract, setHasDepositContract] = useState(item.status === 'signed');
 
   const renter_id = item?.renter?.id || item?.renter_id;
   const room_id = item?.room?.id || item?.room_id;
@@ -83,6 +84,7 @@ export default function CustomerItem({ item }) {
       await dispatch(createDepositContract(formData)).unwrap();
       toast.success("Tạo hợp đồng cọc thành công, đợi khách thuê vào xác nhận")
       setShowDepositModal(false);
+      setHasDepositContract(true);
 
     } catch (error) {
       if (error?.status === 409) {
@@ -140,7 +142,11 @@ export default function CustomerItem({ item }) {
               </>
             ) : ['approved'].includes(item?.status) ? (
               <>
-                <BaseButton type="green" onClick={handleOpenDepositModal}>Tạo hợp đồng cọc</BaseButton>
+                {!hasDepositContract ? (
+                  <BaseButton type="green" onClick={handleOpenDepositModal}>Tạo hợp đồng cọc</BaseButton>
+                ) : (
+                  <BaseButton type="blue" onClick={() => navigate(`/tenant/deposit-contract-detail/renter/${renter_id}/room/${room_id}`)}>Xem hợp đồng cọc</BaseButton>
+                )}
                 <BaseButton type="red" onClick={handleReject}>Từ chối</BaseButton>
               </>
             )

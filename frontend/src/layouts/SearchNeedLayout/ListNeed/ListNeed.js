@@ -9,8 +9,8 @@ export default function ListNeed({ districtId, minPrice, maxPrice }) {
   const dispatch = useDispatch()
 
   const { allPostsByAllCustomerActive } = useSelector((state) => state.postsReducer)
+  const [visibleCount, setVisibleCount] = useState(10)
 
-console.log(">>>>",allPostsByAllCustomerActive)
   useEffect(() => {
     dispatch(getAllPostsByAllCustomerActive())
   }, [dispatch])
@@ -22,17 +22,21 @@ console.log(">>>>",allPostsByAllCustomerActive)
     return matchDistrict && matchPrice
   })
 
+  const handleLoadMore = () => {
+    setVisibleCount(prev => prev + 10)
+  }
+
   return (
     <div className='list-need'>
       <h4>Danh sách nhu cầu tìm phòng</h4>
 
       <div className='list-need_all'>
-        {filtered?.slice(0, 10).map((item) => (
+        {filtered?.slice(0, visibleCount).map((item) => (
           <CardNeed item={item} />
         ))}
       </div>
 
-      <BaseButton type="red">Xem thêm</BaseButton>
+      <BaseButton type="red" onClick={handleLoadMore}>Xem thêm</BaseButton>
     </div>
   )
 }

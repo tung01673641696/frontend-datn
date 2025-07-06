@@ -15,21 +15,21 @@ export default function Dashboard() {
     {
       id: 2,
       title: 'Số phòng',
-      number: 12,
+      number: 6,
       path: '/landlord/house-manager',
       color: 'blue'
     },
     {
       id: 3,
       title: 'Số khách thuê',
-      number: 24,
+      number: 8,
       path: '/landlord/tenant-manager',
       color: 'green'
     },
     {
       id: 5,
       title: 'Số bài đăng',
-      number: 4,
+      number: 6,
       path: '/landlord/house-manager',
       color: 'taro'
     }

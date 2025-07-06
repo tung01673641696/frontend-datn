@@ -7,16 +7,20 @@ export const register = createAsyncThunk(
   'user/register',
   async (data) => {
     const resu = await UserApi.register(data);
-    return resu
+    return resu.data
   }
 )
 
 export const login = createAsyncThunk(
   "user/login",
-  async (data) => {
-    const result = await UserApi.login(data);
-    if (result.status === 200) {
-      return result
+  async (data, { rejectWithValue }) => {
+    try {
+      const result = await UserApi.login(data);
+      if (result.status === 200) {
+        return result;
+      }
+    } catch (error) {
+      return rejectWithValue(error.response.data);
     }
   }
 )
@@ -83,8 +87,8 @@ const UserSlice = createSlice({
       })
       .addCase(register.fulfilled, (state, action) => {
         state.loading = false;
-        state.user.auth = true;
-        state.user = action.payload.data;
+        state.isAuth = true;
+        state.myInfo = action.payload;
       })
 
       .addCase(getAllUser.pending, (state, action) => {

@@ -183,7 +183,7 @@ export default function ServiceBillManager() {
                     setShowConfirmUpdateServiceBill(true);
                   }}
                 >
-                  Cập nhật
+                  Xác nhận đã thanh toán
                 </BaseButton>
               )}
             </div>

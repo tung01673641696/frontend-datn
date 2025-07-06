@@ -66,10 +66,12 @@ export default function Register() {
     }
     try {
       const res = await dispatch(register(data))
-      if(res.payload.data.code === 422) {
-        toast.error(res.payload.data.message)
+      console.log("res", res)
+      if (res.payload.code === 422) {
+        toast.error(res.payload.message)
       }
       else {
+        toast.success("Đăng ký thành công");
         navigate(`/login`)
       }
     } catch (error) {
