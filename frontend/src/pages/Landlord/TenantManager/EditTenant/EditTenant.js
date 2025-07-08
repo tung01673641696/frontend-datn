@@ -4,16 +4,14 @@ import Common from '../../../../layouts/LandlordLayout/Common/Common'
 import BaseInput from '../../../../components/BaseInput/BaseInput'
 import BaseButton from '../../../../components/BaseButton/BaseButton'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { getOneTenant } from '../../../../redux/reducers/tenant'
 import { houseByOwner } from '../../../../redux/reducers/house'
 import { getRoomByHouse } from '../../../../redux/reducers/room'
 import { editTenant } from '../../../../redux/reducers/tenant'
 
-export default function EditTenant() {
-  const params = useParams()
-  const tenant_id = params.id
+export default function EditTenant({ tenantId, onClose }) {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [tenant, setTenant] = useState({
@@ -33,8 +31,10 @@ export default function EditTenant() {
   console.log("one", oneTenant)
 
   useEffect(() => {
-    dispatch(getOneTenant(params.id))
-  }, [])
+    if (tenantId) {
+      dispatch(getOneTenant(tenantId));
+    }
+  }, [tenantId])
 
   useEffect(() => {
     if (oneTenant) {
@@ -77,63 +77,61 @@ export default function EditTenant() {
     const data = {
       name: tenant.name,
       phone: tenant.phone,
-      room_id: tenant.room_id,  
+      room_id: tenant.room_id,
       note: tenant.note,
     }
-    dispatch(editTenant({ tenantId: tenant_id, data: data }))
-    navigate(`/landlord/tenant-manager`)
+    dispatch(editTenant({ tenantId: tenantId, data: data }))
+    if (onClose) onClose();
   }
 
   return (
-    <Common>
-      <form className='edit_tenant' onSubmit={handleSubmit}>
-        <span className='edit_tenant_title'>Cập nhật khách thuê</span>
+    <form className='edit_tenant' onSubmit={handleSubmit}>
 
-        <div className='edit_tenant_box'>
-          <div className='edit_tenant_box_child'>
-            <div className='edit_tenant_box_child_ele'>
-              <select value={tenant.house_id} onChange={handleHouseChange} className='edit_tenant_box_child_select'>
-                <option value="" disabled>Chọn nhà</option>
-                {listHouseByOwner.map(item => (
-                  <option key={item.id} value={item.id}>{item.name}</option>
-                ))}
-              </select>
-            </div>
-
-            <div className='edit_tenant_box_child_ele'>
-              <select value={tenant.room_id} onChange={handleChange} name="room_id" className='edit_tenant_box_child_select'>
-                <option value="">Chọn phòng</option>
-                {listRoomByHouse.map(item => (
-                  <option key={item.id} value={item.id}>{item.name}</option>
-                ))}
-              </select>
-            </div>
+      <div className='edit_tenant_box'>
+        <div className='edit_tenant_box_child'>
+          <div className='edit_tenant_box_child_ele'>
+            <select value={tenant.house_id} onChange={handleHouseChange} className='edit_tenant_box_child_select'>
+              <option value="" disabled>Chọn nhà</option>
+              {listHouseByOwner.map(item => (
+                <option key={item.id} value={item.id}>{item.name}</option>
+              ))}
+            </select>
           </div>
 
-          <div className='edit_tenant_box_child'>
-            <div className='edit_tenant_box_child_ele'>
-              <BaseInput value={tenant.name} onChange={handleChange} name="name" placeholder="Họ và tên" />
-            </div>
-
-            <div className='edit_tenant_box_child_ele'>
-              <BaseInput value={tenant.phone} onChange={handleChange} name="phone" placeholder="Số điện thoại" />
-            </div>
-          </div>
-
-          <div className='edit_tenant_box_child'>
-            <textarea
-              name="note"
-              value={tenant.note}
-              onChange={handleChange}
-              placeholder="Ghi chú"
-            />
-          </div>
-
-          <div className='edit_tenant_button'>
-            <BaseButton type="blue">Cập nhật khách thuê</BaseButton>
+          <div className='edit_tenant_box_child_ele'>
+            <select value={tenant.room_id} onChange={handleChange} name="room_id" className='edit_tenant_box_child_select'>
+              <option value="">Chọn phòng</option>
+              {listRoomByHouse.map(item => (
+                <option key={item.id} value={item.id}>{item.name}</option>
+              ))}
+            </select>
           </div>
         </div>
-      </form>
-    </Common>
+
+        <div className='edit_tenant_box_child'>
+          <div className='edit_tenant_box_child_ele'>
+            <BaseInput value={tenant.name} onChange={handleChange} name="name" placeholder="Họ và tên" />
+          </div>
+
+          <div className='edit_tenant_box_child_ele'>
+            <BaseInput value={tenant.phone} onChange={handleChange} name="phone" placeholder="Số điện thoại" />
+          </div>
+        </div>
+
+        <div className='edit_tenant_box_child'>
+          <textarea
+            name="note"
+            value={tenant.note}
+            onChange={handleChange}
+            placeholder="Ghi chú"
+          />
+        </div>
+
+        <div className='edit_tenant_button'>
+          <BaseButton type="blue">Cập nhật khách thuê</BaseButton>
+        </div>
+      </div>
+    </form>
+
   )
 }

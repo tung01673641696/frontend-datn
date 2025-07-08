@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getRoomByHouse } from '../../../redux/reducers/room'
 import { deleteTenant, getAllTenant } from '../../../redux/reducers/tenant'
 import BaseModal from '../../../components/BaseModal/BaseModal'
+import EditTenant from './EditTenant/EditTenant'
 
 export default function TenantManager() {
   const [isShow, setIsShow] = useState(false)
@@ -23,6 +24,7 @@ export default function TenantManager() {
   const [selectHouse, setSelectHouse] = useState("")
   const [selectRoom, setSelectRoom] = useState("")
   const [status, setStatus] = useState("active")
+  const [showEditTenant, setShowEditTenant] = useState(false)
 
   const { listRoomByHouse } = useSelector((state) => state.roomReducer)
   const { allTenant } = useSelector((state) => state.tenantReducer)
@@ -58,6 +60,11 @@ export default function TenantManager() {
       await dispatch(deleteTenant(tenantId));
       setIsShow(false);
     }
+  };
+
+  const handleShowEditTenant = (tenantId) => {
+    setTenantId(tenantId)
+    setShowEditTenant(true)
   };
 
   const filteredTenant = allTenant.filter(item => {
@@ -162,12 +169,23 @@ export default function TenantManager() {
         <Column title={"Thao tác"}
           render={(value) => (
             <>
-              <BaseButton type="warning" onClick={() => navigate(`/landlord/tenant-manager/edit-tenant/tenant_id/${value.tenant.id}`)}>Sửa</BaseButton>
+              <BaseButton type="warning" onClick={() => handleShowEditTenant(value.tenant.id)}>Sửa</BaseButton>
               <BaseButton type="red" onClick={() => handleShow(value.tenant.id)}>Xóa</BaseButton>
             </>
           )}
         />
       </Table>
+
+      <BaseModal
+        open={showEditTenant}
+        type="blue"
+        width="45%"
+        title="Sửa thông tin khách thuê"
+        content={<EditTenant tenantId={tenantId} onClose={() => setShowEditTenant(false)}/>}
+        onCancel={() => setShowEditTenant(false)}
+        showCancel={false}
+        showConfirm={false}
+      />
     </Common>
   )
 }

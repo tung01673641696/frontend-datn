@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import TenantApi from "../../api/TenantApi";
 import { toast } from "react-toastify";
 
+
 export const addTenant = createAsyncThunk("tenant/addTenant", async (data) => {
   const addTenant = await TenantApi.addTenant(data);
   return addTenant
@@ -32,10 +33,12 @@ export const getOneTenant = createAsyncThunk("tenant/getOneTenant", async (tenan
   return getOneTenant
 })
 
-export const editTenant = createAsyncThunk("tenant/editTenant", async ({ tenantId, data }) => {
+export const editTenant = createAsyncThunk("tenant/editTenant", async ({ tenantId, data }, thunkApi) => {
   const editTenant = await TenantApi.editTenant(tenantId, data);
   if (editTenant.status === 200) {
     toast.success("Cập nhật thông tin khách thuê thành công");
+    const currentStatus = thunkApi.getState().tenantReducer.currentStatus || "active";
+    thunkApi.dispatch(getAllTenant(currentStatus));
   }
   return editTenant
 })

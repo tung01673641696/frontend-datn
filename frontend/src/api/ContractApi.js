@@ -54,6 +54,10 @@ const ContractApi = {
     return axiosClient.get(url);
   },
 
+  async renewContract(contractId, data) {
+    return axiosClient.put(`/contract/renew/${contractId}`, data);
+  }
+
 }
 
 export default ContractApi

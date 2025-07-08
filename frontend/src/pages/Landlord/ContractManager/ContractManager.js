@@ -8,9 +8,11 @@ import BaseModal from '../../../components/BaseModal/BaseModal'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { landlordGetAllContract } from '../../../redux/reducers/contract'
+import { renewRentalContract } from '../../../redux/reducers/contract';
 import { houseByOwner } from '../../../redux/reducers/house'
 import { getRoomByHouse } from '../../../redux/reducers/room'
 import DetailRentalContract from '../../Tenant/DetailRentalContract/DetailRentalContract'
+import dayjs from 'dayjs'
 
 export default function ContractManager() {
   const user = JSON.parse(localStorage.getItem("user"))
@@ -23,6 +25,11 @@ export default function ContractManager() {
   const [selectRoom, setSelectRoom] = useState("")
   const [showViewContract, setShowViewContract] = useState(false)
   const [selectedContract, setSelectedContract] = useState(null);
+
+  const [showRenewModal, setShowRenewModal] = useState(false);
+  const [renewStartDate, setRenewStartDate] = useState('');
+  const [renewEndDate, setRenewEndDate] = useState('');
+  const [contractRenewing, setContractRenewing] = useState(null);
 
   const { listHouseByOwner } = useSelector((state) => state.houseReducer)
   const { listRoomByHouse } = useSelector((state) => state.roomReducer)
@@ -44,6 +51,32 @@ export default function ContractManager() {
     }
   }
 
+  const getStatusLabel = (item) => {
+    if (!item.end_date) return 'Không xác định';
+
+    const daysLeft = dayjs(item.end_date).diff(dayjs(), 'day');
+
+    if (daysLeft < 0) return 'Đã hết hạn';
+    if (daysLeft <= 7) return `Còn ${daysLeft} ngày (sắp hết hạn)`;
+    if (daysLeft <= 30) return `Còn ${daysLeft} ngày`;
+
+    return 'Đang thuê';
+  };
+
+  const getStatusLabelWithColor = (contract) => {
+    const endDate = dayjs(contract.end_date);
+    const today = dayjs();
+    const diff = endDate.diff(today, 'day');
+
+    if (diff < 0) {
+      return <span>Đã hết hạn</span>;
+    } else if (diff <= 30) {
+      return <span style={{ color: 'red' }}>Sắp hết hạn ({diff} ngày)</span>;
+    } else {
+      return <span style={{ color: 'blue' }}>Đang thuê</span>;
+    }
+  };
+
   const filteredContracts = allContract.filter(contract => {
     const matchStatus = selectedStatus ? contract.status === selectedStatus : true;
     const matchHouse = selectHouse ? contract.house?.id === selectHouse : true;
@@ -56,6 +89,24 @@ export default function ContractManager() {
   const handleShowContract = (item) => {
     setSelectedContract(item.room.id);
     setShowViewContract(true)
+  };
+
+  const handleRenewClick = (contract) => {
+    setContractRenewing(contract);
+    setRenewStartDate(contract.end_date);
+    setRenewEndDate('');
+    setShowRenewModal(true);
+  };
+
+  const handleConfirmRenew = () => {
+    dispatch(renewRentalContract({
+      contractId: contractRenewing.contract_id,
+      newStartDate: renewStartDate,
+      newEndDate: renewEndDate
+    })).then(() => {
+      setShowRenewModal(false);
+      dispatch(landlordGetAllContract(id));
+    });
   };
 
   return (
@@ -130,14 +181,15 @@ export default function ContractManager() {
           />
 
           <Column title={"Trạng thái"}
-            render={(item) => (
-              <span>{item?.status === 'signed' ? 'Đang thuê' : 'đã hết hạn'}</span>
-            )}
+            render={(item) => getStatusLabelWithColor(item)}
           />
 
           <Column title={"Hành động"}
             render={(item) => (
-              <><BaseButton type="blue" onClick={() => handleShowContract(item)}>Xem</BaseButton></>
+              <>
+                <BaseButton type="blue" onClick={() => handleShowContract(item)}>Xem</BaseButton>
+                <BaseButton type="green" onClick={() => handleRenewClick(item)}>Gia hạn</BaseButton>
+              </>
             )}
           />
         </Table>
@@ -151,6 +203,29 @@ export default function ContractManager() {
           onCancel={() => setShowViewContract(false)}
           showCancel={false}
           showConfirm={false}
+        />
+
+        <BaseModal
+          open={showRenewModal}
+          title="Gia hạn hợp đồng"
+          type="blue"
+          width="40%"
+          content={
+            <div className="renew">
+              <div className='renew_item'>
+                <label>Ngày bắt đầu mới:</label>
+                <input type="date" readOnly value={renewStartDate} onChange={e => setRenewStartDate(e.target.value)} />
+              </div>
+              <div className='renew_item'>
+                <label>Ngày kết thúc mới:</label>
+                <input type="date" value={renewEndDate} onChange={e => setRenewEndDate(e.target.value)} />
+              </div>
+            </div>
+          }
+          onCancel={() => setShowRenewModal(false)}
+          onConfirm={() => handleConfirmRenew()}
+          showCancel={true}
+          showConfirm={true}
         />
       </div>
     </Common>

@@ -54,3 +54,20 @@ table {
   color: white;
   padding: 8px 20px;
 }
+
+.renew {
+  width: 60%;
+  margin: 0 auto;
+
+  .renew_item {
+    margin: 25px 0;
+
+    label {
+      margin-right: 10px;
+    }
+
+    input {
+      padding: 2px 5px;
+    }
+  }
+}

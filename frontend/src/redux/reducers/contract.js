@@ -108,6 +108,21 @@ export const tenantGetAllContract = createAsyncThunk(
   }
 );
 
+export const renewRentalContract = createAsyncThunk(
+  "contract/renewRentalContract",
+  async ({ contractId, newStartDate, newEndDate }, { rejectWithValue }) => {
+    try {
+      const response = await ContractApi.renewContract(contractId, {
+        start_date: newStartDate,
+        end_date: newEndDate
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 
 const ContractSlice = createSlice({
   name: "contract",
